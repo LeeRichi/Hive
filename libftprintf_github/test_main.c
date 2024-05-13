@@ -16,14 +16,22 @@ int main(int argc, char *argv[])
 	// ft_printf("%d\n", 22);
 	// ft_printf("%d\n", 244);
 	// ft_printf("%d\n", INT_MAX);
+	// ft_printf("my: %c %c %c \n", '0', 0, '1');
+	// printf("og: %c %c %c \n", '0', 0, '1');
+
+
+	ft_printf("count: %d\n", ft_printf("my: %c %c %c \n", '0', 2, '1'));
+	printf("count: %d\n", ft_printf("og: %c %c %c \n", '0', 2, '1'));
+
+
 
 	// //X
 	// ft_printf("mine: %X\n", 233);
 	// printf("og: %X\n", 233);
 
 	// //(null)
-	// ft_printf("%s\n", NULL);
-	// printf("%s\n", NULL);
+	// ft_printf("Mine: %s\n", NULL);
+	// printf("OG: %s\n", NULL);
 
 	// //multiples
 	// ft_printf("mine: 1: %X, 2: %x, 3. %d, 4, %u\n", 233, 233, 233, 233);
@@ -41,9 +49,11 @@ int main(int argc, char *argv[])
 	// ft_printf("Mine: %%\n", test_char);
 	// printf("Mine: %", test_char);
 
-	printf("OG return value: %d\n", printf("%"));
 
-	ft_printf("My return value: %d\n", ft_printf("%"));
-	ft_printf("%");
+	// printf("----tricks----\n");
+	// printf("OG return value: %d\n", printf("%")); //0
+
+	// ft_printf("My return value: %d\n", ft_printf("%")); //0 ??
+	// ft_printf("%");
 	return (0);
 }
