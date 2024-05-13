@@ -6,11 +6,12 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:03:04 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/13 12:56:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:08:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int print_format(char specifier, va_list args)
 {
@@ -21,10 +22,14 @@ int print_format(char specifier, va_list args)
 		count += printchar(va_arg(args, int));
 	else if (specifier == 's')
 		count += printstr(va_arg(args, char *));
-	else if (specifier == 'd')
+	else if (specifier == 'p')
+		count += printaddress(va_arg(args, char *));
+	else if (specifier == 'd' || specifier == 'u')
 		count += printnbr((long)va_arg(args, int), 10);
 	else if (specifier == 'x')
 		count += printnbr((long)va_arg(args, unsigned int), 16);
+	else if (specifier == 'X')
+		count += printnbr_butX((long)va_arg(args, unsigned int), 16);
 	else
 		count += write(1, &specifier, 1);
 	return (count);
