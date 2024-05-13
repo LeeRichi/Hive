@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/13 15:24:23 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/13 16:16:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int printnbr_butX(long n, int base)
 	symbols = "0123456789ABCDEF";
 	if (n < 0)
 	{
-		write(1, "-", 1);
+		if (write(1, "-", 1) == -1)
+			return (-1); 
 		return(printnbr_butX(-n, base) + 1);
 	}
 	else if (n < base)
