@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:12:58 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/06 17:30:46 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:22:33 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	void	*set;
 
 	new_lst = NULL;
-	if (!lst || !f || !del)
-		return (NULL);
 	while (lst)
 	{
 		set = f(lst->content);
+		if (!set)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
 		new_node = ft_lstnew(set);
 		if (!new_node)
 		{
