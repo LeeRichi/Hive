@@ -52,8 +52,18 @@ int main(int argc, char *argv[])
 	// printf("%d\n", ft_printf("MY: %p\n", -ULONG_MAX));
 	// printf("%d\n", printf("OG: %p\n", -ULONG_MAX));
 
-	printf("\nRich pppp: %d\n", ft_printf("RI Address: %p\n", (void *)-14523));
-	printf("\nOG pppprinf: %d\n", printf("OG Address: %p\n", (void *)-14523));
+	// printf("\nRich pppp: %d\n", ft_printf("RI Address: %p\n", (void *)-14523));
+	// printf("\nOG pppprinf: %d\n", printf("OG Address: %p\n", (void *)-14523));
+
+	// printf("%d\n", ft_printf("%%c"));
+
+	// printf("%d\n", printf("%%c"));
+	ft_printf("%c%c%c", 'a', '\t', 'b');
+	printf("%c%c%c", 'a', '\t', 'b');
+
+	//printf("%d\n", ft_printf("%%%%%%"));
+
+	//printf("%d\n", printf("%%%%%%"));
 
 	// ft_printf("My: %d \n", LONG_MIN);
 	// printf("OG: %d \n", LONG_MIN);

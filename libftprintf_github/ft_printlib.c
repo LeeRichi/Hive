@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/14 17:14:56 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/14 19:37:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	printstr(char *s)
 		return (printstr("(null)"));
 	while (*s)
 	{
-		printchar((int)*s);
+		if(printchar((int)*s) == -1)
+			return (-1);
 		count++;
 		++s;
 	}
@@ -40,6 +41,7 @@ int	printnbr(long n, int base)
 {
 	char	*symbols;
 	int		count;
+	int		result;
 	
 	count = 0;
 	symbols = "0123456789abcdef";
@@ -51,14 +53,25 @@ int	printnbr(long n, int base)
 	}
 	if (n < 0)
 	{
-		write(1, "-", 1);
-		return (printnbr(-n, base) + 1);
+		if (write(1, "-", 1) == -1)
+			return (-1);
+		result = printnbr(-n, base);
+		if (result == -1)
+			return (result);
+		return (result + 1);
 	}
 	else if (n < base)
-		return (printchar(symbols[n]));
+	{
+		result = printchar(symbols[n]);
+		if (result == -1)
+			return (-1);
+		return (result);
+	}
 	else
 	{
 		count = printnbr(n / base, base);
+		if (count == -1)
+			return (-1);
 		return (count + printnbr(n % base, base));
 	}
 }
@@ -67,20 +80,37 @@ int	printnbr_butx(long n, int base)
 {
 	char	*symbols;
 	int		count;
-
+	int		result;
+	
 	count = 0;
 	symbols = "0123456789ABCDEF";
+	if (n == LONG_MIN)
+	{
+		if (write(1, "-9223372036854775808\n", 21) == -1)
+			return (-1);
+		return (21);
+	}
 	if (n < 0)
 	{
 		if (write(1, "-", 1) == -1)
 			return (-1);
-		return (printnbr_butx(-n, base) + 1);
+		result = printnbr_butx(-n, base);
+		if (result == -1)
+			return (result);
+		return (result + 1);
 	}
 	else if (n < base)
-		return (printchar(symbols[n]));
+	{
+		result = printchar(symbols[n]);
+		if (result == -1)
+			return (-1);
+		return (result);
+	}
 	else
 	{
 		count = printnbr_butx(n / base, base);
+		if (count == -1)
+			return (-1);
 		return (count + printnbr_butx(n % base, base));
 	}
 }
@@ -92,12 +122,6 @@ int	printnbr_foraddress(unsigned long n, int base)
 	
 	count = 0;
 	symbols = "0123456789abcdef";
-	// if (n == LONG_MIN)
-	// {
-	// 	if (write(1, "-9223372036854775808\n", 21) == -1)
-	// 		return (-1);
-	// 	return (21);
-	// }
 	if (n < 0)
 		return (printnbr_foraddress(-n, base) + 1);
 	else if (n < (unsigned long)base)
