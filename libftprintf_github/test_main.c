@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-	// int test;
+	int test;
 	// char *test_char;
 
 	// test = 10;
@@ -19,13 +19,46 @@ int main(int argc, char *argv[])
 	// ft_printf("my: %c %c %c \n", '0', 0, '1');
 	// printf("og: %c %c %c \n", '0', 0, '1');
 
+	// ft_printf("count: %d\n", ft_printf("my: %c %c %c \n", '0', 2, '1'));
+	// printf("count: %d\n", ft_printf("og: %c %c %c \n", '0', 2, '1'));
 
-	ft_printf("count: %d\n", ft_printf("my: %c %c %c \n", '0', 2, '1'));
-	printf("count: %d\n", ft_printf("og: %c %c %c \n", '0', 2, '1'));
+	// ft_printf("%p \n", -1);
+	// printf("%p \n", -1);
 
+	// ft_printf("count: %d\n", ft_printf("%p \n", -100));
+	// printf("count: %d\n", printf("%p \n", -100));
 
+	//hanlding max values
+	// ft_printf("My: %p %p \n", LONG_MIN, LONG_MAX);
+	// printf("OG: %p %p ", LONG_MIN, LONG_MAX);
 
-	// //X
+	// printf("My return value: %d\n", ft_printf("My: %p %p \n", LONG_MIN, LONG_MAX));
+	// printf("OG return value: %d\n", printf("OG: %p %p \n", LONG_MIN, LONG_MAX));
+
+	// ft_printf("My: %p %p \n", ULONG_MAX, -ULONG_MAX);
+	// printf("OG: %p %p ", ULONG_MAX, -ULONG_MAX);
+
+	// ft_printf("MY: %p, %p\n", ULONG_MAX, -ULONG_MAX);
+	// printf("OG: %p, %p\n", ULONG_MAX, -ULONG_MAX);
+
+	// ft_printf("My: -ULONG_MAX OG: %p, %d\n", -ULONG_MAX, -ULONG_MAX);
+	
+	// printf("%d\n", ft_printf("MY: %p, %p\n", ULONG_MAX, -ULONG_MAX));
+	// printf("%d\n", printf("OG: %p, %p\n", ULONG_MAX, -ULONG_MAX));
+
+	// printf("test MY:%d\n", ft_printf("MY: %p\n", ULONG_MAX));
+	// printf("test OG:%d\n", printf("OG: %p\n", ULONG_MAX));
+
+	// printf("%d\n", ft_printf("MY: %p\n", -ULONG_MAX));
+	// printf("%d\n", printf("OG: %p\n", -ULONG_MAX));
+
+	printf("\nRich pppp: %d\n", ft_printf("RI Address: %p\n", (void *)-14523));
+	printf("\nOG pppprinf: %d\n", printf("OG Address: %p\n", (void *)-14523));
+
+	// ft_printf("My: %d \n", LONG_MIN);
+	// printf("OG: %d \n", LONG_MIN);
+
+	// //
 	// ft_printf("mine: %X\n", 233);
 	// printf("og: %X\n", 233);
 

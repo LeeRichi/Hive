@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:03:04 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/13 17:31:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:43:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	print_format(char specifier, va_list args)
 		count += printaddress(va_arg(args, unsigned long));
 	else if (specifier == 'd' || specifier == 'i')
 		count += printnbr((long)va_arg(args, int), 10);
+	else if (specifier == 'u')
+		count += printnbr((long)va_arg(args, unsigned int), 10);
 	else if (specifier == 'x')
 		count += printnbr((long)va_arg(args, unsigned int), 16);
 	else if (specifier == 'X')
