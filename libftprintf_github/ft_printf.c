@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:03:04 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/14 19:42:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/15 10:57:01 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	print_format(char specifier, va_list args)
 		count += printnbr((long)va_arg(args, unsigned int), 16);
 	else if (specifier == 'X')
 		count += printnbr_butx((long)va_arg(args, unsigned int), 16);
-	// else if (specifier == '%')
-	// 	count += printchar('%');
 	else
 		count += printchar(specifier);
 	return (count);
@@ -49,12 +47,8 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	while (*format != '\0')
 	{
-		// if (*format == '%')
-		// 	count += print_format(*(++format), args);
-		if (*format == '%') 
+		if (*format == '%')
 		{
-			if (*(format + 1) == '\0') // format string ends with '%'
-				return -1;
 			result = print_format(*(++format), args);
 			if (result == -1)
 				return (-1);

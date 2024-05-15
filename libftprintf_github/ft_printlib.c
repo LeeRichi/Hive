@@ -6,51 +6,21 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/14 19:37:56 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/15 11:15:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
-
-int	printchar(char c)
-{
-	if (write(1, &c, 1) != 1)
-		return (-1);
-	return (1);
-}
-
-int	printstr(char *s)
-{
-	int	count;
-
-	count = 0;
-	if (!s)
-		return (printstr("(null)"));
-	while (*s)
-	{
-		if(printchar((int)*s) == -1)
-			return (-1);
-		count++;
-		++s;
-	}
-	return (count);
-}
+// #include <limits.h>
 
 int	printnbr(long n, int base)
 {
 	char	*symbols;
 	int		count;
 	int		result;
-	
+
 	count = 0;
 	symbols = "0123456789abcdef";
-	if (n == LONG_MIN)
-	{
-		if (write(1, "-9223372036854775808\n", 21) == -1)
-			return (-1);
-		return (21);
-	}
 	if (n < 0)
 	{
 		if (write(1, "-", 1) == -1)
@@ -61,12 +31,7 @@ int	printnbr(long n, int base)
 		return (result + 1);
 	}
 	else if (n < base)
-	{
-		result = printchar(symbols[n]);
-		if (result == -1)
-			return (-1);
-		return (result);
-	}
+		return (count + printchar(symbols[n]));
 	else
 	{
 		count = printnbr(n / base, base);
@@ -81,15 +46,9 @@ int	printnbr_butx(long n, int base)
 	char	*symbols;
 	int		count;
 	int		result;
-	
+
 	count = 0;
 	symbols = "0123456789ABCDEF";
-	if (n == LONG_MIN)
-	{
-		if (write(1, "-9223372036854775808\n", 21) == -1)
-			return (-1);
-		return (21);
-	}
 	if (n < 0)
 	{
 		if (write(1, "-", 1) == -1)
@@ -100,12 +59,7 @@ int	printnbr_butx(long n, int base)
 		return (result + 1);
 	}
 	else if (n < base)
-	{
-		result = printchar(symbols[n]);
-		if (result == -1)
-			return (-1);
-		return (result);
-	}
+		return (count + printchar(symbols[n]));
 	else
 	{
 		count = printnbr_butx(n / base, base);
@@ -119,7 +73,7 @@ int	printnbr_foraddress(unsigned long n, int base)
 {
 	char	*symbols;
 	int		count;
-	
+
 	count = 0;
 	symbols = "0123456789abcdef";
 	if (n < 0)
@@ -138,7 +92,6 @@ int	printaddress(unsigned long something)
 	int	count;
 
 	count = 0;
-
 	if ((long)(something * -1) == LONG_MIN)
 	{
 		if (write(1, "0x8000000000000000", 18) == -1)
