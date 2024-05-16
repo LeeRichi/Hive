@@ -6,12 +6,11 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/15 11:15:24 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:19:10 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// #include <limits.h>
 
 int	printnbr(long n, int base)
 {

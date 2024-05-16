@@ -6,12 +6,11 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:03:04 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/15 10:57:01 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:18:29 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	print_format(char specifier, va_list args)
 {
