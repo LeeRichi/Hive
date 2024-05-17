@@ -15,7 +15,7 @@
 </p> -->
 
 <h3 align="center">
-	<a href="#%EF%B8%8F-about">About	</a>
+	<a href="#%EF%B8%8F-about">About</a>
 	<span> · </span>
 	<a href="#%EF%B8%8F-usage">Usage</a>
 	<span> · </span>
@@ -24,7 +24,7 @@
 
 ---
 
-## 💡 About this folder
+## 💡 About
 
 > This folder contains all the works I have been done since 2024/4/15.
 
