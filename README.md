@@ -19,7 +19,7 @@
 	<span> · </span>
 	<a href="#%EF%B8%8F-usage">Usage</a>
 	<span> · </span>
-	<a href="#-testing">Appendix</a>
+	<a href="#-Appendix">Appendix</a>
 </h3>
 
 ---
