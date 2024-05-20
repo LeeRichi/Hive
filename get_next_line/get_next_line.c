@@ -1,4 +1,6 @@
 #include "get_next_line.h"
+#include <fcntl.h>
+#include <string.h>
 
 static size_t ft_count_len(char *a, char *b)
 {
@@ -42,63 +44,112 @@ static char *ft_strjoin(char *a, char *b)
 }
 
 //mother function
-char	*get_next_line(int fd)
+// char	*get_next_line(int fd)
+// {
+// 	static char		*content;
+// 	char			*content_buf;
+// 	char			*line;
+// 	ssize_t			bytes_read;
+
+// 	if (fd < 0 || BUFFER_SIZE <= 0)
+// 		return (NULL);
+// 	content_buf = malloc(BUFFER_SIZE * sizeof(char));
+// 	if (!content_buf)
+// 		return (NULL);
+// 	bytes_read = read(fd, content_buf, BUFFER_SIZE);
+// 	if (bytes_read < 0)
+// 	{
+// 		free(content_buf);
+//         return NULL;
+// 	}
+// 	while (bytes_read > 0)
+// 	{
+// 		content_buf[bytes_read] = '\0';
+// 		line = ft_strjoin(content_buf, content);
+
+// 		free(content);
+// 		free(content_buf);
+// 		printf("line: %s\n", line);
+// 	}
+
+// 	return (line);
+// }
+
+char *get_next_line(int fd)
 {
-	static char		*content;
-	char			*content_buf;
-	char			*line;
-	ssize_t			bytes_read;
+    static char *content = NULL;
+    char *content_buf;
+    char *line = NULL;
+    ssize_t bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	content_buf = malloc(BUFFER_SIZE * sizeof(char));
-	if (!content_buf)
-		return (NULL);
-	bytes_read = read(fd, content_buf, BUFFER_SIZE);
-	if (bytes_read < 0)
-	{
-		free(content_buf);
+    if (fd < 0 || BUFFER_SIZE <= 0)
         return NULL;
-	}
-	while (bytes_read > 0)
-	{
-		content_buf[bytes_read] = '\0';
-		line = ft_strjoin(content_buf, content);
 
-		free(content);
-		free(content_buf);
-		printf("line: %s\n", line);
-	}
+    content_buf = malloc((BUFFER_SIZE + 1) * sizeof(char)); // Allocate space for BUFFER_SIZE + 1 for null terminator
+    if (!content_buf)
+        return NULL;
 
-	return (line);
-}
-
-//chat-gpt test main
-int main(void) {
-    // For testing purposes, you can simulate input using an array of strings
-    char *input[] = {
-        "This is line 1.\n",
-        "This is line 2.\n",
-        "This is line 3.\n",
-        "This is line 4.\n",
-        "This is line 5.\n",
-        NULL // Mark the end of input with a NULL pointer
-    };
-
-    // Simulate reading from a file descriptor (replace this with your actual file descriptor)
-    int fd = 0; // Use stdin (0) for simplicity
-
-    // Iterate over the input array and call get_next_line for each string
-    for (int i = 0; input[i] != NULL; i++) {
-        printf("Reading line %d:\n", i + 1);
-        char *line = get_next_line(fd);
-        if (line != NULL) {
-            printf("Read line: %s\n", line);
-            free(line); // Free allocated memory for the line
-        } else {
-            printf("Failed to read line\n");
-        }
+    bytes_read = read(fd, content_buf, BUFFER_SIZE);
+    if (bytes_read < 0)
+    {
+        free(content_buf);
+        return NULL;
     }
 
-    return 0;
+    if (bytes_read == 0) // No more content to read
+    {
+        free(content_buf);
+        return NULL;
+    }
+
+    content_buf[bytes_read] = '\0'; // Null-terminate the content buffer
+
+    if (content)
+    {
+        char *temp = ft_strjoin(content, content_buf); // Concatenate content_buf with existing content
+        free(content);
+        content = temp;
+    }
+    else
+    {
+        content = strdup(content_buf); // If content is NULL, set it to content_buf
+    }
+
+    free(content_buf); // Free content_buf after concatenation
+
+    // Find the position of newline character in content, if any
+    char *newline_pos = strchr(content, '\n');
+    if (newline_pos != NULL)
+    {
+        *newline_pos = '\0'; // Replace newline character with null terminator
+        line = strdup(content); // Allocate memory for line and copy content until newline
+        memmove(content, newline_pos + 1, strlen(newline_pos + 1) + 1); // Move the remaining content after newline
+    }
+    else
+    {
+        line = strdup(content); // If no newline found, line is the entire content
+        free(content);
+        content = NULL;
+    }
+
+    return line;
+}
+
+
+//test main
+int main(void)
+{
+    int fd1 = open("file1.txt", O_RDONLY);
+
+    char *line;
+
+	line = get_next_line(fd1);
+
+	printf("%s\n", line);
+    while (line != NULL)
+    	free(line);
+
+    close(fd1);
+    
+    return (0);
 }
