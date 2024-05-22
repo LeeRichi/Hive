@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"get_next_line.h": "c",
+		"unistd.h": "c",
+		"stdio.h": "c"
+	}
+}
