@@ -6,64 +6,42 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:15:52 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/22 16:37:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/05/27 11:26:17 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*ft_free(char **str)
+{
+	free(*str);
+	*str = NULL;
+	return (NULL);
+}
+
 size_t ft_strlen(char *s)
 {
     size_t  i;
 
+	// if (!s)
+	// 	return (NULL);
     i = 0;
     while(s[i])
         i++;
     return (i);
 }
 
-char	*ft_strchar(char *content, char c)
+char *ft_strchar(const char *s, int c)
 {
-	size_t	i;
-
-	if (ft_strlen(content) == 0)
-		return (NULL);
-	i = 0;
-	while (content[i])
-	{
-		if (content[i] == c)
-			return (content + i);
-		i++;
-	}
-	return (content);
-}
-
-static size_t ft_count_len(char *a, char *b)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (a[i])
-		i++;
-	j = 0;
-	while (b[j])
-		j++;
-	return (i + j);
-}
-
-size_t	ft_strlen_with_c(char *s, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		i++;
-	}
-	return (i);
+    while (*s)
+    {
+        if (*s == c)
+            return ((char *)s);
+        s++;
+    }
+    if (c == '\0')
+        return ((char *)s);
+    return (NULL);
 }
 
 char	*ft_strjoin(char *a, char *b)
@@ -76,14 +54,20 @@ char	*ft_strjoin(char *a, char *b)
     if (!a)
     {
         a = malloc(sizeof(char));
-        if (!a)
+        if (!a) 
             return (NULL);
-        a[0] = 0;
+        a[0] = '\0';
     }
-	len = ft_count_len(a, b);
+	// if (!b)
+	// {
+	// 	free(a);
+    //     return (NULL);
+	// }
+	len = ft_strlen(a) + ft_strlen(b);
 	new_str = malloc((len + 1) * sizeof(char));
 	if (!new_str)
-		return (NULL);
+		// return (NULL);
+		return (ft_free(&a));
 	i = -1;
 	while (a[++i])
 		new_str[i] = a[i];
@@ -91,53 +75,41 @@ char	*ft_strjoin(char *a, char *b)
 	while (b[++j])
 		new_str[i + j] = b[j];
 	new_str[i + j] = 0;
-    //free(a); //necessary?
+    free(a);
 	return (new_str);
 }
 
-size_t	ft_check_line_break(char *s)
+char	*substr(char *s, size_t start, size_t len)
 {
 	size_t	i;
+	char	*res;
 
-	//printf("test\n");
-	//printf("content: %s\n", s);
 	i = 0;
-	while (s[i++])
-	{
-		if (s[i] == '\n')
-			return (1);
-	}
-	return (0);
-}
-
-char	*ft_reverse_strchar(char *s, char c)
-{
-	size_t	i;
-	char	*new_str;
-
 	if (!s)
+		return (0);
+	// if (start > ft_strlen(s))
+	// {
+	// 	res = malloc(sizeof(char) * (1));
+	// 	if (!res)
+	// 		return (NULL);
+	// 	res[0] = '\0';
+	// 	return (res);
+	// }
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
 		return (NULL);
-	i = 0;
-	while(s[i] && s[i] != c)
-		i++;
-	new_str = malloc((i + 1) * sizeof(char));
-	if (!new_str)
-		return (NULL);
-	new_str[i] = '\0';
-	while (i > 0)
-	{
-		--i;
-		new_str[i] = s[i];
-	}
-	s = ft_strchar(s, c);
-	return (new_str);
+	while (start < ft_strlen(s) && i < len && s[start])
+		res[i++] = s[start++];
+	res[i] = '\0';
+	return (res);
 }
-
 
 // int main(void)
 // {
 // 	char *rich;
 
 // 	rich = "agrwgrwrwb,[,bbwrbcccc";
-// 	printf("%s\n", ft_reverse_strchar(rich, '['));
+// 	printf("%s\n", ft_strchar(rich, 'z'));
 // }
