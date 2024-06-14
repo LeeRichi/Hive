@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 11:15:57 by chlee2            #+#    #+#             */
-/*   Updated: 2024/06/14 22:36:27 by chlee2           ###   ########.fr       */
+/*   Created: 2024/05/27 14:42:58 by chlee2            #+#    #+#             */
+/*   Updated: 2024/05/27 15:29:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*jump_to_next_line(char *content)
 {
@@ -79,7 +79,7 @@ char	*read_content(int fd, char *content)
 		if (bytes < 0)
 		{
 			free(content_buf);
-			return (ft_free(&content_buf));
+			return (ft_free(&content));
 		}
 		if (bytes == 0)
 			break ;
@@ -91,26 +91,20 @@ char	*read_content(int fd, char *content)
 	free(content_buf);
 	return (content);
 }
-#include <stdio.h>
+
 char	*get_next_line(int fd)
 {
-	static char	*content;
+	static char	*content[OPEN_MAX];
 	char		*line;
 
-//	printf("HELLO!!!%d", BUFFER_SIZE);
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
-	{
-//		printf("hhello");
-		free (content);
-		content = NULL;
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
 		return (NULL);
-	}
-	content = read_content(fd, content);
-	if (!content)
+	content[fd] = read_content(fd, content[fd]);
+	if (!content[fd])
 		return (NULL);
-	line = check_line(content);
+	line = check_line(content[fd]);
 	if (!line)
-		return (ft_free(&content));
-	content = jump_to_next_line(content);
+		return (ft_free(&content[fd]));
+	content[fd] = jump_to_next_line(content[fd]);
 	return (line);
 }
