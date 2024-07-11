@@ -33,7 +33,7 @@ void rotate(t_list **lst)
 	if(*lst && (*lst)->next)
 	{
 		temp = *lst;
-		*lst => *(lst)->next;
+		*lst = (*lst)->next;
 		temp->next = NULL;
 
 		current = *lst;
@@ -64,14 +64,14 @@ void reverse_rotate(t_list **lst)
 
 void sa(t_list **stack_a)
 {
-	if(stack_a && *stack_a && *(stack_a)->next)
-		swap_list(*stack_a, *(stack_a)->next);
+	if(stack_a && *stack_a && (*stack_a)->next)
+		swap_list(*stack_a, (*stack_a)->next);
 }
 
 void sb(t_list **stack_b)
 {
-	if(stack_b && *stack_b && *(stack_b)->next)
-		swap_list(*stack_b, *(stack_b)->next);
+	if(stack_b && *stack_b && (*stack_b)->next)
+		swap_list(*stack_b, (*stack_b)->next);
 }
 
 void ss(t_list **stack_a, t_list **stack_b)
