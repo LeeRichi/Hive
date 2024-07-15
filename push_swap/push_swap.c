@@ -73,6 +73,9 @@ int main(int ac, char **av)
 
 	find_min_node(a_stack);
 
+	sort_three(&a_stack);
+	print_stack(a_stack);
+
 	while (a_stack)
     {
         t_list *temp = a_stack;

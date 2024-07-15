@@ -23,6 +23,10 @@ void pop_single_stack(t_list **stack);
 
 bool is_sorted(t_list *stack);
 t_list *find_min_node(t_list *stack);
+void sort_three(t_list **stack);
 
+void rotate(t_list **lst);
+void reverse_rotate(t_list **lst);
+void sa(t_list **stack_a);
 
 #endif

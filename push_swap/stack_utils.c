@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 #include <stdio.h>
 
 bool is_sorted(t_list *stack)
@@ -35,4 +34,36 @@ t_list *find_min_node(t_list *stack)
 	}
 	printf("min value in this stack is: %ld\n", min);
 	return (min_node);
+}
+
+void sort_three(t_list **stack)
+{
+	t_list *min_node;
+
+	min_node = find_min_node(*stack);
+	if((*stack)->nbr == min_node->nbr) //min_node on top
+	{
+		if((*stack)->next->nbr > (*stack)->next->next->nbr)
+		{
+			reverse_rotate(stack);
+			sa(stack);
+		}
+	}
+	else if((*stack)->next->nbr == min_node->nbr)
+	{
+		if((*stack)->nbr > (*stack)->next->next->nbr)
+			rotate(stack);
+		else
+			sa(stack);
+	}
+	else if((*stack)->next->next->nbr == min_node->nbr)
+	{
+		if((*stack)->nbr > (*stack)->next->nbr)
+		{
+			sa(stack);
+			reverse_rotate(stack);
+		}
+		else
+			reverse_rotate(stack);
+	}
 }
