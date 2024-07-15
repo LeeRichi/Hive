@@ -2,6 +2,7 @@
 #define PUSH_SWAP_H
 
 #include "libft/libft.h"
+#include <stdbool.h>
 
 typedef struct s_list
 {
@@ -19,5 +20,9 @@ void push(t_list **x, t_list **y);
 
 void push_single_stack(t_list **stack, int value);
 void pop_single_stack(t_list **stack);
+
+bool is_sorted(t_list *stack);
+t_list *find_min_node(t_list *stack);
+
 
 #endif

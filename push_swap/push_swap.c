@@ -59,7 +59,7 @@ void print_stack(t_list *stack)
 int main(int ac, char **av)
 {
 	t_list *a_stack = NULL;
-	t_list *b_stack = NULL;
+	// t_list *b_stack = NULL;
 
 	if(ac <= 1)
 	{
@@ -69,7 +69,9 @@ int main(int ac, char **av)
 	initialize_stack(&a_stack, ac, av);
 	// push_swap(&a_stack, &b_stack);
 
-	printf("now it's new\n");
+	print_stack(a_stack);
+
+	find_min_node(a_stack);
 
 	while (a_stack)
     {
