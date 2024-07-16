@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void swap_list(t_list *a, t_list *b)
+static void swap_list(t_list *a, t_list *b)
 {
 	int temp;
 

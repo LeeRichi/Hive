@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-#include <stdio.h>
+#include <stdio.h> //temp
 
 bool is_sorted(t_list *stack)
 {
