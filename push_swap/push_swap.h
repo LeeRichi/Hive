@@ -8,7 +8,12 @@ typedef struct s_list
 {
 	int			nbr;
 	int			min;
+	int			index;
+	int			op_cost;
+	bool		cheapest;
+	bool		above_mid;
 	struct s_list	*next;
+	struct s_list	*target_node;
 }	t_list;
 
 //push_swap.c //main
@@ -29,7 +34,6 @@ void push(t_list **x, t_list **y);
 void rotate(t_list **lst);
 void reverse_rotate(t_list **lst);
 
-void sa(t_list **stack_a);
 void sa(t_list **stack_a);
 void sb(t_list **stack_b);
 void ss(t_list **stack_a, t_list **stack_b);

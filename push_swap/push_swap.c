@@ -42,11 +42,6 @@ void initialize_stack(t_list **stack, int ac, char **av)
 	}
 }
 
-// void push_swap(t_list **a_stack, t_list **b_stack)
-// {
-
-// }
-
 void print_stack(t_list *stack)
 {
 	while(stack)
