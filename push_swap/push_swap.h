@@ -49,7 +49,15 @@ void rrr(t_list **stack_a, t_list **stack_b);
 //stack_utils.c
 bool is_sorted(t_list *stack);
 t_list *find_min_node(t_list *stack);
+t_list *find_max_node(t_list *stack);
 void sort_three(t_list **stack);
 
+//sort_stack.c
+void sort_stack(t_list **a, t_list **b);
+void set_target_node(t_list *a, t_list *b);
+
+
+
+void print_stack(t_list *stack);
 
 #endif

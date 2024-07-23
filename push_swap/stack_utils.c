@@ -18,6 +18,9 @@ bool is_sorted(t_list *stack)
 
 t_list *find_min_node(t_list *stack)
 {
+	if(!stack)
+		return (NULL);
+
 	t_list *min_node;
 	long min;
 
@@ -32,15 +35,43 @@ t_list *find_min_node(t_list *stack)
 
 		stack = stack->next;
 	}
-	printf("min value in this stack is: %ld\n", min);
+	//printf("min value in this stack is: %ld\n", min);
 	return (min_node);
 }
+
+t_list *find_max_node(t_list *stack)
+{
+	if(!stack)
+		return (NULL);
+
+	long max;
+	t_list *node_that_holds_max;
+
+	max = LONG_MIN;
+	while(stack)
+	{
+		if(stack->nbr > max)
+		{
+			max = stack->nbr;
+			node_that_holds_max = stack;
+		}
+		stack = stack->next;
+	}
+	//printf("max value in this stack is: %ld\n", max);
+	return(node_that_holds_max);
+}
+
 
 void sort_three(t_list **stack)
 {
 	t_list *min_node;
 
+	// printf("---\n");
+	// print_stack(*stack);
+	// printf("---\n");
+
 	min_node = find_min_node(*stack);
+	// printf("first node value: %d\n", (*stack)->next->nbr);
 	if((*stack)->nbr == min_node->nbr) //min_node on top
 	{
 		if((*stack)->next->nbr > (*stack)->next->next->nbr)
