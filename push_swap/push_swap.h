@@ -57,6 +57,9 @@ void sort_stack(t_list **a, t_list **b);
 void set_target_node(t_list *a, t_list *b);
 
 
+//from_a_to_b.c
+void from_a_to_b(t_list **a, t_list **b);
+
 
 void print_stack(t_list *stack);
 
