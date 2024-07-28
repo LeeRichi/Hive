@@ -44,7 +44,7 @@ void set_target_node(t_list *a, t_list *b) //set each a
 			a->target_node = find_max_node(b);
 		else
 			a->target_node = target_node;
-		printf("test: %d\n", a->target_node->nbr);
+		// printf("test: %d\n", a->target_node->nbr);
 		a = a->next;
 	}
 }
@@ -108,10 +108,11 @@ void sort_stack(t_list **a, t_list **b)
 		pb(a, b);
 	while(len_a-- > 3 && !is_sorted(*a))
 	{
+		printf("Times the loops run.\n");
 		set_info_to_stack_a(*a, *b);
-		from_a_to_b(*a, *b);
+		// from_a_to_b(a, b);
 	}
-	// sort_three(a);
+	sort_three(a);
 	//move nodes from b to a
 	// while(*b)
 	// {

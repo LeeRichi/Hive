@@ -66,6 +66,7 @@ void sort_three(t_list **stack)
 {
 	t_list *min_node;
 
+	printf("sort_three triggered.\n");
 	// printf("---\n");
 	// print_stack(*stack);
 	// printf("---\n");

@@ -66,8 +66,6 @@ int main(int ac, char **av)
 
 	print_stack(a_stack);
 
-	//sort_three(&a_stack);
-
 	sort_stack(&a_stack, &b_stack);
 	printf("After: \n");
 	print_stack(a_stack);
