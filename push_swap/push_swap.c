@@ -62,11 +62,13 @@ int main(int ac, char **av)
 		return (1);
 	}
 	initialize_stack(&a_stack, ac, av);
-	// push_swap(&a_stack, &b_stack);
 
+	printf("begining: \n");
 	print_stack(a_stack);
 
+	printf("sorting now...: \n");
 	sort_stack(&a_stack, &b_stack);
+
 	printf("After: \n");
 	print_stack(a_stack);
 

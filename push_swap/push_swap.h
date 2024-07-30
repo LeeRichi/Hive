@@ -21,6 +21,7 @@ int is_dup(t_list *stack, int value);
 int ft_checker(char *str);
 void initialize_stack(t_list **stack, int ac, char **av);
 void push_swap(t_list **a_stack, t_list **b_stack);
+void print_stack(t_list *stack);
 
 //node_operation.c
 int stack_len(t_list *stack);
@@ -59,8 +60,5 @@ void set_target_node(t_list *a, t_list *b);
 
 //from_a_to_b.c
 void from_a_to_b(t_list **a, t_list **b);
-
-
-void print_stack(t_list *stack);
 
 #endif

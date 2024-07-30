@@ -102,15 +102,27 @@ void sort_stack(t_list **a, t_list **b)
 	int len_a;
 
 	len_a = stack_len(*a);
+
+	printf("len_a is init %d\n", len_a);
+
 	if(len_a-- > 3 && !is_sorted(*a))
 		pb(a, b);
 	if(len_a-- > 3 && !is_sorted(*a))
 		pb(a, b);
+
+	printf("len_a in mid is: %d\n", len_a);
+
+	printf("printing stack_a\n");
+	print_stack(*a);
+	printf("printing stack_a\n");
+	print_stack(*b);
+
 	while(len_a-- > 3 && !is_sorted(*a))
 	{
-		printf("Times the loops run.\n");
+		printf("len_a is now %d\n", len_a);
+		ft_printf("Times the loops run.\n");
 		set_info_to_stack_a(*a, *b);
-		// from_a_to_b(a, b);
+		from_a_to_b(a, b);
 	}
 	sort_three(a);
 	//move nodes from b to a

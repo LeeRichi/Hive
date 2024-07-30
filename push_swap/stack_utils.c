@@ -71,6 +71,9 @@ void sort_three(t_list **stack)
 	// print_stack(*stack);
 	// printf("---\n");
 
+	if(stack_len(*stack) != 3)
+		return;
+
 	min_node = find_min_node(*stack);
 	// printf("first node value: %d\n", (*stack)->next->nbr);
 	if((*stack)->nbr == min_node->nbr) //min_node on top

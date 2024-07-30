@@ -51,6 +51,15 @@ void from_a_to_b(t_list **a, t_list **b)
 	t_list *cheapest_node;
 
 	cheapest_node = get_cheapest(*a);
+
+	ft_printf("cheapest_node's value: %d\n", cheapest_node->nbr);
+	while(*a)
+	{
+		ft_printf("test: \n", (*a)->nbr);
+		*a = (*a)->next;
+	}
+
+	ft_printf("and it takes %d steps\n", cheapest_node->op_cost);
 	if(cheapest_node->above_mid && cheapest_node->target_node->above_mid)
 		rr(a, b);
 	else if (!(cheapest_node->above_mid) && !(cheapest_node->target_node->above_mid))
