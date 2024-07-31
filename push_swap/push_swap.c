@@ -72,8 +72,8 @@ int main(int ac, char **av)
 	printf("After: \n");
 	print_stack(a_stack);
 
-	// printf("b: \n");
-	// print_stack(b_stack);
+	printf("B-----: \n");
+	print_stack(b_stack);
 
 	while (a_stack)
     {

@@ -114,23 +114,23 @@ void sort_stack(t_list **a, t_list **b)
 
 	printf("printing stack_a\n");
 	print_stack(*a);
-	printf("printing stack_a\n");
+	printf("printing stack_b\n");
 	print_stack(*b);
 
 	while(len_a-- > 3 && !is_sorted(*a))
 	{
-		printf("len_a is now %d\n", len_a);
-		ft_printf("Times the loops run.\n");
+		// printf("len_a is now %d\n", len_a);
+		// ft_printf("Times the loops run.\n");
 		set_info_to_stack_a(*a, *b);
 		from_a_to_b(a, b);
 	}
 	sort_three(a);
 	//move nodes from b to a
-	// while(*b)
-	// {
-	// 	set_info_to_stack_b(*a, *b);
-	// 	from_b_to_a(*a, *b);
-	// }
+	while(*b)
+	{
+		set_info_to_stack_b(*a, *b);
+		from_b_to_a(*a, *b);
+	}
 	current_index(*a);
 	//a checker?
 	//min_on_top();
