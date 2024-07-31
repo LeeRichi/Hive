@@ -49,14 +49,17 @@ void bring_node_to_top(t_list **stack, t_list *cheapest_node, char name)
 void from_a_to_b(t_list **a, t_list **b)
 {
 	t_list *cheapest_node;
+	t_list *temp;
 
 	cheapest_node = get_cheapest(*a);
 
 	ft_printf("cheapest_node's value: %d\n", cheapest_node->nbr);
-	while(*a)
+
+	temp = *b;
+	while(temp)
 	{
-		ft_printf("test: \n", (*a)->nbr);
-		*a = (*a)->next;
+        ft_printf("Node's value: %d\n", temp->nbr);
+		temp = temp->next;
 	}
 
 	ft_printf("and it takes %d steps\n", cheapest_node->op_cost);
@@ -66,5 +69,5 @@ void from_a_to_b(t_list **a, t_list **b)
 		rrr(a, b);
 	bring_node_to_top(a, cheapest_node, 'a');
 	bring_node_to_top(b, cheapest_node, 'b');
-	pa(a, b);
+	pb(a, b);
 }
