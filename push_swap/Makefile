@@ -6,7 +6,7 @@
 #    By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by LEECHI            #+#    #+#              #
-#    Updated: 2024/07/28 11:04:45 by LEECHI           ###   ########.fr        #
+#    Updated: 2024/07/31 08:31:39 by LEECHI           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = push_swap.c \
 		stack_utils.c \
 		sort_stack.c \
 		from_a_to_b.c \
+		set_info/set_info_to_stack_a.c \
 
 OBJS = $(SRCS:.c=.o)
 

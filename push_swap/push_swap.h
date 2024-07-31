@@ -54,11 +54,20 @@ t_list *find_max_node(t_list *stack);
 void sort_three(t_list **stack);
 
 //sort_stack.c
+void current_index(t_list *a);
 void sort_stack(t_list **a, t_list **b);
 void set_target_node(t_list *a, t_list *b);
 
 
 //from_a_to_b.c
 void from_a_to_b(t_list **a, t_list **b);
+
+//set_info
+//set_info_to_stack_a
+void set_info_to_stack_a(t_list *a, t_list *b);
+
+
+
+//set_info_to_stack_B
 
 #endif
