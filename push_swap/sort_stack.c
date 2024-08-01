@@ -67,9 +67,9 @@ void sort_stack(t_list **a, t_list **b)
 		from_a_to_b(a, b);
 
 		//printf("printing stack_a\n");
-		print_stack(*a);
+		//print_stack(*a);
 		//printf("printing stack_b\n");
-		print_stack(*b);
+		//print_stack(*b);
 		len_a--;
 	}
 	//printf("tell me len_a: %d\n", len_a);

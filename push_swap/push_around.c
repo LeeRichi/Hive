@@ -17,7 +17,7 @@ static void bring_node_to_top(t_list **stack, t_list *cheapest_node, char name)
 	int r_len;
 
 	len = stack_len(*stack);
-	r_len = (*stack)->index - len;
+	r_len = len - (*stack)->index;
 	if(name == 'a')
 	{
 		if(*stack == cheapest_node)
