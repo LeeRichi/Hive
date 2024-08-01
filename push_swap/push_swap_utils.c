@@ -62,22 +62,27 @@ void reverse_rotate(t_list **lst)
 	}
 }
 
-void sa(t_list **stack_a)
+void sa(t_list **stack_a, int print)
 {
 	if(stack_a && *stack_a && (*stack_a)->next)
 		swap_list(*stack_a, (*stack_a)->next);
+	if(print)
+		ft_printf("sa\n");
 }
 
-void sb(t_list **stack_b)
+void sb(t_list **stack_b, int print)
 {
 	if(stack_b && *stack_b && (*stack_b)->next)
 		swap_list(*stack_b, (*stack_b)->next);
+	if(print)
+		ft_printf("sb\n");
 }
 
 void ss(t_list **stack_a, t_list **stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	sa(stack_a, 0);
+	sb(stack_b, 0);
+	ft_printf("ss\n");
 }
 
 void pa(t_list **stack_a, t_list **stack_b)
@@ -86,6 +91,7 @@ void pa(t_list **stack_a, t_list **stack_b)
 	{
 		push(stack_b, stack_a);
 	}
+	ft_printf("pa\n");
 }
 
 void pb(t_list **stack_a, t_list **stack_b)
@@ -94,36 +100,47 @@ void pb(t_list **stack_a, t_list **stack_b)
 	{
 		push(stack_a, stack_b);
 	}
+	ft_printf("pb\n");
 }
 
-void ra(t_list **stack_a)
+void ra(t_list **stack_a, int print)
 {
 	rotate(stack_a);
+	if(print)
+		ft_printf("ra\n");
 }
 
-void rb(t_list **stack_b)
+void rb(t_list **stack_b, int print)
 {
 	rotate(stack_b);
+	if(print)
+		ft_printf("rb\n");
 }
 
 void rr(t_list **stack_a, t_list **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	ra(stack_a, 0);
+	rb(stack_b, 0);
+	ft_printf("rr\n");
 }
 
-void rra(t_list **stack_a)
+void rra(t_list **stack_a, int print)
 {
 	reverse_rotate(stack_a);
+	if(print)
+		ft_printf("rra\n");
 }
 
-void rrb(t_list **stack_b)
+void rrb(t_list **stack_b, int print)
 {
 	reverse_rotate(stack_b);
+	if(print)
+		ft_printf("rrb\n");
 }
 
 void rrr(t_list **stack_a, t_list **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra(stack_a, 0);
+	rrb(stack_b, 0);
+	ft_printf("rrr\n");
 }

@@ -25,12 +25,12 @@ static void bring_node_to_top(t_list **stack, t_list *cheapest_node, char name)
 		if(cheapest_node->above_mid)
 		{
 			while(len--)
-				ra(stack);
+				ra(stack, 1);
 		}
 		else
 		{
 			while(len--)
-				rra(stack);
+				rra(stack, 1);
 		}
 	}
 	else if(name == 'b')
@@ -40,12 +40,12 @@ static void bring_node_to_top(t_list **stack, t_list *cheapest_node, char name)
 		if(cheapest_node->target_node->above_mid)
 		{
 			while(cheapest_node->target_node->index--)
-				rb(stack);
+				rb(stack, 1);
 		}
 		else
 		{
 			while(r_len--)
-				rrb(stack);
+				rrb(stack, 1);
 		}
 	}
 }
@@ -61,12 +61,12 @@ static void fetch_target_for_pushing_b_nodes(t_list **stack, t_list *node)
 	if(node->target_node->above_mid)
 	{
 		while(node->target_node->index--)
-			ra(stack);
+			rb(stack, 1);
 	}
 	else
 	{
 		while(for_loop_poppose--)
-			rra(stack);
+			rrb(stack, 1);
 	}
 }
 
@@ -84,13 +84,12 @@ void from_a_to_b(t_list **a, t_list **b)
 	t_list *cheapest_node;
 	cheapest_node = get_cheapest(*a);
 
-	ft_printf("cheapest_node's value: %d\n", cheapest_node->nbr);
-	ft_printf("and it takes %d steps\n", cheapest_node->op_cost);
+	// ft_printf("cheapest_node's value: %d\n", cheapest_node->nbr);
+	// ft_printf("and it takes %d steps\n", cheapest_node->op_cost);
 
 	//the situation that we can use double rotate instead of single rotate.
 	if(top_checker(a, b, cheapest_node) == 0) //but one case we have to avoid is that when the node is on top already.
 	{
-		ft_printf("test\n");
 		if(cheapest_node->above_mid && cheapest_node->target_node->above_mid)
 			rr(a, b);
 		else if (!(cheapest_node->above_mid) && !(cheapest_node->target_node->above_mid))

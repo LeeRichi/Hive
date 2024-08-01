@@ -18,6 +18,8 @@ int ft_checker(char *str) //1 is pass
 {
 	if(str[0] == '-' && str[1] == '1')
 		return (1);
+	// if(str[0] == '-')
+	// 	return (1);
 	else if(str[0] == '0')
 		return (1);
 	else if(ft_atoi(str) != 0 && ft_atoi(str) != -1)//if it's 0 or -1, that means overflow.
@@ -62,18 +64,19 @@ int main(int ac, char **av)
 		return (1);
 	}
 	initialize_stack(&a_stack, ac, av);
+	initialize_stack(&b_stack, 0, NULL);
 
-	printf("begining: \n");
-	print_stack(a_stack);
+	//printf("begining: \n");
+	//print_stack(a_stack);
 
-	printf("sorting now...: \n");
+	//printf("sorting now...: \n");
 	sort_stack(&a_stack, &b_stack);
 
-	printf("After: \n");
-	print_stack(a_stack);
+	//printf("After: \n");
+	//print_stack(a_stack);
 
-	printf("B-----: \n");
-	print_stack(b_stack);
+	//printf("B-----: \n");
+	//print_stack(b_stack);
 
 	while (a_stack)
     {

@@ -35,7 +35,6 @@ t_list *find_min_node(t_list *stack)
 
 		stack = stack->next;
 	}
-	//printf("min value in this stack is: %ld\n", min);
 	return (min_node);
 }
 
@@ -57,7 +56,6 @@ t_list *find_max_node(t_list *stack)
 		}
 		stack = stack->next;
 	}
-	//printf("max value in this stack is: %ld\n", max);
 	return(node_that_holds_max);
 }
 
@@ -66,7 +64,7 @@ void sort_three(t_list **stack)
 {
 	t_list *min_node;
 
-	printf("sort_three triggered.\n");
+	//printf("sort_three triggered.\n");
 	// printf("---\n");
 	// print_stack(*stack);
 	// printf("---\n");
@@ -80,25 +78,28 @@ void sort_three(t_list **stack)
 	{
 		if((*stack)->next->nbr > (*stack)->next->next->nbr)
 		{
-			reverse_rotate(stack);
-			sa(stack);
+			//rra(stack, 1);
+			// reverse_rotate(stack);
+			sa(stack, 1);
 		}
 	}
 	else if((*stack)->next->nbr == min_node->nbr)
 	{
 		if((*stack)->nbr > (*stack)->next->next->nbr)
-			rotate(stack);
+			ra(stack, 1);
 		else
-			sa(stack);
+			sa(stack, 1);
 	}
 	else if((*stack)->next->next->nbr == min_node->nbr)
 	{
 		if((*stack)->nbr > (*stack)->next->nbr)
 		{
-			sa(stack);
-			reverse_rotate(stack);
+			sa(stack, 1);
+			// reverse_rotate(stack);
+			rra(stack, 1);
 		}
 		else
-			reverse_rotate(stack);
+			// reverse_rotate(stack);
+			rra(stack, 1);
 	}
 }
