@@ -56,18 +56,17 @@ void sort_three(t_list **stack);
 //sort_stack.c
 void current_index(t_list *a);
 void sort_stack(t_list **a, t_list **b);
-void set_target_node(t_list *a, t_list *b);
+// void set_target_node(t_list *a, t_list *b);
 
-
-//from_a_to_b.c
+//push_around
 void from_a_to_b(t_list **a, t_list **b);
+void from_b_to_a(t_list **a, t_list **b);
 
 //set_info
 //set_info_to_stack_a
 void set_info_to_stack_a(t_list *a, t_list *b);
-
-
-
-//set_info_to_stack_B
+void set_cheapest(t_list *stack);
+//set_info_to_stack_b
+void set_info_to_stack_b(t_list *a, t_list *b);
 
 #endif

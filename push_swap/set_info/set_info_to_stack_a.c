@@ -20,7 +20,7 @@
 // 	}
 // }
 
-void set_target_node(t_list *a, t_list *b) //set each a
+static void set_target_node(t_list *a, t_list *b) //set each a
 {
 	t_list *current;
 	t_list *target_node;
@@ -59,7 +59,7 @@ static void count_cost(t_list *a, t_list *b)
 	{
 		a->op_cost = a->index;
 		if(!(a->above_mid))
-			a->op_cost = len_a - a->index;
+			a->op_cost = len_a - (a->index);
 		if(a->target_node->above_mid)
 			a->op_cost += a->target_node->index;
 		else
@@ -68,7 +68,7 @@ static void count_cost(t_list *a, t_list *b)
 	}
 }
 
-static void set_cheapest(t_list *stack)
+void set_cheapest(t_list *stack)
 {
 	long cheapest;
 	t_list *cheapest_node;
