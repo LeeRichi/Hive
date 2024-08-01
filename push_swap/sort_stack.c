@@ -21,6 +21,20 @@ void current_index(t_list *a)
 	}
 }
 
+void min_on_top(t_list **stack)
+{
+	t_list *min_node;
+
+	min_node = find_min_node(*stack);
+	while(*stack != min_node)
+	{
+		if(min_node->above_mid)
+			ra(stack);
+		else
+			rra(stack);
+	}
+}
+
 // void set_target_node(t_list *a, t_list *b) //set each a
 // {
 // 	t_list *current;
@@ -117,7 +131,7 @@ void sort_stack(t_list **a, t_list **b)
 	// printf("printing stack_b\n");
 	// print_stack(*b);
 
-	while(len_a-- > 3 && !is_sorted(*a))
+	while(len_a > 3 && !is_sorted(*a))
 	{
 		printf("I want to know the len: %d\n", len_a);
 		set_info_to_stack_a(*a, *b);
@@ -127,9 +141,14 @@ void sort_stack(t_list **a, t_list **b)
 		print_stack(*a);
 		printf("printing stack_b\n");
 		print_stack(*b);
+		len_a--;
 	}
+	printf("tell me len_a: %d\n", len_a);
 	if(len_a == 3 && !is_sorted(*a))
+	{
 		sort_three(a);
+		printf("is this ever triggered?");
+	}
 	while(*b)
 	{
 		set_info_to_stack_b(*a, *b);
@@ -137,5 +156,5 @@ void sort_stack(t_list **a, t_list **b)
 	}
 	current_index(*a);
 	//a checker?
-	//min_on_top();
+	min_on_top(a);
 }

@@ -6,7 +6,7 @@
 /*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/07/10 19:28:16 by LEECHI           ###   ########.fr       */
+/*   Updated: 2024/08/01 18:35:27 by LEECHI           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ int	printnbr_foraddress(unsigned long n, int base)
 
 	count = 0;
 	symbols = "0123456789abcdef";
-	if (n < 0)
-		return (printnbr_foraddress(-n, base) + 1);
-	else if (n < (unsigned long)base)
+	if (n < (unsigned long)base)
 		return (printchar(symbols[n]));
 	else
 	{

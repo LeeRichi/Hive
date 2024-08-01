@@ -54,8 +54,8 @@ void set_info_to_stack_b(t_list *a, t_list *b)
 	current_index(b);
 	set_target_node_version_b(a, b);
 
-	ft_printf("11test this shit: %d\n", b->nbr);
-	ft_printf("test this shit, and should be 6: %d\n", b->target_node->above_mid); //should be 6
+	ft_printf("b->nbr: test this shit: %d\n", b->nbr);
+	ft_printf("b->target_node->nbr: test this shit: %d\n", b->target_node->nbr); //should be 6
 	// count_cost_version_b(a, b);
 	// set_cheapest(b);
 }
