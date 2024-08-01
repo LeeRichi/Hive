@@ -39,14 +39,34 @@ static void bring_node_to_top(t_list **stack, t_list *cheapest_node, char name)
 			return;
 		if(cheapest_node->target_node->above_mid)
 		{
-			while(r_len--)
+			while(cheapest_node->target_node->index--)
 				rb(stack);
 		}
 		else
 		{
 			while(r_len--)
-				rb(stack);
+				rrb(stack);
 		}
+	}
+}
+
+static void fetch_target_for_pushing_b_nodes(t_list **stack, t_list *node)
+{
+	int a_len;
+	int for_loop_poppose;
+
+	a_len = stack_len(*stack);
+	for_loop_poppose = a_len - node->target_node->index;
+
+	if(node->target_node->above_mid)
+	{
+		while(node->target_node->index--)
+			ra(stack);
+	}
+	else
+	{
+		while(for_loop_poppose--)
+			rra(stack);
 	}
 }
 
@@ -85,6 +105,6 @@ void from_a_to_b(t_list **a, t_list **b)
 
 void from_b_to_a(t_list **a, t_list **b)
 {
-	bring_node_to_top(a, *b, 'b');
+	fetch_target_for_pushing_b_nodes(a, *b);
 	pa(a, b);
 }

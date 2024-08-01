@@ -12,7 +12,7 @@ static void set_target_node_version_b(t_list *a, t_list *b) //set each b //close
 		current = a;
 		while(current)
 		{
-			if(b->nbr > current->nbr && best_value > current->nbr)
+			if(b->nbr < current->nbr && best_value > current->nbr)
 			{
 				target_node = current;
 				best_value = current->nbr;
@@ -53,6 +53,9 @@ void set_info_to_stack_b(t_list *a, t_list *b)
 	current_index(a);
 	current_index(b);
 	set_target_node_version_b(a, b);
+
+	ft_printf("11test this shit: %d\n", b->nbr);
+	ft_printf("test this shit, and should be 6: %d\n", b->target_node->above_mid); //should be 6
 	// count_cost_version_b(a, b);
 	// set_cheapest(b);
 }

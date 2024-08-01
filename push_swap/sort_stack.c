@@ -128,7 +128,8 @@ void sort_stack(t_list **a, t_list **b)
 		printf("printing stack_b\n");
 		print_stack(*b);
 	}
-	sort_three(a);
+	if(len_a == 3 && !is_sorted(*a))
+		sort_three(a);
 	while(*b)
 	{
 		set_info_to_stack_b(*a, *b);
