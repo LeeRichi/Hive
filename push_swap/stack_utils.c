@@ -59,21 +59,14 @@ t_list *find_max_node(t_list *stack)
 	return(node_that_holds_max);
 }
 
-
 void sort_three(t_list **stack)
 {
 	t_list *min_node;
-
-	//printf("sort_three triggered.\n");
-	// printf("---\n");
-	// print_stack(*stack);
-	// printf("---\n");
 
 	if(stack_len(*stack) != 3)
 		return;
 
 	min_node = find_min_node(*stack);
-	// printf("first node value: %d\n", (*stack)->next->nbr);
 	if((*stack)->nbr == min_node->nbr) //min_node on top
 	{
 		if((*stack)->next->nbr > (*stack)->next->next->nbr)
