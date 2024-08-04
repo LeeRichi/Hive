@@ -61,12 +61,12 @@ static void fetch_target_for_pushing_b_nodes(t_list **stack, t_list *node)
 	if(node->target_node->above_mid)
 	{
 		while(node->target_node->index--)
-			rb(stack, 1);
+			ra(stack, 1);
 	}
 	else
 	{
 		while(for_loop_poppose--)
-			rrb(stack, 1);
+			rra(stack, 1);
 	}
 }
 

@@ -78,7 +78,7 @@ void sort_three(t_list **stack)
 	{
 		if((*stack)->next->nbr > (*stack)->next->next->nbr)
 		{
-			//rra(stack, 1);
+			rra(stack, 1);
 			// reverse_rotate(stack);
 			sa(stack, 1);
 		}

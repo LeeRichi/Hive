@@ -69,4 +69,6 @@ void set_cheapest(t_list *stack);
 //set_info_to_stack_b
 void set_info_to_stack_b(t_list *a, t_list *b);
 
+//ps_split.c
+char **ps_split(char *str, int *am_words);
 #endif
