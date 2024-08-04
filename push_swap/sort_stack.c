@@ -62,7 +62,6 @@ void sort_stack(t_list **a, t_list **b)
 
 	while(len_a > 3 && !is_sorted(*a))
 	{
-		//printf("I want to know the len: %d\n", len_a);
 		set_info_to_stack_a(*a, *b);
 		from_a_to_b(a, b);
 
