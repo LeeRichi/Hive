@@ -6,7 +6,7 @@
 /*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:06:51 by LEECHI            #+#    #+#             */
-/*   Updated: 2024/08/04 23:06:53 by LEECHI           ###   ########.fr       */
+/*   Updated: 2024/08/05 10:04:09 by LEECHI           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ t_list *find_max_node(t_list *stack)
 		stack = stack->next;
 	}
 	return(node_that_holds_max);
+}
+
+t_list *get_cheapest(t_list *stack)
+{
+	while(stack)
+	{
+		if(stack->cheapest)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
 }
 
 void sort_three(t_list **stack)
