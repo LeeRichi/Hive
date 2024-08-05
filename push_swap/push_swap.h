@@ -71,4 +71,10 @@ void set_info_to_stack_b(t_list *a, t_list *b);
 
 //ps_split.c
 char **ps_split(char *str, int *am_words);
+
+//general_functions
+void	std_error(void);
+void	ft_free_throw(t_list *stack);
+void	ft_two_free_throws(char **stack);
+
 #endif
