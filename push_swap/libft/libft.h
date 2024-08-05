@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/07/10 19:36:35 by LEECHI           ###   ########.fr       */
+/*   Updated: 2024/08/05 17:46:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdint.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <stdbool.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   node_operation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/05 17:54:20 by chlee2            #+#    #+#             */
+/*   Updated: 2024/08/05 17:56:02 by chlee2           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int stack_len(t_list *stack)
+int	stack_len(t_list *stack)
 {
-	if(!stack)
+	int	i;
+
+	if (!stack)
 		return (0);
-	int i;
 	i = 0;
-	while(stack)
+	while (stack)
 	{
 		i++;
 		stack = stack->next;
@@ -14,32 +27,26 @@ int stack_len(t_list *stack)
 	return (i);
 }
 
-t_list *new_node(int value)
+t_list	*new_node(int value)
 {
-	t_list *node = (t_list *)malloc(sizeof(t_list));
-	if(!node)
+	t_list	*node;
+
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
 	node->nbr = value;
 	node->next = NULL;
 	return (node);
 }
 
-void push_single_stack(t_list **stack, int value)
+void	push_single_stack(t_list **stack, int value)
 {
-    t_list *node = new_node(value);
-    if (node)
-    {
-        node->next = *stack;
-        *stack = node;
-    }
-}
+	t_list	*node;
 
-// void pop_single_stack(t_list **stack)
-// {
-// 	if(stack && *stack)
-// 	{
-// 		t_list *temp = *stack;
-// 		*stack = (*stack)->next;
-// 		free(temp);
-// 	}
-// }
+	node = new_node(value);
+	if (node)
+	{
+		node->next = *stack;
+		*stack = node;
+	}
+}

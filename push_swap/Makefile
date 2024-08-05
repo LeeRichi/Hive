@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+         #
+#    By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by LEECHI            #+#    #+#              #
-#    Updated: 2024/08/05 12:33:47 by LEECHI           ###   ########.fr        #
+#    Updated: 2024/08/05 17:53:03 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = push_swap.c \
 		node_operation.c \
-		push_swap_utils.c \
 		stack_utils.c \
 		sort_stack.c \
 		push_around.c \
@@ -31,6 +30,11 @@ SRCS = push_swap.c \
 		ps_split.c \
 		general_functions/std_error.c \
 		general_functions/free_things.c \
+		instructions/index.c \
+		instructions/swaps.c \
+		instructions/rotations.c \
+		instructions/reverse_rotations.c \
+		instructions/push.c \
 
 OBJS = $(SRCS:.c=.o)
 
