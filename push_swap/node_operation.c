@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:54:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:56:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:25:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	stack_len(t_list *stack)
 	return (i);
 }
 
-t_list	*new_node(int value)
+static t_list	*new_node(int value)
 {
 	t_list	*node;
 

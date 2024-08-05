@@ -6,14 +6,14 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:47:16 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:19:11 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 //1 means dup
-int	is_dup(t_list *stack, int value)
+static int	is_dup(t_list *stack, int value)
 {
 	while (stack)
 	{
@@ -25,7 +25,7 @@ int	is_dup(t_list *stack, int value)
 }
 
 //if it's 0 or -1, that means overflow. //1 is pass
-int	ft_checker(char *str)
+static int	ft_checker(char *str)
 {
 	if (str[0] == '-' && str[1] == '1')
 		return (1);
@@ -37,7 +37,7 @@ int	ft_checker(char *str)
 		return (0);
 }
 
-void	initialize_stack(t_list **stack, int ac, char **av)
+static void	initialize_stack(t_list **stack, int ac, char **av)
 {
 	int	value;
 

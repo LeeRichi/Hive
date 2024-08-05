@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 18:01:23 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:25:49 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,12 @@ typedef struct s_list
 	struct s_list	*target_node;
 }	t_list;
 
-//push_swap.c //main
-int		is_dup(t_list *stack, int value);
-int		ft_checker(char *str);
-void	initialize_stack(t_list **stack, int ac, char **av);
-void	push_swap(t_list **a_stack, t_list **b_stack);
-void	print_stack(t_list *stack);
-
 //ps_split.c
 char	**ps_split(char *str, int *am_words);
 
 //node_operation.c
 int		stack_len(t_list *stack);
-t_list	*new_node(int value);
 void	push_single_stack(t_list **stack, int value);
-void	pop_single_stack(t_list **stack);
 
 //general_functions
 void	std_error(void);
