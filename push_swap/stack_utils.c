@@ -6,7 +6,7 @@
 /*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:06:51 by LEECHI            #+#    #+#             */
-/*   Updated: 2024/08/05 10:04:09 by LEECHI           ###   ########.fr       */
+/*   Updated: 2024/08/05 10:11:32 by LEECHI           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,39 +78,4 @@ t_list *get_cheapest(t_list *stack)
 		stack = stack->next;
 	}
 	return (NULL);
-}
-
-void sort_three(t_list **stack)
-{
-	t_list *min_node;
-
-	if(stack_len(*stack) != 3)
-		return;
-
-	min_node = find_min_node(*stack);
-	if((*stack)->nbr == min_node->nbr)
-	{
-		if((*stack)->next->nbr > (*stack)->next->next->nbr)
-		{
-			rra(stack, 1);
-			sa(stack, 1);
-		}
-	}
-	else if((*stack)->next->nbr == min_node->nbr)
-	{
-		if((*stack)->nbr > (*stack)->next->next->nbr)
-			ra(stack, 1);
-		else
-			sa(stack, 1);
-	}
-	else if((*stack)->next->next->nbr == min_node->nbr)
-	{
-		if((*stack)->nbr > (*stack)->next->nbr)
-		{
-			sa(stack, 1);
-			rra(stack, 1);
-		}
-		else
-			rra(stack, 1);
-	}
 }
