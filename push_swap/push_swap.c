@@ -6,18 +6,18 @@
 /*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by LEECHI            #+#    #+#             */
-/*   Updated: 2024/08/05 12:30:42 by LEECHI           ###   ########.fr       */
+/*   Updated: 2024/08/05 14:26:05 by LEECHI           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 //1 means dup
-int is_dup(t_list *stack, int value)
+int	is_dup(t_list *stack, int value)
 {
-	while(stack)
+	while (stack)
 	{
-		if(stack->nbr == value)
+		if (stack->nbr == value)
 			return (1);
 		stack = stack->next;
 	}
@@ -25,24 +25,25 @@ int is_dup(t_list *stack, int value)
 }
 
 //if it's 0 or -1, that means overflow. //1 is pass
-int ft_checker(char *str)
+int	ft_checker(char *str)
 {
-	if(str[0] == '-' && str[1] == '1')
+	if (str[0] == '-' && str[1] == '1')
 		return (1);
-	else if(str[0] == '0')
+	else if (str[0] == '0')
 		return (1);
-	else if(ft_atoi(str) != 0 && ft_atoi(str) != -1)
+	else if (ft_atoi(str) != 0 && ft_atoi(str) != -1)
 		return (1);
 	else
 		return (0);
 }
 
-void initialize_stack(t_list **stack, int ac, char **av)
+void	initialize_stack(t_list **stack, int ac, char **av)
 {
-	while(ac - 1 >= 1)
-	{
-		int value = ft_atoi(av[ac - 1]);
+	int	value;
 
+	while (ac - 1 >= 1)
+	{
+		value = ft_atoi(av[ac - 1]);
 		if (!ft_checker(av[ac - 1]) || is_dup(*stack, value))
 			std_error();
 		push_single_stack(stack, value);
@@ -50,19 +51,10 @@ void initialize_stack(t_list **stack, int ac, char **av)
 	}
 }
 
-void print_stack(t_list *stack)
+int	main(int ac, char **av)
 {
-	while(stack)
-	{
-		ft_printf("%d\n", stack->nbr);
-		stack = stack->next;
-	}
-}
-
-int main(int ac, char **av)
-{
-	t_list 	*a_stack;
-	t_list 	*b_stack;
+	t_list	*a_stack;
+	t_list	*b_stack;
 	int		am_words;
 	char	**split_av;
 
