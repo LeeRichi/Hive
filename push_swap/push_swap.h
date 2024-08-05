@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:45:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:01:23 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_list	*get_cheapest(t_list *stack);
 //set_info
 //set_info_to_stack_a
 void	set_info_to_stack_a(t_list *a, t_list *b);
-void	set_cheapest(t_list *stack);
 //set_info_to_stack_b
 void	set_info_to_stack_b(t_list *a, t_list *b);
 

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:46:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:09:00 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int		ft_atoi(const char *str);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
-int	ft_printf(const char *format, ...);
-int	printchar(char c);
-int	printstr(char *s);
-int	printnbr(long n, int base);
-int	printnbr_butx(long n, int base);
-int	printnbr_foraddress(unsigned long n, int base);
-int	printaddress(unsigned long something);
+int		ft_printf(const char *format, ...);
+int		printchar(char c);
+int		printstr(char *s);
+int		printnbr(long n, int base);
+int		printnbr_butx(long n, int base);
+int		printnbr_foraddress(unsigned long n, int base);
+int		printaddress(unsigned long something);
 
 #endif

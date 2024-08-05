@@ -6,17 +6,17 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:30:32 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:41:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 18:06:43 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void swap_list(t_list *a, t_list *b)
+void	swap_list(t_list *a, t_list *b)
 {
-	int temp;
+	int	temp;
 
-	if(a && b)
+	if (a && b)
 	{
 		temp = a->nbr;
 		a->nbr = b->nbr;
@@ -24,11 +24,11 @@ void swap_list(t_list *a, t_list *b)
 	}
 }
 
-void push(t_list **x, t_list **y)
+void	push(t_list **x, t_list **y)
 {
-	t_list *temp;
+	t_list	*temp;
 
-	if(x && *x)
+	if (x && *x)
 	{
 		temp = *x;
 		*x = (*x)->next;
@@ -37,40 +37,36 @@ void push(t_list **x, t_list **y)
 	}
 }
 
-void rotate(t_list **lst)
+void	rotate(t_list **lst)
 {
-	t_list *temp;
-	t_list *current;
+	t_list	*temp;
+	t_list	*current;
 
-	if(*lst && (*lst)->next)
+	if (*lst && (*lst)->next)
 	{
 		temp = *lst;
 		*lst = (*lst)->next;
 		temp->next = NULL;
-
 		current = *lst;
-		while(current->next)
+		while (current->next)
 			current = current->next;
 		current->next = temp;
 	}
 }
 
-void reverse_rotate(t_list **lst)
+void	reverse_rotate(t_list **lst)
 {
-	t_list *temp;
-	t_list *current;
+	t_list	*temp;
+	t_list	*current;
 
-	if(*lst && (*lst)->next)
+	if (*lst && (*lst)->next)
 	{
 		current = *lst;
-		while(current->next->next)
+		while (current->next->next)
 			current = current->next;
-
 		temp = current->next;
 		current->next = NULL;
-
 		temp->next = *lst;
 		*lst = temp;
 	}
 }
-
