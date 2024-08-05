@@ -1,6 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: LEECHI <LEECHI@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/04 23:06:51 by LEECHI            #+#    #+#             */
+/*   Updated: 2024/08/04 23:06:53 by LEECHI           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h> //temp
+#include "push_swap.h"
 
 bool is_sorted(t_list *stack)
 {
@@ -67,12 +77,11 @@ void sort_three(t_list **stack)
 		return;
 
 	min_node = find_min_node(*stack);
-	if((*stack)->nbr == min_node->nbr) //min_node on top
+	if((*stack)->nbr == min_node->nbr)
 	{
 		if((*stack)->next->nbr > (*stack)->next->next->nbr)
 		{
 			rra(stack, 1);
-			// reverse_rotate(stack);
 			sa(stack, 1);
 		}
 	}
@@ -88,11 +97,9 @@ void sort_three(t_list **stack)
 		if((*stack)->nbr > (*stack)->next->nbr)
 		{
 			sa(stack, 1);
-			// reverse_rotate(stack);
 			rra(stack, 1);
 		}
 		else
-			// reverse_rotate(stack);
 			rra(stack, 1);
 	}
 }
