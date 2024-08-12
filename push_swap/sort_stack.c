@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:39:31 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:42:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/05 21:47:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	sort_stack(t_list **a, t_list **b)
 		from_a_to_b(a, b);
 		len_a--;
 	}
-	sort_three(a);
+	if (len_a == 3 && !is_sorted(*a))
+		sort_three(a);
 	while (*b)
 	{
 		set_info_to_stack_b(*a, *b);

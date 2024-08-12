@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:58:09 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 18:02:07 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/07 23:18:36 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,26 @@ static void	count_cost(t_list *a, t_list *b)
 		a->op_cost = a->index;
 		if (!(a->above_mid))
 			a->op_cost = len_a - (a->index);
+
 		if (a->target_node->above_mid)
 			a->op_cost += a->target_node->index;
 		else
 			a->op_cost += (len_b - a->target_node->index);
+
+		if(!(a->above_mid) && !(a->target_node->above_mid))
+		{
+			if(len_a - (a->index) > len_b - a->target_node->index)
+				a->op_cost -= len_b - a->target_node->index;
+			else
+				a->op_cost -= len_a - a->index;
+		}
+		else if((a->above_mid) && (a->target_node->above_mid))
+		{
+			if(a->index > a->target_node->index)
+				a->op_cost -= a->target_node->index;
+			else
+				a->op_cost -= a->index;
+		}
 		a = a->next;
 	}
 }

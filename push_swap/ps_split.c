@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:53:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 17:54:04 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:20:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	**ps_split(char *str, int *am_words)
 				str++;
 		}
 		result[i] = NULL;
+		result[0] = NULL;
 	}
 	return (result);
 }

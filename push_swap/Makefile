@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/10 18:30:28 by LEECHI            #+#    #+#              #
-#    Updated: 2024/08/05 17:53:03 by chlee2           ###   ########.fr        #
+#    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
+#    Updated: 2024/08/07 15:11:55 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFTDIR = libft
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS = push_swap.c \
 		node_operation.c \
@@ -40,15 +40,9 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-# $(NAME): $(OBJS)
-# 	@make -C $(LIBFTDIR)
-# 	cp $(LIBFTDIR)/$(LIBFT) $(NAME)
-# 	ar rcs $(NAME) $(OBJS)
-
 $(NAME): $(OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
-
 clean:
 	$(RM) $(OBJS)
 	@make clean -C $(LIBFTDIR)

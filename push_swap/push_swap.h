@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 18:25:49 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/07 22:51:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ typedef struct s_list
 	struct s_list	*next;
 	struct s_list	*target_node;
 }	t_list;
+
+//main.c
+int		is_dup(t_list *stack, int value);
+int		ft_checker(char *str);
+void	initialize_stack(t_list **stack, int ac, char **av);
 
 //ps_split.c
 char	**ps_split(char *str, int *am_words);
@@ -77,5 +82,8 @@ void	sort_stack(t_list **a, t_list **b);
 //push_around
 void	from_a_to_b(t_list **a, t_list **b);
 void	from_b_to_a(t_list **a, t_list **b);
+
+//temp
+void print_stack(t_list *stack);
 
 #endif

@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/07 22:51:42 by chlee2           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../push_swap.h"
 
-#include "push_swap.h"
-
-//1 means dup
 int	is_dup(t_list *stack, int value)
 {
 	while (stack)
@@ -80,6 +67,9 @@ int	main(int ac, char **av)
 	else
 		initialize_stack(&a_stack, ac, av);
 	initialize_stack(&b_stack, 0, NULL);
+
+	printf("begining: \n");
+	print_stack(a_stack);
 	sort_stack(&a_stack, &b_stack);
 	ft_free_throw(a_stack);
 	ft_free_throw(b_stack);

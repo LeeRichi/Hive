@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 12:29:06 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 18:08:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:16:15 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	ft_two_free_throws(char **split_av)
 	while (split_av[i])
 	{
 		free(split_av[i]);
+		split_av[i] = NULL;
 		i++;
 	}
 	free(split_av);
+	split_av = NULL;
 }

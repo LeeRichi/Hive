@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:29:08 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/05 18:03:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/07 23:24:23 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,14 @@ void	from_a_to_b(t_list **a, t_list **b)
 	cheapest_node = get_cheapest(*a);
 	a_above_mid = cheapest_node->above_mid;
 	b_above_mid = cheapest_node->target_node->above_mid;
-	if (*a != cheapest_node && *b != cheapest_node->target_node)
+	if (a_above_mid && b_above_mid)
 	{
-		if (a_above_mid && b_above_mid)
+		while (*a != cheapest_node && *b != cheapest_node->target_node)
 			rr(a, b);
-		else if (!a_above_mid && !b_above_mid)
+	}
+	else if (!a_above_mid && !b_above_mid)
+	{
+		while (*a != cheapest_node && *b != cheapest_node->target_node)
 			rrr(a, b);
 	}
 	current_index(*a);
