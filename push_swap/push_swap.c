@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/07 22:51:42 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/12 15:51:35 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,22 @@ int	is_dup(t_list *stack, int value)
 //if it's 0 or -1, that means overflow. //1 is pass
 int	ft_checker(char *str)
 {
-	if (str[0] == '-' && str[1] == '1')
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == '-')
+			i++;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	if (str_len(str) == 2 && (str[0] == '-' && str[1] == '1'))
 		return (1);
-	else if (str[0] == '0')
+	else if (str_len(str) == 1 && str[0] == '0')
 		return (1);
-	else if (ft_atoi(str) != 0 && ft_atoi(str) != -1)
+	else if (ft_atoll(str) != 0 && ft_atoll(str) != -1)
 		return (1);
 	else
 		return (0);
@@ -51,14 +62,15 @@ void	initialize_stack(t_list **stack, int ac, char **av)
 	}
 }
 
-void print_stack(t_list *stack)
-{
-	while(stack)
-	{
-		ft_printf("%d\n", stack->nbr);
-		stack = stack->next;
-	}
-}
+//remove for eva
+// void print_stack(t_list *stack)
+// {
+// 	while (stack)
+// 	{
+// 		ft_printf("%d\n", stack->nbr);
+// 		stack = stack->next;
+// 	}
+// }
 
 int	main(int ac, char **av)
 {

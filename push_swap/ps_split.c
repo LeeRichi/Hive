@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:53:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/07 15:20:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/12 14:55:20 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	count_word(char *str)
 	return (am + 1);
 }
 
-static int	str_len(char *str)
+int	str_len(char *str)
 {
 	int	i;
 
