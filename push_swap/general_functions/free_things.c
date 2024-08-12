@@ -18,9 +18,12 @@ void	ft_free_throw(t_list *stack)
 
 	if (stack == NULL)
 		return ;
-	temp = stack;
-	stack = stack->next;
-	free(temp);
+	while (stack)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
 }
 
 //designed for split_av
