@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/08/07 15:11:55 by chlee2           ###   ########.fr        #
+#    Updated: 2024/08/12 19:00:23 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFTDIR = libft
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = push_swap.c \
 		node_operation.c \

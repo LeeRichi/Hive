@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/12 15:51:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/12 19:52:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_checker(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] == '-')
+		while (str[i] == '-' || str[i] == '+')
 			i++;
 		if (!ft_isdigit(str[i]))
 			return (0);
@@ -85,7 +85,7 @@ int	main(int ac, char **av)
 		std_error();
 	else if (ac == 2)
 	{
-		split_av = ps_split(av[1], &am_words);
+		split_av = ps_split(av[1], &am_words); //-50	-
 		initialize_stack(&a_stack, am_words + 1, split_av);
 		ft_two_free_throws(split_av);
 	}
