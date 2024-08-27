@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/12 19:52:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/27 17:21:43 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ int	is_dup(t_list *stack, int value)
 int	ft_checker(char *str)
 {
 	int	i;
+
+	ft_printf("test test: %d\n", ft_atoll("–2147483647"));
+	// ft_printf("test: %d\n", ft_atoll("-2147483647"));
+
+	// ft_printf("test: %d\n", ft_atoll("2147483648"));
+	// ft_printf("test: %d\n", ft_atoll("2147483647"));
+
+	// ft_printf("test: %d\n", ft_atoll("0"));
+	// ft_printf("test: %d\n", ft_atoll("-1"));
+
 
 	i = 0;
 	while (str[i])
@@ -62,16 +72,6 @@ void	initialize_stack(t_list **stack, int ac, char **av)
 	}
 }
 
-//remove for eva
-// void print_stack(t_list *stack)
-// {
-// 	while (stack)
-// 	{
-// 		ft_printf("%d\n", stack->nbr);
-// 		stack = stack->next;
-// 	}
-// }
-
 int	main(int ac, char **av)
 {
 	t_list	*a_stack;
@@ -81,11 +81,11 @@ int	main(int ac, char **av)
 
 	a_stack = NULL;
 	b_stack = NULL;
-	if (ac <= 1)
-		std_error();
+	if (ac < 2)
+		return (0);
 	else if (ac == 2)
 	{
-		split_av = ps_split(av[1], &am_words); //-50	-
+		split_av = ps_split(av[1], &am_words);
 		initialize_stack(&a_stack, am_words + 1, split_av);
 		ft_two_free_throws(split_av);
 	}

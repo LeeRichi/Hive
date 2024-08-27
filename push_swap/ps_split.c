@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:53:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/12 19:44:47 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/27 13:49:30 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	count_word(char *str)
 	am = 0;
 	while (str[i] == ' ')
 		i++;
+	if (str[i] == '\0')
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == ' ' && str[i + 1] != '\0' && str[i + 1] != ' ')
@@ -70,7 +72,8 @@ char	**ps_split(char *str, int *am_words)
 	int		i;
 
 	*am_words = count_word(str);
-	// ft_printf("am_words: %d\n", *am_words);
+	if (!*am_words)
+		std_error();
 	result = (char **)malloc((*am_words + 2) * sizeof(char *));
 	if (!result)
 		return (NULL);
@@ -83,7 +86,7 @@ char	**ps_split(char *str, int *am_words)
 		{
 			result[i] = malloc_a_word(str);
 			i++;
-			while (*str && (*str != ' ')) //  first second third
+			while (*str && (*str != ' '))
 				str++;
 		}
 		result[i] = NULL;
