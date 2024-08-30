@@ -3,14 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+         #
+#    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/08/12 19:00:23 by chlee2           ###   ########.fr        #
+#    Updated: 2024/08/30 10:40:08 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# NAME = push_swap.a
 NAME = push_swap
 
 LIBFT = libft.a

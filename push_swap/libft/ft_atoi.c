@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:20:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/10 13:23:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/30 10:32:20 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -30,11 +44,10 @@ int	ft_atoi(const char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		long_buffer = result;
-		result = 10 * result + (*str - 48);
-		if (flag > 0 && result / 10 != long_buffer)
+		long_buffer = 10 * result + (*str - 48);
+		if (flag > 0 && long_buffer / 10 != result)
 			return (-1);
-		else if (flag < 0 && result / 10 != long_buffer)
+		else if (flag < 0 && long_buffer / 10 != result)
 			return (0);
 		str++;
 	}

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/27 17:21:43 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/30 10:39:16 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <string.h>
 
 //1 means dup
 int	is_dup(t_list *stack, int value)
@@ -28,16 +29,11 @@ int	is_dup(t_list *stack, int value)
 int	ft_checker(char *str)
 {
 	int	i;
+	ft_printf("atoll test: %d\n", ft_atoll("-2147483648"));
+	ft_printf("atoll test: %d\n", ft_atoll("-2147483647"));
 
-	ft_printf("test test: %d\n", ft_atoll("–2147483647"));
-	// ft_printf("test: %d\n", ft_atoll("-2147483647"));
-
-	// ft_printf("test: %d\n", ft_atoll("2147483648"));
-	// ft_printf("test: %d\n", ft_atoll("2147483647"));
-
-	// ft_printf("test: %d\n", ft_atoll("0"));
-	// ft_printf("test: %d\n", ft_atoll("-1"));
-
+	ft_printf("atoll test: %d\n", ft_atoll("2147483648"));
+	ft_printf("atoll test: %d\n", ft_atoll("2147483647"));
 
 	i = 0;
 	while (str[i])
@@ -65,6 +61,8 @@ void	initialize_stack(t_list **stack, int ac, char **av)
 	while (ac - 1 >= 1)
 	{
 		value = ft_atoi(av[ac - 1]);
+
+		ft_printf("%d\n", ft_checker(av[ac - 1]));
 		if (!ft_checker(av[ac - 1]) || is_dup(*stack, value))
 			std_error();
 		push_single_stack(stack, value);
