@@ -6,11 +6,12 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/08/30 10:40:08 by chlee2           ###   ########.fr        #
+#    Updated: 2024/08/31 22:20:50 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+NAMEBONUS = checker
 
 LIBFT = libft.a
 LIBFTDIR = libft
@@ -37,19 +38,48 @@ SRCS = push_swap.c \
 
 OBJS = $(SRCS:.c=.o)
 
+BONUS_SRCS = bonus/main_bonus.c \
+				node_operation.c \
+				stack_utils.c \
+				sort_stack.c \
+				push_around.c \
+				set_info/set_info_to_stack_a.c \
+				set_info/set_info_to_stack_b.c \
+				ps_split.c \
+				general_functions/std_error.c \
+				general_functions/free_things.c \
+				instructions/index.c \
+				instructions/swaps.c \
+				instructions/rotations.c \
+				instructions/reverse_rotations.c \
+				instructions/push.c \
+
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+
 all: $(NAME)
+
+# ??
+# %.o: %.c
+# 	@cc $(CFLAGS) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
+
+bonus: $(NAMEBONUS)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
+
+$(NAMEBONUS): $(BONUS_OBJS)
+	@make -C $(LIBFTDIR)
+	$(CC) $(CFLAGS) -o $(NAMEBONUS) $(BONUS_OBJS) -L$(LIBFTDIR) -lft
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BONUS_OBJS)
 	@make clean -C $(LIBFTDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAMEBONUS)
 	@make fclean -C $(LIBFTDIR)
 
-re: fclean $(NAME)
+re: fclean $(NAME) $(NAMEBONUS)
 
 .PHONY: all clean fclean re

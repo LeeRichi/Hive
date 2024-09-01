@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/27 15:32:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/08/31 21:23:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ size_t	ft_strlen(const char *str);
 int		ft_atoll(char *str);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+int		ft_strcmp(const char *s1, const char *s2);
 
+//ft_printf_packages
 int		ft_printf(const char *format, ...);
 int		printchar(char c);
 int		printstr(char *s);
@@ -68,5 +70,13 @@ int		printnbr(long n, int base);
 int		printnbr_butx(long n, int base);
 int		printnbr_foraddress(unsigned long n, int base);
 int		printaddress(unsigned long something);
+
+//get_next_line_packages
+// char	*get_next_line(int fd);
+// char	*ft_free(char **str);
+// size_t	ft_strlen(char *s);
+// char	*ft_strchar(const char *s, int c);
+// char	*ft_strjoin(char *a, char *b);
+// char	*substr(char *s, size_t start, size_t len);
 
 #endif
