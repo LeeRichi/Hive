@@ -12,67 +12,112 @@
 
 #include "../lib/minilibx_opengl/mlx.h"
 #include "../includes/so_long.h"
+#include "../lib/libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
 
-// Function to handle the key press event
-int handle_key(int key, void *param)
+
+typedef struct s_map
 {
-	void **params = (void **)param;
-    void *mlx_ptr = params[0];
-    void *win_ptr = params[1];
+	unsigned int	cols;
+	unsigned int	rows;
+	unsigned int	starts;
+	unsigned int	exits;
+	unsigned int	chests;
+	unsigned int	players;
+	char			**cont;
+}	t_map;
 
-	printf("%d\n", key);
-    // Close the window and exit if the 'Esc' key is pressed
-    if (key == 53) // 53 is the keycode for 'Esc' on macOS
-    {
-    	mlx_destroy_window(mlx_ptr, win_ptr);
-        exit(0);
-    }
-    return (0);
-}
-
-int close_window(void *param)
+typedef struct s_game
 {
-	void **params = (void **)param;
-    void *mlx_ptr = params[0];
-    void *win_ptr = params[1];
 
-    mlx_destroy_window(mlx_ptr, win_ptr);
-    exit(0);
-    return (0);
-}
+	char **grid;
 
-int main(void)
+	t_map *map;
+
+	uint32_t row;
+	uint32_t col;
+
+} t_game;
+
+
+static void	arg_checker(int ac, char **av)
 {
-	t_mlx_data data;
-    // void *mlx_ptr;
-    // void *win_ptr;
-	void *params[2];
-
-    data.mlx_ptr = mlx_init();
-    if (!data.mlx_ptr)
-        return (1);
-    data.win_ptr = mlx_new_window(data.mlx_ptr, 600, 400, "hi :)");
-    if (!data.win_ptr)
+	if (ac != 2)
 	{
-		free(data.mlx_ptr);
-		return (1);
+		ft_printf("so_long needs only one *.ber map as the second argument, plz try again.");
+		exit(EXIT_FAILURE);
 	}
-	params[0] = data.mlx_ptr;
-    params[1] = data.win_ptr;
+	if(ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".ber", 4))
+	{
+		ft_printf("Error: only accepts file that end with .ber");
+		exit(EXIT_FAILURE);
+	}
+}
 
-    // Handle key press events
-    mlx_key_hook(data.win_ptr, handle_key, params);
+int count_row(t_game *game, char *ber_map)
+{
+	int i;
+	int fd;
+	char *res;
 
-    // Handle the window close event
-    mlx_hook(data.win_ptr, 17, 0, close_window, params);
+	fd = open(ber_map, O_RDONLY);
+	if (fd < 0)
+		// to_do, show error
+		// ft_error();
+		printf("Failed to open file.");
+	while (true)
+	{
+		res = get_next_line(fd);
+		if (!res)
+			break;
+		i++;
+		free(res);
+	}
+	close(fd);
+	if(i > "big value")
+		show_error();
+	return (i);
+}
 
-    // Start the event loop
-    mlx_loop(data.mlx_ptr);
+t_map create_map(int x, int y)
+{
+	t_map *map;
 
-    // Clean up resources (though it will not be reached)
-    mlx_destroy_window(data.mlx_ptr, data.win_ptr);
-    free(data.mlx_ptr);
-    return (0);
+
+}
+
+void init_map(t_game *game, char *ber_map)
+{
+	int i;
+	char *res;
+	int fd;
+
+	game->map = (0, count_row(game, ber_map));
+	if(!game->map)
+		show_error();
+	
+}
+
+void	game_init(char *ber_map)
+{
+	t_game game;
+
+	ft_memset(&game, 0, sizeof(t_game));
+
+	init_map(&game, ber_map);
+	map_checker();
+}
+
+int main(int ac, char **av)
+{
+	// t_game game;
+	// t_mlx_data data;
+	// void *params[2];
+
+	arg_checker(ac, av);
+	game_init(av[1]);
+
+	return (0);
 }
