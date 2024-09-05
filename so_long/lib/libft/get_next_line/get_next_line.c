@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:15:57 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/31 19:04:57 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/05 22:24:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*jump_to_next_line(char *content)
 		free(content);
 		return (NULL);
 	}
-	new_content = substr(content, len, ft_strlen(content) - len);
+	new_content = substr(content, len, gnl_strlen(content) - len);
 	free(content);
 	return (new_content);
 }
@@ -52,7 +52,7 @@ char	*free_or_join(char *content, char *buf)
 {
 	char	*res;
 
-	res = ft_strjoin(content, buf);
+	res = gnl_strjoin(content, buf);
 	if (!res)
 	{
 		free(buf);

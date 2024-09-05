@@ -12,35 +12,19 @@
 
 #include "../lib/minilibx_opengl/mlx.h"
 #include "../includes/so_long.h"
+#include "../lib/libft/get_next_line/get_next_line.h"
 #include "../lib/libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 
-
-typedef struct s_map
+//temp
+void	show_error(t_game *game, char *error_m)
 {
-	unsigned int	cols;
-	unsigned int	rows;
-	unsigned int	starts;
-	unsigned int	exits;
-	unsigned int	chests;
-	unsigned int	players;
-	char			**cont;
-}	t_map;
-
-typedef struct s_game
-{
-
-	char **grid;
-
-	t_map *map;
-
-	uint32_t row;
-	uint32_t col;
-
-} t_game;
-
+	delete_game(game);
+	ft_printf("Error: %s\n", error_m);
+	exit(EXIT_FAILURE);
+}
 
 static void	arg_checker(int ac, char **av)
 {
@@ -64,9 +48,8 @@ int count_row(t_game *game, char *ber_map)
 
 	fd = open(ber_map, O_RDONLY);
 	if (fd < 0)
-		// to_do, show error
-		// ft_error();
-		printf("Failed to open file.");
+		show_error(game, "open file failed1.");
+	i = 0;
 	while (true)
 	{
 		res = get_next_line(fd);
@@ -76,30 +59,62 @@ int count_row(t_game *game, char *ber_map)
 		free(res);
 	}
 	close(fd);
-	if(i > "big value")
-		show_error();
+	if(i > 132)
+		show_error(game, "map to big, should be less than 132.");
 	return (i);
 }
 
-t_map create_map(int x, int y)
+t_map *calloc_map(int cols, int rows)
 {
 	t_map *map;
 
-
+	map = ft_calloc(1, sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->cont = ft_calloc(rows + 1, sizeof(char *));
+	if (!map)
+	{
+		free(map);
+		return (NULL);
+	}
+	map->cols = cols;
+	map->rows = rows;
+	return (map);
 }
 
 void init_map(t_game *game, char *ber_map)
 {
-	int i;
+	unsigned int i;
 	char *res;
 	int fd;
 
-	game->map = create_map(0, count_row(game, ber_map));
+	//first create an empty map
+	game->map = calloc_map(0, count_row(game, ber_map));
 	if(!game->map)
-		show_error();
+		show_error(game, "calloc failed.");
 
+	//now assign the value to each row and col
+	fd = open(ber_map, O_RDONLY);
+	if (!fd)
+		show_error(game, "open file faile2.");
+	i = 0;
+	while (i < game->map->rows)
+	{
+		res = get_next_line(fd);
+		if (!res)
+			show_error(game, "get_next_line failed.");
+		game->map->cont[i] = ft_strtrim(res, "\n");
+		if (!game->map->cont[i])
+			show_error(game, "ft_strtrim failed?");
+		else if (ft_strlen(game->map->cont[i]) > 132)
+			show_error(game, "map to big, should be less than 132.");
 
+		printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
 
+		i++;
+		free(res);
+	}
+	close(fd);
 }
 
 void	game_init(char *ber_map)
@@ -109,7 +124,7 @@ void	game_init(char *ber_map)
 	ft_memset(&game, 0, sizeof(t_game));
 
 	init_map(&game, ber_map);
-	map_checker();
+	// map_checker();
 }
 
 int main(int ac, char **av)

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 11:16:06 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/05 20:48:51 by chlee2           ###   ########.fr       */
+/*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
+/*   Updated: 2024/09/05 22:22:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../includes/so_long.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
+// static void delete_map(t_map *map)
+// {
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+// }
 
-char	*get_next_line(int fd);
-char	*ft_free(char **str);
-size_t	gnl_strlen(char *s);
-char	*ft_strchar(const char *s, int c);
-char	*gnl_strjoin(char *a, char *b);
-char	*substr(char *s, size_t start, size_t len);
-
-#endif
+void delete_game(t_game *game)
+{
+	if (!game)
+		return;
+	// if (game->img)
+	// 	delete_image(game);
+	// if (game->map)
+	// 	delete_map(game->map);
+	// if (game->disp.mlx)
+	// 	mlx_terminate(game->disp.mlx);
+}
