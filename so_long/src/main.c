@@ -94,10 +94,12 @@ void init_map(t_game *game, char *ber_map)
 	char *res;
 	int fd;
 
-	game->map = (0, count_row(game, ber_map));
+	game->map = create_map(0, count_row(game, ber_map));
 	if(!game->map)
 		show_error();
-	
+
+
+
 }
 
 void	game_init(char *ber_map)
