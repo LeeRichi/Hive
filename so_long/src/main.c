@@ -19,8 +19,10 @@
 #include <fcntl.h>
 
 //temp
+//pass *game for deleting it.
 void	show_error(t_game *game, char *error_m)
 {
+	//delete_game is not ready by now
 	delete_game(game);
 	ft_printf("Error: %s\n", error_m);
 	exit(EXIT_FAILURE);
@@ -48,7 +50,7 @@ int count_row(t_game *game, char *ber_map)
 
 	fd = open(ber_map, O_RDONLY);
 	if (fd < 0)
-		show_error(game, "open file failed1.");
+		show_error(game, "open file failed.");
 	i = 0;
 	while (true)
 	{
@@ -96,7 +98,7 @@ void init_map(t_game *game, char *ber_map)
 	//now assign the value to each row and col
 	fd = open(ber_map, O_RDONLY);
 	if (!fd)
-		show_error(game, "open file faile2.");
+		show_error(game, "open file faile.");
 	i = 0;
 	while (i < game->map->rows)
 	{
@@ -109,7 +111,7 @@ void init_map(t_game *game, char *ber_map)
 		else if (ft_strlen(game->map->cont[i]) > 132)
 			show_error(game, "map to big, should be less than 132.");
 
-		printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
+		// printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
 
 		i++;
 		free(res);
@@ -124,8 +126,31 @@ void	game_init(char *ber_map)
 	ft_memset(&game, 0, sizeof(t_game));
 
 	init_map(&game, ber_map);
-	// map_checker();
+
+	// map_checker(&game);
 }
+
+// void game_init(char *ber_map)
+// {
+//     t_game game;
+
+//     ft_memset(&game, 0, sizeof(t_game));
+
+//     init_map(&game, ber_map);
+
+//     // Print all the rows after initializing the map
+//     printf("Map initialized with %d rows:\n", game.map->rows);
+//     for (unsigned int i = 0; i < game.map->rows; i++)
+//     {
+//         printf("Row %d: %s\n", i, game.map->cont[i]);
+//     }
+
+//     // Check if a specific row is correctly assigned (for debugging)
+//     printf("Debugging: Row 4 (if exists): %s\n", (game.map->rows > 4) ? game.map->cont[4] : "N/A");
+
+//     // map_checker(&game);
+// }
+
 
 int main(int ac, char **av)
 {

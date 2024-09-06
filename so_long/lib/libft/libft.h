@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/31 21:23:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/06 12:40:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
+
+typedef struct  s_point
+{
+	int           x;
+	int           y;
+}               t_point;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -61,6 +67,8 @@ int		ft_atoll(char *str);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strcmp(const char *s1, const char *s2);
+
+void 	flood_fill(char **tab, t_point size, t_point begin);
 
 //ft_printf_packages
 int		ft_printf(const char *format, ...);
