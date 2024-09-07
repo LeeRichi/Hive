@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:20:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/31 18:20:58 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:02:25 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 // 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 // }
 
-int	ft_atoi(const char *str)
+// int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int			flag;
 	long		result;

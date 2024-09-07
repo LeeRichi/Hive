@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/06 13:04:20 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:46:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_pos
 //delete.c
 void delete_game(t_game *game);
 
+//map_checker.c
+int map_checker(t_game *game);
 
 // typedef struct s_game
 // {

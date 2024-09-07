@@ -66,6 +66,30 @@ int count_row(t_game *game, char *ber_map)
 	return (i);
 }
 
+// int count_col(t_game *game, char *ber_map)
+// {
+// 	int i = 0;
+// 	int fd;
+// 	char *just_one_line;
+
+// 	fd = open(ber_map, O_RDONLY);
+// 	if (fd < 0)
+// 		show_error(game, "open file failed.");
+
+// 	just_one_line = get_next_line(fd);
+// 	ft_printf("test: %s\n", just_one_line);
+// 	if (!just_one_line)
+// 		show_error(game, "get_next_line file failed.");
+
+// 	while(just_one_line[i] != '\n')
+// 		i++;
+// 	free(just_one_line);
+// 	close(fd);
+// 	if (i > 132)
+// 		show_error(game, "map to big, should be less than 132.");
+// 	return (i);
+// }
+
 t_map *calloc_map(int cols, int rows)
 {
 	t_map *map;
@@ -81,6 +105,7 @@ t_map *calloc_map(int cols, int rows)
 	}
 	map->cols = cols;
 	map->rows = rows;
+
 	return (map);
 }
 
@@ -91,7 +116,9 @@ void init_map(t_game *game, char *ber_map)
 	int fd;
 
 	//first create an empty map
+	// game->map = calloc_map(count_col(game, ber_map), count_row(game, ber_map));
 	game->map = calloc_map(0, count_row(game, ber_map));
+
 	if(!game->map)
 		show_error(game, "calloc failed.");
 
@@ -105,14 +132,15 @@ void init_map(t_game *game, char *ber_map)
 		res = get_next_line(fd);
 		if (!res)
 			show_error(game, "get_next_line failed.");
+		//this includes malloc for each char
 		game->map->cont[i] = ft_strtrim(res, "\n");
+
 		if (!game->map->cont[i])
 			show_error(game, "ft_strtrim failed?");
 		else if (ft_strlen(game->map->cont[i]) > 132)
 			show_error(game, "map to big, should be less than 132.");
 
-		// printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
-
+		printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
 		i++;
 		free(res);
 	}
@@ -127,7 +155,7 @@ void	game_init(char *ber_map)
 
 	init_map(&game, ber_map);
 
-	// map_checker(&game);
+	map_checker(&game);
 }
 
 // void game_init(char *ber_map)

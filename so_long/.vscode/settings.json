@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.ejs": "html",
+		"*.js": "javascriptreact",
+		"stdlib.h": "c",
+		"so_long.h": "c"
+	}
+}

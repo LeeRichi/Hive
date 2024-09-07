@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/06 12:40:32 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:04:49 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	ft_strlcpy(char *dst,
 			const char *src, size_t dstsize);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	*ft_memmove(void *dst, const void *src, size_t n);
-int		ft_atoi(const char *str);
+int		ft_atoi(char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	ft_putnbr_fd(int n, int fd);
