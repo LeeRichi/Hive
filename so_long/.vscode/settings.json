@@ -3,6 +3,7 @@
 		"*.ejs": "html",
 		"*.js": "javascriptreact",
 		"stdlib.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"stdint.h": "c"
 	}
 }

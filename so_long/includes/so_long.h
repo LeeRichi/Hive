@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/07 17:46:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/07 23:01:48 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 #include <stdint.h>
 # include "../lib/minilibx_opengl/mlx.h"
 #include "../lib/libft/libft.h"
+
+
+//might be conflict
+// typedef struct  s_point
+// {
+// 	int           x;
+// 	int           y;
+// }               t_point;
 
 // typedef struct s_img
 // {
@@ -35,7 +43,8 @@ typedef struct s_map
 {
 	unsigned int	cols;
 	unsigned int	rows;
-	unsigned int	starts;
+	// unsigned int	starts;
+	t_point	starts;
 	unsigned int	exits;
 	unsigned int	chests;
 	unsigned int	players;
