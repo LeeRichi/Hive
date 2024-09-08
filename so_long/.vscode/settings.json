@@ -4,6 +4,7 @@
 		"*.js": "javascriptreact",
 		"stdlib.h": "c",
 		"so_long.h": "c",
-		"stdint.h": "c"
+		"stdint.h": "c",
+		"libft.h": "c"
 	}
 }

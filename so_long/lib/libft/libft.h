@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/07 23:01:43 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:21:54 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strcmp(const char *s1, const char *s2);
 
-void 	flood_fill(char **tab, t_point size, t_point begin);
+void	flood_fill(char **tab, t_point size, t_point begin);
+void	rich_flood_fill(char **tab, t_point size, t_point begin);
 
 //ft_printf_packages
 int		ft_printf(const char *format, ...);

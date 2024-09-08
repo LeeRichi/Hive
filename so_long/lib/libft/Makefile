@@ -45,6 +45,7 @@ SRCS = ft_isalpha.c \
 		get_next_line/get_next_line_bonus.c \
 		get_next_line/get_next_line_utils_bonus.c \
 		flood_fill.c \
+		rich_flood_fill.c \
 
 BONUS = ft_lstmap_bonus.c ft_lstnew_bonus.c 			\
 		ft_lstlast_bonus.c ft_lstsize_bonus.c			\

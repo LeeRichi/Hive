@@ -6,41 +6,65 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/07 23:36:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:51:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//template
-//void  flood_fill(char **tab, t_point size, t_point begin)
+int	rich_check_c(char **map, t_point size, char c)
+{
+	int i = 0;
+	int j = 0;
+
+	//look for char c
+	j = 0;
+	while(j < size.y)
+	{
+		i = 0;
+		while(i < size.x)
+		{
+			if(map[j][i] == c)
+				return (0);
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
+
+int	rich_check_border(char **map, t_point size)
+{
+	int i;
+
+	//check first row and the last row
+	i = 0;
+	while (i < size.x)
+	{
+		if(map[0][i] != '1' || map[size.y - 1][i] != '1')
+			return (0);
+		i++;
+	}
+
+	i = 0;
+	while (i < size.y)
+	{
+		if(map[i][0] != '1' || map[i][size.x - 1] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	map_checker(t_game *game)
 {
-	//check the border
 	char **temp_map = NULL;
 	t_point size;
 	t_point begin;
 	unsigned int i = 0;
 	unsigned int j = 0;
-	//run while loop until find the starting point, which is 0
-	game->map->cols = ft_strlen(game->map->cont[0]); //7
-
-	// ft_printf("game->map->cols: %d\n", game->map->cols); //7
-
-	// while (game->map->cont[j][i] - '0' != 0 && i < game->map->cols) // 7 //assuming i is not 7+1
-	// 	i++;
-	// ft_printf("i: %d\n", i);
-	// in this case, 0 is not found, go to the next row.
-	// if (i > game->map->cols-1)
-	// {
-	// 	i = 0;
-	// 	while (game->map->cont[j][i] - '0' != 0 && i < game->map->cols)
-	// 		i++;
-	// 	j++;
-	// }
-
-	ft_printf("%c\n", game->map->cont[3][2]);
+	game->map->cols = ft_strlen(game->map->cont[0]);
+	game->map->starts = (t_point){-1, -1};
 
 	//find starts
 	j = 0;
@@ -51,10 +75,6 @@ int	map_checker(t_game *game)
 		{
 			if (game->map->cont[j][i] == 'P')
 			{
-				ft_printf("j: %d\n", j);
-				ft_printf("i: %d\n", i);
-
-				ft_printf("true\n");
 				game->map->starts = (t_point){j, i};
 				break ;
 			}
@@ -62,49 +82,40 @@ int	map_checker(t_game *game)
 		}
 		j++;
 	}
-
-	ft_printf("j: %d\n", j);
-	ft_printf("i: %d\n", i);
-
-	ft_printf("x: %d\n", game->map->starts.x);
-	ft_printf("y: %d\n", game->map->starts.y);
+	if (game->map->starts.x == -1 && game->map->starts.y == -1)
+	{
+		printf("Can't find P\n");
+		return (0);
+	}
 
 	game->map->cont[game->map->starts.x][game->map->starts.y] = '0';
-
 	temp_map = game->map->cont;
-
 	begin = (t_point){game->map->starts.y, game->map->starts.x};
-
-	ft_printf("begin.x: %d\n", begin.x);
-	ft_printf("begin.y: %d\n", begin.y);
-
 	size = (t_point){game->map->cols, game->map->rows};
+	if (!rich_check_border(temp_map, size))
+	{
+		ft_printf("border is invalid\n");
+		return (0);
+	}
 
-	ft_printf("size.cols: %d\n", game->map->cols);
-	ft_printf("size.rows: %d\n", game->map->rows);
+	// ft_printf("size.cols: %d\n", game->map->cols);
+	// ft_printf("size.rows: %d\n", game->map->rows);
 
+	//temp
 	//before
 	i = 0;
 	while(i < game->map->rows)
 	{
-		ft_printf("before: %s\n", temp_map[i]);
+		ft_printf("before calling rich_flood_fill: %s\n", temp_map[i]);
 		i++;
 	}
 
-	flood_fill(temp_map, size, begin);
+	rich_flood_fill(temp_map, size, begin);
 
-	// i = 0;
-	// while(i < game->map->cols)
-	// {
-	// 	j = 0;
-	// 	while(j < game->map->rows)
-	// 	{
-	// 		ft_printf("%s")
-	// 	}	j++;
-	// 	i++;
-	// }
+	if (rich_check_c(temp_map, size, 'E') && rich_check_c(temp_map, size, 'C')) //means possible to collect every Cs and reach E //map is valid
+		ft_printf("map is valid.\n");
 
-	//print
+	// print
 	i = 0;
 	while(i < game->map->rows)
 	{
@@ -112,6 +123,5 @@ int	map_checker(t_game *game)
 		i++;
 	}
 
-	//temp
 	return (1);
 }
