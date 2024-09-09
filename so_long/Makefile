@@ -6,14 +6,17 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/07 12:06:45 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/09 17:34:52 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-LIBFT = lib/libft/libft.a
 LIBFTDIR = lib/libft
+LIBFT = $(LIBFTDIR)/libft.a
+
+MLXDIR = lib/minilibx_opengl
+MLX = $(MLXDIR)/libmlx.a
 
 CC = cc
 RM = rm -f
@@ -34,11 +37,13 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFTDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
+	@make -C $(MLXDIR)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	$(RM) $(OBJS)
 	@make clean -C $(LIBFTDIR)
+	@make clean -C $(MLXDIR)
 
 fclean: clean
 	rm -f $(NAME)

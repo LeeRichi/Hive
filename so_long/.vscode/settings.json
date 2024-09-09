@@ -5,6 +5,7 @@
 		"stdlib.h": "c",
 		"so_long.h": "c",
 		"stdint.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"mlx_int.h": "c"
 	}
 }

@@ -6,18 +6,18 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/08 18:51:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/09 10:31:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+//look for char c
 int	rich_check_c(char **map, t_point size, char c)
 {
 	int i = 0;
 	int j = 0;
 
-	//look for char c
 	j = 0;
 	while(j < size.y)
 	{
@@ -46,6 +46,7 @@ int	rich_check_border(char **map, t_point size)
 		i++;
 	}
 
+	//check first col and the last col
 	i = 0;
 	while (i < size.y)
 	{

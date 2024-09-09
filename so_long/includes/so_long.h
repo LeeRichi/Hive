@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/07 23:01:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/09 17:15:01 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //temp
 #include <stdint.h>
-# include "../lib/minilibx_opengl/mlx.h"
+#include "../lib/minilibx_opengl/mlx.h"
 #include "../lib/libft/libft.h"
 
 
@@ -87,6 +87,9 @@ void delete_game(t_game *game);
 
 //map_checker.c
 int map_checker(t_game *game);
+
+//window.init.c
+int	window_init(void);
 
 // typedef struct s_game
 // {

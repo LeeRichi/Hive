@@ -66,30 +66,6 @@ int count_row(t_game *game, char *ber_map)
 	return (i);
 }
 
-// int count_col(t_game *game, char *ber_map)
-// {
-// 	int i = 0;
-// 	int fd;
-// 	char *just_one_line;
-
-// 	fd = open(ber_map, O_RDONLY);
-// 	if (fd < 0)
-// 		show_error(game, "open file failed.");
-
-// 	just_one_line = get_next_line(fd);
-// 	ft_printf("test: %s\n", just_one_line);
-// 	if (!just_one_line)
-// 		show_error(game, "get_next_line file failed.");
-
-// 	while(just_one_line[i] != '\n')
-// 		i++;
-// 	free(just_one_line);
-// 	close(fd);
-// 	if (i > 132)
-// 		show_error(game, "map to big, should be less than 132.");
-// 	return (i);
-// }
-
 t_map *calloc_map(int cols, int rows)
 {
 	t_map *map;
@@ -188,6 +164,8 @@ int main(int ac, char **av)
 
 	arg_checker(ac, av);
 	game_init(av[1]);
+
+	window_init();
 
 	return (0);
 }
