@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/08 18:21:54 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/13 23:20:49 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 
+//for flood_fill
 typedef struct  s_point
 {
 	int           x;

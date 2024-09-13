@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/09 17:15:01 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/13 23:53:39 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,24 @@
 
 //temp
 #include <stdint.h>
-#include "../lib/minilibx_opengl/mlx.h"
+#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
-
-
-//might be conflict
-// typedef struct  s_point
-// {
-// 	int           x;
-// 	int           y;
-// }               t_point;
-
-// typedef struct s_img
-// {
-
-// }	t_img;
 
 typedef struct s_graph
 {
-	// mlx_t	*mlx;
-	int height;
-	int width;
+	mlx_t	*mlx;
+	int32_t	height;
+	int32_t	width;
 
 } t_graph;
 
 typedef struct s_map
 {
+	//starting points
+	t_point			starting;
 	unsigned int	cols;
 	unsigned int	rows;
-	// unsigned int	starts;
-	t_point	starts;
+	unsigned int	starts;
 	unsigned int	exits;
 	unsigned int	chests;
 	unsigned int	players;
@@ -53,34 +41,16 @@ typedef struct s_map
 
 typedef struct s_game
 {
-
-	char **grid;
-
-	t_map *map;
-	// t_img *img;
-
-	uint32_t row;
-	uint32_t col;
-
-	t_graph disp;
-
+	char 		**grid;
+	uint32_t 	row;
+	uint32_t 	col;
+	t_map 		*map;
+	t_graph 	disp;
+	mlx_image_t **img;
 } t_game;
 
-typedef struct s_mlx_data
-{
-	void *mlx_ptr;
-	void *win_ptr;
-} t_mlx_data;
-
-typedef struct s_pos
-{
-	uint32_t x;
-	uint32_t y;
-} t_pos;
-
-
 //main.c
-
+void show_error(t_game *game, char *error_m);
 
 //delete.c
 void delete_game(t_game *game);
@@ -89,17 +59,6 @@ void delete_game(t_game *game);
 int map_checker(t_game *game);
 
 //window.init.c
-int	window_init(void);
-
-// typedef struct s_game
-// {
-
-// 	char **grid;
-
-// 	uint32_t row;
-// 	uint32_t col;
-
-
-// } t_game;
+int	window_init(t_game *game);
 
 #endif

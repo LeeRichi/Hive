@@ -10,13 +10,13 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "../lib/minilibx_opengl/mlx.h"
 #include "../includes/so_long.h"
 #include "../lib/libft/get_next_line/get_next_line.h"
 #include "../lib/libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include "../includes/constants.h"
 
 //temp
 //pass *game for deleting it.
@@ -132,40 +132,13 @@ void	game_init(char *ber_map)
 	init_map(&game, ber_map);
 
 	map_checker(&game);
+
+	//window_init(&game);
 }
 
-// void game_init(char *ber_map)
-// {
-//     t_game game;
-
-//     ft_memset(&game, 0, sizeof(t_game));
-
-//     init_map(&game, ber_map);
-
-//     // Print all the rows after initializing the map
-//     printf("Map initialized with %d rows:\n", game.map->rows);
-//     for (unsigned int i = 0; i < game.map->rows; i++)
-//     {
-//         printf("Row %d: %s\n", i, game.map->cont[i]);
-//     }
-
-//     // Check if a specific row is correctly assigned (for debugging)
-//     printf("Debugging: Row 4 (if exists): %s\n", (game.map->rows > 4) ? game.map->cont[4] : "N/A");
-
-//     // map_checker(&game);
-// }
-
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	// t_game game;
-	// t_mlx_data data;
-	// void *params[2];
-
 	arg_checker(ac, av);
 	game_init(av[1]);
-
-	window_init();
-
 	return (0);
 }
