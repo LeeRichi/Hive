@@ -76,7 +76,7 @@ t_map *calloc_map(int cols, int rows)
 	map->cont = ft_calloc(rows + 1, sizeof(char *));
 	if (!map)
 	{
-		free(map);
+		//free(map);
 		return (NULL);
 	}
 	map->cols = cols;
@@ -92,7 +92,6 @@ void init_map(t_game *game, char *ber_map)
 	int fd;
 
 	//first create an empty map
-	// game->map = calloc_map(count_col(game, ber_map), count_row(game, ber_map));
 	game->map = calloc_map(0, count_row(game, ber_map));
 
 	if(!game->map)
@@ -127,13 +126,26 @@ void	game_init(char *ber_map)
 {
 	t_game game;
 
+	(void)game;
+	(void)ber_map;
+
 	ft_memset(&game, 0, sizeof(t_game));
 
 	init_map(&game, ber_map);
 
 	map_checker(&game);
 
-	//window_init(&game);
+	window_init(&game);
+
+	// rich_from_texture_to_img(&game);
+
+	//rich_img_to_window(&game);
+
+	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
+    // // Handle the window close event
+    mlx_close_hook(game.disp.mlx, close_window, &game);
+    // // Start the event loop
+    mlx_loop(game.disp.mlx);
 }
 
 int	main(int ac, char **av)

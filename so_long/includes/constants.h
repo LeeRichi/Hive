@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:13:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/13 23:43:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/14 11:18:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,13 @@ typedef enum s_char
 	EXIT = 'E',
 	PLAYER = 'P'
 } t_char;
+
+typedef enum s_img
+{
+	W,
+	P,
+	C,
+	E
+} t_img;
 
 #endif

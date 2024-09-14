@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/12 16:00:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/14 23:18:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,26 @@ static void delete_image(t_game *game)
 	}
 }
 
-static void delete_cont(char **cont)
+static void delete_cont(t_map *map)
 {
-	int	i;
+	unsigned int	i;
 
-	if (!cont)
+	if (!map)
 		return ;
 	i = 0;
-	while (i < AMOUNT_OF_IMGS)
+	while (i < map->rows)
 	{
-		free(cont[i]);
+		free(map->cont[i]);
 		i++;
 	}
-
-	free(cont);
+	free(map->cont);
 }
 
 static void delete_map(t_map *map)
 {
 	if (!map)
 		return;
-
-	delete_cont(map->cont);
+	delete_cont(map);
 	free(map);
 }
 

@@ -9,6 +9,11 @@
 		"mlx_int.h": "c",
 		"mlx.h": "c",
 		"constants.h": "c",
-		"mlx42.h": "c"
+		"mlx42.h": "c",
+		"locale": "c",
+		"__locale": "c",
+		"string": "c",
+		"string_view": "c",
+		"get_next_line.h": "c"
 	}
 }
