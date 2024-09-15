@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/15 12:10:40 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 16:43:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ static void delete_image(t_game *game)
 {
 	int i;
 
+	if (!game->img)
+		return;
+
 	i = 0;
 	//change 1 to something else later
-	while (i < 3)
-	{
+	while (i < AMOUNT_OF_IMGS)
 		mlx_delete_image(game->disp.mlx, game->img[i++]);
-		free(game->img);
-	}
+	free(game->img);
 }
 
 static void delete_cont(t_map *map)

@@ -126,9 +126,6 @@ void	game_init(char *ber_map)
 {
 	t_game game;
 
-	(void)game;
-	(void)ber_map;
-
 	ft_memset(&game, 0, sizeof(t_game));
 
 	init_map(&game, ber_map);
@@ -140,7 +137,7 @@ void	game_init(char *ber_map)
 	//this used to have double free
 	rich_from_texture_to_img(&game);
 
-	// draw_map(&game);
+	draw_map(&game);
 
 	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
     // // Handle the window close event

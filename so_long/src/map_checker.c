@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/15 16:28:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 16:52:17 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ static char **deep_copy(char **source, unsigned int rows, unsigned int cols)
 	return (temp);
 }
 
-// void free_copy(char **temp, int rows)
-// {
-// 	int i;
+static void free_copy(char **temp, int rows)
+{
+	int i;
 
-// 	i = 0;
-// 	while(i < rows)
-// 		free(temp[i]);
-// 	free(temp);
-// }
+	i = 0;
+	while(i < rows)
+		free(temp[i++]);
+	free(temp);
+}
 
 // look for char c
-int rich_check_c(char **map, t_point size, char c)
+static int rich_check_c(char **map, t_point size, char c)
 {
 	int i = 0;
 	int j = 0;
@@ -69,7 +69,7 @@ int rich_check_c(char **map, t_point size, char c)
 	return (1);
 }
 
-int	rich_check_border(char **map, t_point size)
+static int	rich_check_border(char **map, t_point size)
 {
 	int i;
 
@@ -124,30 +124,21 @@ int	map_checker(t_game *game)
 		return (0);
 	}
 
-	game->map->cont[game->map->starting.x][game->map->starting.y] = '0';
 	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
 	if (!temp_map)
     {
         ft_printf("Failed to create temp map\n");
         return (0);
     }
+
+	temp_map[game->map->starting.x][game->map->starting.y] = '0';
 	begin = (t_point){game->map->starting.y, game->map->starting.x};
 	size = (t_point){game->map->cols, game->map->rows};
 	if (!rich_check_border(temp_map, size))
 	{
 		ft_printf("border is invalid\n");
-		//temp
-		// free_copy(temp_map, game->map->rows); // Free the temp_map before returning
+		free_copy(temp_map, game->map->rows);
 		return (0);
-	}
-
-	//temp
-	//before
-	i = 0;
-	while(i < game->map->rows)
-	{
-		ft_printf("before calling rich_flood_fill: %s\n", temp_map[i]);
-		i++;
 	}
 
 	rich_flood_fill(temp_map, size, begin);
@@ -155,23 +146,7 @@ int	map_checker(t_game *game)
 	if (rich_check_c(temp_map, size, 'E') && rich_check_c(temp_map, size, 'C')) //means possible to collect every Cs and reach E //map is valid
 		ft_printf("map is valid.\n");
 
-	// to print
-	i = 0;
-	while(i < game->map->rows)
-	{
-		ft_printf("after: %s\n", temp_map[i]);
-		i++;
-	}
-
-	//real_map print
-	i = 0;
-	while(i < game->map->rows)
-	{
-		ft_printf("after(real map): %s\n", game->map->cont[i]);
-		i++;
-	}
-
-	// free_copy(temp_map, game->map->rows);
+	free_copy(temp_map, game->map->rows);
 
 	return (1);
 }
