@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/14 16:46:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 15:24:21 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int map_checker(t_game *game);
 void handle_key(struct mlx_key_data keydata, void *param);
 void close_window(void *param);
 int	window_init(t_game *game);
+
+void draw_map(t_game *game);
 
 //img_init.c
 void rich_from_texture_to_img(t_game *game);

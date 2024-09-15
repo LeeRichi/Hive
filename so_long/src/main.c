@@ -137,9 +137,10 @@ void	game_init(char *ber_map)
 
 	window_init(&game);
 
-	// rich_from_texture_to_img(&game);
+	//this used to have double free
+	rich_from_texture_to_img(&game);
 
-	//rich_img_to_window(&game);
+	// draw_map(&game);
 
 	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
     // // Handle the window close event

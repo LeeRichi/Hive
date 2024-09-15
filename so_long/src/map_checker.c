@@ -6,25 +6,61 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/13 23:42:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 16:28:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//look for char c
-int	rich_check_c(char **map, t_point size, char c)
+static char **deep_copy(char **source, unsigned int rows, unsigned int cols)
+{
+	char **temp;
+	unsigned int i;
+
+	temp = malloc(sizeof(char *) * rows);
+	if (!temp)
+		return (NULL);
+
+	i = 0;
+	while (i < rows)
+	{
+		temp[i] = malloc(sizeof(char) * (cols + 1));
+		if (!temp[i])
+		{
+			while(i-- > 0)
+				free(temp[i]);
+			free(temp);
+			return (NULL);
+		}
+		ft_strlcpy(temp[i], source[i], cols + 1);
+		i++;
+	}
+	return (temp);
+}
+
+// void free_copy(char **temp, int rows)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while(i < rows)
+// 		free(temp[i]);
+// 	free(temp);
+// }
+
+// look for char c
+int rich_check_c(char **map, t_point size, char c)
 {
 	int i = 0;
 	int j = 0;
 
 	j = 0;
-	while(j < size.y)
+	while (j < size.y)
 	{
 		i = 0;
-		while(i < size.x)
+		while (i < size.x)
 		{
-			if(map[j][i] == c)
+			if (map[j][i] == c)
 				return (0);
 			i++;
 		}
@@ -58,7 +94,7 @@ int	rich_check_border(char **map, t_point size)
 
 int	map_checker(t_game *game)
 {
-	char **temp_map = NULL;
+	char **temp_map;
 	t_point size;
 	t_point begin;
 	unsigned int i = 0;
@@ -89,12 +125,19 @@ int	map_checker(t_game *game)
 	}
 
 	game->map->cont[game->map->starting.x][game->map->starting.y] = '0';
-	temp_map = game->map->cont;
+	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
+	if (!temp_map)
+    {
+        ft_printf("Failed to create temp map\n");
+        return (0);
+    }
 	begin = (t_point){game->map->starting.y, game->map->starting.x};
 	size = (t_point){game->map->cols, game->map->rows};
 	if (!rich_check_border(temp_map, size))
 	{
 		ft_printf("border is invalid\n");
+		//temp
+		// free_copy(temp_map, game->map->rows); // Free the temp_map before returning
 		return (0);
 	}
 
@@ -119,6 +162,16 @@ int	map_checker(t_game *game)
 		ft_printf("after: %s\n", temp_map[i]);
 		i++;
 	}
+
+	//real_map print
+	i = 0;
+	while(i < game->map->rows)
+	{
+		ft_printf("after(real map): %s\n", game->map->cont[i]);
+		i++;
+	}
+
+	// free_copy(temp_map, game->map->rows);
 
 	return (1);
 }

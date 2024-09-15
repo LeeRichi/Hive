@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/14 21:07:54 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 10:41:34 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,6 @@
 #include <stdio.h>
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
-
-// void	handle_key(struct mlx_key_data keydata, void *param)
-// {
-
-// 	if (keydata.key == 256)
-//     {
-// 		delete_game(param);
-// 		exit(0);
-// 	}
-// 	else if (keydata.key == 65)
-// 	{
-// 		ft_printf("go left, mother fucker\n");
-// 	}
-// 	else if (keydata.key == 83)
-// 	{
-// 		ft_printf("go down, mother fucker\n");
-// 	}
-// 	else if (keydata.key == 68)
-// 	{
-// 		ft_printf("go right, mother fucker\n");
-// 	}
-// 	else if (keydata.key == 87)
-// 	{
-// 		ft_printf("go up, mother fucker\n");
-// 	}
-// }
 
 void	handle_key(struct mlx_key_data keydata, void *param)
 {

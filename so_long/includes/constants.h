@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:13:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/14 11:18:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/15 15:42:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define BLOCK_SIZE 64
 
 //temp
-# define AMOUNT_OF_IMGS 7
+# define AMOUNT_OF_IMGS 5
 
 typedef enum s_char
 {
@@ -30,6 +30,7 @@ typedef enum s_char
 typedef enum s_img
 {
 	W,
+	G,
 	P,
 	C,
 	E

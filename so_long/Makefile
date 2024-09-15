@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/14 22:06:57 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/14 23:23:22 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,11 @@ fclean: clean
 	rm -f $(NAME)
 	@make fclean -C $(LIBFTDIR)
 
-build_exec: $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR)
+# build_exec: $(OBJS) $(LIBFT)
+# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR)
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean re build_exec
+.PHONY: all clean fclean re
 
 
