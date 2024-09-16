@@ -135,7 +135,7 @@ void	game_init(char *ber_map)
 
 	// draw_map(&game);
 
-	draw_camera(&game, 10, 10);
+	draw_camera(&game);
 
 	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
     // // Handle the window close event

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/16 14:43:00 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/16 22:07:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 #include <stdio.h>
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
-
-int is_valid_move(t_game *game, int new_x, int new_y)
-{
-	return (game->map->cont[new_x][new_y] != 'W');
-}
 
 void find_P(t_game *game)
 {
@@ -71,7 +66,7 @@ void move_player(t_game *game, int new_y, int new_x)
 	game->map->starting.x = new_x;
 	game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
 	// draw_map(game);
-	draw_camera(game, 640, 640);
+	draw_camera(game);
 }
 
 //export functions
@@ -110,17 +105,31 @@ void	close_window(void *param)
 
 int	window_init(t_game *game)
 {
+	ft_printf("1.%d, %d\n", game->map->cols, game->map->rows);
+
 	// game->disp.width = game->map->cols * BLOCK_SIZE;
 	// game->disp.height = game->map->rows * BLOCK_SIZE;
 
-	// Set the window size to fit the camera's dimensions (camera_width and camera_height)
-	game->disp.width = 10 * BLOCK_SIZE;
-    game->disp.height = 10 * BLOCK_SIZE;
-	//void mlx_set_window_size(mlx_t* mlx, int32_t new_width, int32_t new_height)
+	ft_printf("2.%d, %d\n", game->disp.width, game->disp.height);
+
+	game->disp.width = game->map->cols * BLOCK_SIZE;
+	game->disp.height = game->map->rows * BLOCK_SIZE;
 
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 
-	game->disp.mlx = mlx_init(game->disp.width, game->disp.height, "so_long", true);
+	ft_printf("3.%d, %d\n", game->disp.width,game->disp.height);
+
+	if(game->disp.width < game->disp.height)
+		game->map->window_width = game->disp.width;
+	else
+		game->map->window_width = game->disp.height;
+
+	// game->map->window_width = game->disp.width;
+	// game->map->window_height = game->disp.height;
+
+	//ref
+	//mlx_t* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
+	game->disp.mlx = mlx_init(game->map->window_width, game->map->window_width, "so_long", true);
 	if (!game->disp.mlx)
 		show_error(game, "mlx_init error.");
     return (0);

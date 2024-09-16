@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/16 13:33:30 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/16 22:02:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,19 @@ typedef struct s_map
 	unsigned int	exits;
 	unsigned int	movements;
 	unsigned int 	block_len;
+
+	unsigned int 	window_width;
+	unsigned int 	window_height;
+
 	char 			**cont;
 }	t_map;
 
 typedef struct s_game
 {
+
+	//temp
+	t_point 	camera_pos; // Top-left corner of the camera view
+
 	uint32_t 	row;
 	uint32_t 	col;
 	t_map 		*map;
@@ -68,7 +76,7 @@ int	window_init(t_game *game);
 void draw_map(t_game *game);
 
 //temp
-void draw_camera(t_game *game, int camera_width, int camera_height);
+void draw_camera(t_game *game);
 
 //img_init.c
 void rich_from_texture_to_img(t_game *game);
