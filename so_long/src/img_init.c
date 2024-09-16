@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 01:02:33 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/15 15:43:58 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/16 14:00:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,16 @@ void draw_block(t_game *game, mlx_image_t *img, int y, int x)
 
 void check_block(t_game *game, int y, int x)
 {
+	draw_block(game, game->img[G], y, x);
+
 	if(game->map->cont[y][x] == '1')
 		draw_block(game, game->img[W], y, x);
-	else if (game->map->cont[y][x] == '0')
-		draw_block(game, game->img[G], y, x);
 	else if (game->map->cont[y][x] == 'P')
 		draw_block(game, game->img[P], y, x);
 	else if (game->map->cont[y][x] == 'C')
 		draw_block(game, game->img[C], y, x);
 	else if (game->map->cont[y][x] == 'E')
-	{
 		draw_block(game, game->img[E], y, x);
-		ft_printf("test");
-	}
 }
 
 void draw_map(t_game *game)
@@ -92,16 +89,52 @@ void draw_map(t_game *game)
 	unsigned int x;
 
 	y = 0;
-	while (y < game->map->rows) //01234
+	while (y < game->map->rows)
 	{
 		x = 0;
-		while (x < game->map->cols) //0123456
+		while (x < game->map->cols)
 		{
 			check_block(game, y, x);
 			x++;
-			printf("%d", game->map->cont[y][x]);
 		}
-		printf("\n");
 		y++;
 	}
 }
+
+//temp
+void draw_camera(t_game *game, int camera_width, int camera_height)
+{
+	int start_x, start_y;
+	unsigned int end_x, end_y;
+	find_P(game);
+	int player_x = (int)game->map->starting.x;	// Player's x position in grid
+	int	player_y = (int)game->map->starting.y;  // Player's y position in grid
+
+	ft_printf("%d, %d\n", player_x, player_y);
+
+	// Calculate the starting point of the camera (center the camera on the player)
+    start_x = player_x - camera_width / 2;
+    start_y = player_y - camera_height / 2;
+
+    // Clamp the starting position to ensure the camera doesn't go out of bounds
+    if (start_x < 0) start_x = 0;
+    if (start_y < 0) start_y = 0;
+
+    // Calculate the end point of the camera
+    end_x = start_x + camera_width;
+    end_y = start_y + camera_height;
+
+    // Clamp the end position to ensure the camera doesn't go out of bounds
+    if (end_x > game->map->cols) end_x = game->map->cols;
+    if (end_y > game->map->rows) end_y = game->map->rows;
+
+    // Loop over the visible part of the map and render it
+    for (unsigned  y = start_y; y < end_y; y++)
+    {
+        for (unsigned x = start_x; x < end_x; x++)
+        {
+            check_block(game, y, x);  // Only draw blocks within the camera view
+        }
+    }
+}
+

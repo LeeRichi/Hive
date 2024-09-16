@@ -107,15 +107,11 @@ void init_map(t_game *game, char *ber_map)
 		res = get_next_line(fd);
 		if (!res)
 			show_error(game, "get_next_line failed.");
-		//this includes malloc for each char
 		game->map->cont[i] = ft_strtrim(res, "\n");
-
 		if (!game->map->cont[i])
-			show_error(game, "ft_strtrim failed?");
+			show_error(game, "ft_strtrim failed.");
 		else if (ft_strlen(game->map->cont[i]) > 132)
 			show_error(game, "map to big, should be less than 132.");
-
-		printf("Row %d: %s\n", i, game->map->cont[i]);  // Debugging statement
 		i++;
 		free(res);
 	}
@@ -137,7 +133,9 @@ void	game_init(char *ber_map)
 	//this used to have double free
 	rich_from_texture_to_img(&game);
 
-	draw_map(&game);
+	// draw_map(&game);
+
+	draw_camera(&game, 10, 10);
 
 	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
     // // Handle the window close event

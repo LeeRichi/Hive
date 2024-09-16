@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/15 16:52:17 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/16 12:40:16 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,32 @@ static void free_copy(char **temp, int rows)
 }
 
 // look for char c
-static int rich_check_c(char **map, t_point size, char c)
+int rich_check_c(char **map, t_point size, char c)
 {
 	int i = 0;
 	int j = 0;
 
+	int collectables;
+
+	collectables = 0;
 	j = 0;
 	while (j < size.y)
 	{
+		// if (collectables > 0 && c == 'E')
+		// 	return (1);
 		i = 0;
 		while (i < size.x)
 		{
 			if (map[j][i] == c)
-				return (0);
+				collectables++;
 			i++;
 		}
 		j++;
 	}
-	return (1);
+	// if (collectables > 0 && c == 'C')
+	if (collectables > 0)
+		return (collectables);
+	return (0);
 }
 
 static int	rich_check_border(char **map, t_point size)
@@ -97,54 +105,60 @@ int	map_checker(t_game *game)
 	char **temp_map;
 	t_point size;
 	t_point begin;
-	unsigned int i = 0;
-	unsigned int j = 0;
+	// unsigned int i = 0;
+	// unsigned int j = 0;
 	game->map->cols = ft_strlen(game->map->cont[0]);
-	game->map->starting = (t_point){-1, -1};
+	if (game->map->cols == game->map->rows)
+		show_error(game, "Map must be rectangular, invalid map.\n");
+	// game->map->starting = (t_point){-1, -1};
 
-	//find starting
-	j = 0;
-	while (j < game->map->rows)
-	{
-		i = 0;
-		while (i < game->map->cols)
-		{
-			if (game->map->cont[j][i] == 'P')
-			{
-				game->map->starting = (t_point){j, i};
-				break ;
-			}
-			i++;
-		}
-		j++;
-	}
-	if (game->map->starting.x == -1 && game->map->starting.y == -1)
-	{
-		printf("Can't find P\n");
-		return (0);
-	}
+	size = (t_point){game->map->cols, game->map->rows};
+
+	//find starting for flood
+	// j = 0;
+	// while (j < game->map->rows)
+	// {
+	// 	i = 0;
+	// 	while (i < game->map->cols)
+	// 	{
+	// 		if (game->map->cont[j][i] == 'P')
+	// 		{
+	// 			game->map->starting = (t_point){j, i};
+	// 			break ;
+	// 		}
+	// 		i++;
+	// 	}
+	// 	j++;
+	// }
 
 	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
 	if (!temp_map)
     {
-        ft_printf("Failed to create temp map\n");
+		show_error(game, "Failed to create temp map\n");
         return (0);
     }
-
-	temp_map[game->map->starting.x][game->map->starting.y] = '0';
-	begin = (t_point){game->map->starting.y, game->map->starting.x};
-	size = (t_point){game->map->cols, game->map->rows};
+	if (rich_check_c(temp_map, size, 'E') != 1 || rich_check_c(temp_map, size, 'P') != 1)
+		show_error(game, "Exit or Player is not equal to 1, invalid map.\n");
 	if (!rich_check_border(temp_map, size))
 	{
-		ft_printf("border is invalid\n");
+		show_error(game, "border is invalid.\n");
 		free_copy(temp_map, game->map->rows);
 		return (0);
 	}
+	find_P(game);
+	// if (game->map->starting.x == -1 && game->map->starting.y == -1)
+	// 	show_error(game, "Can't find P for starting point of flood.\n");
+
+	//starting point for flood
+	temp_map[game->map->starting.x][game->map->starting.y] = '0';
+	begin = (t_point){game->map->starting.y, game->map->starting.x};
+	game->map->collectibles = rich_check_c(temp_map, size, 'C');
 
 	rich_flood_fill(temp_map, size, begin);
 
-	if (rich_check_c(temp_map, size, 'E') && rich_check_c(temp_map, size, 'C')) //means possible to collect every Cs and reach E //map is valid
-		ft_printf("map is valid.\n");
+	//these lines can be deleted later
+	// if (!(rich_check_c(temp_map, size, 'E') && rich_check_c(temp_map, size, 'C'))) //means possible to collect every Cs and reach E //map is valid
+	// 	ft_printf("map is valid.\n");
 
 	free_copy(temp_map, game->map->rows);
 
