@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/01 22:53:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 18:43:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ int	ft_checker(char *str)
 		return (1);
 	else
 		return (0);
+}
+
+void free_stack(t_list **stack)
+{
+	t_list **temp;
+
+	while (*stack)
+	{
+		*temp = *stack;
+		*stack = (*stack)->next;
+		free(*temp);
+	}
+	std_error();
 }
 
 void	initialize_stack(t_list **stack, int ac, char **av)

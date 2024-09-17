@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/01 22:52:13 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/17 15:42:51 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,6 @@ BONUS_SRCS = bonus/main_bonus.c \
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
-
-# ??
-# %.o: %.c
-# 	@cc $(CFLAGS) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
 
 bonus: $(NAMEBONUS)
 
