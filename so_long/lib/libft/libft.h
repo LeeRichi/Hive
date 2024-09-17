@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 00:28:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 10:50:30 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # include "get_next_line/get_next_line.h"
 
 //for flood_fill
-typedef struct  s_point
+typedef struct s_point
 {
-	int           x;
-	int           y;
-}               t_point;
+	int	x;
+	int	y;
+}	t_point;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
