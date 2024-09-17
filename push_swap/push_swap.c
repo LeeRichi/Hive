@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 18:43:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 18:43:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	initialize_stack(t_list **stack, int ac, char **av)
 	{
 		value = ft_atoi(av[ac - 1]);
 		if (!ft_checker(av[ac - 1]) || is_dup(*stack, value))
-			std_error();
+			free_stack();
 		push_single_stack(stack, value);
 		ac--;
 	}
