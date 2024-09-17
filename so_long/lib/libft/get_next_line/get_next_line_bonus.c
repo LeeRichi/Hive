@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chlee2 <chlee2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:42:58 by chlee2            #+#    #+#             */
-/*   Updated: 2024/05/27 15:29:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 17:06:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ char	*read_content(int fd, char *content)
 
 char	*get_next_line(int fd)
 {
-	static char	*content[OPEN_MAX];
+	static char	*content[1024];
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 1024)
 		return (NULL);
 	content[fd] = read_content(fd, content[fd]);
 	if (!content[fd])
