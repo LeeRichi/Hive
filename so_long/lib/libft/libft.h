@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/13 23:20:49 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 00:28:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdint.h>
+# include <fcntl.h>
 # include <stddef.h>
 # include <unistd.h>
 # include <stdint.h>
@@ -21,6 +23,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include "get_next_line/get_next_line.h"
 
 //for flood_fill
 typedef struct  s_point

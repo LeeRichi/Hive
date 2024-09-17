@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/16 22:07:45 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 10:19:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 
-void find_P(t_game *game)
+void	find_p(t_game *game)
 {
-	unsigned int x;
-	unsigned int y;
+	unsigned int	x;
+	unsigned int	y;
 
 	y = 0;
 	while (y < game->map->rows)
@@ -40,22 +40,21 @@ void find_P(t_game *game)
 	}
 }
 
-void move_player(t_game *game, int new_y, int new_x)
+static void	move_player(t_game *game, int new_y, int new_x)
 {
-	find_P(game);
+	find_p(game);
 	if (game->map->cont[new_y][new_x] == '1')
 		return ;
-	if (game->map->cont[new_y][new_x] == 'E' && game->map->collectibles > 0)
+	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
 	{
 		ft_printf("You are still too poor, can not get in.\n");
-		return;
+		return ;
 	}
 	game->map->movements++;
 	ft_printf("You moved %d steps\n", game->map->movements);
-
 	if (game->map->cont[new_y][new_x] == 'C')
-		game->map->collectibles--;
-	else if (game->map->cont[new_y][new_x] == 'E' && game->map->collectibles == 0)
+		game->map->coins--;
+	else if (game->map->cont[new_y][new_x] == 'E' && game->map->coins == 0)
 	{
 		delete_game(game);
 		ft_printf("You win!\n");
@@ -65,17 +64,16 @@ void move_player(t_game *game, int new_y, int new_x)
 	game->map->starting.y = new_y;
 	game->map->starting.x = new_x;
 	game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
-	// draw_map(game);
 	draw_camera(game);
 }
 
 //export functions
 void	handle_key(struct mlx_key_data keydata, void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
-	find_P(game);
+	find_p(game);
 	if (keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == 256)
@@ -84,7 +82,7 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 			exit(EXIT_SUCCESS);
 		}
 		else if (keydata.key == 65)
-        	move_player(game, game->map->starting.y, game->map->starting.x - 1);
+			move_player(game, game->map->starting.y, game->map->starting.x - 1);
 		else if (keydata.key == 68)
 			move_player(game, game->map->starting.y, game->map->starting.x + 1);
 		else if (keydata.key == 83)
@@ -96,41 +94,33 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 
 void	close_window(void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = param;
 	delete_game(game);
 	exit(0);
 }
 
+//ww = window_width
 int	window_init(t_game *game)
 {
-	ft_printf("1.%d, %d\n", game->map->cols, game->map->rows);
-
-	// game->disp.width = game->map->cols * BLOCK_SIZE;
-	// game->disp.height = game->map->rows * BLOCK_SIZE;
-
-	ft_printf("2.%d, %d\n", game->disp.width, game->disp.height);
+	unsigned int	ww;
+	int				dw;
 
 	game->disp.width = game->map->cols * BLOCK_SIZE;
 	game->disp.height = game->map->rows * BLOCK_SIZE;
-
+	dw = game->disp.width;
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-
-	ft_printf("3.%d, %d\n", game->disp.width,game->disp.height);
-
-	if(game->disp.width < game->disp.height)
+	if (game->disp.width < game->disp.height)
 		game->map->window_width = game->disp.width;
 	else
 		game->map->window_width = game->disp.height;
-
-	// game->map->window_width = game->disp.width;
-	// game->map->window_height = game->disp.height;
-
-	//ref
-	//mlx_t* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
-	game->disp.mlx = mlx_init(game->map->window_width, game->map->window_width, "so_long", true);
+	ww = game->map->window_width;
+	if (game->map->cols > 25 || game->map->rows > 25)
+		game->disp.mlx = mlx_init(ww, ww, "so_long", true);
+	else
+		game->disp.mlx = mlx_init(dw, game->disp.height, "so_long", true);
 	if (!game->disp.mlx)
 		show_error(game, "mlx_init error.");
-    return (0);
+	return (0);
 }

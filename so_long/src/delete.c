@@ -6,28 +6,26 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/15 16:43:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/16 23:30:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 #include "../includes/constants.h"
 
-static void delete_image(t_game *game)
+static void	delete_image(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game->img)
-		return;
-
+		return ;
 	i = 0;
-	//change 1 to something else later
 	while (i < AMOUNT_OF_IMGS)
 		mlx_delete_image(game->disp.mlx, game->img[i++]);
 	free(game->img);
 }
 
-static void delete_cont(t_map *map)
+static void	delete_cont(t_map *map)
 {
 	unsigned int	i;
 
@@ -42,18 +40,18 @@ static void delete_cont(t_map *map)
 	free(map->cont);
 }
 
-static void delete_map(t_map *map)
+static void	delete_map(t_map *map)
 {
 	if (!map)
-		return;
+		return ;
 	delete_cont(map);
 	free(map);
 }
 
-void delete_game(t_game *game)
+void	delete_game(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	if (game->img)
 		delete_image(game);
 	if (game->map)

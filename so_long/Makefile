@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/16 14:32:19 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/17 10:19:52 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ SRCS = src/main.c \
 		src/delete.c \
 		src/map_checker.c \
 		src/img_init.c \
+		src/deep_copy.c \
+		src/init_map.c \
+		src/draw_camera.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -42,16 +45,6 @@ $(MLX42):
 	@cmake -B $(MLX42DIR)/build -S $(MLX42DIR)
 	@cmake --build $(MLX42DIR)/build
 
-# clean:
-# 	$(RM) $(OBJS)
-# 	@make clean -C $(LIBFTDIR)
-# 	@cmake --build $(MLX42DIR)/build --target clean
-
-# fclean: clean
-# 	rm -f $(NAME)
-# 	@make fclean -C $(LIBFTDIR)
-# 	$(RM) -r $(MLX42DIR)/build
-
 clean:
 	$(RM) $(OBJS)
 	@make clean -C $(LIBFTDIR)
@@ -59,9 +52,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	@make fclean -C $(LIBFTDIR)
-
-# build_exec: $(OBJS) $(LIBFT)
-# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR)
 
 re: fclean $(NAME)
 

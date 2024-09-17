@@ -6,15 +6,15 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/16 22:02:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/17 10:24:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include <stdint.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "constants.h"
 #include "../lib/libft/libft.h"
 
 //to communicate with mlx server
@@ -30,28 +30,19 @@ typedef struct s_graph
 typedef struct s_map
 {
 	t_point			starting;
-	unsigned int	cols;
+	t_point 		flood_begin;
+	unsigned int 	cols;
 	unsigned int	rows;
-	unsigned int	players;
-	unsigned int	collectibles;
-	unsigned int	exits;
+	unsigned int	coins;
 	unsigned int	movements;
 	unsigned int 	block_len;
-
 	unsigned int 	window_width;
-	unsigned int 	window_height;
-
 	char 			**cont;
 }	t_map;
 
 typedef struct s_game
 {
-
-	//temp
-	t_point 	camera_pos; // Top-left corner of the camera view
-
-	uint32_t 	row;
-	uint32_t 	col;
+	t_point 	camera_pos;
 	t_map 		*map;
 	t_graph 	disp;
 	mlx_image_t **img;
@@ -67,18 +58,23 @@ void delete_game(t_game *game);
 int map_checker(t_game *game);
 
 //window.init.c
-//find_P is called for also map_checker.c for flood.
-void find_P(t_game *game);
+//find_p is called for also map_checker.c for flood.
+void find_p(t_game *game);
 void handle_key(struct mlx_key_data keydata, void *param);
 void close_window(void *param);
 int	window_init(t_game *game);
 
-void draw_map(t_game *game);
-
-//temp
-void draw_camera(t_game *game);
-
 //img_init.c
 void rich_from_texture_to_img(t_game *game);
+
+//deep_copy.c
+char **deep_copy(char **source, unsigned int rows, unsigned int cols);
+void free_copy(char **temp, int rows);
+
+//init_map.c
+void init_map(t_game *game, char *ber_map);
+
+//draw_camera.c
+void draw_camera(t_game *game);
 
 #endif
