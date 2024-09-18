@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:53:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 14:21:44 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/18 16:27:49 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,13 @@ char	**ps_split(char *str, int *am_words)
 	char	**result;
 	int		i;
 
-
 	*am_words = count_word(str);
 	if (!*am_words)
 		std_error();
-
-	ft_printf("am_words: %d\n", *am_words); //1
-	// result = (char **)malloc((*am_words + 2) * sizeof(char *));
 	result = (char **)malloc((*am_words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	i = 1;
+	i = 0;
 	while (*str)
 	{
 		while (*str && (*str == ' '))
@@ -94,7 +90,6 @@ char	**ps_split(char *str, int *am_words)
 				str++;
 		}
 		result[i] = NULL;
-		result[0] = NULL;
 	}
 	return (result);
 }

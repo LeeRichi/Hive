@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_things.c                                      :+:      :+:    :+:   */
+/*   init_stack_by_string.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 12:29:06 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 16:28:04 by chlee2           ###   ########.fr       */
+/*   Created: 2024/09/18 17:18:21 by chlee2            #+#    #+#             */
+/*   Updated: 2024/09/18 17:23:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	ft_free_throw(t_list *stack)
+static void	free_args(t_list **stack, char **split_av)
 {
 	t_list	*temp;
 
-	if (stack == NULL)
-		return ;
-	while (stack)
+	while (*stack)
 	{
-		temp = stack;
-		stack = stack->next;
+		temp = (*stack);
+		*stack = (*stack)->next;
 		free(temp);
 	}
+	ft_two_free_throws(split_av);
+	std_error();
 }
 
-//designed for split_av
-void	ft_two_free_throws(char **split_av)
+void	initialize_stack_by_string(t_list **stack, int ac, char **av)
 {
-	int	i;
+	int	value;
 
-	if (split_av == NULL)
-		return ;
-	i = 0;
-	while (split_av[i])
+	while (ac - 1 >= 0)
 	{
-		free(split_av[i]);
-		split_av[i] = NULL;
-		i++;
+		value = ft_atoi(av[ac - 1]);
+		if (!ft_checker(av[ac - 1]) || is_dup(*stack, value))
+			free_args(stack, av);
+		push_single_stack(stack, value);
+		ac--;
 	}
-	free(split_av);
 }

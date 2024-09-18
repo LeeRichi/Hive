@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/01 17:15:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/18 17:24:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ typedef struct s_list
 	struct s_list	*target_node;
 }	t_list;
 
-//push_swap.c //main
-// int		is_dup(t_list *stack, int value);
-// int		ft_checker(char *str);
-// void	initialize_stack(t_list **stack, int ac, char **av);
-
 //ps_split.c
 int		str_len(char *str);
 char	**ps_split(char *str, int *am_words);
+
+//init_stack.c
+int		is_dup(t_list *stack, int value);
+int		ft_checker(char *str);
+void	initialize_stack(t_list **stack, int ac, char **av);
+
+//init_stack_by_string.c
+void	initialize_stack_by_string(t_list **stack, int ac, char **av);
 
 //node_operation.c
 int		stack_len(t_list *stack);
@@ -43,7 +46,7 @@ void	push_single_stack(t_list **stack, int value);
 //general_functions
 void	std_error(void);
 void	ft_free_throw(t_list *stack);
-void	ft_two_free_throws(char **stack);
+void	ft_two_free_throws(char **split_av);
 
 //instructions.c
 void	swap_list(t_list *a, t_list *b);
@@ -83,8 +86,5 @@ void	sort_stack(t_list **a, t_list **b);
 //push_around
 void	from_a_to_b(t_list **a, t_list **b);
 void	from_b_to_a(t_list **a, t_list **b);
-
-//temp
-void	print_stack(t_list *stack);
 
 #endif

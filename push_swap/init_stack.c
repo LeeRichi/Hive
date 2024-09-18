@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 11:40:29 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 00:20:58 by chlee2           ###   ########.fr       */
+/*   Created: 2024/09/18 17:13:23 by chlee2            #+#    #+#             */
+/*   Updated: 2024/09/18 17:23:51 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	is_dup(t_list *stack, int value)
 	return (0);
 }
 
-//if it's 0 or -1, that means overflow. //1 is pass
 int	ft_checker(char *str)
 {
 	int	i;
@@ -48,19 +47,21 @@ int	ft_checker(char *str)
 		return (0);
 }
 
-void free_stack(t_list **stack)
+static void	free_stack(t_list **stack)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	while (*stack)
 	{
-		temp = *stack;
+		temp = (*stack);
 		*stack = (*stack)->next;
 		free(temp);
 	}
 	std_error();
 }
 
+//ac is received as am_words, which could +1 than av[i]
+//so I put - 1 for the following
 void	initialize_stack(t_list **stack, int ac, char **av)
 {
 	int	value;
@@ -73,30 +74,4 @@ void	initialize_stack(t_list **stack, int ac, char **av)
 		push_single_stack(stack, value);
 		ac--;
 	}
-}
-
-int	main(int ac, char **av)
-{
-	t_list	*a_stack;
-	t_list	*b_stack;
-	int		am_words;
-	char	**split_av;
-
-	a_stack = NULL;
-	b_stack = NULL;
-	if (ac < 2)
-		return (0);
-	else if (ac == 2)
-	{
-		split_av = ps_split(av[1], &am_words);
-		initialize_stack(&a_stack, am_words + 1, split_av);
-		ft_two_free_throws(split_av);
-	}
-	else
-		initialize_stack(&a_stack, ac, av);
-	initialize_stack(&b_stack, 0, NULL);
-	sort_stack(&a_stack, &b_stack);
-	ft_free_throw(a_stack);
-	ft_free_throw(b_stack);
-	return (0);
 }

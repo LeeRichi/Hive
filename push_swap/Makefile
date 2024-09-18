@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/18 13:42:36 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/18 17:18:33 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = push_swap.c \
+SRCS = main.c \
+		init_stack.c \
+		init_stack_by_string.c \
 		node_operation.c \
 		stack_utils.c \
 		sort_stack.c \
@@ -65,9 +67,6 @@ $(NAME): $(OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
 
-# cc -Wall -Wextra -Werror -g3 -fsanitize=address your_program.c -o your_program
-
-
 $(NAMEBONUS): $(BONUS_OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAMEBONUS) $(BONUS_OBJS) -L$(LIBFTDIR) -lft
@@ -82,7 +81,4 @@ fclean: clean
 
 re: fclean $(NAME) $(NAMEBONUS)
 
-debug: CFLAGS += -fsanitize=address -g3
-debug: re
-
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re
