@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/17 15:42:51 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/18 13:42:36 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,9 @@ $(NAME): $(OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
 
+# cc -Wall -Wextra -Werror -g3 -fsanitize=address your_program.c -o your_program
+
+
 $(NAMEBONUS): $(BONUS_OBJS)
 	@make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -o $(NAMEBONUS) $(BONUS_OBJS) -L$(LIBFTDIR) -lft
@@ -79,4 +82,7 @@ fclean: clean
 
 re: fclean $(NAME) $(NAMEBONUS)
 
-.PHONY: all clean fclean re
+debug: CFLAGS += -fsanitize=address -g3
+debug: re
+
+.PHONY: all clean fclean re debug
