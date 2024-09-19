@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:53:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 16:27:49 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static int	count_word(char *str)
 {

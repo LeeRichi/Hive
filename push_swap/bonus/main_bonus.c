@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:50:25 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 14:13:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:54:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap_bonus.h"
+#include "../includes/push_swap_bonus.h"
 
 static char	*ft_ins_check(t_list **a_stack, t_list **b_stack, char *instruction)
 {

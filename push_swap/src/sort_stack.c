@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:39:31 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:43:46 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 //this function set indexes for each node and set either true/false to above_mid
 void	current_index(t_list *a)

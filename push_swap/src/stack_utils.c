@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:06:51 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:35:20 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:16 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 bool	is_sorted(t_list *stack)
 {

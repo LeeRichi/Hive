@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:18:21 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 17:23:47 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	free_args(t_list **stack, char **split_av)
 {

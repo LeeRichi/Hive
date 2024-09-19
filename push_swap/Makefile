@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/19 14:08:14 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/19 14:58:16 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,44 +20,43 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c \
-		init_stack.c \
-		init_stack_by_string.c \
-		node_operation.c \
-		stack_utils.c \
-		sort_stack.c \
-		push_around.c \
-		set_info/set_info_to_stack_a.c \
-		set_info/set_info_to_stack_b.c \
-		ps_split.c \
-		general_functions/std_error.c \
-		general_functions/free_things.c \
-		instructions/index.c \
-		instructions/swaps.c \
-		instructions/rotations.c \
-		instructions/reverse_rotations.c \
-		instructions/push.c \
+SRCS = src/main.c \
+		src/init_stack.c \
+		src/init_stack_by_string.c \
+		src/node_operation.c \
+		src/stack_utils.c \
+		src/sort_stack.c \
+		src/push_around.c \
+		src/set_info/set_info_to_stack_a.c \
+		src/set_info/set_info_to_stack_b.c \
+		src/ps_split.c \
+		src/general_functions/std_error.c \
+		src/general_functions/free_things.c \
+		src/instructions/index.c \
+		src/instructions/swaps.c \
+		src/instructions/rotations.c \
+		src/instructions/reverse_rotations.c \
+		src/instructions/push.c \
 
 OBJS = $(SRCS:.c=.o)
 
 BONUS_SRCS = bonus/main_bonus.c \
-				bonus/basic_check.c \
-				init_stack.c \
-				init_stack_by_string.c \
-				node_operation.c \
-				stack_utils.c \
-				sort_stack.c \
-				push_around.c \
-				set_info/set_info_to_stack_a.c \
-				set_info/set_info_to_stack_b.c \
-				ps_split.c \
-				general_functions/std_error.c \
-				general_functions/free_things.c \
-				instructions/index.c \
-				instructions/swaps.c \
-				instructions/rotations.c \
-				instructions/reverse_rotations.c \
-				instructions/push.c \
+				src/init_stack.c \
+				src/init_stack_by_string.c \
+				src/node_operation.c \
+				src/stack_utils.c \
+				src/sort_stack.c \
+				src/push_around.c \
+				src/set_info/set_info_to_stack_a.c \
+				src/set_info/set_info_to_stack_b.c \
+				src/ps_split.c \
+				src/general_functions/std_error.c \
+				src/general_functions/free_things.c \
+				src/instructions/index.c \
+				src/instructions/swaps.c \
+				src/instructions/rotations.c \
+				src/instructions/reverse_rotations.c \
+				src/instructions/push.c \
 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 

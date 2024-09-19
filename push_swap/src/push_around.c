@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:29:08 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:39:51 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	bring_node_to_a_top(t_list **stack, t_list *cheapest_node)
 {

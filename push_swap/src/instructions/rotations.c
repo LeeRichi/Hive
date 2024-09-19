@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:31:06 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:40:29 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../includes/push_swap.h"
 
 void	ra(t_list **stack_a, int print)
 {

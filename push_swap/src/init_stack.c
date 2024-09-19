@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:13:23 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 17:23:51 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:30 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 //1 means dup
 int	is_dup(t_list *stack, int value)

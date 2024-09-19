@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_things.c                                      :+:      :+:    :+:   */
+/*   reverse_rotations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 12:29:06 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/18 16:28:04 by chlee2           ###   ########.fr       */
+/*   Created: 2024/08/05 14:31:13 by chlee2            #+#    #+#             */
+/*   Updated: 2024/09/19 14:56:54 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../includes/push_swap.h"
 
-void	ft_free_throw(t_list *stack)
+void	rra(t_list **stack_a, int print)
 {
-	t_list	*temp;
-
-	if (stack == NULL)
-		return ;
-	while (stack)
-	{
-		temp = stack;
-		stack = stack->next;
-		free(temp);
-	}
+	reverse_rotate(stack_a);
+	if (print)
+		ft_printf("rra\n");
 }
 
-//designed for split_av
-void	ft_two_free_throws(char **split_av)
+void	rrb(t_list **stack_b, int print)
 {
-	int	i;
+	reverse_rotate(stack_b);
+	if (print)
+		ft_printf("rrb\n");
+}
 
-	if (split_av == NULL)
-		return ;
-	i = 0;
-	while (split_av[i])
-	{
-		free(split_av[i]);
-		split_av[i] = NULL;
-		i++;
-	}
-	free(split_av);
+void	rrr(t_list **stack_a, t_list **stack_b)
+{
+	rra(stack_a, 0);
+	rrb(stack_b, 0);
+	ft_printf("rrr\n");
 }

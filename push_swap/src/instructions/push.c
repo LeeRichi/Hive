@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   std_error.c                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 12:29:18 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:40:36 by chlee2           ###   ########.fr       */
+/*   Created: 2024/08/05 17:52:26 by chlee2            #+#    #+#             */
+/*   Updated: 2024/09/19 14:56:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../includes/push_swap.h"
 
-void	std_error(void)
+void	pa(t_list **stack_a, t_list **stack_b)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	if (stack_b && *stack_b)
+		push(stack_b, stack_a);
+	ft_printf("pa\n");
+}
+
+void	pb(t_list **stack_a, t_list **stack_b)
+{
+	if (stack_a && *stack_a)
+		push(stack_a, stack_b);
+	ft_printf("pb\n");
 }

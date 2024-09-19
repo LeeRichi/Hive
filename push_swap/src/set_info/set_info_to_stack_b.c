@@ -6,11 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:56:37 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:40:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:56:39 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../includes/push_swap.h"
 
 //set each b //closest bigger
 static void	set_target_node_version_b(t_list *a, t_list *b)

@@ -6,14 +6,14 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 13:59:07 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:53:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_BONUS_H
 # define PUSH_SWAP_BONUS_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_list
 {
