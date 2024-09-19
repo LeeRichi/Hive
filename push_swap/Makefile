@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/18 17:18:33 by chlee2           ###   ########.fr        #
+#    Updated: 2024/09/19 14:08:14 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ OBJS = $(SRCS:.c=.o)
 
 BONUS_SRCS = bonus/main_bonus.c \
 				bonus/basic_check.c \
+				init_stack.c \
+				init_stack_by_string.c \
 				node_operation.c \
 				stack_utils.c \
 				sort_stack.c \

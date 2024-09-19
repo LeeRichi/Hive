@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:50:25 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/13 13:57:21 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:13:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 	else if (ac == 2)
 	{
 		split_av = ps_split(av[1], &am_words);
-		initialize_stack(&a_stack, am_words + 1, split_av);
+		initialize_stack_by_string(&a_stack, am_words, split_av);
 		ft_two_free_throws(split_av);
 	}
 	else

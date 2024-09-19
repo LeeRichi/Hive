@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/01 22:51:56 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 13:59:07 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct s_list
 int		is_dup(t_list *stack, int value);
 int		ft_checker(char *str);
 void	initialize_stack(t_list **stack, int ac, char **av);
+
+//init_stack_by_string.c
+void	initialize_stack_by_string(t_list **stack, int ac, char **av);
 
 //ps_split.c
 int		str_len(char *str);
