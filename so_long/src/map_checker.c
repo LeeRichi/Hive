@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 10:18:50 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:27:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,15 @@ static void	values_injection(t_game *game, char **temp_map, t_point size)
 	find_p(game);
 	temp_map[game->map->starting.y][game->map->starting.x] = '0';
 	game->map->coins = rich_check_c(temp_map, size, 'C');
+	if (game->map->coins == 0)
+	{
+		free_copy(temp_map, game->map->rows);
+		show_error(game, "There's no coins to collect.\n");
+	}
 	game->map->flood_begin = (t_point){y, x};
 }
 
-int	map_checker(t_game *game)
+void	map_checker(t_game *game)
 {
 	char	**temp_map;
 	t_point	size;
@@ -91,20 +96,18 @@ int	map_checker(t_game *game)
 	size = (t_point){game->map->cols, game->map->rows};
 	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
 	if (!temp_map)
-	{
 		show_error(game, "Failed to create temp map\n");
-		return (0);
-	}
 	if (!is_eqaul_to_one(temp_map, size))
+	{
+		free_copy(temp_map, game->map->rows);
 		show_error(game, "Exit or Player is not equal to 1, invalid map.\n");
+	}
 	if (!rich_check_border(temp_map, size))
 	{
-		show_error(game, "border is invalid.\n");
 		free_copy(temp_map, game->map->rows);
-		return (0);
+		show_error(game, "border is invalid.\n");
 	}
 	values_injection(game, temp_map, size);
 	rich_flood_fill(temp_map, size, game->map->flood_begin);
 	free_copy(temp_map, game->map->rows);
-	return (1);
 }

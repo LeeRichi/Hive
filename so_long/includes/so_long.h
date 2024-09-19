@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 14:27:58 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:27:48 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	show_error(t_game *game, char *error_m);
 void	delete_game(t_game *game);
 
 //map_checker.c
-int		map_checker(t_game *game);
+void	map_checker(t_game *game);
 
 //window.init.c
 //find_p is called for also map_checker.c for flood.
