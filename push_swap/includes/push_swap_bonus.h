@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:41:24 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 14:53:47 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/21 11:26:43 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	reverse_rotate(t_list **lst);
 void	sa(t_list **stack_a, int print);
 void	sb(t_list **stack_b, int print);
 void	ss(t_list **stack_a, t_list **stack_b);
-void	pa(t_list **stack_a, t_list **stack_b);
-void	pb(t_list **stack_a, t_list **stack_b);
+void	pa(t_list **stack_a, t_list **stack_b, int print);
+void	pb(t_list **stack_a, t_list **stack_b, int print);
 void	ra(t_list **stack_a, int print);
 void	rb(t_list **stack_b, int print);
 void	rr(t_list **stack_a, t_list **stack_b);

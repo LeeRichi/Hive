@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:50:25 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 14:54:45 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/21 11:26:04 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static char	*ft_ins_check(t_list **a_stack, t_list **b_stack, char *instruction)
 	else if (!ft_strcmp(instruction, "ss\n"))
 		ss(a_stack, b_stack);
 	else if (!ft_strcmp(instruction, "pa\n"))
-		pa(a_stack, b_stack);
+		pa(a_stack, b_stack, 0);
 	else if (!ft_strcmp(instruction, "pb\n"))
-		pb(a_stack, b_stack);
+		pb(a_stack, b_stack, 0);
 	else if (!ft_strcmp(instruction, "ra\n"))
 		ra(a_stack, 0);
 	else if (!ft_strcmp(instruction, "rb\n"))

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:39:31 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 14:56:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/21 11:27:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	sort_stack(t_list **a, t_list **b)
 	len_a = stack_len(*a);
 	if (len_a > 3 && !is_sorted(*a))
 	{
-		pb(a, b);
+		pb(a, b, 1);
 		len_a--;
 	}
 	while (len_a > 3 && !is_sorted(*a))

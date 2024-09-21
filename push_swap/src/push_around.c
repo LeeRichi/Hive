@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:29:08 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 14:56:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/21 11:29:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	from_a_to_b(t_list **a, t_list **b)
 	current_index(*b);
 	bring_node_to_a_top(a, cheapest_node);
 	bring_node_to_b_top(b, cheapest_node);
-	pb(a, b);
+	pb(a, b, 1);
 }
 
 void	from_b_to_a(t_list **a, t_list **b)
 {
 	fetch_target_for_pushing_b_nodes(a, *b);
-	pa(a, b);
+	pa(a, b, 1);
 }
