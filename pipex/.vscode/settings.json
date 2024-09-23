@@ -2,6 +2,11 @@
 	"files.associations": {
 		"*.ejs": "html",
 		"*.js": "javascriptreact",
-		"locale": "c"
+		"locale": "c",
+		"pipex.h": "c",
+		"stdio.h": "c",
+		"__locale": "c",
+		"bitset": "c",
+		"libft.h": "c"
 	}
 }

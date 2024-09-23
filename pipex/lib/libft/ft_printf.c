@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:03:04 by chlee2            #+#    #+#             */
-/*   Updated: 2024/08/30 10:44:36 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/23 10:43:59 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	print_format(char specifier, va_list args)
 {
 	int	count;
+
+	// printf("specifier: %c\n", specifier);
 
 	count = 0;
 	if (specifier == 'c')
@@ -48,7 +50,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			result = print_format(*(++format), args);
+			format++;
+			// printf("format now is...............: %c\n", *format);
+
+			result = print_format(*format, args);
+
 			if (result == -1)
 				return (-1);
 			count += result;
