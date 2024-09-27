@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 15:27:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:15:10 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_map
 	unsigned int	movements;
 	unsigned int	block_len;
 	unsigned int	window_width;
+	unsigned int	window_height;
 	char			**cont;
 }	t_map;
 
