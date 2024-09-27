@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/27 14:16:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:38:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 		draw_block(game, game->img[C], window_y, window_x);
 	else if (game->map->cont[y][x] == 'E')
 		draw_block(game, game->img[E], window_y, window_x);
+	else if (game->map->cont[y][x] == 'Z')
+	{
+		draw_block(game, game->img[E], window_y, window_x);
+		draw_block(game, game->img[P], window_y, window_x);
+	}
 }
 
 // update the window's bound

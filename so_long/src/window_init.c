@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/27 14:06:09 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:55:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	find_p(game);
 	if (game->map->cont[new_y][new_x] == '1')
 		return ;
-	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
-	{
-		ft_printf("You are still too poor, can not get in.\n");
-		return ;
-	}
 	game->map->movements++;
 	ft_printf("You moved %d steps\n", game->map->movements);
 	if (game->map->cont[new_y][new_x] == 'C')
@@ -60,10 +55,29 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		ft_printf("You win!\n");
 		exit(EXIT_SUCCESS);
 	}
-	game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
-	game->map->starting.y = new_y;
-	game->map->starting.x = new_x;
-	game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
+	{
+		ft_printf("You are still too poor, collect all the coins and come again.\n");
+		game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
+		game->map->starting.y = new_y;
+		game->map->starting.x = new_x;
+		game->map->cont[game->map->starting.y][game->map->starting.x] = 'Z';
+	}
+	if (game->map->cont[new_y][new_x] == 'Z' && game->map->coins > 0)
+	{
+		ft_printf("fhpeojgpoemve;");
+		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
+		game->map->starting.y = new_y;
+		game->map->starting.x = new_x;
+		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+	}
+	else
+	{
+		game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
+		game->map->starting.y = new_y;
+		game->map->starting.x = new_x;
+		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+	}
 	draw_camera(game);
 }
 
