@@ -6,12 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 09:19:19 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 00:31:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 21:56:10 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include "../includes/constants.h"
 
 void	show_error(t_game *game, char *error_m)
 {

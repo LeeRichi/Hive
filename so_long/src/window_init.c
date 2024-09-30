@@ -6,16 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 15:52:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 21:57:07 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include "../includes/constants.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 
 void	find_p(t_game *game)
 {
@@ -40,7 +35,7 @@ void	find_p(t_game *game)
 	}
 }
 
-static void update_position(t_game *game, int new_y, int new_x, char new_tile) 
+static void update_position(t_game *game, int new_y, int new_x, char new_tile)
 {
 	game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
 	game->map->starting.y = new_y;
@@ -50,6 +45,7 @@ static void update_position(t_game *game, int new_y, int new_x, char new_tile)
 
 static void	move_player(t_game *game, int new_y, int new_x)
 {
+	//varibales for printing
 	// unsigned int i;
 	// unsigned int j;
 
@@ -157,7 +153,7 @@ int	window_init(t_game *game)
 		game->disp.mlx = mlx_init(dw, game->disp.height, "so_long", true);
 	if (!game->disp.mlx)
 		show_error(game, "mlx_init error.");
-	
+
 	//Ani
 	// mlx_image_to_window(game->disp.mlx, game->img, game->map->window_width, game->map->window_height);
 	return (0);

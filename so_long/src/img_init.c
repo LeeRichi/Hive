@@ -6,12 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 01:02:33 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 10:08:45 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 21:56:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include "../includes/constants.h"
 
 //local functions
 static void	count_block_len(t_game *game)

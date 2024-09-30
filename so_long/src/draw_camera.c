@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 16:02:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 22:22:59 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,22 @@ static void	update_camera(t_game *game)
 
 	visible_width = game->map->window_width / game->map->block_len;
 	visible_height = game->map->window_width / game->map->block_len;
-	game->camera_pos.y = game->map->starting.y - visible_height / 2; 
+	game->camera_pos.y = game->map->starting.y - visible_height / 2;
 	game->camera_pos.x = game->map->starting.x - visible_width / 2;
-	ft_printf("camera_pos.x: %d, (int)game->map->window_width / BLOCK_SIZE / 2: %d\n", game->camera_pos.x, (int)game->map->window_width / BLOCK_SIZE / 2);
-	// ft_printf("starting.y: %d, camera_pos.y: %d\n", game->camera_pos.y);
-
-	//if small map
-	if (game->map->window_width / BLOCK_SIZE < 25)
+	if (game->map->cols > 25 || game->map->rows > 25)
+	{
+		if (game->camera_pos.x < (int)game->map->window_width / BLOCK_SIZE / 2)
+			game->camera_pos.x = 0;
+		if (game->map->starting.y < (int)game->map->window_width / BLOCK_SIZE / 2)
+			game->camera_pos.y = 0;
+	}
+	else
 	{
 		if (game->camera_pos.x < (int)game->map->cols)
 			game->camera_pos.x = 0;
 		if (game->camera_pos.y < (int)game->map->rows)
 			game->camera_pos.y = 0;
 	}
-	else
-	{
-		if (game->camera_pos.x < (int)game->map->window_width / BLOCK_SIZE / 2) // vs 15/2
-			game->camera_pos.x = 0;
-		if (game->map->starting.y < (int)game->map->window_width / BLOCK_SIZE / 2)
-			game->camera_pos.y = 0;
-	}
-	// if (game->camera_pos.x < (int)game->map->window_width / BLOCK_SIZE / 2) // vs 15/2
-	// 	game->camera_pos.x = 0;
-	// if (game->map->starting.y < (int)game->map->window_width / BLOCK_SIZE / 2)
-	// 	game->camera_pos.y = 0;
-	
-	ft_printf("camera_pos.x: %d, map.cols: %d, visible_width: %d\n", game->camera_pos.x, game->map->cols, visible_width);
-	ft_printf("camera_pos.y: %d, map.rows: %d, visible_height: %d\n", game->camera_pos.y, game->map->rows, visible_height);
-
 	if (game->camera_pos.x > (int)game->map->cols - visible_width)
 		game->camera_pos.x = (int)game->map->cols - visible_width;
 	if (game->camera_pos.y > (int)game->map->rows - visible_height)
@@ -107,9 +95,6 @@ void	draw_camera(t_game *game)
 	vh = game->disp.height / game->map->block_len;
 	update_camera(game);
 	y = game->camera_pos.y;
-
-	ft_printf("cam y: %d\n", y);
-
 	while (y < game->camera_pos.y + vh && y < (int)game->map->rows)
 	{
 		x = game->camera_pos.x;

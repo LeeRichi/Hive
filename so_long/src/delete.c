@@ -6,12 +6,11 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/16 23:30:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 21:56:17 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include "../includes/constants.h"
 
 static void	delete_image(t_game *game)
 {
