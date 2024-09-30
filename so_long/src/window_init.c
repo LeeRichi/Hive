@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/27 14:55:52 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/29 16:32:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	find_p(t_game *game)
 		x = 0;
 		while (x < game->map->cols)
 		{
-			if (game->map->cont[y][x] == 'P')
+			if (game->map->cont[y][x] == 'P' || game->map->cont[y][x] == 'Z')
 			{
 				game->map->starting.x = x;
 				game->map->starting.y = y;
@@ -42,6 +42,11 @@ void	find_p(t_game *game)
 
 static void	move_player(t_game *game, int new_y, int new_x)
 {
+	unsigned int i;
+	unsigned int j;
+
+	int count = 0;
+
 	find_p(game);
 	if (game->map->cont[new_y][new_x] == '1')
 		return ;
@@ -63,20 +68,50 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		game->map->starting.x = new_x;
 		game->map->cont[game->map->starting.y][game->map->starting.x] = 'Z';
 	}
-	if (game->map->cont[new_y][new_x] == 'Z' && game->map->coins > 0)
+	//if current is Z
+	if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z')
 	{
-		ft_printf("fhpeojgpoemve;");
-		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
-		game->map->starting.y = new_y;
-		game->map->starting.x = new_x;
-		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+		ft_printf("stepping on Z\n");
+		//only the first time
+		if (count == 0)
+		{
+			ft_printf("firest time?\n");
+			game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
+			game->map->starting.y = new_y;
+			game->map->starting.x = new_x;
+			game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+		}
+		else
+		{
+			ft_printf("Not firest.\n");
+			game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
+			game->map->starting.y = new_y;
+			game->map->starting.x = new_x;
+			game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
+		}
+		count++;
+		ft_printf("count: %d\n", count);
 	}
-	else
+	else if (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C')
 	{
+		ft_printf("else\n");
 		game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
 		game->map->starting.y = new_y;
 		game->map->starting.x = new_x;
 		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
+	}
+	//print blue print
+	i = 0;
+	while (i < game->map->rows)
+	{
+		j = 0;
+		while (j < game->map->cols)
+		{
+			ft_printf("%c", game->map->cont[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
 	}
 	draw_camera(game);
 }
