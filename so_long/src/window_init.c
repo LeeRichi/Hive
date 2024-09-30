@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/29 16:32:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 15:52:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,18 @@ void	find_p(t_game *game)
 	}
 }
 
+static void update_position(t_game *game, int new_y, int new_x, char new_tile) 
+{
+	game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
+	game->map->starting.y = new_y;
+	game->map->starting.x = new_x;
+	game->map->cont[new_y][new_x] = new_tile;
+}
+
 static void	move_player(t_game *game, int new_y, int new_x)
 {
-	unsigned int i;
-	unsigned int j;
-
-	int count = 0;
+	// unsigned int i;
+	// unsigned int j;
 
 	find_p(game);
 	if (game->map->cont[new_y][new_x] == '1')
@@ -61,58 +67,29 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		exit(EXIT_SUCCESS);
 	}
 	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
+		update_position(game, new_y, new_x, 'Z');
+	if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z' && (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C'))
 	{
-		ft_printf("You are still too poor, collect all the coins and come again.\n");
-		game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
-		game->map->starting.y = new_y;
-		game->map->starting.x = new_x;
-		game->map->cont[game->map->starting.y][game->map->starting.x] = 'Z';
-	}
-	//if current is Z
-	if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z')
-	{
-		ft_printf("stepping on Z\n");
-		//only the first time
-		if (count == 0)
-		{
-			ft_printf("firest time?\n");
-			game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
-			game->map->starting.y = new_y;
-			game->map->starting.x = new_x;
-			game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
-		}
-		else
-		{
-			ft_printf("Not firest.\n");
-			game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
-			game->map->starting.y = new_y;
-			game->map->starting.x = new_x;
-			game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
-		}
-		count++;
-		ft_printf("count: %d\n", count);
-	}
-	else if (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C')
-	{
-		ft_printf("else\n");
-		game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
+		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
 		game->map->starting.y = new_y;
 		game->map->starting.x = new_x;
 		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
 	}
-	//print blue print
-	i = 0;
-	while (i < game->map->rows)
-	{
-		j = 0;
-		while (j < game->map->cols)
-		{
-			ft_printf("%c", game->map->cont[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
+	else if (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C')
+		update_position(game, new_y, new_x, 'P');
+	// //for printing
+	// i = 0;
+	// while (i < game->map->rows)
+	// {
+	// 	j = 0;
+	// 	while (j < game->map->cols)
+	// 	{
+	// 		ft_printf("%c", game->map->cont[i][j]);
+	// 		j++;
+	// 	}
+	// 	ft_printf("\n");
+	// 	i++;
+	// }
 	draw_camera(game);
 }
 
@@ -151,6 +128,7 @@ void	close_window(void *param)
 }
 
 //ww = window_width
+//if the map is big enough, we will open only a "square" window and display a part of map dynamically
 int	window_init(t_game *game)
 {
 	unsigned int	ww;
@@ -158,6 +136,11 @@ int	window_init(t_game *game)
 
 	game->disp.width = game->map->cols * BLOCK_SIZE;
 	game->disp.height = game->map->rows * BLOCK_SIZE;
+
+	//printsss
+	// ft_printf("game->disp.width: %d\n", game->disp.width);
+	// ft_printf("game->disp.height: %d\n", game->disp.height);
+
 	dw = game->disp.width;
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	if (game->disp.width < game->disp.height)
@@ -165,11 +148,17 @@ int	window_init(t_game *game)
 	else
 		game->map->window_width = game->disp.height;
 	ww = game->map->window_width;
+
+	//printss
+	// ft_printf("ww: %d\n", ww);
 	if (game->map->cols > 25 || game->map->rows > 25)
 		game->disp.mlx = mlx_init(ww, ww, "so_long", true);
 	else
 		game->disp.mlx = mlx_init(dw, game->disp.height, "so_long", true);
 	if (!game->disp.mlx)
 		show_error(game, "mlx_init error.");
+	
+	//Ani
+	// mlx_image_to_window(game->disp.mlx, game->img, game->map->window_width, game->map->window_height);
 	return (0);
 }
