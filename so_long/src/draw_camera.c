@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 22:22:59 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 00:21:51 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,18 @@ static void	update_camera(t_game *game)
 {
 	int	visible_width;
 	int	visible_height;
+	int	mid_position;
 
+	mid_position = (int)game->map->window_width / BLOCK_SIZE / 2;
 	visible_width = game->map->window_width / game->map->block_len;
 	visible_height = game->map->window_width / game->map->block_len;
 	game->camera_pos.y = game->map->starting.y - visible_height / 2;
 	game->camera_pos.x = game->map->starting.x - visible_width / 2;
 	if (game->map->cols > 25 || game->map->rows > 25)
 	{
-		if (game->camera_pos.x < (int)game->map->window_width / BLOCK_SIZE / 2)
+		if (game->map->starting.x < mid_position)
 			game->camera_pos.x = 0;
-		if (game->map->starting.y < (int)game->map->window_width / BLOCK_SIZE / 2)
+		if (game->map->starting.y < mid_position)
 			game->camera_pos.y = 0;
 	}
 	else

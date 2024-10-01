@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 21:57:07 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/09/30 23:29:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 			delete_game(param);
 			exit(EXIT_SUCCESS);
 		}
-		else if (keydata.key == 65)
+		else if (keydata.key == MLX_KEY_A)
 			move_player(game, game->map->starting.y, game->map->starting.x - 1);
-		else if (keydata.key == 68)
+		else if (keydata.key == MLX_KEY_D)
 			move_player(game, game->map->starting.y, game->map->starting.x + 1);
-		else if (keydata.key == 83)
+		else if (keydata.key == MLX_KEY_S)
 			move_player(game, game->map->starting.y + 1, game->map->starting.x);
-		else if (keydata.key == 87)
+		else if (keydata.key == MLX_KEY_W)
 			move_player(game, game->map->starting.y - 1, game->map->starting.x);
 	}
 }
@@ -132,11 +132,6 @@ int	window_init(t_game *game)
 
 	game->disp.width = game->map->cols * BLOCK_SIZE;
 	game->disp.height = game->map->rows * BLOCK_SIZE;
-
-	//printsss
-	// ft_printf("game->disp.width: %d\n", game->disp.width);
-	// ft_printf("game->disp.height: %d\n", game->disp.height);
-
 	dw = game->disp.width;
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	if (game->disp.width < game->disp.height)
@@ -144,9 +139,6 @@ int	window_init(t_game *game)
 	else
 		game->map->window_width = game->disp.height;
 	ww = game->map->window_width;
-
-	//printss
-	// ft_printf("ww: %d\n", ww);
 	if (game->map->cols > 25 || game->map->rows > 25)
 		game->disp.mlx = mlx_init(ww, ww, "so_long", true);
 	else
