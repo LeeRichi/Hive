@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/01 17:17:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 23:29:37 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,15 @@ void	find_p(t_game *game)
 	}
 }
 
+static void inject_old(t_game *game)
+{
+	game->map->old.x = game->map->starting.x;
+	game->map->old.y = game->map->starting.y;
+}
+
 static void update_position(t_game *game, int new_y, int new_x, char new_tile)
 {
+	inject_old(game);
 	game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
 	game->map->starting.y = new_y;
 	game->map->starting.x = new_x;
@@ -66,6 +73,7 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		update_position(game, new_y, new_x, 'Z');
 	if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z' && (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C'))
 	{
+		inject_old(game);
 		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
 		game->map->starting.y = new_y;
 		game->map->starting.x = new_x;

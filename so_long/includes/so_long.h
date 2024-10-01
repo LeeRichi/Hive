@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/01 17:09:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 23:26:34 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_graph
 typedef struct s_map
 {
 	t_point			starting;
+	t_point			old;
 	t_point			flood_begin;
 	unsigned int	cols;
 	unsigned int	rows;

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/01 17:21:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 23:31:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,15 @@ void	update_player(t_game *game)
 		check_block(game, game->map->starting.y, game->map->starting.x, 1);
 
 		//old
-		check_block(game, game->map->starting.y, game->map->starting.x, 1);
+		check_block(game, game->map->old.y, game->map->old.x, 1);
 	}
 	else
 	{
 		check_block(game, game->map->starting.y, game->map->starting.x, 0);
 
 		//old
-		check_block(game, game->map->starting.y, game->map->starting.x, 1);
-		
+		check_block(game, game->map->old.y, game->map->old.x, 0);
+
 	}
 	// old position
 }
@@ -174,7 +174,6 @@ void	draw_camera(t_game *game)
 		y++;
 	}
 }
-
 
 void draw_map(t_game *game)
 {
