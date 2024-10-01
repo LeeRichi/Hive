@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 23:29:47 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:17:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	// 	ft_printf("\n");
 	// 	i++;
 	// }
-	draw_camera(game);
+
+
+	// draw_camera(game);
+	update_player(game);
+	// draw_map(game);
 }
 
 //export functions
@@ -98,7 +102,7 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 	find_p(game);
 	if (keydata.action == MLX_PRESS)
 	{
-		if (keydata.key == 256)
+		if (keydata.key == MLX_KEY_ESCAPE)
 		{
 			delete_game(param);
 			exit(EXIT_SUCCESS);

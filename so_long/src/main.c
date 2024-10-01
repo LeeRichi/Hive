@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 09:19:19 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/30 21:56:10 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:09:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static void	game_init(char *ber_map)
 	map_checker(&game);
 	window_init(&game);
 	rich_from_texture_to_img(&game);
-	draw_camera(&game);
+	// draw_camera(&game);
+	draw_map(&game);
+
 	mlx_key_hook(game.disp.mlx, (mlx_keyfunc)handle_key, &game);
 	mlx_close_hook(game.disp.mlx, close_window, &game);
 	mlx_loop(game.disp.mlx);
