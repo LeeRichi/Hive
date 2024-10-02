@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/01 23:26:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 12:15:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	free_copy(char **temp, int rows);
 void	init_map(t_game *game, char *ber_map);
 
 //draw_camera.c
+void	update_camera(t_game *game);
 void	draw_camera(t_game *game);
 void	update_player(t_game *game);
-void	draw_map(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/01 23:29:37 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 12:28:18 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,22 @@ static void update_position(t_game *game, int new_y, int new_x, char new_tile)
 	game->map->cont[new_y][new_x] = new_tile;
 }
 
+static int f_norm(t_game *game, int new_y, int new_x)
+{
+	if (game->map->cont[game->map->starting.y][game->map->starting.x] != 'Z')
+		return (0);
+	if (game->map->cont[new_y][new_x] != '0' && game->map->cont[new_y][new_x] != 'C')
+		return (0);
+	return (1);
+}
+
 static void	move_player(t_game *game, int new_y, int new_x)
 {
-	//varibales for printing
-	// unsigned int i;
-	// unsigned int j;
+	int temp_y;
+	int temp_x;
 
+	temp_y = game->camera_pos.y;
+	temp_x = game->camera_pos.x;
 	find_p(game);
 	if (game->map->cont[new_y][new_x] == '1')
 		return ;
@@ -71,7 +81,8 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	}
 	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
 		update_position(game, new_y, new_x, 'Z');
-	if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z' && (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C'))
+	// if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z' && (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C'))
+	if (f_norm(game, new_y, new_x))
 	{
 		inject_old(game);
 		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
@@ -81,24 +92,11 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	}
 	else if (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C')
 		update_position(game, new_y, new_x, 'P');
-	// //for printing
-	// i = 0;
-	// while (i < game->map->rows)
-	// {
-	// 	j = 0;
-	// 	while (j < game->map->cols)
-	// 	{
-	// 		ft_printf("%c", game->map->cont[i][j]);
-	// 		j++;
-	// 	}
-	// 	ft_printf("\n");
-	// 	i++;
-	// }
-
-
-	// draw_camera(game);
-	update_player(game);
-	// draw_map(game);
+	update_camera(game);
+	if(temp_y != game->camera_pos.y || temp_x != game->camera_pos.x)
+		draw_camera(game);
+	else
+		update_player(game);
 }
 
 //export functions

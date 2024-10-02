@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/09/30 15:39:37 by chlee2           ###   ########.fr        #
+#    Updated: 2024/10/02 12:34:11 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,6 @@ SRCS = src/main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
-
 clone:
 	@if [ ! -d "$(MLX42DIR)" ]; then \
 		git clone $(MLX42_REPO) $(MLX42DIR); \
@@ -44,6 +42,7 @@ clone:
 		echo "$(MLX42DIR) already exists."; \
 	fi
 
+all: clone $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLX42DIR)/build -lmlx42 -lglfw
@@ -60,7 +59,6 @@ clean:
 	$(RM) $(OBJS)
 	@make clean -C $(LIBFTDIR)
 	rm -rf $(MLX42DIR)
-
 
 fclean: clean
 	rm -f $(NAME)
