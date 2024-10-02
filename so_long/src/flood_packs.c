@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_ground.c                                      :+:      :+:    :+:   */
+/*   flood_packs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 17:00:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 17:44:20 by chlee2           ###   ########.fr       */
+/*   Created: 2024/10/02 19:10:29 by chlee2            #+#    #+#             */
+/*   Updated: 2024/10/02 19:16:46 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//bl = block_len;
-void	draw_ground(t_game *game)
+int	flood_check(t_game *game, char **temp)
 {
-	int	x;
-	int	y;
-	int	bl;
+	int	i;
+	int	j;
 
-	bl = game->map->block_len;
-	y = 0;
-	while (y < (int)game->map->rows)
+	i = 0;
+	while (i < (int)game->map->rows)
 	{
-		x = 0;
-		while (x < (int)game->map->cols)
+		j = 0;
+		while (j < (int)game->map->cols)
 		{
-			draw_block(game, game->img[G], y * bl, x * bl);
-			x++;
+			if (temp[i][j] == 'C' || temp[i][j] == 'E')
+				return (0);
+			j++;
 		}
-		y++;
+		i++;
 	}
+	return (1);
 }

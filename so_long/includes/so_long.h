@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 17:04:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 19:17:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ typedef struct s_game
 
 //main.c
 void	show_error(t_game *game, char *error_m);
+void	errow_and_temp(t_game *game, char *error_m, char **temp);
 
 //delete.c
 void	delete_game(t_game *game);
+
+//flood_packs
+int	flood_check(t_game *game, char **temp);
 
 //map_checker.c
 void	map_checker(t_game *game);

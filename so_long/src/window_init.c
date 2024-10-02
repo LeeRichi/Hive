@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 17:15:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:44:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	int	temp_y;
 	int	temp_x;
 
-	int i = 0;
-	int j = 0;
-
 	temp_y = game->camera_pos.y;
 	temp_x = game->camera_pos.x;
 	find_p(game);
@@ -58,18 +55,6 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		draw_camera(game);
 	else
 		update_player(game);
-
-	while(i < (int)game->map->rows)
-	{
-		j = 0;
-		while(j < (int)game->map->cols)
-		{
-			ft_printf("%c", game->map->cont[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
 }
 
 //export functions

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/19 15:27:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 19:19:07 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,12 @@ void	map_checker(t_game *game)
 	if (!temp_map)
 		show_error(game, "Failed to create temp map\n");
 	if (!is_eqaul_to_one(temp_map, size))
-	{
-		free_copy(temp_map, game->map->rows);
-		show_error(game, "Exit or Player is not equal to 1, invalid map.\n");
-	}
+		errow_and_temp(game, "Exit or Player is not equal to 1.\n", temp_map);
 	if (!rich_check_border(temp_map, size))
-	{
-		free_copy(temp_map, game->map->rows);
-		show_error(game, "border is invalid.\n");
-	}
+		errow_and_temp(game, "border is invalid.\n", temp_map);
 	values_injection(game, temp_map, size);
-	rich_flood_fill(temp_map, size, game->map->flood_begin);
+	rich_flood_fill(temp_map, size, game->map->starting);
+	if (!flood_check(game, temp_map))
+		errow_and_temp(game, "Map doesnt not have valid path.\n", temp_map);
 	free_copy(temp_map, game->map->rows);
 }

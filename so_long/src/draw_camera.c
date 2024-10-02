@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 17:42:01 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 19:20:42 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 	{
 		cam_y = game->camera_pos.y;
 		cam_x = game->camera_pos.x;
+		window_y = (y - game->camera_pos.y) * game->map->block_len;
+		window_x = (x - game->camera_pos.x) * game->map->block_len;
 	}
 	window_y = (y - cam_y) * game->map->block_len;
 	window_x = (x - cam_x) * game->map->block_len;
+	if (game->map->cont[y][x] == '0')
 		draw_block(game, game->img[G], window_y, window_x);
 	if (game->map->cont[y][x] == '1')
 		draw_block(game, game->img[W], window_y, window_x);
@@ -44,12 +47,12 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 	if (game->map->cont[y][x] == 'C')
 		draw_block(game, game->img[C], window_y, window_x);
 	if (game->map->cont[y][x] == 'E')
-		draw_block(game, game->img[E], window_y, window_x);
-	if (game->map->cont[y][x] == 'Z')
 	{
+		draw_block(game, game->img[G], window_y, window_x);
 		draw_block(game, game->img[E], window_y, window_x);
-		draw_block(game, game->img[P], window_y, window_x);
 	}
+	if (game->map->cont[y][x] == 'Z')
+		draw_block(game, game->img[P], window_y, window_x);
 }
 
 // update the window's bound

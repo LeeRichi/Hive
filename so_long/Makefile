@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/10/02 17:02:26 by chlee2           ###   ########.fr        #
+#    Updated: 2024/10/02 19:10:25 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = src/main.c \
 		src/window_init.c \
 		src/window_init_helpers.c \
 		src/delete.c \
+		src/flood_packs.c \
 		src/map_checker.c \
 		src/img_init.c \
 		src/deep_copy.c \
@@ -37,18 +38,13 @@ SRCS = src/main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-clone:
-	@if [ ! -d "$(MLX42DIR)" ]; then \
-		git clone $(MLX42_REPO) $(MLX42DIR); \
-	else \
-		echo "$(MLX42DIR) already exists."; \
-	fi
+all: $(MLX42DIR) $(NAME)
 
-all: clone $(NAME)
+$(MLX42DIR):
+	git clone $(MLX42_REPO) $(MLX42DIR)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLX42DIR)/build -lmlx42 -lglfw
-
 
 $(LIBFT):
 	@make -C $(LIBFTDIR)
@@ -66,7 +62,7 @@ fclean: clean
 	rm -f $(NAME)
 	@make fclean -C $(LIBFTDIR)
 
-re: fclean clone $(NAME)
+re: fclean all
 
 .PHONY: all clean fclean re
 
