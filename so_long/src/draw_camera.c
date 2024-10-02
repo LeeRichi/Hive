@@ -6,14 +6,14 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 12:41:36 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:42:01 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
 //wy = window_y, wx = window_x
-static void	draw_block(t_game *game, mlx_image_t *img, int wy, int wx)
+void	draw_block(t_game *game, mlx_image_t *img, int wy, int wx)
 {
 	if (mlx_image_to_window(game->disp.mlx, img, wx, wy) < 0)
 		show_error(game, "mlx_image_to_window failed.");
@@ -36,16 +36,16 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 	}
 	window_y = (y - cam_y) * game->map->block_len;
 	window_x = (x - cam_x) * game->map->block_len;
-	draw_block(game, game->img[G], window_y, window_x);
+		draw_block(game, game->img[G], window_y, window_x);
 	if (game->map->cont[y][x] == '1')
 		draw_block(game, game->img[W], window_y, window_x);
-	else if (game->map->cont[y][x] == 'P')
+	if (game->map->cont[y][x] == 'P')
 		draw_block(game, game->img[P], window_y, window_x);
-	else if (game->map->cont[y][x] == 'C')
+	if (game->map->cont[y][x] == 'C')
 		draw_block(game, game->img[C], window_y, window_x);
-	else if (game->map->cont[y][x] == 'E')
+	if (game->map->cont[y][x] == 'E')
 		draw_block(game, game->img[E], window_y, window_x);
-	else if (game->map->cont[y][x] == 'Z')
+	if (game->map->cont[y][x] == 'Z')
 	{
 		draw_block(game, game->img[E], window_y, window_x);
 		draw_block(game, game->img[P], window_y, window_x);
@@ -56,13 +56,11 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 void	update_camera(t_game *game)
 {
 	int	visible_width;
-	int	visible_height;
 	int	mid_position;
 
 	mid_position = (int)game->map->window_width / BLOCK_SIZE / 2;
 	visible_width = game->map->window_width / game->map->block_len;
-	visible_height = game->map->window_width / game->map->block_len;
-	game->camera_pos.y = game->map->starting.y - visible_height / 2;
+	game->camera_pos.y = game->map->starting.y - visible_width / 2;
 	game->camera_pos.x = game->map->starting.x - visible_width / 2;
 	if (game->map->cols > 25 || game->map->rows > 25)
 	{
@@ -80,8 +78,8 @@ void	update_camera(t_game *game)
 	}
 	if (game->camera_pos.x > (int)game->map->cols - visible_width)
 		game->camera_pos.x = (int)game->map->cols - visible_width;
-	if (game->camera_pos.y > (int)game->map->rows - visible_height)
-		game->camera_pos.y = (int)game->map->rows - visible_height;
+	if (game->camera_pos.y > (int)game->map->rows - visible_width)
+		game->camera_pos.y = (int)game->map->rows - visible_width;
 }
 
 //only update two blocks, not whole map nor whole window

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 12:15:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:04:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,17 @@ void	delete_game(t_game *game);
 //map_checker.c
 void	map_checker(t_game *game);
 
-//window.init.c
+//window_init.c
 //find_p is called for also map_checker.c for flood.
-void	find_p(t_game *game);
 void	handle_key(struct mlx_key_data keydata, void *param);
-void	close_window(void *param);
 int		window_init(t_game *game);
+
+//window_init_helpers.c
+void	find_p(t_game *game);
+void	close_window(void *param);
+void    inject_old(t_game *game);
+void	update_position(t_game *game, int new_y, int new_x, char new_tile);
+void		move_away(t_game *game, int new_y, int new_x);
 
 //img_init.c
 void	rich_from_texture_to_img(t_game *game);
@@ -76,9 +81,16 @@ void	free_copy(char **temp, int rows);
 //init_map.c
 void	init_map(t_game *game, char *ber_map);
 
+//draw_ground.c
+void	draw_ground(t_game *game);
+
 //draw_camera.c
+void	draw_block(t_game *game, mlx_image_t *img, int wy, int wx);
 void	update_camera(t_game *game);
 void	draw_camera(t_game *game);
 void	update_player(t_game *game);
+
+//win_exit.c
+void    you_win(t_game *game);
 
 #endif

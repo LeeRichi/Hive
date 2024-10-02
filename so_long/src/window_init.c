@@ -6,63 +6,35 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 12:28:18 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:15:39 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	find_p(t_game *game)
+static int	is_walkable(t_game *game, int new_y, int new_x)
 {
-	unsigned int	x;
-	unsigned int	y;
+	char	new;
 
-	y = 0;
-	while (y < game->map->rows)
-	{
-		x = 0;
-		while (x < game->map->cols)
-		{
-			if (game->map->cont[y][x] == 'P' || game->map->cont[y][x] == 'Z')
-			{
-				game->map->starting.x = x;
-				game->map->starting.y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
+	new = game->map->cont[new_y][new_x];
+	return (new == '0' || new == 'C');
 }
 
-static void inject_old(t_game *game)
+static int	f_norm(t_game *game, int new_y, int new_x)
 {
-	game->map->old.x = game->map->starting.x;
-	game->map->old.y = game->map->starting.y;
-}
+	char	old;
 
-static void update_position(t_game *game, int new_y, int new_x, char new_tile)
-{
-	inject_old(game);
-	game->map->cont[game->map->starting.y][game->map->starting.x] = '0';
-	game->map->starting.y = new_y;
-	game->map->starting.x = new_x;
-	game->map->cont[new_y][new_x] = new_tile;
-}
-
-static int f_norm(t_game *game, int new_y, int new_x)
-{
-	if (game->map->cont[game->map->starting.y][game->map->starting.x] != 'Z')
-		return (0);
-	if (game->map->cont[new_y][new_x] != '0' && game->map->cont[new_y][new_x] != 'C')
-		return (0);
-	return (1);
+	old = game->map->cont[game->map->starting.y][game->map->starting.x];
+	return (is_walkable(game, new_y, new_x) && old == 'Z');
 }
 
 static void	move_player(t_game *game, int new_y, int new_x)
 {
-	int temp_y;
-	int temp_x;
+	int	temp_y;
+	int	temp_x;
+
+	int i = 0;
+	int j = 0;
 
 	temp_y = game->camera_pos.y;
 	temp_x = game->camera_pos.x;
@@ -74,29 +46,30 @@ static void	move_player(t_game *game, int new_y, int new_x)
 	if (game->map->cont[new_y][new_x] == 'C')
 		game->map->coins--;
 	else if (game->map->cont[new_y][new_x] == 'E' && game->map->coins == 0)
-	{
-		delete_game(game);
-		ft_printf("You win!\n");
-		exit(EXIT_SUCCESS);
-	}
+		you_win(game);
 	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
 		update_position(game, new_y, new_x, 'Z');
-	// if (game->map->cont[game->map->starting.y][game->map->starting.x] == 'Z' && (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C'))
 	if (f_norm(game, new_y, new_x))
-	{
-		inject_old(game);
-		game->map->cont[game->map->starting.y][game->map->starting.x] = 'E';
-		game->map->starting.y = new_y;
-		game->map->starting.x = new_x;
-		game->map->cont[game->map->starting.y][game->map->starting.x] = 'P';
-	}
-	else if (game->map->cont[new_y][new_x] == '0' || game->map->cont[new_y][new_x] == 'C')
+		move_away(game, new_y, new_x);
+	else if (is_walkable(game, new_y, new_x))
 		update_position(game, new_y, new_x, 'P');
 	update_camera(game);
-	if(temp_y != game->camera_pos.y || temp_x != game->camera_pos.x)
+	if (temp_y != game->camera_pos.y || temp_x != game->camera_pos.x)
 		draw_camera(game);
 	else
 		update_player(game);
+
+	while(i < (int)game->map->rows)
+	{
+		j = 0;
+		while(j < (int)game->map->cols)
+		{
+			ft_printf("%c", game->map->cont[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
 }
 
 //export functions
@@ -124,17 +97,9 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 	}
 }
 
-void	close_window(void *param)
-{
-	t_game	*game;
-
-	game = param;
-	delete_game(game);
-	exit(0);
-}
-
 //ww = window_width
-//if the map is big enough, we will open only a "square" window and display a part of map dynamically
+//if the map is big enough, 
+//we will open only a "square" window and display a part of map dynamically
 int	window_init(t_game *game)
 {
 	unsigned int	ww;
@@ -155,8 +120,5 @@ int	window_init(t_game *game)
 		game->disp.mlx = mlx_init(dw, game->disp.height, "so_long", true);
 	if (!game->disp.mlx)
 		show_error(game, "mlx_init error.");
-
-	//Ani
-	// mlx_image_to_window(game->disp.mlx, game->img, game->map->window_width, game->map->window_height);
 	return (0);
 }

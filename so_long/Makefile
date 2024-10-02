@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/10/02 12:34:11 by chlee2           ###   ########.fr        #
+#    Updated: 2024/10/02 17:02:26 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,17 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g
 
-
 SRCS = src/main.c \
 		src/window_init.c \
+		src/window_init_helpers.c \
 		src/delete.c \
 		src/map_checker.c \
 		src/img_init.c \
 		src/deep_copy.c \
 		src/init_map.c \
+		src/draw_ground.c \
 		src/draw_camera.c \
+		src/win_exit.c \
 
 OBJS = $(SRCS:.c=.o)
 
