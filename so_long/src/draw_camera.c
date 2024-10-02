@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 19:20:42 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/02 19:30:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 	if (game->map->cont[y][x] == 'Z')
 		draw_block(game, game->img[P], window_y, window_x);
 }
+
 
 // update the window's bound
 void	update_camera(t_game *game)
