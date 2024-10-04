@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/03 14:45:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:49:35 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 //wy = window_y, wx = window_x
 void	draw_block(t_game *game, mlx_image_t *img, int wy, int wx)
 {
-	// if(img == game->img[G])
-	// 	ft_printf("This is G.\n");
 	if (mlx_image_to_window(game->disp.mlx, img, wx, wy) < 0)
 		show_error(game, "mlx_image_to_window failed.");
 }
 
-// static void	check_block(t_game *game, int y, int x, int cam_y, int cam_x)
 static void	check_block(t_game *game, int y, int x, int is_big_map)
 {
 	int	window_y;
@@ -38,23 +35,21 @@ static void	check_block(t_game *game, int y, int x, int is_big_map)
 	}
 	window_y = (y - cam_y) * game->map->block_len;
 	window_x = (x - cam_x) * game->map->block_len;
-
-	if (game->map->cont[y][x] == '0')
-		draw_block(game, game->img[G], window_y, window_x);
+	draw_block(game, game->img[G], window_y, window_x);
 	if (game->map->cont[y][x] == '1')
 		draw_block(game, game->img[W], window_y, window_x);
-	if (game->map->cont[y][x] == 'P')
+	else if (game->map->cont[y][x] == 'P')
 		draw_block(game, game->img[P], window_y, window_x);
-	if (game->map->cont[y][x] == 'C')
+	else if (game->map->cont[y][x] == 'C')
 	{
 		draw_block(game, game->img[C], window_y, window_x);
 	}
-	if (game->map->cont[y][x] == 'E')
+	else if (game->map->cont[y][x] == 'E')
 	{
 		draw_block(game, game->img[G], window_y, window_x);
 		draw_block(game, game->img[E], window_y, window_x);
 	}
-	if (game->map->cont[y][x] == 'Z')
+	else if (game->map->cont[y][x] == 'Z')
 		draw_block(game, game->img[P], window_y, window_x);
 }
 
@@ -121,14 +116,12 @@ void	draw_camera(t_game *game)
 		x = game->camera_pos.x;
 		while (x < game->camera_pos.x + vw && x < (int)game->map->cols)
 		{
-			ft_printf("%c", game->map->cont[y][x]);
 			if (game->map->cols > 25 || game->map->rows > 25)
 				check_block(game, y, x, 1);
 			else
 				check_block(game, y, x, 0);
 			x++;
 		}
-		ft_printf("\n");
 		y++;
 	}
 }

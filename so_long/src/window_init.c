@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:39:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/03 14:41:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:52:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,6 @@ static int	f_norm(t_game *game, int new_y, int new_x)
 	return (is_walkable(game, new_y, new_x) && old == 'Z');
 }
 
-// static void	move_player(t_game *game, int new_y, int new_x)
-// {
-// 	int	temp_y;
-// 	int	temp_x;
-
-// 	temp_y = game->camera_pos.y;
-// 	temp_x = game->camera_pos.x;
-// 	find_p(game);
-// 	if (game->map->cont[new_y][new_x] == '1')
-// 		return ;
-// 	game->map->movements++;
-// 	ft_printf("You moved %d steps\n", game->map->movements);
-// 	if (game->map->cont[new_y][new_x] == 'C')
-// 		game->map->coins--;
-// 	else if (game->map->cont[new_y][new_x] == 'E' && game->map->coins == 0)
-// 		you_win(game);
-// 	if (game->map->cont[new_y][new_x] == 'E' && game->map->coins > 0)
-// 		update_position(game, new_y, new_x, 'Z');
-// 	if (f_norm(game, new_y, new_x))
-// 		move_away(game, new_y, new_x);
-// 	else if (is_walkable(game, new_y, new_x))
-// 		update_position(game, new_y, new_x, 'P');
-// 	update_camera(game);
-// 	if (temp_y != game->camera_pos.y || temp_x != game->camera_pos.x)
-// 		draw_camera(game);
-// 	else
-// 		update_player(game);
-// }
-
 static void	move_player(t_game *game, int new_y, int new_x)
 {
 	int	temp_y;
@@ -70,14 +41,13 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		return ;
 	game->map->movements++;
 	ft_printf("You moved %d steps\n", game->map->movements);
-	
+
 	// // Print the contents of the 2D array
 	// ft_printf("Map content after move:\n");
 	// for (i = 0; i < (int)game->map->rows; i++) // Assuming map height is stored in game->map->height
 	// {
 	// 	ft_printf("%s\n", game->map->cont[i]);
 	// }
-	
 	if (game->map->cont[new_y][new_x] == 'C')
 		game->map->coins--;
 	else if (game->map->cont[new_y][new_x] == 'E' && game->map->coins == 0)
@@ -90,18 +60,10 @@ static void	move_player(t_game *game, int new_y, int new_x)
 		update_position(game, new_y, new_x, 'P');
 	update_camera(game);
 	if (temp_y != game->camera_pos.y || temp_x != game->camera_pos.x)
-	{
 		draw_camera(game);
-		ft_printf("draw_camera fired.\n");
-	}
 	else
-	{
 		update_player(game);
-		ft_printf("update_player fired.\n");
-	}
 }
-
-
 
 //export functions
 void	handle_key(struct mlx_key_data keydata, void *param)
@@ -129,7 +91,7 @@ void	handle_key(struct mlx_key_data keydata, void *param)
 }
 
 //ww = window_width
-//if the map is big enough, 
+//if the map is big enough,
 //we will open only a "square" window and display a part of map dynamically
 int	window_init(t_game *game)
 {
