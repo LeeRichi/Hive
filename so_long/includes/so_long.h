@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 19:17:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:04:11 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	errow_and_temp(t_game *game, char *error_m, char **temp);
 void	delete_game(t_game *game);
 
 //flood_packs
-int	flood_check(t_game *game, char **temp);
+int		flood_check(t_game *game, char **temp);
 
 //map_checker.c
 void	map_checker(t_game *game);
@@ -67,13 +67,15 @@ void	map_checker(t_game *game);
 //find_p is called for also map_checker.c for flood.
 void	handle_key(struct mlx_key_data keydata, void *param);
 int		window_init(t_game *game);
+int		f_norm(t_game *game, int new_y, int new_x);
+int		is_walkable(t_game *game, int new_y, int new_x);
 
 //window_init_helpers.c
 void	find_p(t_game *game);
 void	close_window(void *param);
-void    inject_old(t_game *game);
+void	inject_old(t_game *game);
 void	update_position(t_game *game, int new_y, int new_x, char new_tile);
-void		move_away(t_game *game, int new_y, int new_x);
+void	move_away(t_game *game, int new_y, int new_x);
 
 //img_init.c
 void	rich_from_texture_to_img(t_game *game);
@@ -95,6 +97,12 @@ void	draw_camera(t_game *game);
 void	update_player(t_game *game);
 
 //win_exit.c
-void    you_win(t_game *game);
+void	you_win(t_game *game);
+
+//valid_movements.c
+void	valid_movements(t_game *game, int new_y, int new_x);
+
+//check_block.c
+void	check_block(t_game *game, int y, int x, int is_big_map);
 
 #endif

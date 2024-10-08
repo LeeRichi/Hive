@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:41:54 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/04 14:49:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:59:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,6 @@ void	draw_block(t_game *game, mlx_image_t *img, int wy, int wx)
 {
 	if (mlx_image_to_window(game->disp.mlx, img, wx, wy) < 0)
 		show_error(game, "mlx_image_to_window failed.");
-}
-
-static void	check_block(t_game *game, int y, int x, int is_big_map)
-{
-	int	window_y;
-	int	window_x;
-	int	cam_y;
-	int	cam_x;
-
-	cam_y = 0;
-	cam_x = 0;
-	if (is_big_map)
-	{
-		cam_y = game->camera_pos.y;
-		cam_x = game->camera_pos.x;
-	}
-	window_y = (y - cam_y) * game->map->block_len;
-	window_x = (x - cam_x) * game->map->block_len;
-	draw_block(game, game->img[G], window_y, window_x);
-	if (game->map->cont[y][x] == '1')
-		draw_block(game, game->img[W], window_y, window_x);
-	else if (game->map->cont[y][x] == 'P')
-		draw_block(game, game->img[P], window_y, window_x);
-	else if (game->map->cont[y][x] == 'C')
-	{
-		draw_block(game, game->img[C], window_y, window_x);
-	}
-	else if (game->map->cont[y][x] == 'E')
-	{
-		draw_block(game, game->img[G], window_y, window_x);
-		draw_block(game, game->img[E], window_y, window_x);
-	}
-	else if (game->map->cont[y][x] == 'Z')
-		draw_block(game, game->img[P], window_y, window_x);
 }
 
 // update the window's bound
