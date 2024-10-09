@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 00:17:37 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 00:18:46 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/09 16:55:57 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ void	init_map(t_game *game, char *ber_map, int row_count)
 		res = get_next_line(fd);
 		if (!res)
 			show_error_close(game, fd, "get_next_line failed.");
-		game->map->cont[i] = ft_strtrim(res, "\n");
+		// game->map->cont[i] = ft_strtrim(res, "\n");
 		if (!game->map->cont[i])
+		{
 			show_error_close(game, fd, "ft_strtrim failed.");
+		}
 		else if (ft_strlen(game->map->cont[i]) > 132)
 			show_error_close(game, fd, "map to big, should be less than 132.");
 		i++;
