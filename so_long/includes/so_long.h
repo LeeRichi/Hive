@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/08 17:04:11 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/09 00:09:00 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	show_error(t_game *game, char *error_m);
 void	errow_and_temp(t_game *game, char *error_m, char **temp);
 
 //delete.c
+void	show_error_close(t_game *game, int fd, char *str);
 void	delete_game(t_game *game);
 
 //flood_packs
@@ -85,7 +86,8 @@ char	**deep_copy(char **source, unsigned int rows, unsigned int cols);
 void	free_copy(char **temp, int rows);
 
 //init_map.c
-void	init_map(t_game *game, char *ber_map);
+int		count_row(t_game *game, char *ber_map);
+void	init_map(t_game *game, char *ber_map, int row_count);
 
 //draw_ground.c
 void	draw_ground(t_game *game);

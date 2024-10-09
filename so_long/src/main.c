@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 09:19:19 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/03 14:38:49 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/09 00:18:34 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,13 @@ static void	arg_checker(int ac, char **av)
 static void	game_init(char *ber_map)
 {
 	t_game	game;
+	int		row_count;
 
 	ft_memset(&game, 0, sizeof(t_game));
-	init_map(&game, ber_map);
+	row_count = count_row(&game, ber_map);
+	if (row_count == 0)
+		show_error(&game, "empty map file.");
+	init_map(&game, ber_map, row_count);
 	map_checker(&game);
 	window_init(&game);
 	rich_from_texture_to_img(&game);

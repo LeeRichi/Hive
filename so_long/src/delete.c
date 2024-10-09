@@ -6,11 +6,17 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:52:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/02 15:27:11 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/08 23:49:37 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	show_error_close(t_game *game, int fd, char *str)
+{
+	close(fd);
+	show_error(game, str);
+}
 
 static void	delete_image(t_game *game)
 {
