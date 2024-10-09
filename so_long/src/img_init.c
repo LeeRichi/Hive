@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 01:02:33 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 11:58:30 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/09 17:27:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ static mlx_image_t	*rich_from_png_to_texture(t_game *game, const char *fp)
 	if (!texture)
 		show_error(game, "png to texture failed");
 	img = mlx_texture_to_image(game->disp.mlx, texture);
+	mlx_delete_texture(texture);
 	if (!img)
-	{
-		mlx_delete_texture(texture);
 		show_error(game, "texture to image has failed.");
-	}
 	if (!mlx_resize_image(img, game->map->block_len, game->map->block_len))
 		show_error(game, "mlx_resize_image has failed.");
 	return (img);

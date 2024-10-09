@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 00:17:37 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 16:55:57 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/09 17:33:28 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,46 @@ static t_map	*calloc_map(int cols, int rows)
 	return (map);
 }
 
-void	init_map(t_game *game, char *ber_map, int row_count)
+void	read_map_line(t_game *game, int fd, unsigned int i)
+{
+	char	*res;
+
+	res = get_next_line(fd);
+	if (!res)
+		show_error_close(game, fd, "get_next_line failed.");
+	game->map->cont[i] = ft_strtrim(res, "\n");
+	if (!game->map->cont[i])
+	{
+		free(res);
+		show_error_close(game, fd, "ft_strtrim failed.");
+	}
+	else if (ft_strlen(game->map->cont[i]) > 132)
+		show_error_close(game, fd, "map too big, should be less than 132.");
+	free(res);
+}
+
+void	load_map(t_game *game, int fd)
 {
 	unsigned int	i;
-	char			*res;
-	int				fd;
+
+	i = 0;
+	while (i < game->map->rows)
+	{
+		read_map_line(game, fd, i);
+		i++;
+	}
+}
+
+void	init_map(t_game *game, char *ber_map, int row_count)
+{
+	int	fd;
 
 	game->map = calloc_map(0, row_count);
 	if (!game->map)
 		show_error(game, "calloc failed.");
 	fd = open(ber_map, O_RDONLY);
-	if (!fd)
-		show_error(game, "open file faile.");
-	i = 0;
-	while (i < game->map->rows)
-	{
-		res = get_next_line(fd);
-		if (!res)
-			show_error_close(game, fd, "get_next_line failed.");
-		// game->map->cont[i] = ft_strtrim(res, "\n");
-		if (!game->map->cont[i])
-		{
-			show_error_close(game, fd, "ft_strtrim failed.");
-		}
-		else if (ft_strlen(game->map->cont[i]) > 132)
-			show_error_close(game, fd, "map to big, should be less than 132.");
-		i++;
-		free(res);
-	}
+	if (fd == -1)
+		show_error(game, "open file failed.");
+	load_map(game, fd);
 	close(fd);
 }
