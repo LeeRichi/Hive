@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:37:03 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/12 10:40:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/12 15:24:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ typedef struct s_data
 
 } t_data;
 
-void
-ft_free_tab(char **tab);
+//error.c
+void	ft_free_tab(char **tab);
+void	show_error(t_data *data, char *message, int err_code);
+
+//close.c
 void	double_close(int f1, int f2);
 void	four_close(int f1, int f2, int end1, int end2);
-void	show_error(t_data *data, char *message, int err_code);
+
+//path_finder.c
+char *find_path(t_data *data, char *cmd, char **envp);
 
 #endif
