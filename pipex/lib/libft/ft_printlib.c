@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:56:20 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/23 10:54:43 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/12 23:37:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	printnbr(long n, int base)
 	char	*symbols;
 	int		count;
 	int		result;
-
-	// printf("printnbr fired\n");
 
 	count = 0;
 	symbols = "0123456789abcdef";

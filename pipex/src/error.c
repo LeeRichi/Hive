@@ -6,13 +6,13 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:15:34 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/12 15:26:59 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/12 23:36:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_free_tab(char **tab)
+static void	ft_free_tab(char **tab)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:15:38 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/23 10:54:42 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/12 23:36:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	printstr(char *s)
 {
 	int	count;
 
-	// printf("printstr fired\n");
 	count = 0;
 	if (!s)
 		return (printstr("(null)"));
