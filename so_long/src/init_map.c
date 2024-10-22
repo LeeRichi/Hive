@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 00:17:37 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 17:33:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:23:13 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	load_map(t_game *game, int fd)
 		read_map_line(game, fd, i);
 		i++;
 	}
+	if (!loop_cont(game))
+		show_error(game, "Your map is in wrong shape.\n");
 }
 
 void	init_map(t_game *game, char *ber_map, int row_count)

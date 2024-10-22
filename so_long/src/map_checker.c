@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/08 23:54:57 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:21:30 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	map_checker(t_game *game)
 	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
 	if (!temp_map)
 		show_error(game, "Failed to create temp map\n");
+	if (!loop_temp_map(temp_map))
+		show_error(game, "There is unvalid char\n");
 	if (!is_eqaul_to_one(temp_map, size))
 		errow_and_temp(game, "Exit or Player is not equal to 1.\n", temp_map);
 	if (!rich_check_border(temp_map, size))

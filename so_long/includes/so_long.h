@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 00:09:00 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:21:18 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,9 @@ void	valid_movements(t_game *game, int new_y, int new_x);
 
 //check_block.c
 void	check_block(t_game *game, int y, int x, int is_big_map);
+
+//loop_temp_map.c
+int		loop_temp_map(char **temp_map);
+int		loop_cont(t_game *game);
 
 #endif

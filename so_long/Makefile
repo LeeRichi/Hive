@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:30:28 by chlee2            #+#    #+#              #
-#    Updated: 2024/10/09 16:56:27 by chlee2           ###   ########.fr        #
+#    Updated: 2024/10/22 17:33:17 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = src/main.c \
 		src/draw_camera.c \
 		src/win_exit.c \
 		src/check_block.c \
+		src/loop_temp_map.c \
 
 OBJS = $(SRCS:.c=.o)
 
