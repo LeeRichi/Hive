@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 09:19:19 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/09 00:18:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/28 18:07:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	show_error(t_game *game, char *error_m)
 	exit(EXIT_FAILURE);
 }
 
-void	errow_and_temp(t_game *game, char *error_m, char **temp)
+void	error_and_temp(t_game *game, char *error_m, char **temp)
 {
 	free_copy(temp, game->map->rows);
 	delete_game(game);

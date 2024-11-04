@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:31:33 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/22 18:32:03 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/28 18:45:17 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,21 @@ static int	is_valid_char(char c)
 }
 
 //1 means pass
-int	loop_temp_map(char **temp_map)
+int	loop_temp_map(char **temp_map, t_game *game)
 {
-	int	i;
-	int	j;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	while (temp_map[i])
+	while (i < game->map->rows)
 	{
 		j = 0;
-		while (j < temp_map[i][j])
+		while (j < ft_strlen(temp_map[i]))
 		{
 			if (!is_valid_char(temp_map[i][j]))
 				return (0);
 			j++;
 		}
-		ft_printf("\n");
 		i++;
 	}
 	return (1);

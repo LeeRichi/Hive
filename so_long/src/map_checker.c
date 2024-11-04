@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:34:47 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/22 18:21:30 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/28 18:46:29 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,16 @@ void	map_checker(t_game *game)
 	size = (t_point){game->map->cols, game->map->rows};
 	temp_map = deep_copy(game->map->cont, game->map->rows, game->map->cols);
 	if (!temp_map)
-		show_error(game, "Failed to create temp map\n");
-	if (!loop_temp_map(temp_map))
-		show_error(game, "There is unvalid char\n");
+		error_and_temp(game, "Failed to create temp map\n", temp_map);
+	if (!loop_temp_map(temp_map, game))
+		error_and_temp(game, "There is unvalid char\n", temp_map);
 	if (!is_eqaul_to_one(temp_map, size))
-		errow_and_temp(game, "Exit or Player is not equal to 1.\n", temp_map);
+		error_and_temp(game, "Exit or Player is not equal to 1.\n", temp_map);
 	if (!rich_check_border(temp_map, size))
-		errow_and_temp(game, "border is invalid.\n", temp_map);
+		error_and_temp(game, "border is invalid.\n", temp_map);
 	values_injection(game, temp_map, size);
 	rich_flood_fill(temp_map, size, game->map->starting);
 	if (!flood_check(game, temp_map))
-		errow_and_temp(game, "Map doesnt not have valid path.\n", temp_map);
+		error_and_temp(game, "Map doesnt not have valid path.\n", temp_map);
 	free_copy(temp_map, game->map->rows);
 }

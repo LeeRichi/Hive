@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:00:59 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/22 18:21:18 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/10/28 18:45:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_game
 
 //main.c
 void	show_error(t_game *game, char *error_m);
-void	errow_and_temp(t_game *game, char *error_m, char **temp);
+void	error_and_temp(t_game *game, char *error_m, char **temp);
 
 //delete.c
 void	show_error_close(t_game *game, int fd, char *str);
@@ -108,7 +108,7 @@ void	valid_movements(t_game *game, int new_y, int new_x);
 void	check_block(t_game *game, int y, int x, int is_big_map);
 
 //loop_temp_map.c
-int		loop_temp_map(char **temp_map);
+int		loop_temp_map(char **temp_map, t_game *game);
 int		loop_cont(t_game *game);
 
 #endif
