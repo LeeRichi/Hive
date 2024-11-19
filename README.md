@@ -36,4 +36,4 @@
 - [get_next_line](https://github.com/LeeRichi/Hive/tree/master/get_next_line)
 - [push_swap](https://github.com/LeeRichi/Hive/tree/master/push_swap)
 - [so_long](https://github.com/LeeRichi/Hive/tree/master/so_long)
-- ongoing [pipix](https://github.com/LeeRichi/Hive/tree/master/pipex)
+- [pipix](https://github.com/LeeRichi/Hive/tree/master/pipex) (currently working on)
