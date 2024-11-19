@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/09/17 10:50:30 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:11:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
+#include <string.h>
+#include <errno.h>
 # include "get_next_line/get_next_line.h"
 
 //for flood_fill

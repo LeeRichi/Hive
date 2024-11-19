@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.ejs": "html",
+		"*.js": "javascriptreact",
+		"pipex.h": "c",
+		"libft.h": "c"
+	}
+}

@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-	<b><i>Welcome to Rich's Hive Folder</i></b><br>
+	<b><i>Welcome to to my Hive Folder</i></b><br>
 </p>
 
 <!-- <p align="center">
@@ -26,44 +26,8 @@
 
 ## 💡 About
 
-> This folder contains all the works I have been done since 2024/4/15.
+> This folder contains all the projects I have been working on since 2024/4/15.
 
-## 🛠️ Usage
-
-### Requirements
-
-The functions are written in C language and thus need the **`gcc` compiler** and some standard **C libraries** to run.
-
-### Instructions
-
-**1. Compiling the library**
-
-To compile, go to the library path and run:
-
-```shell
-$ make
-```
-
-Other make-files-commands:
-```shell
-$ make bonus 
-$ make clean 
-$ make fclean
-$ make re 
-```
-**2. Using it in your code**
-
-To use the library functions in your code, simply include its header:
-
-```C
-#include "libft.h"
-```
-
-<!-- ## 📋 Testing
-
-You can use this third party tester to fully test the project: -->
-
-<!-- * [Tripouille/printfTester](https://github.com/Tripouille/printfTester) -->
 
 ## 📋 Appendix
 
