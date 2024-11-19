@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-	<b><i>Welcome to to my Hive Folder 🐝</i></b><br>
+	<b><i>🐝 Welcome to to my Hive Folder 🐝</i></b><br>
 </p>
 
 <!-- <p align="center">
