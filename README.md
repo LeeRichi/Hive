@@ -16,7 +16,7 @@
 
 <h3 align="center">
 	<a href="#%EF%B8%8F-about">About</a>
-	<span> | </span>
+	<span>   |   </span>
 	<a href="#-Appendix">Appendix</a>
 </h3>
 
@@ -24,7 +24,7 @@
 
 ## 💡 About
 
-> This folder contains all the projects I have been working on since 2024/4/15.
+- This folder contains all the projects I have been working on since 2024/4/15.
 
 
 ## 📋 Appendix
