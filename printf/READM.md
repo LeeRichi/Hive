@@ -11,7 +11,7 @@
     <span> · </span>
     <a href="#features-of-the-project">Features</a>
     <span> · </span>
-    <a href="#🛠️ requirements">Requirements</a>
+    <a href="#🛠️-requirements">Requirements</a>
     <span> · </span>
     <a href="#instructions">Instructions</a>
     <span> · </span>
