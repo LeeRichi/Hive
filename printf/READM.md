@@ -7,11 +7,13 @@
 </p>
 
 <h3 align="center">
-	<a href="#%EF%B8%8F-about">About	</a>
+	<a href="#%EF%B8%8F-about">About </a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-usage">Usage</a>
+	<a href="#%EF%B8%8F-usage">Features</a>
 	<span> · </span>
-	<!-- <a href="#-testing">Testing</a> -->
+	<a href="#%EF%B8%8F-requirements">Requirements</a>
+	<span> · </span>
+	<a href="#%EF%B8%8F-learning-goals">Learning Goals</a>
 </h3>
 
 ---
@@ -24,13 +26,13 @@
 ## 🛠️ Features of the Project
 
 - Supports various format specifiers, including:
- - %c: Print a single character.
- - %s: Print a string of characters.
- - %p: Print a memory address.
- - %d/%i: Print an integer in decimal.
- - %u: Print an unsigned integer.
- - %x/%X: Print a number in hexadecimal (lowercase/uppercase).
- - %%: Print a percentage sign.
+	- %c: Print a single character.
+ 	- %s: Print a string of characters.
+ 	- %p: Print a memory address.
+ 	- %d/%i: Print an integer in decimal.
+	- %u: Print an unsigned integer.
+ 	- %x/%X: Print a number in hexadecimal (lowercase/uppercase).
+ 	- %%: Print a percentage sign.
 - Handles flags like -, 0, ., and width/precision for formatting output.
 - Modular and reusable code structure to simplify the addition of new specifiers or flags.
 - Efficient memory management, ensuring no memory leaks during execution.
