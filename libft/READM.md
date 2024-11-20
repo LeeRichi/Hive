@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-	<b><i>My* very first own library</i></b><br>
+	<b><i>My very first own library</i></b><br>
 </p>
 
 <h3 align="center">
@@ -18,9 +18,8 @@
 
 ## 💡 About the project
 
-> This project is about understanding the way these functions work,
-implementing and learning to use them. Your will create your own library. It will be
-helpful since you will use it in your next C school assignments.
+> This project is about understanding the way these functions work, implementing and learning to use them.<br>
+This library is helpful for the future Hive projects.
 
 ## 🛠️ Usage
 
