@@ -50,8 +50,8 @@ The project is written in C and uses the MLX library for graphics rendering. It 
 
 ### 1. Compiling the project
 
-To compile the project, navigate to the project directory and run:
-Tip: Some users might encounter errors when running the following commands in the VSCode terminal on Mac M1. However, using the original Terminal app on macOS can resolve the issue.
+To compile the project, navigate to the project directory and run:<br>
+>Tip: Some users might encounter errors when running the following commands in the VSCode terminal on Mac M1. However, using the original Terminal app on macOS can resolve the issue.
 
 ```shell
 $ make
