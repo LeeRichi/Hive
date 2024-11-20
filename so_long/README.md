@@ -18,8 +18,6 @@
 		<a href="#-learning-goals">Learning Goals</a>
 		<span> · </span>
 		<a href="#-project-structure">Project Structure</a>
-		<span> · </span>
-		<a href="#-testing">Testing</a>
 </h3>
 
 ---
