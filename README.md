@@ -30,8 +30,8 @@
 ## 📋 Appendix
 
 - [libft](https://github.com/LeeRichi/Hive/blob/master/libft/READM.md) - A custom C library replicating standard libc functions and more.
-- [ft_printf](https://github.com/LeeRichi/Hive/blob/master/printf/READM.md) – Implementation of printf, a formatted output function in C.
-- [get_next_line](https://github.com/LeeRichi/Hive/tree/master/get_next_line) – A function to read lines from file descriptors, character by character.
+- [ft_printf](https://github.com/LeeRichi/Hive/blob/master/ft_printf/READM.md) – Implementation of printf, a formatted output function in C.
+- [get_next_line](https://github.com/LeeRichi/Hive/tree/master/get_next_line/README.md) – A function to read lines from file descriptors, character by character.
 - [push_swap](https://github.com/LeeRichi/Hive/tree/master/push_swap) – A project to implement and optimize sorting algorithms with limited instructions.
 - [so_long](https://github.com/LeeRichi/Hive/tree/master/so_long) – A 2D game built with MLX, showcasing pathfinding and game mechanics.
 - [pipix](https://github.com/LeeRichi/Hive/tree/master/pipex) – (🚧 Work in Progress) A simplified shell-like program to replicate pipe functionality.
