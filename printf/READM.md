@@ -13,9 +13,9 @@
 	<span> · </span>
 	<a href="#%EF%B8%8F-requirements">Requirements</a>
 	<span> · </span>
-	<a href="#-instructions">Instructions</a>
+	<a href="#🛠️-instructions">Instructions</a>
 	<span> · </span>
-	<a href="#-learning-goals">Learning Goals</a>
+	<a href="#🎯-learning-goals">Learning Goals</a>
 </h3>
 
 ---
@@ -40,7 +40,7 @@
 - Efficient memory management, ensuring no memory leaks during execution.
 
 
-### Requirements
+#🛠️-requirements
 
 The function is written in C language and thus needs the **`gcc` compiler** and some standard **C libraries** to run.
 
@@ -69,7 +69,7 @@ To use the library functions in your code, simply include its header:
 #include "ft_printf.h"
 ```
 
-## Learning Goals
+#🎯-learning-goals
 - This project helps develop:
 	- Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
 	- String manipulation: Master techniques for formatting and processing strings.
