@@ -103,3 +103,5 @@ Where maps/my_map.ber is the map file you want to use for your game. The player 
 ├── window_init.c
 └── window_init_helpers.c
 ```
+## screen shot
+<img width="962" alt="Screenshot 2024-11-20 at 3 30 23 PM" src="https://github.com/user-attachments/assets/c59e7a9d-9cf4-4cba-8e22-54043398de62">
