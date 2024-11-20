@@ -69,8 +69,7 @@ To use the library functions in your code, simply include its header:
 
 ## Learning Goals
 - This project helps develop:
-
-  - Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
+	- Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
 	- String manipulation: Master techniques for formatting and processing strings.
 	- Algorithm design: Create efficient solutions for implementing custom flags and specifiers.
 	- Code optimization: Write clean, modular, and performance-optimized C code.
