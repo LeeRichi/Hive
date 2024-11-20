@@ -29,7 +29,7 @@
 
 ## 📋 Appendix
 
-- [libft](https://github.com/LeeRichi/Hive/tree/master/libft) - A custom C library replicating standard libc functions and more.
+- [libft](https://github.com/LeeRichi/Hive/blob/master/libft/READM.md#-testing) - A custom C library replicating standard libc functions and more.
 - [ft_printf](https://github.com/LeeRichi/Hive/tree/master/printf) – Implementation of printf, a formatted output function in C.
 - [get_next_line](https://github.com/LeeRichi/Hive/tree/master/get_next_line) – A function to read lines from file descriptors, character by character.
 - [push_swap](https://github.com/LeeRichi/Hive/tree/master/push_swap) – A project to implement and optimize sorting algorithms with limited instructions.
