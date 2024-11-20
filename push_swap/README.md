@@ -7,17 +7,19 @@
 </p>
 
 <h3 align="center">
-		<a href="#about-the-project">About</a>
+		<a href="#-about-the-project">About</a>
 		<span> · </span>
-		<a href="#features-of-the-project">Features</a>
+		<a href="#-features-of-the-project">Features</a>
 		<span> · </span>
-		<a href="#requirements">Requirements</a>
+		<a href="#-requirements">Requirements</a>
 		<span> · </span>
-		<a href="#instructions">Instructions</a>
+		<a href="#-instructions">Instructions</a>
 		<span> · </span>
-		<a href="#learning-goals">Learning Goals</a>
+		<a href="#-learning-goals">Learning Goals</a>
 		<span> · </span>
-		<a href="#project-structure">Project Structure</a>
+		<a href="#-project-structure">Project Structure</a>
+		<span> · </span>
+		<a href="#-testing">Testing</a>
 </h3>
 
 ---
@@ -129,3 +131,9 @@ The program will output "OK" if the stacks are correctly sorted or "KO" if the o
     ├── sort_stack.c
     └── stack_utils.c
 ```
+
+## 🧪 Testing
+```
+https://github.com/LeoFu9487/push_swap_tester
+```
+
