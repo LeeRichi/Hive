@@ -26,7 +26,7 @@
 
 
 ## 🌟 Features of the Project
-3
+
 - Supports various format specifiers, including:
 	- `%c`: Print a single character.
 	- `%s`: Print a string of characters.
