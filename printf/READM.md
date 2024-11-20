@@ -40,7 +40,7 @@
 - Efficient memory management, ensuring no memory leaks during execution.
 
 
-### 🛠️ Requirements
+## 🛠️ Requirements
 
 The function is written in C language and thus needs the **`gcc` compiler** and some standard **C libraries** to run.
 
