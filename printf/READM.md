@@ -7,13 +7,13 @@
 </p>
 
 <h3 align="center">
-	<a href="#%EF%B8%8F-about">About </a>
+	<a href="#-about-the-project">About</a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-usage">Features</a>
+	<a href="#%EF%B8%8F-features-of-the-project">Features</a>
 	<span> · </span>
 	<a href="#%EF%B8%8F-requirements">Requirements</a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-learning-goals">Learning Goals</a>
+	<a href="#-learning-goals">Learning Goals</a>
 </h3>
 
 ---
@@ -26,13 +26,13 @@
 ## 🛠️ Features of the Project
 
 - Supports various format specifiers, including:
-	- %c: Print a single character.
- 	- %s: Print a string of characters.
- 	- %p: Print a memory address.
- 	- %d/%i: Print an integer in decimal.
-	- %u: Print an unsigned integer.
- 	- %x/%X: Print a number in hexadecimal (lowercase/uppercase).
- 	- %%: Print a percentage sign.
+	- `%c`: Print a single character.
+	- `%s`: Print a string of characters.
+	- `%p`: Print a memory address.
+	- `%d`/`%i`: Print an integer in decimal.
+	- `%u`: Print an unsigned integer.
+	- `%x`/`%X`: Print a number in hexadecimal (lowercase/uppercase).
+	- `%%`: Print a percentage sign.
 - Handles flags like -, 0, ., and width/precision for formatting output.
 - Modular and reusable code structure to simplify the addition of new specifiers or flags.
 - Efficient memory management, ensuring no memory leaks during execution.
@@ -70,7 +70,7 @@ To use the library functions in your code, simply include its header:
 ## Learning Goals
 - This project helps develop:
 
- - Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
- - String manipulation: Master techniques for formatting and processing strings.
- - Algorithm design: Create efficient solutions for implementing custom flags and specifiers.
- - Code optimization: Write clean, modular, and performance-optimized C code.
+  - Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
+	- String manipulation: Master techniques for formatting and processing strings.
+	- Algorithm design: Create efficient solutions for implementing custom flags and specifiers.
+	- Code optimization: Write clean, modular, and performance-optimized C code.
