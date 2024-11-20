@@ -17,7 +17,7 @@
 		<span> · </span>
 		<a href="#learning-goals">Learning Goals</a>
 		<span> · </span>
-		<a href="#bonus">Bonus</a>
+		<a href="#project-structure">Project Structure</a>
 </h3>
 
 ---
@@ -97,7 +97,7 @@ The program will output "OK" if the stacks are correctly sorted or "KO" if the o
 	- Efficiency: Learn how to minimize operations for better performance in sorting.
 	- Memory management: Efficient use of memory and dynamic allocation in C.
 
-## 📂 Project Strucute
+## 📂 Project Structure
 ```
 .
 ├── Makefile
