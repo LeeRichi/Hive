@@ -7,16 +7,17 @@
 </p>
 
 <h3 align="center">
-	<a href="#-about-the-project">About</a>
-	<span> · </span>
-	<a href="#🌟-features-of-the-project">Features</a>
-	<span> · </span>
-	<a href="#🛠️ -requirements">Requirements</a>
-	<span> · </span>
-	<a href="#🛠️-instructions">Instructions</a>
-	<span> · </span>
-	<a href="#🎯-learning-goals">Learning Goals</a>
+    <a href="#about-the-project">About</a>
+    <span> · </span>
+    <a href="#features-of-the-project">Features</a>
+    <span> · </span>
+    <a href="#requirements">Requirements</a>
+    <span> · </span>
+    <a href="#instructions">Instructions</a>
+    <span> · </span>
+    <a href="#learning-goals">Learning Goals</a>
 </h3>
+
 
 ---
 
