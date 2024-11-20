@@ -9,9 +9,9 @@
 <h3 align="center">
 	<a href="#-about-the-project">About</a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-features-of-the-project">Features</a>
+	<a href="#🌟-features-of-the-project">Features</a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-requirements">Requirements</a>
+	<a href="#🛠️ -requirements">Requirements</a>
 	<span> · </span>
 	<a href="#🛠️-instructions">Instructions</a>
 	<span> · </span>
@@ -25,7 +25,7 @@
 > The printf project involves implementing a custom version of the standard C library function printf. This function provides formatted output, which is essential for displaying data in a controlled and user-friendly manner. The goal of the project is to mimic the behavior of the original printf function, understanding its internals, and managing its formatting capabilities.
 
 
-## 🛠️ Features of the Project
+## 🌟 Features of the Project
 
 - Supports various format specifiers, including:
 	- `%c`: Print a single character.
@@ -40,7 +40,7 @@
 - Efficient memory management, ensuring no memory leaks during execution.
 
 
-#🛠️-requirements
+### 🛠️ Requirements
 
 The function is written in C language and thus needs the **`gcc` compiler** and some standard **C libraries** to run.
 
@@ -69,7 +69,7 @@ To use the library functions in your code, simply include its header:
 #include "ft_printf.h"
 ```
 
-#🎯-learning-goals
+## 🎯 Learning Goals
 - This project helps develop:
 	- Low-level programming skills: Gain deeper knowledge of how functions like printf handle arguments using va_list and variable argument functions (stdarg.h).
 	- String manipulation: Master techniques for formatting and processing strings.
