@@ -13,7 +13,7 @@
     <span> · </span>
     <a href="#-requirements">Requirements</a>
     <span> · </span>
-    <a href="#instructions">Instructions</a>
+    <a href="#-instructions">Instructions</a>
     <span> · </span>
     <a href="#-learning-goals">Learning Goals</a>
 </h3>
