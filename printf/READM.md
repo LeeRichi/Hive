@@ -11,7 +11,7 @@
     <span> · </span>
     <a href="#-features-of-the-project">Features</a>
     <span> · </span>
-    <a href="#requirements">Requirements</a>
+    <a href="#-requirements">Requirements</a>
     <span> · </span>
     <a href="#instructions">Instructions</a>
     <span> · </span>
@@ -44,7 +44,7 @@
 
 The function is written in C language and thus needs the **`gcc` compiler** and some standard **C libraries** to run.
 
-## Instructions
+## 🔧 Instructions
 
 **1. Compiling the library**
 
