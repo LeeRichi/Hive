@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 18:50:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 20:04:21 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,6 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 	status = 0;
 
 	full_path = NULL;
-
-	//print out the cmd in order to determine whether i should go for get_paths()
-	// ft_putstr_fd("cmd: ", STDERR);
-	// ft_putstr_fd(cmd, STDERR);
-	// ft_putstr_fd("\n\n\n", STDERR);
 
 	s_cmd = split_command(cmd, data);
 	all_path = get_paths(envp, data);

@@ -6,11 +6,31 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 19:02:40 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 20:02:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+//temp
+#include <ctype.h>  // For isspace()
+
+int is_empty_or_whitespace(char *str)
+{
+    if (str == NULL || str[0] == '\0') {
+        return 1;  // String is empty
+    }
+
+    // Check if all characters are spaces or the string is empty
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (!isspace((unsigned char)str[i])) {
+            return 0;  // Found a non-space character
+        }
+    }
+
+    return 1;  // String contains only spaces
+}
+
 
 static int execute_cmd(t_data *data, char *cmd, char **envp)
 {
@@ -18,25 +38,37 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	char **arguments;
 	int 	signal;
 
+	right_path = NULL;
 	signal = 0;
 	arguments = ft_split(cmd, ' ');
 	if (!arguments)
 		show_error(data, "Command split failed", EXIT_FAILURE, cmd);
 
+    if (is_empty_or_whitespace(cmd))
+		show_error(data, "command not found", EXIT_FAILURE, cmd);
+
 	if (arguments[0][0] != '/')
 	{
-		
-	}
-	right_path = find_path(data, cmd, envp);
-	if (!right_path)
-	{
-		ft_free_tab(arguments);
-		show_error(data, "Executable path not found", EXIT_FAILURE, cmd);
-	}
+		right_path = find_path(data, cmd, envp);
+		if (!right_path)
+		{
+			ft_free_tab(arguments);
+			show_error(data, "Executable path not found", EXIT_FAILURE, cmd);
+		}
+	} 
+	else
+		right_path = arguments[0];
+
+	//print now the right_path
+	// ft_putstr_fd("right_path: ", STDERR);
+	// ft_putstr_fd(right_path, STDERR);
+	// ft_putstr_fd("\n\n\n", STDERR);
+
 	if (execve(right_path, arguments, envp) == -1)
 	{
-		ft_free_tab(arguments);
-		free(right_path);
+		show_error(data, "No such file or directory", 127, right_path);
+		// ft_free_tab(arguments);
+		// free(right_path);
 		signal = -1;
 	}
 	ft_free_tab(arguments);
@@ -70,7 +102,7 @@ int open_file(t_data *data, char *av, int i)
 	{
 		// ft_putstr_fd(av, STDERR);
 		// ft_putstr_fd(": ", STDERR);
-		show_error(data, "No such file or directory", 1, av);
+		show_error(data, "No such file or directory", 127, av);
 	}
 	return (fd);
 }
