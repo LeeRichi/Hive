@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 20:02:32 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 23:59:34 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	char *right_path;
 	char **arguments;
 	int 	signal;
+	char *special_cmd;
 
 	right_path = NULL;
 	signal = 0;
@@ -45,7 +46,10 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 		show_error(data, "Command split failed", EXIT_FAILURE, cmd);
 
     if (is_empty_or_whitespace(cmd))
-		show_error(data, "command not found", EXIT_FAILURE, cmd);
+		{
+			special_cmd = ft_strjoin(" ", cmd);
+			show_error(data, "command not found", 127, special_cmd);
+		}
 
 	if (arguments[0][0] != '/')
 	{
@@ -55,7 +59,7 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 			ft_free_tab(arguments);
 			show_error(data, "Executable path not found", EXIT_FAILURE, cmd);
 		}
-	} 
+	}
 	else
 		right_path = arguments[0];
 
@@ -66,7 +70,7 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 
 	if (execve(right_path, arguments, envp) == -1)
 	{
-		show_error(data, "No such file or directory", 127, right_path);
+		show_error(data, "No such file or directory", 127, cmd);
 		// ft_free_tab(arguments);
 		// free(right_path);
 		signal = -1;

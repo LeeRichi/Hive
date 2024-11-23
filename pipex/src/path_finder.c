@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 20:04:21 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 23:39:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,26 +104,19 @@ static void	handle_cmd_error(char *cmd, t_data *data)
 	// ft_putnbr_fd(access(cmd, W_OK), STDERR_FILENO);
 
 	rev_cmd = rev_str(cmd);
-
-	ft_putstr_fd(rev_cmd, STDERR_FILENO);
-
-
 	//a directory
 	if (rev_cmd[0] == '/')
 		show_error(data, "No such file or directory", 127, cmd);
 
 	if (access(cmd, F_OK) == 0 && access(cmd, X_OK) == -1)
-	{
-		ft_putstr_fd("test", STDERR_FILENO);
 		show_error(data, "Permission denied", 126, cmd);
-	}
-	
+
 	if (access(cmd, X_OK) == -1 && cmd[0] == '/')
 		show_error(data, "No such file or directory", 127, cmd);
 
 	if (access(cmd, F_OK) == -1)
 		show_error(data, "command not found", 127, cmd);
-	
+
 	if (access(cmd, F_OK) != 0)
 		show_error(data, "No such file or directory", 127, cmd);
 
