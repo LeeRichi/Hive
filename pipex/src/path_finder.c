@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 17:02:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 17:42:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ static char *rev_str(char *str)
 
 	count = 0;
 	//mark old
-	//new_str = malloc(sizeof(char) * (count + 1));
+	new_str = malloc(sizeof(char) * (count + 1));
 
 	//mark new
-	new_str = NULL;
-
-	
+	// new_str = NULL;
 	if (!new_str)
 		return (NULL);
   count = ft_strlen(str);
@@ -99,9 +97,14 @@ static void	handle_cmd_error(char *cmd, t_data *data)
 
 	char *rev_cmd;
 
-	rev_cmd = rev_str(cmd);
-	(void)rev_cmd;
+	// ft_putstr_fd(cmd, STDERR_FILENO);
 
+	// ft_putnbr_fd(access(cmd, F_OK), STDERR_FILENO);
+	// ft_putnbr_fd(access(cmd, W_OK), STDERR_FILENO);
+
+	rev_cmd = rev_str(cmd);
+
+	ft_putstr_fd(rev_cmd, STDERR_FILENO);
 	if (rev_cmd[0] == '/')
 		show_error(data, "No such file or directory", 127, cmd);
 	// else
@@ -109,6 +112,7 @@ static void	handle_cmd_error(char *cmd, t_data *data)
 
 	if (access(cmd, F_OK) == 0 && access(cmd, X_OK) == -1)
 	{
+		ft_putstr_fd("test", STDERR_FILENO);
 		show_error(data, "Permission denied", 126, cmd);
 	}
 
@@ -145,9 +149,6 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 	if (!all_path)
 	{
 		ft_free_tab(s_cmd);
-
-		//
-		exit(0);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 	i = -1;
