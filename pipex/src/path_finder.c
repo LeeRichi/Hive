@@ -6,9 +6,10 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 17:22:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 18:50:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/pipex.h"
 
@@ -73,12 +74,10 @@ static char *rev_str(char *str)
 
 	count = 0;
 	//mark old
-	//new_str = malloc(sizeof(char) * (count + 1));
+	new_str = malloc(sizeof(char) * (count + 1));
 
 	//mark new
-	new_str = NULL;
-
-	
+	// new_str = NULL;
 	if (!new_str)
 		return (NULL);
   count = ft_strlen(str);
@@ -99,29 +98,34 @@ static void	handle_cmd_error(char *cmd, t_data *data)
 
 	char *rev_cmd;
 
-	rev_cmd = rev_str(cmd);
-	(void)rev_cmd;
+	// ft_putstr_fd(cmd, STDERR_FILENO);
 
+	// ft_putnbr_fd(access(cmd, F_OK), STDERR_FILENO);
+	// ft_putnbr_fd(access(cmd, W_OK), STDERR_FILENO);
+
+	rev_cmd = rev_str(cmd);
+
+	ft_putstr_fd(rev_cmd, STDERR_FILENO);
+
+
+	//a directory
 	if (rev_cmd[0] == '/')
 		show_error(data, "No such file or directory", 127, cmd);
-	// else
-	// 	show_error(data, "comment not found.", 1, cmd);
 
 	if (access(cmd, F_OK) == 0 && access(cmd, X_OK) == -1)
 	{
+		ft_putstr_fd("test", STDERR_FILENO);
 		show_error(data, "Permission denied", 126, cmd);
 	}
-
-	// if (!access(cmd, F_OK) && !access(cmd, X_OK))
-	// {
-	// 	ft_putstr_fd("\n test test \n", STDERR);
-	// if (access(cmd, X_OK) == -1 && rev_cmd[0] == '/')
-	// }
+	
 	if (access(cmd, X_OK) == -1 && cmd[0] == '/')
 		show_error(data, "No such file or directory", 127, cmd);
 
 	if (access(cmd, F_OK) == -1)
 		show_error(data, "command not found", 127, cmd);
+	
+	if (access(cmd, F_OK) != 0)
+		show_error(data, "No such file or directory", 127, cmd);
 
 	if (access(cmd, X_OK) == -1 && !ft_strchr(cmd, '/'))
 		show_error(data, "comment not found", 1, cmd);
@@ -140,6 +144,12 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 	status = 0;
 
 	full_path = NULL;
+
+	//print out the cmd in order to determine whether i should go for get_paths()
+	// ft_putstr_fd("cmd: ", STDERR);
+	// ft_putstr_fd(cmd, STDERR);
+	// ft_putstr_fd("\n\n\n", STDERR);
+
 	s_cmd = split_command(cmd, data);
 	all_path = get_paths(envp, data);
 	if (!all_path)

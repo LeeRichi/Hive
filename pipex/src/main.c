@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 14:27:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 19:02:40 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,20 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	char **arguments;
 	int 	signal;
 
-	// write(1, cmd, 10);
 	signal = 0;
 	arguments = ft_split(cmd, ' ');
 	if (!arguments)
-			show_error(data, "Command split failed.", EXIT_FAILURE, cmd);
+		show_error(data, "Command split failed", EXIT_FAILURE, cmd);
+
+	if (arguments[0][0] != '/')
+	{
+		
+	}
 	right_path = find_path(data, cmd, envp);
 	if (!right_path)
 	{
 		ft_free_tab(arguments);
-		show_error(data, "Executable path not found.", EXIT_FAILURE, cmd);
+		show_error(data, "Executable path not found", EXIT_FAILURE, cmd);
 	}
 	if (execve(right_path, arguments, envp) == -1)
 	{
@@ -114,9 +118,6 @@ static int	pipex(t_data *data, char **av, char **envp)
 		if (waitpid(pid[i], &status, 0) == -1)
 			show_error(data, "Error: waitpid() failed.", EXIT_FAILURE, NULL);
 	}
-	// ft_putstr_fd("status: ", STDERR_FILENO);
-	// ft_putnbr_fd(status, STDERR_FILENO);
-	// ft_putstr_fd("\n\n\n", STDERR_FILENO);
 
 	return (status);
 }
