@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:15:34 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/18 16:24:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 00:30:04 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,16 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-// static void	message_check_print(char *err)
-// {
-// 	if (ft_strcmp(err, "dup2") == 0)
-// 		write(STDERR_FILENO, "Error: dup2() failed\n", 22);
-// 	else if (ft_strcmp(err, "fork") == 0)
-// 		write(STDERR_FILENO, "Error: fork() failed\n", 22);
-// 	else if (ft_strcmp(err, "pipe") == 0)
-// 		write(STDERR_FILENO, "Error: pipe() creation failed\n", 30);
-// 	else if (ft_strcmp(err, "malloc") == 0)
-// 		write(STDERR_FILENO, "Error: malloc() failed\n", 24);
-// 	else if (ft_strcmp(err, "permission") == 0)
-// 		write(STDERR_FILENO, "Error: permission denied\n", 26);
-// 	else if (ft_strcmp(err, "file_name") == 0)
-// 		write(STDERR_FILENO, "Error: No such file or directory\n", 34);
-// 		write(STDERR_FILENO, "Error: Unknown error occurred\n", 31);
-// 	if (errno)
-// 	{
-// 		write(STDERR_FILENO, "System Error: ", 14);
-// 		write(STDERR_FILENO, strerror(errno), strlen(strerror(errno)));
-// 		write(STDERR_FILENO, "\n", 1);
-// 	}
-// }
-
-static void message_check_print(char *err)
+static void message_check_print(char *err, char *av)
 {
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, err, strlen(err));
-	write(STDERR_FILENO, "\n", 1);
-	// if (errno)
-	// {
-	// 	write(STDERR_FILENO, "System Error: ", 14);
-	// 	write(STDERR_FILENO, strerror(errno), strlen(strerror(errno)));
-	// 	write(STDERR_FILENO, "\n", 1);
-	// }
+	if (av)
+	{
+		ft_putstr_fd(av, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
+	ft_putstr_fd(err, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
-
 
 static void	free_data(t_data *data)
 {
@@ -79,9 +53,10 @@ static void	free_data(t_data *data)
 	free(data);
 }
 
-void	show_error(t_data *data, char *message, int err_code)
+void	show_error(t_data *data, char *message, int err_code, char *av)
 {
+	if (av != NULL)
+		message_check_print(message, av);
 	free_data(data);
-	message_check_print(message);
 	exit(err_code);
 }

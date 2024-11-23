@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:37:03 by chlee2            #+#    #+#             */
-/*   Updated: 2024/10/12 23:43:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/22 11:04:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../lib/libft/libft.h"
 
 # define STDERR 2
+# define FAILFCMD 127
+
 
 typedef struct s_data
 {
@@ -27,7 +29,8 @@ typedef struct s_data
 
 //error.c
 void	ft_free_tab(char **tab);
-void	show_error(t_data *data, char *message, int err_code);
+// void	show_error(t_data *data, char *message, int err_code);
+void show_error(t_data *data, char *message, int err_code, char *av);
 
 //close.c
 void	double_close(int f1, int f2);
