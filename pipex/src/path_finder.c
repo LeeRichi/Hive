@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 17:02:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 17:22:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,6 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 	if (!all_path)
 	{
 		ft_free_tab(s_cmd);
-
-		//
-		exit(0);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 	i = -1;

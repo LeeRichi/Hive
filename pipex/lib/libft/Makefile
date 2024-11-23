@@ -42,8 +42,6 @@ SRCS = ft_isalpha.c \
 		ft_strcmp.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
-		get_next_line/get_next_line_bonus.c \
-		get_next_line/get_next_line_utils_bonus.c \
 		flood_fill.c \
 		rich_flood_fill.c \
 

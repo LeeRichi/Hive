@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:37:03 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/22 11:04:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/23 17:10:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define STDERR 2
 # define FAILFCMD 127
 
+#include <sys/wait.h>
 
 typedef struct s_data
 {
