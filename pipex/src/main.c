@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 23:59:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/24 14:04:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,15 @@
 
 int is_empty_or_whitespace(char *str)
 {
-    if (str == NULL || str[0] == '\0') {
-        return 1;  // String is empty
-    }
-
-    // Check if all characters are spaces or the string is empty
+    if (str == NULL || str[0] == '\0')
+				return 1;
     for (int i = 0; str[i] != '\0'; i++) {
         if (!isspace((unsigned char)str[i])) {
-            return 0;  // Found a non-space character
+            return 0;
         }
     }
-
-    return 1;  // String contains only spaces
+    return 1;
 }
-
 
 static int execute_cmd(t_data *data, char *cmd, char **envp)
 {
@@ -62,12 +57,6 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	}
 	else
 		right_path = arguments[0];
-
-	//print now the right_path
-	// ft_putstr_fd("right_path: ", STDERR);
-	// ft_putstr_fd(right_path, STDERR);
-	// ft_putstr_fd("\n\n\n", STDERR);
-
 	if (execve(right_path, arguments, envp) == -1)
 	{
 		show_error(data, "No such file or directory", 127, cmd);
