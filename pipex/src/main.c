@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/24 14:04:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/24 19:13:40 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 		show_error(data, "Command split failed", EXIT_FAILURE, cmd);
 
     if (is_empty_or_whitespace(cmd))
-		{
-			special_cmd = ft_strjoin(" ", cmd);
-			show_error(data, "command not found", 127, special_cmd);
-		}
+	{
+		special_cmd = ft_strjoin(" ", cmd);
+		show_error(data, "command not found", 127, special_cmd);
+	}
 
-	if (arguments[0][0] != '/')
+	//this means abs path
+	// if (arguments[0][0] != '/' && arguments[0][0] != '.')
+	if (!ft_strchar(arguments[0], '/'))
 	{
 		right_path = find_path(data, cmd, envp);
+		//
+		// double_close(data->f1, data->f2);
 		if (!right_path)
 		{
 			ft_free_tab(arguments);
@@ -57,13 +61,18 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	}
 	else
 		right_path = arguments[0];
+
 	if (execve(right_path, arguments, envp) == -1)
 	{
+		if (errno == EACCES)
+			show_error(data, "Permission denied", 126, cmd);
+
 		show_error(data, "No such file or directory", 127, cmd);
-		// ft_free_tab(arguments);
-		// free(right_path);
+
+		// double_close(data->end[0], data->end[1]);
 		signal = -1;
 	}
+	double_close(data->f1, data->f2);
 	ft_free_tab(arguments);
 	free(right_path);
 	return (signal);
@@ -92,11 +101,8 @@ int open_file(t_data *data, char *av, int i)
 		fd = open(av, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	}
 	if (fd == -1)
-	{
-		// ft_putstr_fd(av, STDERR);
-		// ft_putstr_fd(": ", STDERR);
 		show_error(data, "No such file or directory", 127, av);
-	}
+
 	return (fd);
 }
 
@@ -106,6 +112,8 @@ static void	child_process(t_data *data, char **av, char **envp, int i)
 	{
 		data->f1 = open_file(data, av[1], 0);
 		dup_pipe(data->f1, STDIN_FILENO, data, "Error: dup2() failed for input redirection.");
+		close(data->f1);
+
 		dup_pipe(data->end[1], STDOUT_FILENO, data, "Error: dup2() failed for pipe output.");
 	}
 	else
@@ -113,10 +121,19 @@ static void	child_process(t_data *data, char **av, char **envp, int i)
 		data->f2 = open_file(data, av[4], 1);
 		dup_pipe(data->end[0], STDIN_FILENO, data, "Error: dup2() failed for pipe input.");
 		dup_pipe(data->f2, STDOUT_FILENO, data, "Error: dup2() failed for output redirection.");
+		close(data->f2);
+
 	}
 	double_close(data->end[0], data->end[1]);
+	
 	if (execute_cmd(data, av[i + 2], envp))
+	{
 		show_error(data, "Error: Command execution failed.", EXIT_FAILURE, av[i + 2]);
+	}
+
+	double_close(data->f1, data->f2);
+
+
 }
 
 static int	pipex(t_data *data, char **av, char **envp)
@@ -124,6 +141,9 @@ static int	pipex(t_data *data, char **av, char **envp)
 	pid_t	pid[2];
 	int i;
 	int status;
+
+	data->f1 = 0;
+	data->f2 = 0;
 
 	if (pipe(data->end) < 0)
 		show_error(data, "Error: pipe() creation failed.", EXIT_FAILURE, NULL);
@@ -136,7 +156,26 @@ static int	pipex(t_data *data, char **av, char **envp)
 		if (pid[i] == 0)
 			child_process(data, av, envp, i);
 	}
+
+	//
+	// ft_putstr_fd("f1: ", STDERR_FILENO);
+    // ft_putnbr_fd(data->f1, STDERR_FILENO);
+    // ft_putstr_fd("\n", STDERR_FILENO);
+
+    // ft_putstr_fd("f2: ", STDERR_FILENO);
+    // ft_putnbr_fd(data->f2, STDERR_FILENO);
+    // ft_putstr_fd("\n", STDERR_FILENO);
+
+    // ft_putstr_fd("end[0]: ", STDERR_FILENO);
+    // ft_putnbr_fd(data->end[0], STDERR_FILENO);
+    // ft_putstr_fd("\n", STDERR_FILENO);
+
+    // ft_putstr_fd("end[1]: ", STDERR_FILENO);
+    // ft_putnbr_fd(data->end[1], STDERR_FILENO);
+    // ft_putstr_fd("\n", STDERR_FILENO);
+
 	four_close(data->f1, data->f2, data->end[0], data->end[1]);
+
 	i = -1;
 	while ((++i) <= 1)
 	{
