@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:37:03 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 17:10:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/25 18:48:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ typedef struct s_data
 
 }	t_data;
 
+int is_empty_or_whitespace(char *str);
+
 //error.c
 void	ft_free_tab(char **tab);
 // void	show_error(t_data *data, char *message, int err_code);
 void show_error(t_data *data, char *message, int err_code, char *av);
+void show_error_for_sc(t_data *data, char *message, int err_code, char *av);
 
 //close.c
 void	double_close(int f1, int f2);

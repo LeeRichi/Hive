@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:15:34 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/23 00:30:04 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/25 18:47:45 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+	tab[0] = NULL;
 	free(tab);
 }
 
@@ -60,3 +61,13 @@ void	show_error(t_data *data, char *message, int err_code, char *av)
 	free_data(data);
 	exit(err_code);
 }
+
+void	show_error_for_sc(t_data *data, char *message, int err_code, char *av)
+{
+	if (av != NULL)
+		message_check_print(message, av);
+	free_data(data);
+	free(av);
+	exit(err_code);
+}
+
