@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 15:13:38 by chlee2            #+#    #+#              #
-#    Updated: 2024/11/23 17:09:56 by chlee2           ###   ########.fr        #
+#    Updated: 2024/11/26 16:30:42 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRCS = src/main.c \
 		src/error.c \
 		src/close.c \
 		src/path_finder.c \
+		src/child_process.c \
+		src/tool.c \
 
 OBJS = $(SRCS:.c=.o)
 

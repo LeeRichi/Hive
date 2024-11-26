@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/26 14:28:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:43:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
-#include <string.h>
-#include <errno.h>
+# include	<string.h>
+# include	<errno.h>
 # include "get_next_line/get_next_line.h"
 
 //for flood_fill
@@ -87,14 +87,6 @@ int		printnbr_foraddress(unsigned long n, int base);
 int		printaddress(unsigned long something);
 
 //new for pipex
-    int is_empty_or_whitespace(char *str);
-
-//get_next_line_packages
-// char	*get_next_line(int fd);
-// char	*ft_free(char **str);
-// size_t	ft_strlen(char *s);
-// char	*ft_strchar(const char *s, int c);
-// char	*ft_strjoin(char *a, char *b);
-// char	*substr(char *s, size_t start, size_t len);
+int		is_empty_or_whitespace(char *str);
 
 #endif

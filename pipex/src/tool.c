@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_empty_or_whitespace.c                           :+:      :+:    :+:   */
+/*   tool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 14:26:49 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/26 15:46:41 by chlee2           ###   ########.fr       */
+/*   Created: 2024/11/26 16:30:00 by chlee2            #+#    #+#             */
+/*   Updated: 2024/11/26 16:30:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "../includes/pipex.h"
 
-static int	ft_is_space(char c)
+char	*rev_str(char *str)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
-}
+	int		len;
+	char	*new_str;
+	int		i;
 
-int	is_empty_or_whitespace(char *str)
-{
-	int	i;
-
-	if (str == NULL || str[0] == '\0')
-		return (1);
+	len = ft_strlen(str);
+	new_str = malloc(sizeof(char) * (len + 1));
+	if (!new_str)
+		return (NULL);
 	i = 0;
-	while (str[i] != '\0')
+	while (len != 0)
 	{
-		if (!ft_is_space((unsigned char)str[i]))
-			return (0);
+		new_str[i] = str[len - 1 - i];
 		i++;
+		len--;
 	}
-	return (1);
+	new_str[i] = '\0';
+	return (new_str);
 }
