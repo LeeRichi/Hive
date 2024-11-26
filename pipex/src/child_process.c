@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:31:48 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/26 16:05:56 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 17:02:54 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	child_process(t_data *data, char **av, char **envp, int i)
 	}
 	double_close(data->end[0], data->end[1]);
 	if (is_empty_or_whitespace(av[i + 2]))
-		show_error(data, "Command not found", 127, av[i + 2]);
+		show_error(data, "command not found", 127, av[i + 2]);
 	if (execute_cmd(data, av[i + 2], envp))
 		show_error(data, "Command execution failed.", EXIT_FAILURE, av[i + 2]);
 	double_close(data->f1, data->f2);
