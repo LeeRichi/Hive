@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:37:03 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/25 18:48:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:30:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	double_close(int f1, int f2);
 void	four_close(int f1, int f2, int end1, int end2);
 
 //path_finder.c
-char	*find_path(t_data *data, char *cmd, char **envp);
+char	*find_path(t_data *data, char *cmd, char **envp, char **arguments);
 
 #endif

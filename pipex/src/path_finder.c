@@ -6,24 +6,27 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:39 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/25 21:02:04 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 14:20:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/pipex.h"
 
-static char	**split_command(char *cmd, t_data *data)
+static char	**split_command(char *cmd, t_data *data, char **arguments)
 {
 	char	**s_cmd;
 
 	s_cmd = ft_split(cmd, ' ');
 	if (!s_cmd)
+	{
+		ft_free_tab(arguments);
 		show_error(data, "s_cmd split malloc failed.", EXIT_FAILURE, NULL);
+	}
 	return (s_cmd);
 }
 
-static char	**get_paths(char **envp, t_data *data)
+static char	**get_paths(char **envp, t_data *data, char **arguments)
 {
 	int		i;
 	char	**all_path;
@@ -35,7 +38,10 @@ static char	**get_paths(char **envp, t_data *data)
 		{
 			all_path = ft_split(envp[i] + 5, ':');
 			if (!all_path)
+			{
+				ft_free_tab(arguments);
 				show_error(data, "all_path split failed.", EXIT_FAILURE, NULL);
+			}
 			return (all_path);
 		}
 		i++;
@@ -43,25 +49,31 @@ static char	**get_paths(char **envp, t_data *data)
 	return (NULL);
 }
 
-static char	*build_and_check_path(t_data *data, char *dir, char *cmd, int *status)
+static char	*build_and_check_path(t_data *data, char *dir, char *cmd, int *status, char **arguments)
 {
 	char	*one_path;
 	char	*full_path;
 
 	//
 	(void)data;
+	(void)arguments;
 
 	one_path = ft_strjoin(dir, "/");
 	if (!one_path)
+	{
+		// ft_free_tab(arguments);
 		show_error(data, "Memory allocation failed", 1, NULL);
+	}
 	full_path = ft_strjoin(one_path, cmd);
 	if (!full_path)
 	{
+		// ft_free_tab(arguments);
 		free(one_path);
 		show_error(data, "Memory allocation failed", 1, NULL);
 	}
 	
 	free(one_path);
+
 	if (access(full_path, F_OK | X_OK) != 0)
 	{
 		free(full_path);
@@ -94,7 +106,7 @@ static char *rev_str(char *str)
 	return (new_str);
 }
 
-static void	handle_cmd_error(char *cmd, t_data *data)
+static void	handle_cmd_error(char *cmd, t_data *data, char **arguments)
 {
 	(void)data;
 
@@ -115,44 +127,51 @@ static void	handle_cmd_error(char *cmd, t_data *data)
 	if (rev_cmd[0] == '/')
 	{
 		free(rev_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 
 	if (access(cmd, F_OK) == 0 && access(cmd, X_OK) == -1)
 	{
 		free(rev_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "Permission denied", 126, cmd);
 	}
 
 	if (access(cmd, X_OK) == -1 && cmd[0] == '/')
 	{
 		free(rev_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 
 	if (access(cmd, F_OK) == -1)
 	{
 		free(rev_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "command not found", 127, cmd);
 	}
 
 	if (access(cmd, F_OK) != 0)
 	{
-		free(rev_cmd);	
+		free(rev_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 
 	if (access(cmd, X_OK) == -1 && !ft_strchr(cmd, '/'))
 	{
 		free(rev_cmd);
-		show_error(data, "comment not found", 1, cmd);
+		ft_free_tab(arguments);
+		show_error(data, "command not found", 1, cmd);
 	}
 
 	free(rev_cmd);
+	ft_free_tab(arguments);
 	// show_error(data, "Permission denied.", 1, cmd);
 }
 
-char	*find_path(t_data *data, char *cmd, char **envp)
+char	*find_path(t_data *data, char *cmd, char **envp, char **arguments)
 {
 	char **s_cmd;
 	char	**all_path;
@@ -165,19 +184,26 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 
 	full_path = NULL;
 
-	s_cmd = split_command(cmd, data);
-	all_path = get_paths(envp, data);
+	s_cmd = split_command(cmd, data, arguments);
+	if (!s_cmd)
+	{
+		ft_free_tab(arguments);
+		show_error(data, "split_command failed", 127, cmd);
+	} 
+	all_path = get_paths(envp, data, arguments);
 	if (!all_path)
 	{
 		// ft_free_tab(s_cmd);
+		ft_free_tab(arguments);
 		show_error(data, "No such file or directory", 127, cmd);
 	}
 	i = -1;
 	while (all_path[++i])
 	{
-		full_path = build_and_check_path(data, all_path[i], s_cmd[0], &status);
+		full_path = build_and_check_path(data, all_path[i], s_cmd[0], &status, arguments);
 		// if (!full_path)
 		// {
+		// 	ft_free_tab(arguments); 
 		// 	ft_free_tab(s_cmd);
 		// 	ft_free_tab(all_path);
 		// 	show_error(data, "command not found", 127, cmd);
@@ -185,11 +211,22 @@ char	*find_path(t_data *data, char *cmd, char **envp)
 		if (full_path)
 			break;
 	}
+	// if (!full_path)
+	// {
+	// 	ft_free_tab(arguments);
+	// 	ft_free_tab(s_cmd);
+	// 	ft_free_tab(all_path);
+	// 	show_error(data, "command not found", 127, cmd);
+	// }
+
 	ft_free_tab(all_path);
 	ft_free_tab(s_cmd);
 	if (status == -1)
-		handle_cmd_error(cmd, data);
-	// if (!full_path)
-	// 	show_error(data, "command not found.", EXIT_FAILURE, cmd);
+		handle_cmd_error(cmd, data, arguments);
+	if (!full_path)
+	{
+		ft_free_tab(arguments);
+		show_error(data, "command not found.", EXIT_FAILURE, cmd);
+	}
 	return (full_path);
 }

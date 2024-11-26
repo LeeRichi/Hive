@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/25 20:32:01 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 14:28:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int		printnbr(long n, int base);
 int		printnbr_butx(long n, int base);
 int		printnbr_foraddress(unsigned long n, int base);
 int		printaddress(unsigned long something);
+
+//new for pipex
+    int is_empty_or_whitespace(char *str);
 
 //get_next_line_packages
 // char	*get_next_line(int fd);
