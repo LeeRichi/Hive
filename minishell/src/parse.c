@@ -18,6 +18,7 @@ void free_tokens(char **tokens)
 void execute_external_command(char **tokens)
 {
     pid_t pid = fork();
+
     if (pid == -1)
     {
         perror("fork");
@@ -29,7 +30,7 @@ void execute_external_command(char **tokens)
         // Child process: execute external command
         if (execvp(tokens[0], tokens) == -1)
         {
-            perror("execvp");
+            perror(tokens[0]);
             exit(1);
         }
     }
@@ -44,7 +45,6 @@ void parse(t_shell *shell)
 {
     char *input = shell->input;  // Assuming `input` is set in the shell struct
     char **tokens;
-    // int i = 0;
 
     tokens = ft_split(input, ' ');
     if (!tokens)
@@ -54,33 +54,26 @@ void parse(t_shell *shell)
     // Check for built-in commands (example: "cd", "exit")
     if (tokens[0] != NULL)
     {
-        if (strcmp(tokens[0], "cd") == 0)
+        if (tokens[0] != NULL)
         {
-            if (tokens[1])
-            {
-                if (chdir(tokens[1]) != 0)
-                    perror("cd");
-            }
+            if (strcmp(tokens[0], "echo") == 0)
+                handle_echo(tokens);
+            else if (strcmp(tokens[0], "cd") == 0)
+                handle_cd(tokens);
+            // else if (strcmp(tokens[0], "pwd") == 0)
+            //     handle_pwd();
+            // else if (strcmp(tokens[0], "env") == 0)
+            //     handle_env(shell->envp); // Pass environment variables
+            // else if (strcmp(tokens[0], "exit") == 0)
+            //     handle_exit(tokens);
+            // else if (strcmp(tokens[0], "unset") == 0)
+            //     handle_unset(tokens);
+            // else if (strcmp(tokens[0], "echo") == 0)
+            //     handle_echo(tokens);
+            // else if (strcmp(tokens[0], "export") == 0)
+            //     handle_export(tokens);
             else
-            {
-                // Default behavior: change to the home directory
-                char *home = getenv("HOME");
-                if (home)
-                    chdir(home);
-                else
-                    printf("HOME not set.\n");
-            }
-        }
-        else if (strcmp(tokens[0], "exit") == 0)
-        {
-            // Exit the shell
-            free_tokens(tokens);
-            exit(0);
-        }
-        else
-        {
-            // Handle external commands by forking and exec'ing
-            execute_external_command(tokens);
+                execute_external_command(tokens);
         }
     }
 

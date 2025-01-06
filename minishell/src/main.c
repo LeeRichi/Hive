@@ -6,17 +6,14 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 18:04:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/06 19:26:26 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-# include <readline/readline.h>
-# include <stdio.h>
-# include <signal.h>
-#include <stdlib.h>
 
-t_sig *sig;
+//global signal
+t_sig sig;
 
 //think what you need in a shell
 void shell_init(char **av, char **envp, t_shell **shell)
@@ -34,14 +31,6 @@ void shell_init(char **av, char **envp, t_shell **shell)
 	//print something if it's needed
 }
 
-//to handle ctrl+c //display a new lie
-void handle_sigint(int sig)
-{
-    (void)sig;
-    printf("\n");
-	ft_putstr_fd("> ", STDERR);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	(void)envp;
@@ -54,8 +43,10 @@ int	main(int ac, char **av, char **envp)
 		printf("We only handle 1 comment.\n");
 		exit(EXIT_FAILURE);
 	}
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	init_sig();
+	signal(SIGINT, &handle_sigint);
+	signal(SIGQUIT, &handle_sigquit);
+
 	shell_init(av, envp, &shell);
 	//exec minishell
 	while (1)
