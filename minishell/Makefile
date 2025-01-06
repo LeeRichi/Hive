@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/17 15:13:38 by chlee2            #+#    #+#              #
-#    Updated: 2024/11/26 00:53:21 by chlee2           ###   ########.fr        #
+#    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
+#    Updated: 2025/01/06 20:13:07 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = minishell
 
 LIBFTDIR = lib/libft
 LIBFT = $(LIBFTDIR)/libft.a
@@ -19,20 +19,24 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
+# not sure if -lncureses in needed?
+# LDFLAGS = -L$(LIBFTDIR) -lft -lreadline -lncurses
+LDFLAGS = -L$(LIBFTDIR) -lft -lreadline
 SRCS = src/main.c \
-		src/error.c \
-		src/close.c \
-		src/path_finder.c \
+		src/parse.c \
+		src/sig.c \
+		src/buildits/echo.c \
+		src/buildits/cd.c \
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) $(LDFLAGS)
 
 $(LIBFT):
-	@make -C $(LIBFTDIR)
+	@make -C $(LIBFTDIR) 
 
 clean:
 	$(RM) $(OBJS)

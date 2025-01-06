@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:15:34 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/25 18:47:45 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:47:59 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	ft_free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	tab[0] = NULL;
 	free(tab);
 }
 
-static void message_check_print(char *err, char *av)
+static void	message_check_print(char *err, char *av)
 {
 	if (av)
 	{
@@ -42,7 +41,7 @@ static void message_check_print(char *err, char *av)
 static void	free_data(t_data *data)
 {
 	if (!data)
-		return;
+		return ;
 	if (data->f1 >= 0)
 		close(data->f1);
 	if (data->f2 >= 0)
@@ -70,4 +69,3 @@ void	show_error_for_sc(t_data *data, char *message, int err_code, char *av)
 	free(av);
 	exit(err_code);
 }
-
