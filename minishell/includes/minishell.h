@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/03 17:55:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/06 14:46:25 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 //include bunch of libraries I guess
 # include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 //defines
 // # define STDERR 2
