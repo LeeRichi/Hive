@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 17:34:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/06 17:58:43 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct s_sig
 typedef struct s_shell
 {
     char **envp;
+    char *input;
 }	t_shell;
 
 
 //global functions
+void parse(t_shell *shell);
 
 #endif

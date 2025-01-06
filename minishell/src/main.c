@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 17:38:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/06 18:04:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@
 t_sig *sig;
 
 //think what you need in a shell
-void shell_init(char **av, char **envp)
+void shell_init(char **av, char **envp, t_shell **shell)
 {
-	t_shell *shell;
-    shell = (t_shell *)malloc(sizeof(t_shell));
-    if (!shell)
+	(void)av;
+    *shell = (t_shell *)malloc(sizeof(t_shell));
+    if (!*shell)
     {
         perror("Failed to initialize shell\n");
         exit(EXIT_FAILURE);
     }
-    shell->envp = envp;
+    (*shell)->envp = envp;
+    (*shell)->input = NULL;
 
 	//print something if it's needed
 }
@@ -45,7 +46,8 @@ int	main(int ac, char **av, char **envp)
 {
 	(void)envp;
 	(void)av;
-	char *inputs;
+	char *input;
+	t_shell *shell;
 
 	if (ac != 1)
 	{
@@ -54,22 +56,23 @@ int	main(int ac, char **av, char **envp)
 	}
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	shell_init(av, envp);
+	shell_init(av, envp, &shell);
 	//exec minishell
 	while (1)
 	{
-		inputs = readline("> ");
-        if (!inputs)
+		input = readline("> ");
+        if (!input)
         {
             printf("exit\n");
             break;
         }
-        if (*inputs)
-            add_history(inputs);
-		//test print
-		printf("Command: %s\n", inputs);
-
+        if (*input)
+            add_history(input);
+		//parse
+		shell->input = input;
+		parse(shell);
 		
-    	free(inputs);
+    	free(input);
 	}
+	free(shell);
 }
