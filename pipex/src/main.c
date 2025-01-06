@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:41:41 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/24 19:13:40 by chlee2           ###   ########.fr       */
+/*   Updated: 2024/11/25 20:42:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,21 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 
 	right_path = NULL;
 	signal = 0;
+
 	arguments = ft_split(cmd, ' ');
 	if (!arguments)
 		show_error(data, "Command split failed", EXIT_FAILURE, cmd);
-
     if (is_empty_or_whitespace(cmd))
 	{
 		special_cmd = ft_strjoin(" ", cmd);
-		show_error(data, "command not found", 127, special_cmd);
+		if (!special_cmd)
+		{
+			ft_free_tab(arguments);
+			show_error(data, "ft_strjoin failed", 1, NULL);
+		}
+		ft_free_tab(arguments);
+
+		show_error_for_sc(data, "command not found", 127, special_cmd);
 	}
 
 	//this means abs path
@@ -51,8 +58,6 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	if (!ft_strchar(arguments[0], '/'))
 	{
 		right_path = find_path(data, cmd, envp);
-		//
-		// double_close(data->f1, data->f2);
 		if (!right_path)
 		{
 			ft_free_tab(arguments);
@@ -65,11 +70,12 @@ static int execute_cmd(t_data *data, char *cmd, char **envp)
 	if (execve(right_path, arguments, envp) == -1)
 	{
 		if (errno == EACCES)
+		{
+			ft_free_tab(arguments);
 			show_error(data, "Permission denied", 126, cmd);
-
+		}
+		ft_free_tab(arguments);
 		show_error(data, "No such file or directory", 127, cmd);
-
-		// double_close(data->end[0], data->end[1]);
 		signal = -1;
 	}
 	double_close(data->f1, data->f2);
@@ -130,10 +136,7 @@ static void	child_process(t_data *data, char **av, char **envp, int i)
 	{
 		show_error(data, "Error: Command execution failed.", EXIT_FAILURE, av[i + 2]);
 	}
-
 	double_close(data->f1, data->f2);
-
-
 }
 
 static int	pipex(t_data *data, char **av, char **envp)
