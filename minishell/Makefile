@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/06 14:54:48 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/06 14:57:30 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,10 @@ LIBFT = $(LIBFTDIR)/libft.a
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L$(LIBFTDIR) -lft -lreadline -lncurses
 
+# not sure if -lncureses in needed?
+# LDFLAGS = -L$(LIBFTDIR) -lft -lreadline -lncurses
+LDFLAGS = -L$(LIBFTDIR) -lft -lreadline
 SRCS = src/main.c \
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 14:46:25 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/06 17:34:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@
 # include <readline/history.h>
 
 //defines
-// # define STDERR 2
+# define STDERR 2
 
 //structs
-// typedef struct s_data
-// {
-// 	int	f1;
-// 	int	f2;
-// 	int	end[2];
-// }	t_data;
+typedef struct s_sig
+{
+	int nbr;
+}	t_sig;
+
+typedef struct s_shell
+{
+    char **envp;
+}	t_shell;
+
 
 //global functions
 
