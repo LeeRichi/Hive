@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 20:14:33 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/07 20:43:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 //defines
 # define STDERR 2
 
+# define SUCCESS 0
+# define ERROR 1
+// # define PATH_MAX 42
+# define NONE_NUMERIC_EXIT_CODE 255
+
 //structs
 typedef struct s_sig
 {
@@ -38,6 +43,7 @@ typedef struct s_shell
 {
     char **envp;
     char *input;
+    int exit_code;
 }	t_shell;
 
 
@@ -52,6 +58,8 @@ void init_sig(void);
 //builtins
 void handle_echo(char **tokens);
 void handle_cd(char **tokens);
+int handle_pwd(void);
+void handle_exit(t_shell *shell, char **tokens);
 
 extern t_sig sig;
 #endif

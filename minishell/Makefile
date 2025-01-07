@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/06 20:13:07 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/07 20:45:16 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ LDFLAGS = -L$(LIBFTDIR) -lft -lreadline
 SRCS = src/main.c \
 		src/parse.c \
 		src/sig.c \
-		src/buildits/echo.c \
-		src/buildits/cd.c \
+		src/buildins/echo.c \
+		src/buildins/cd.c \
+		src/buildins/pwd.c \
+		src/buildins/exit.c \
 
 OBJS = $(SRCS:.c=.o)
 

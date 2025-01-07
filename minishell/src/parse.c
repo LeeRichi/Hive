@@ -60,12 +60,12 @@ void parse(t_shell *shell)
                 handle_echo(tokens);
             else if (strcmp(tokens[0], "cd") == 0)
                 handle_cd(tokens);
-            // else if (strcmp(tokens[0], "pwd") == 0)
-            //     handle_pwd();
+            else if (strcmp(tokens[0], "pwd") == 0)
+                handle_pwd();
             // else if (strcmp(tokens[0], "env") == 0)
             //     handle_env(shell->envp); // Pass environment variables
-            // else if (strcmp(tokens[0], "exit") == 0)
-            //     handle_exit(tokens);
+            else if (strcmp(tokens[0], "exit") == 0)
+                handle_exit(shell, tokens);
             // else if (strcmp(tokens[0], "unset") == 0)
             //     handle_unset(tokens);
             // else if (strcmp(tokens[0], "echo") == 0)
