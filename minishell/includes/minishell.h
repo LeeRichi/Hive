@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/07 20:43:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:19:20 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../lib/libft/libft.h"
 
-//include bunch of libraries I guess
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -29,7 +28,6 @@
 
 # define SUCCESS 0
 # define ERROR 1
-// # define PATH_MAX 42
 # define NONE_NUMERIC_EXIT_CODE 255
 
 //structs
@@ -39,11 +37,19 @@ typedef struct s_sig
     int sigquit;
 }	t_sig;
 
+typedef struct s_token
+{
+ char   *str;
+ char   *type;
+ struct s_token *prev;
+ struct s_token *next;
+} t_token;
+
 typedef struct s_shell
 {
-    char **envp;
-    char *input;
-    int exit_code;
+    char    **envp;
+    char    *input;
+    int     exit_code;
 }	t_shell;
 
 

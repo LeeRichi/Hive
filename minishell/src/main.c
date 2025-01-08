@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/08 11:16:43 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:16:51 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,45 @@
 t_sig sig;
 
 //think what you need in a shell
-void shell_init(char **av, char **envp, t_shell **shell)
+void shell_init(char **av, char **envp, t_shell *shell)
 {
 	(void)av;
-    *shell = (t_shell *)malloc(sizeof(t_shell));
+    shell = (t_shell *)malloc(sizeof(t_shell));
     if (!shell)
     {
         perror("Failed to initialize shell\n");
         exit(EXIT_FAILURE);
     }
-    (*shell)->envp = envp;
-    (*shell)->input = NULL;
+    shell->envp = envp;
+    shell->input = NULL;
 
 	//print something if it's needed
 }
 
+void ft_free_all(t_shell *shell)
+{
+	if (shell->input)
+    {
+        free(shell->input);
+        shell->input = NULL;
+    }
+
+	//free linked list?
+
+	//might as well free envp?
+	// if (shell->envp)
+    // {
+    //     for (int i = 0; shell->envp[i] != NULL; i++)
+    //     {
+    //         free(shell->envp[i]);
+    //     }
+    //     free(shell->envp);
+    // }
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	(void)envp;
-	(void)av;
-	char *input;
-	t_shell *shell;
-
-	shell = NULL;
+	t_shell shell;
 
 	if (ac != 1)
 	{
@@ -53,19 +69,19 @@ int	main(int ac, char **av, char **envp)
 	//exec minishell
 	while (1)
 	{
-		input = readline("> ");
-        if (!input)
+		shell.input = readline("> ");
+        if (!shell.input)
         {
             printf("exit\n");
             break;
         }
-        if (*input)
-            add_history(input);
+        if (shell.input)
+            add_history(shell.input);
 		//parse
-		shell->input = input;
-		parse(shell);
-
-    	free(input);
+		parse(&shell);
+		//exec //later
+		// execute(&shell);
 	}
-	free(shell);
+	ft_free_all(&shell);
+	return(shell.exit_code);
 }

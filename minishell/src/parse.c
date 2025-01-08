@@ -41,6 +41,17 @@ void execute_external_command(char **tokens)
     }
 }
 
+//temp
+void print_tokens(char **tokens)
+{
+    int i = 0;
+    while (tokens[i])
+    {
+        printf("Token %d: %s\n", i, tokens[i]);
+        i++;
+    }
+}
+
 void parse(t_shell *shell)
 {
     char *input = shell->input;  // Assuming `input` is set in the shell struct
@@ -48,9 +59,10 @@ void parse(t_shell *shell)
 
     tokens = ft_split(input, ' ');
     if (!tokens)
-    {
         printf("split failed.\n");
-    }
+
+    print_tokens(tokens);
+
     // Check for built-in commands (example: "cd", "exit")
     if (tokens[0] != NULL)
     {
@@ -77,5 +89,6 @@ void parse(t_shell *shell)
         }
     }
 
+    //might delete depends how I free_all?
     free_tokens(tokens);
 }
