@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:38:15 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/07 20:40:33 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:20:18 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int ft_isNum(char *s)
 {
     int i;
     i = 0;
-    
+
     if (s == NULL)
         return (0);
     if (s[0] == '-')
@@ -41,12 +41,14 @@ void handle_exit(t_shell *shell, char **args)
     else if (args[1] && !ft_isNum(args[1]))
     {
         ft_putstr_fd("minishell: exit: ", STDERR);
-		ft_putstr_fd(args[1], STDERR);   
+		ft_putstr_fd(args[1], STDERR);
 		ft_putendl_fd(": numeric argument required", STDERR);
         shell->exit_code = NONE_NUMERIC_EXIT_CODE;
     }
-    else if (args[1]) //valid
+    else if (args[1]) //valid //with exit and 1 numeric arg
         shell->exit_code = ft_atoi(args[1]);
-    else //default
+    else //default //valid //only exit
         shell->exit_code = 0;
+
+	// printf("%d\n", shell->exit_code);
 }

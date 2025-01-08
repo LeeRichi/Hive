@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:16:25 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/06 19:27:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:12:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 //to handle ctrl+c //display a new lie
 void handle_sigint(int code)
 {
-    (void)code;
-    printf("\n");
+	(void)code;
+	printf("\n");
 	ft_putstr_fd("> ", STDERR);
 }
 
 //ctrl+\/
 void handle_sigquit(int code)
 {
-	char *err_code;
+
+	(void)code;
+	// char *err_code;
 
 	signal(SIGQUIT, SIG_IGN);
-	err_code = ft_itoa(code);
+	// err_code = ft_itoa(code);
 
 	sig.sigquit = 1;
 }
