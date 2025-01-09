@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/09 23:35:06 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/09 23:35:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 char *str_append(char *str, char c)
 {
     size_t len = str ? strlen(str) : 0;
-    char *new_str = malloc(len + 2); // +1 for the new char, +1 for '\0'
+    char *new_str = malloc(len + 2);
     if (!new_str)
     {
         perror("malloc");
