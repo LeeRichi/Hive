@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/07 20:45:16 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/09 23:24:45 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = src/main.c \
 		src/buildins/cd.c \
 		src/buildins/pwd.c \
 		src/buildins/exit.c \
+		src/lex/lex.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,7 +39,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) $(LDFLAGS)
 
 $(LIBFT):
-	@make -C $(LIBFTDIR) 
+	@make -C $(LIBFTDIR)
 
 clean:
 	$(RM) $(OBJS)

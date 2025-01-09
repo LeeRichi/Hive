@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/08 17:19:20 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/09 23:29:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define SUCCESS 0
 # define ERROR 1
 # define NONE_NUMERIC_EXIT_CODE 255
+# define WHITESPACE " \t\n"
 
 //structs
 typedef struct s_sig
@@ -66,6 +67,9 @@ void handle_echo(char **tokens);
 void handle_cd(char **tokens);
 int handle_pwd(void);
 void handle_exit(t_shell *shell, char **tokens);
+
+//lex
+char **tokenize_input(char *input);
 
 extern t_sig sig;
 #endif

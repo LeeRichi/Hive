@@ -54,10 +54,14 @@ void print_tokens(char **tokens)
 
 void parse(t_shell *shell)
 {
-    char *input = shell->input;  // Assuming `input` is set in the shell struct
+    char *input = shell->input;
     char **tokens;
 
-    tokens = ft_split(input, ' ');
+    // tokens = ft_split(input, ' ');
+    // if (!tokens)
+    //     printf("split failed.\n");
+
+	tokens = tokenize_input(input);
     if (!tokens)
         printf("split failed.\n");
 
