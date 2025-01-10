@@ -57,42 +57,38 @@ void parse(t_shell *shell)
     char *input = shell->input;
     char **tokens;
 
-    // tokens = ft_split(input, ' ');
-    // if (!tokens)
-    //     printf("split failed.\n");
-
 	tokens = tokenize_input(input);
-    if (!tokens)
-        printf("split failed.\n");
+    // if (!tokens)
+    //     printf("tokenize_input failed by returning NULL.\n");
 
-    print_tokens(tokens);
+    //temp
+    if(tokens)
+        print_tokens(tokens);
+
+    shell->tokens = tokens; //????
 
     // Check for built-in commands (example: "cd", "exit")
-    if (tokens[0] != NULL)
+    if (tokens && tokens[0] != NULL)
     {
-        if (tokens[0] != NULL)
-        {
-            if (strcmp(tokens[0], "echo") == 0)
-                handle_echo(tokens);
-            else if (strcmp(tokens[0], "cd") == 0)
-                handle_cd(tokens);
-            else if (strcmp(tokens[0], "pwd") == 0)
-                handle_pwd();
-            // else if (strcmp(tokens[0], "env") == 0)
-            //     handle_env(shell->envp); // Pass environment variables
-            else if (strcmp(tokens[0], "exit") == 0)
-                handle_exit(shell, tokens);
-            // else if (strcmp(tokens[0], "unset") == 0)
-            //     handle_unset(tokens);
-            // else if (strcmp(tokens[0], "echo") == 0)
-            //     handle_echo(tokens);
-            // else if (strcmp(tokens[0], "export") == 0)
-            //     handle_export(tokens);
-            else
-                execute_external_command(tokens);
-        }
-    }
+        if (strcmp(tokens[0], "echo") == 0)
+            handle_echo(tokens);
+        else if (strcmp(tokens[0], "cd") == 0)
+            handle_cd(tokens);
+        else if (strcmp(tokens[0], "pwd") == 0)
+            handle_pwd();
+        // else if (strcmp(tokens[0], "env") == 0)
+        //     handle_env(shell->envp); // Pass environment variables
+        else if (strcmp(tokens[0], "exit") == 0)
+            handle_exit(shell, tokens);
+        // else if (strcmp(tokens[0], "unset") == 0)
+        //     handle_unset(tokens);
+        // else if (strcmp(tokens[0], "export") == 0)
+        //     handle_export(tokens);
 
+        else
+            execute_external_command(tokens);
+    }
     //might delete depends how I free_all?
-    free_tokens(tokens);
+    // if (tokens)
+    //     free_tokens(tokens);
 }

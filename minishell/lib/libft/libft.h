@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:45:13 by chlee2            #+#    #+#             */
-/*   Updated: 2024/11/26 15:43:52 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/10 18:12:13 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,9 @@ int		printaddress(unsigned long something);
 
 //new for pipex
 int		is_empty_or_whitespace(char *str);
+
+//new for minishell
+void	*ft_realloc(void *ptr, size_t size);
+
 
 #endif

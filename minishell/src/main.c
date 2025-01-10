@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/08 17:16:51 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/10 20:59:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void shell_init(char **av, char **envp, t_shell *shell)
     }
     shell->envp = envp;
     shell->input = NULL;
+	shell->tokens = NULL;
+	
 
 	//print something if it's needed
 }
@@ -75,10 +77,16 @@ int	main(int ac, char **av, char **envp)
             printf("exit\n");
             break;
         }
-        if (shell.input)
+		if (shell.input)
             add_history(shell.input);
 		//parse
 		parse(&shell);
+
+		//temp
+		// printf("first fucking token: %s\n", shell.tokens[0]);
+		// print_tokens(shell.tokens);
+
+		
 		//exec //later
 		// execute(&shell);
 	}

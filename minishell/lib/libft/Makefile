@@ -45,6 +45,7 @@ SRCS = ft_isalpha.c \
 		flood_fill.c \
 		rich_flood_fill.c \
 		is_empty_or_whitespace.c \
+		ft_realloc.c \
 
 
 BONUS = ft_lstmap_bonus.c ft_lstnew_bonus.c 			\

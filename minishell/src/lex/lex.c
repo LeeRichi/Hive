@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/10 15:54:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/10 20:55:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-
-#define WHITESPACE " \t\n"
 
 char *str_append(char *str, char c)
 {
@@ -108,6 +106,9 @@ char **tokenize_input(char *input)
 	char *env_value;
 	int j;
 
+    //but what if i got "" which is an empty string
+
+    //keep waiting for more inputs if quotes are not equal
 	if (!check_balanced_quotes(input)) {
 		while (1) {
 			printf("> ");
@@ -136,6 +137,16 @@ char **tokenize_input(char *input)
         else if (c == '"' && !in_single_quote)
         {
             in_double_quote = !in_double_quote;
+            if (current_token == NULL) 
+            {
+                tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
+                if (!tokens) {
+                    perror("realloc");
+                    exit(EXIT_FAILURE);
+                }
+                tokens[token_count] = strdup("");
+                tokens[token_count + 1] = NULL;
+            }
         }
 		else if (in_double_quote && c == '$')
 		{
@@ -152,7 +163,7 @@ char **tokenize_input(char *input)
         {
             if (current_token)
             {
-                tokens = realloc(tokens, sizeof(char *) * (token_count + 2));
+                tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
                 if (!tokens)
                 {
                     perror("realloc");
@@ -160,7 +171,6 @@ char **tokenize_input(char *input)
                 }
                 tokens[token_count++] = current_token;
                 tokens[token_count] = NULL;
-				free(current_token);
                 current_token = NULL;
             }
         }
@@ -171,7 +181,7 @@ char **tokenize_input(char *input)
 
     if (current_token)
     {
-        tokens = realloc(tokens, sizeof(char *) * (token_count + 2));
+        tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
         if (!tokens)
         {
             perror("realloc");
@@ -179,7 +189,6 @@ char **tokenize_input(char *input)
         }
         tokens[token_count++] = current_token;
         tokens[token_count] = NULL;
-		free(current_token);
     }
 
     return tokens;
