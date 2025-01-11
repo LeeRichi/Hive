@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:44:57 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 19:02:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 19:11:58 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void handle_wrong_pipes(t_shell *shell, char **current_token, int *token_count, 
     printf("last_token_type: %d\n", shell->last_token_type);
 
 	// Handle invalid sequences like `| |`, `|>` or `>` at start
-	if (shell->last_token_type == 2 || shell->last_token_type == 3 || (token_count == 0 && *current_token == NULL))
-	{
-        printf("minishell: syntax error near unexpected token `%c`\n", c);
-        // free(shell->input);
-        // exit(EXIT_FAILURE);
-	}
+	// if (shell->last_token_type == 2 || shell->last_token_type == 3 || (token_count == 0 && *current_token == NULL))
+	// {
+    //     printf("minishell: syntax error near unexpected token `%c`\n", c);
+    //     // free(shell->input);
+    //     // exit(EXIT_FAILURE);
+	// }
 
 	// Handle the pipe or redirection
 	if (*current_token)
