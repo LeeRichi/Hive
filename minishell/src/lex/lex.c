@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 18:21:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 19:07:19 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,16 @@ void tokenize_input(char *input, t_shell *shell)
 		{
 			printf("$ ");
 			char *additional_input = readline(NULL);
-			if (additional_input) {
+			if (additional_input) 
+            {
 				input = str_append(input, '\n');
-				// char *temp = input;
 				input = ft_strjoin(input, additional_input);
-				// free(temp);
 				free(additional_input);
 			}
 		if (check_balanced_quotes(input))
 			break;
 		}
 	}
-
-    printf("last_token_type: %d\n", shell->last_token_type);
 
 	int i = 0;
 	while (input[i] != '\0')
@@ -158,7 +155,7 @@ void tokenize_input(char *input, t_shell *shell)
 		//handle wrong pipes and redirctions
 		else if (strchr("|<>", c) && !in_single_quote && !in_double_quote)
 		{
-			handle_wrong_pipes(shell, current_token, token_count, c);
+			handle_wrong_pipes(shell, &current_token, &token_count, c);
 		}
 		else if (strchr(WHITESPACE, c) && !in_single_quote && !in_double_quote)
         {
@@ -191,5 +188,12 @@ void tokenize_input(char *input, t_shell *shell)
         shell->tokens[token_count++] = current_token;
         shell->tokens[token_count] = NULL;
         shell->last_token_type = 1;
+    }
+
+    if (shell->last_token_type == 2 || shell->last_token_type == 3)
+    {
+        printf("$ ");
+       //I want to keep reading line here
+       //when it gets the inputs, append it and run again
     }
 }

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 17:54:32 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 18:58:13 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void handle_exit(t_shell *shell, char **tokens);
 void tokenize_input(char *input, t_shell *shell);
 char *str_append(char *str, char c);
 //lex/wrong.pipe.c
-void handle_wrong_pipes(t_shell *shell, char *current_token, int token_count, char c);
+void handle_wrong_pipes(t_shell *shell, char **current_token, int *token_count, char c);
 
 
 //utils
