@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:16:25 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/08 11:12:19 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 17:55:06 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void handle_sigint(int code)
 {
 	(void)code;
 	printf("\n");
-	ft_putstr_fd("> ", STDERR);
+	ft_putstr_fd("$ ", STDERR);
 }
 
 //ctrl+\/

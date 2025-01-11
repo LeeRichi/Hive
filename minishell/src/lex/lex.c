@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 16:45:29 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 18:21:28 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,13 @@ void tokenize_input(char *input, t_shell *shell)
 	int in_double_quote = 0;
 	char *env_value;
 	int j;
+    char c;
 
 	//keep waiting for more inputs if quotes are not equal
 	if (!check_balanced_quotes(input)) {
 		while (1)
 		{
-			printf("> ");
+			printf("$ ");
 			char *additional_input = readline(NULL);
 			if (additional_input) {
 				input = str_append(input, '\n');
@@ -115,10 +116,12 @@ void tokenize_input(char *input, t_shell *shell)
 		}
 	}
 
+    printf("last_token_type: %d\n", shell->last_token_type);
+
 	int i = 0;
 	while (input[i] != '\0')
     {
-        char c = input[i];
+        c = input[i];
 
         if (c == '\'' && !in_double_quote)
         {
@@ -136,9 +139,10 @@ void tokenize_input(char *input, t_shell *shell)
                 }
                 shell->tokens[token_count] = strdup("");
                 shell->tokens[token_count + 1] = NULL;
+                shell->last_token_type = 1;
             }
         }
-		//handle dollar sign and append
+		//handle dollar sign (but dont handle it in single quotes) and append
 		else if (!in_single_quote && c == '$')
 		{
 			env_value = handle_dollar_sign(input, &i);
@@ -152,10 +156,10 @@ void tokenize_input(char *input, t_shell *shell)
 				free(env_value);
 		}
 		//handle wrong pipes and redirctions
-		// else if (strchr("|<>", c) && !in_single_quote && !in_double_quote)
-		// {
-		// 	handle_wrong_pipes(input, shell);
-		// }
+		else if (strchr("|<>", c) && !in_single_quote && !in_double_quote)
+		{
+			handle_wrong_pipes(shell, current_token, token_count, c);
+		}
 		else if (strchr(WHITESPACE, c) && !in_single_quote && !in_double_quote)
         {
             if (current_token)
@@ -186,5 +190,6 @@ void tokenize_input(char *input, t_shell *shell)
         }
         shell->tokens[token_count++] = current_token;
         shell->tokens[token_count] = NULL;
+        shell->last_token_type = 1;
     }
 }

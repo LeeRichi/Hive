@@ -4,22 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void free_tokens(char **tokens)
-{
-    int i = 0;
-
-	//temp
-	if (!tokens)
-		return ;
-	while (tokens[i])
-	{
-        free(tokens[i]);
-        i++;
-    }
-    free(tokens);
-}
-
-
+//exe part
 void execute_external_command(char **tokens)
 {
     pid_t pid = fork();
@@ -46,32 +31,11 @@ void execute_external_command(char **tokens)
     }
 }
 
-//temp
-void print_tokens(char **tokens)
-{
-    int i = 0;
-    while (tokens[i])
-    {
-        printf("Token %d: %s\n", i, tokens[i]);
-		printf("i: %d\n", i);
-		i++;
-	}
-}
-
 void parse(t_shell *shell)
 {
-    char *input = shell->input;
-	//init (again? not sure why? without this will cause seg.f)
-	shell->tokens = NULL;
+	tokenize_input(shell->input, shell);
 
-	tokenize_input(input, shell);
-	//unnes
-	// if (!shell->tokens)
-    //     printf("tokenize_input failed by returning NULL.\n");
-
-	//token print
-	if(shell->tokens)
-		print_tokens(shell->tokens);
+    print_tokens(shell->tokens);
 
     // Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
@@ -90,7 +54,6 @@ void parse(t_shell *shell)
         //     handle_unset(shell->tokens);
         // else if (strcmp(shell->tokens[0], "export") == 0)
         //     handle_export(shell->tokens);
-
         else
             execute_external_command(shell->tokens);
     }

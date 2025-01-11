@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 14:01:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 17:54:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_sig
     int sigquit;
 }	t_sig;
 
-//this is doubly linked list struct
+//this is doubly linked list struct //not used yet //pending
 typedef struct s_token
 {
  char   *str;
@@ -53,7 +53,7 @@ typedef struct s_shell
     char    *input;
     int     exit_code;
     char    **tokens; //might need to change tpye to custom linked list??
-		int 		last_token_type;
+    int 		last_token_type;
 } t_shell;
 
 //global functions
@@ -72,10 +72,16 @@ void handle_exit(t_shell *shell, char **tokens);
 
 //lex
 void tokenize_input(char *input, t_shell *shell);
+char *str_append(char *str, char c);
 //lex/wrong.pipe.c
-void handle_wrong_pipes(char *input, t_shell *shell);
+void handle_wrong_pipes(t_shell *shell, char *current_token, int token_count, char c);
 
-//global fucking hell
+
+//utils
+//free.c
+void free_tokens(char **tokens);
+void ft_free_all(t_shell *shell);
+//print.c
 void print_tokens(char **tokens);
 
 extern t_sig sig;
