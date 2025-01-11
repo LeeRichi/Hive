@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/09 23:24:45 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/11 13:32:29 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = src/main.c \
 		src/buildins/pwd.c \
 		src/buildins/exit.c \
 		src/lex/lex.c \
+		src/lex/wrong_pipe.c \
 
 OBJS = $(SRCS:.c=.o)
 

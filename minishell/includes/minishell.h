@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/10 19:26:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 14:01:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_shell
     char    *input;
     int     exit_code;
     char    **tokens; //might need to change tpye to custom linked list??
-}	t_shell;
-
+		int 		last_token_type;
+} t_shell;
 
 //global functions
 void parse(t_shell *shell);
@@ -71,8 +71,9 @@ int handle_pwd(void);
 void handle_exit(t_shell *shell, char **tokens);
 
 //lex
-char **tokenize_input(char *input);
-
+void tokenize_input(char *input, t_shell *shell);
+//lex/wrong.pipe.c
+void handle_wrong_pipes(char *input, t_shell *shell);
 
 //global fucking hell
 void print_tokens(char **tokens);

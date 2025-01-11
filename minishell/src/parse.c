@@ -7,8 +7,12 @@
 void free_tokens(char **tokens)
 {
     int i = 0;
-    while (tokens[i])
-    {
+
+	//temp
+	if (!tokens)
+		return ;
+	while (tokens[i])
+	{
         free(tokens[i]);
         i++;
     }
@@ -19,7 +23,7 @@ void execute_external_command(char **tokens)
 {
     pid_t pid = fork();
 
-    if (pid == -1)
+	if (pid == -1)
     {
         perror("fork");
         return;
@@ -55,17 +59,17 @@ void print_tokens(char **tokens)
 void parse(t_shell *shell)
 {
     char *input = shell->input;
-    char **tokens;
+    char **tokens = NULL;
 
-	tokens = tokenize_input(input);
+	tokenize_input(input, shell);
     // if (!tokens)
     //     printf("tokenize_input failed by returning NULL.\n");
 
     //temp
-    if(tokens)
-        print_tokens(tokens);
+    if(shell->tokens)
+        print_tokens(shell->tokens);
 
-    shell->tokens = tokens; //????
+    // shell->tokens = tokens; //????
 
     // Check for built-in commands (example: "cd", "exit")
     if (tokens && tokens[0] != NULL)
