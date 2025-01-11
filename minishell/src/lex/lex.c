@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 14:03:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/11 16:45:29 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ bool check_balanced_quotes(const char *input)
 
 void tokenize_input(char *input, t_shell *shell)
 {
-    char **tokens = NULL;
     char *current_token = NULL;
     int token_count = 0;
 	int in_single_quote = 0;
@@ -98,7 +97,7 @@ void tokenize_input(char *input, t_shell *shell)
 	char *env_value;
 	int j;
 
-    //keep waiting for more inputs if quotes are not equal
+	//keep waiting for more inputs if quotes are not equal
 	if (!check_balanced_quotes(input)) {
 		while (1)
 		{
@@ -130,13 +129,13 @@ void tokenize_input(char *input, t_shell *shell)
             in_double_quote = !in_double_quote;
             if (current_token == NULL)
             {
-                tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
-                if (!tokens) {
+                shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
+                if (!shell->tokens) {
                     perror("realloc");
                     exit(EXIT_FAILURE);
                 }
-                tokens[token_count] = strdup("");
-                tokens[token_count + 1] = NULL;
+                shell->tokens[token_count] = strdup("");
+                shell->tokens[token_count + 1] = NULL;
             }
         }
 		//handle dollar sign and append
@@ -161,14 +160,14 @@ void tokenize_input(char *input, t_shell *shell)
         {
             if (current_token)
             {
-                tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
-                if (!tokens)
+                shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
+                if (!shell->tokens)
                 {
                     perror("realloc");
                     exit(EXIT_FAILURE);
                 }
-                tokens[token_count++] = current_token;
-                tokens[token_count] = NULL;
+                shell->tokens[token_count++] = current_token;
+                shell->tokens[token_count] = NULL;
                 current_token = NULL;
             }
         }
@@ -179,15 +178,13 @@ void tokenize_input(char *input, t_shell *shell)
 
     if (current_token)
     {
-        tokens = ft_realloc(tokens, sizeof(char *) * (token_count + 2));
-        if (!tokens)
+        shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
+        if (!shell->tokens)
         {
             perror("realloc");
             exit(EXIT_FAILURE);
         }
-        tokens[token_count++] = current_token;
-        tokens[token_count] = NULL;
+        shell->tokens[token_count++] = current_token;
+        shell->tokens[token_count] = NULL;
     }
-
-    shell->tokens = tokens;
 }

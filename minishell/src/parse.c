@@ -19,6 +19,7 @@ void free_tokens(char **tokens)
     free(tokens);
 }
 
+
 void execute_external_command(char **tokens)
 {
     pid_t pid = fork();
@@ -52,47 +53,48 @@ void print_tokens(char **tokens)
     while (tokens[i])
     {
         printf("Token %d: %s\n", i, tokens[i]);
-        i++;
-    }
+		printf("i: %d\n", i);
+		i++;
+	}
 }
 
 void parse(t_shell *shell)
 {
     char *input = shell->input;
-    char **tokens = NULL;
+	//init (again? not sure why? without this will cause seg.f)
+	shell->tokens = NULL;
 
 	tokenize_input(input, shell);
-    // if (!tokens)
+	//unnes
+	// if (!shell->tokens)
     //     printf("tokenize_input failed by returning NULL.\n");
 
-    //temp
-    if(shell->tokens)
-        print_tokens(shell->tokens);
-
-    // shell->tokens = tokens; //????
+	//token print
+	if(shell->tokens)
+		print_tokens(shell->tokens);
 
     // Check for built-in commands (example: "cd", "exit")
-    if (tokens && tokens[0] != NULL)
+    if (shell->tokens && shell->tokens[0] != NULL)
     {
-        if (strcmp(tokens[0], "echo") == 0)
-            handle_echo(tokens);
-        else if (strcmp(tokens[0], "cd") == 0)
-            handle_cd(tokens);
-        else if (strcmp(tokens[0], "pwd") == 0)
+        if (strcmp(shell->tokens[0], "echo") == 0)
+            handle_echo(shell->tokens);
+        else if (strcmp(shell->tokens[0], "cd") == 0)
+            handle_cd(shell->tokens);
+        else if (strcmp(shell->tokens[0], "pwd") == 0)
             handle_pwd();
-        // else if (strcmp(tokens[0], "env") == 0)
+        else if (strcmp(shell->tokens[0], "exit") == 0)
+            handle_exit(shell, shell->tokens);
+        // else if (strcmp(shell->tokens[0], "env") == 0)
         //     handle_env(shell->envp); // Pass environment variables
-        else if (strcmp(tokens[0], "exit") == 0)
-            handle_exit(shell, tokens);
-        // else if (strcmp(tokens[0], "unset") == 0)
-        //     handle_unset(tokens);
-        // else if (strcmp(tokens[0], "export") == 0)
-        //     handle_export(tokens);
+        // else if (strcmp(shell->tokens[0], "unset") == 0)
+        //     handle_unset(shell->tokens);
+        // else if (strcmp(shell->tokens[0], "export") == 0)
+        //     handle_export(shell->tokens);
 
         else
-            execute_external_command(tokens);
+            execute_external_command(shell->tokens);
     }
     //might delete depends how I free_all?
-    // if (tokens)
-    //     free_tokens(tokens);
+    // if (shell->tokens)
+    //     free_shell->tokens(shell->tokens);
 }
