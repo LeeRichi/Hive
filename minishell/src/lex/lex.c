@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 19:48:47 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/12 19:05:27 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ void tokenize_input(char *input, t_shell *shell)
     char *env_value;
     int j;
     char c;
+	int type_flag = 0;
 
-    // Keep waiting for more inputs if quotes are not balanced
+	// Keep waiting for more inputs if quotes are not balanced
     while (!check_balanced_quotes(input))
     {
         printf("$ ");
@@ -118,11 +119,8 @@ void tokenize_input(char *input, t_shell *shell)
     while (input[i] != '\0')
     {
         c = input[i];
-
         if (c == '\'' && !in_double_quote)
-        {
             in_single_quote = !in_single_quote;
-        }
         else if (c == '"' && !in_single_quote)
         {
             in_double_quote = !in_double_quote;
@@ -198,13 +196,13 @@ void tokenize_input(char *input, t_shell *shell)
         if (!additional_input)
         {
             fprintf(stderr, "minishell: unexpected EOF after `%c`\n",
-                    shell->last_token_type == 2 ? '|' : '<');
+				shell->last_token_type == 2 ? '|' : '<');
             free(input);
             exit(EXIT_FAILURE);
         }
         // input = str_append(input, '\n');
-        printf("additional_input: %s\n", additional_input);
-
+        // printf("additional_input: %s\n", additional_input);
+        additional_input = ft_strjoin(" ", additional_input);
         input = ft_strjoin(input, additional_input);
         // printf("new_input: %s\n", input);
 
@@ -214,11 +212,10 @@ void tokenize_input(char *input, t_shell *shell)
         // in_single_quote = 0;
         // in_double_quote = 0;
         i = 0;
-
         // Re-parse the new input
         while (additional_input[i] != '\0')
         {
-            
+        	printf("additional_input[i]: %c\n", additional_input[i]);
             c = additional_input[i];
             if (c == '\'' && !in_double_quote)
             {
@@ -246,8 +243,10 @@ void tokenize_input(char *input, t_shell *shell)
             }
             else if (strchr(WHITESPACE, c) && !in_single_quote && !in_double_quote)
             {
-                if (current_token)
-                {
+				printf("test\n");
+				if (current_token)
+				{
+					printf("test2\n");
                     shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
                     if (!shell->tokens)
                     {
@@ -261,10 +260,23 @@ void tokenize_input(char *input, t_shell *shell)
             }
             else
             {
+				printf("add: %c\n", additional_input[i]);
                 current_token = str_append(current_token, c);
             }
             i++;
         }
-        shell->last_token_type = 1; // Reset after re-parsing
+
+		if (current_token)
+		{
+			shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
+			if (!shell->tokens)
+			{
+				perror("realloc");
+				exit(EXIT_FAILURE);
+			}
+			shell->tokens[token_count] = current_token;
+			shell->tokens[token_count + 1] = NULL;
+			shell->last_token_type = 1;
+		}
     }
 }
