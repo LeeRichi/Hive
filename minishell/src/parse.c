@@ -35,9 +35,9 @@ void parse(t_shell *shell)
 {
 	tokenize_input(shell->input, shell);
 
-    print_tokens(shell->tokens);
+	print_tokens(shell->tokens);
 
-    // Check for built-in commands (example: "cd", "exit")
+	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
     {
         if (strcmp(shell->tokens[0], "echo") == 0)

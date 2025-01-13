@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/12 19:05:27 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/13 23:34:47 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,86 +88,56 @@ bool check_balanced_quotes(const char *input)
     return (single_quotes % 2 == 0 && double_quotes % 2 == 0);
 }
 
-void tokenize_input(char *input, t_shell *shell)
+int ft_arraylen(char **tokens)
+{
+	int len;
+
+	len = 0;
+	if (!tokens)
+        return (0);
+    while (tokens[len] != NULL)
+        len++;
+	return (len);
+}
+
+void parse_input_fragment(char *input, t_shell *shell, int *in_single_quote, int *in_double_quote)
 {
     char *current_token = NULL;
-    int token_count = 0;
-    int in_single_quote = 0;
-    int in_double_quote = 0;
     char *env_value;
-    int j;
+    int token_count = shell->tokens ? ft_arraylen(shell->tokens) : 0;
+    int i = 0, j;
     char c;
-	int type_flag = 0;
 
-	// Keep waiting for more inputs if quotes are not balanced
-    while (!check_balanced_quotes(input))
-    {
-        printf("$ ");
-        char *additional_input = readline(NULL);
-        if (!additional_input)
-        {
-            fprintf(stderr, "minishell: unexpected EOF while looking for matching quotes\n");
-            free(input);
-            exit(EXIT_FAILURE);
-        }
-        input = str_append(input, '\n');
-        input = ft_strjoin(input, additional_input);
-        free(additional_input);
-    }
-
-    int i = 0;
     while (input[i] != '\0')
     {
         c = input[i];
-        if (c == '\'' && !in_double_quote)
-            in_single_quote = !in_single_quote;
-        else if (c == '"' && !in_single_quote)
-        {
-            in_double_quote = !in_double_quote;
-            if (current_token == NULL)
-            {
-                shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
-                if (!shell->tokens)
-                {
-                    perror("realloc");
-                    exit(EXIT_FAILURE);
-                }
-                shell->tokens[token_count] = strdup("");
-                shell->tokens[token_count + 1] = NULL;
-                shell->last_token_type = 1;
-            }
-        }
-        else if (!in_single_quote && c == '$')
+        if (c == '\'' && !(*in_double_quote))
+            *in_single_quote = !(*in_single_quote);
+        else if (c == '"' && !(*in_single_quote))
+            *in_double_quote = !(*in_double_quote);
+        else if (!(*in_single_quote) && c == '$')
         {
             env_value = handle_dollar_sign(input, &i);
             j = 0;
             while (env_value[j])
-            {
-                current_token = str_append(current_token, env_value[j]);
-                j++;
-            }
-            if (env_value && env_value[0] != '\0')
-                free(env_value);
+                current_token = str_append(current_token, env_value[j++]);
+            free(env_value);
         }
-        else if (strchr("|<>", c) && !in_single_quote && !in_double_quote)
+        else if (strchr("|<>", c) && !(*in_single_quote) && !(*in_double_quote))
         {
             handle_wrong_pipes(shell, &current_token, &token_count, c);
         }
-        else if (strchr(WHITESPACE, c) && !in_single_quote && !in_double_quote)
+        else if (strchr(WHITESPACE, c) && !(*in_single_quote) && !(*in_double_quote))
         {
             if (current_token)
             {
                 shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
-                if (!shell->tokens)
-                {
-                    perror("realloc");
-                    exit(EXIT_FAILURE);
-                }
                 shell->tokens[token_count++] = current_token;
                 shell->tokens[token_count] = NULL;
                 current_token = NULL;
-            }
-        }
+				shell->last_token_type = 1;
+			}
+		}
         else
         {
             current_token = str_append(current_token, c);
@@ -178,20 +148,44 @@ void tokenize_input(char *input, t_shell *shell)
     if (current_token)
     {
         shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
-        if (!shell->tokens)
-        {
-            perror("realloc");
-            exit(EXIT_FAILURE);
-        }
-        shell->tokens[token_count] = current_token;
-        shell->tokens[token_count + 1] = NULL;
-        shell->last_token_type = 1;
+        shell->tokens[token_count++] = current_token;
+        shell->tokens[token_count] = NULL;
+		shell->last_token_type = 1;
     }
 
-    // Handle incomplete commands like `|` or `<`
-    while (shell->last_token_type == 2 || shell->last_token_type == 3)
-    {
+	// print_tokens(shell->tokens);
+}
+
+void tokenize_input(char *input, t_shell *shell)
+{
+    int in_single_quote = 0;
+    int in_double_quote = 0;
+
+	clear_tokens(shell);
+
+	//this does not work
+	// free_tokens(&shell->tokens);
+
+	while (!check_balanced_quotes(input))
+	{
         printf("> ");
+        char *additional_input = readline(NULL);
+        if (!additional_input)
+        {
+            fprintf(stderr, "minishell: unexpected EOF while looking for matching quotes\n");
+            free(input);
+            exit(EXIT_FAILURE);
+        }
+        input = ft_strjoin(input, additional_input);
+        free(additional_input);
+    }
+
+    parse_input_fragment(input, shell, &in_single_quote, &in_double_quote);
+
+    // Handle incomplete commands
+	while (shell->last_token_type == 2 || shell->last_token_type == 3)
+	{
+        printf("$ ");
         char *additional_input = readline(NULL);
         if (!additional_input)
         {
@@ -200,83 +194,15 @@ void tokenize_input(char *input, t_shell *shell)
             free(input);
             exit(EXIT_FAILURE);
         }
-        // input = str_append(input, '\n');
-        // printf("additional_input: %s\n", additional_input);
-        additional_input = ft_strjoin(" ", additional_input);
+
+        input = ft_strjoin(input, " ");
         input = ft_strjoin(input, additional_input);
-        // printf("new_input: %s\n", input);
-
-        // Reset parsing state for the additional input
-        // current_token = NULL;
-        // token_count = 0;
-        // in_single_quote = 0;
-        // in_double_quote = 0;
-        i = 0;
-        // Re-parse the new input
-        while (additional_input[i] != '\0')
-        {
-        	printf("additional_input[i]: %c\n", additional_input[i]);
-            c = additional_input[i];
-            if (c == '\'' && !in_double_quote)
-            {
-                in_single_quote = !in_single_quote;
-            }
-            else if (c == '"' && !in_single_quote)
-            {
-                in_double_quote = !in_double_quote;
-            }
-            else if (!in_single_quote && c == '$')
-            {
-                env_value = handle_dollar_sign(additional_input, &i);
-                j = 0;
-                while (env_value[j])
-                {
-                    current_token = str_append(current_token, env_value[j]);
-                    j++;
-                }
-                if (env_value && env_value[0] != '\0')
-                    free(env_value);
-            }
-            else if (strchr("|<>", c) && !in_single_quote && !in_double_quote)
-            {
-                handle_wrong_pipes(shell, &current_token, &token_count, c);
-            }
-            else if (strchr(WHITESPACE, c) && !in_single_quote && !in_double_quote)
-            {
-				printf("test\n");
-				if (current_token)
-				{
-					printf("test2\n");
-                    shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
-                    if (!shell->tokens)
-                    {
-                        perror("realloc");
-                        exit(EXIT_FAILURE);
-                    }
-                    shell->tokens[token_count] = current_token;
-                    shell->tokens[token_count + 1] = NULL;
-                    current_token = NULL;
-                }
-            }
-            else
-            {
-				printf("add: %c\n", additional_input[i]);
-                current_token = str_append(current_token, c);
-            }
-            i++;
-        }
-
-		if (current_token)
-		{
-			shell->tokens = ft_realloc(shell->tokens, sizeof(char *) * (token_count + 2));
-			if (!shell->tokens)
-			{
-				perror("realloc");
-				exit(EXIT_FAILURE);
-			}
-			shell->tokens[token_count] = current_token;
-			shell->tokens[token_count + 1] = NULL;
-			shell->last_token_type = 1;
-		}
+		parse_input_fragment(additional_input, shell, &in_single_quote, &in_double_quote);
+		free(additional_input);
     }
+
+	shell->last_token_type = 0;
+
+	free(input);
 }
+
