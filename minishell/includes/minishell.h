@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/13 23:35:30 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/14 20:03:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 typedef struct s_sig
 {
 	int sigint;
-    int sigquit;
+  	int sigquit;
 }	t_sig;
 
 //this is doubly linked list struct //not used yet //pending
@@ -49,11 +49,14 @@ typedef struct s_token
 
 typedef struct s_shell
 {
-    char    **envp;
+    char	**envp;
     char    *input;
     int     exit_code;
     char    **tokens; //might need to change tpye to custom linked list??
-    int 		last_token_type;
+    int		last_token_type;
+	int		token_count;
+	int		in_single_quote;
+    int		in_double_quote;
 } t_shell;
 
 //global functions
@@ -73,8 +76,17 @@ void handle_exit(t_shell *shell, char **tokens);
 //lex
 void tokenize_input(char *input, t_shell *shell);
 char *str_append(char *str, char c);
-//lex/wrong.pipe.c
+//lex/wrong_pipe.c
 void handle_wrong_pipes(t_shell *shell, char **current_token, int *token_count, char c);
+//lex/wrong_quotes.c
+char *handle_dollar_sign(char *s, int *index);
+bool check_balanced_quotes(const char *input);
+void handle_unbalanced_quotes(char **input);
+
+//lex/lex_helper.c
+char *str_append(char *str, char c);
+char *get_env_value(const char *env_name);
+int ft_arraylen(char **tokens);
 
 //utils
 //free.c
@@ -84,5 +96,5 @@ void ft_free_all(t_shell *shell);
 //print.c
 void print_tokens(char **tokens);
 
-extern t_sig sig;
+extern t_sig g_sig;
 #endif

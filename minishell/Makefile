@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/11 17:54:15 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/14 19:40:12 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRCS = src/main.c \
 		src/lex/wrong_pipe.c \
 		src/utils/free.c \
 		src/utils/print.c \
+		src/lex/quotes_and_dollar.c \
+		src/lex/lex_helper.c \
 
 OBJS = $(SRCS:.c=.o)
 

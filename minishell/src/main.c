@@ -6,27 +6,25 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/11 17:50:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:58:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//global signal
-t_sig sig;
+t_sig	g_sig;
 
-//think what you need in a shell
-static void shell_init(char **envp, t_shell *shell)
+static void	shell_init(char **envp, t_shell *shell)
 {
-    shell->envp = envp;
-    shell->input = NULL;
+	shell->envp = envp;
+	shell->input = NULL;
 	shell->tokens = NULL;
 	shell->last_token_type = 0;
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	t_shell shell;
+	t_shell	shell;
 
 	(void)av;
 	if (ac != 1)
@@ -37,25 +35,15 @@ int	main(int ac, char **av, char **envp)
 	init_sig();
 	signal(SIGINT, &handle_sigint);
 	signal(SIGQUIT, &handle_sigquit);
-
 	shell_init(envp, &shell);
-
-	// start minishell
 	while (1)
 	{
 		shell.input = readline("$ ");
-		if (!shell.input)
-        {
-            printf("exit\n");
-            break;
-        }
 		if (shell.input)
-            add_history(shell.input);
-		//parse
+			add_history(shell.input);
 		parse(&shell);
-		// exec //later
 		// execute(&shell);
 	}
 	ft_free_all(&shell);
-	return(shell.exit_code);
+	return (shell.exit_code);
 }
