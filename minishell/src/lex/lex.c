@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/14 23:58:45 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 00:07:49 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,18 +127,30 @@ void process_additional_input(t_shell *shell, char **input)
     }
 }
 
-void empty_pipe_checker(char *input, t_shell *shell)
+int empty_pipe_checker(char *input, t_shell *shell)
 {
-	if (ft_strncmp(input, "||", 2) == 0)
-	{
-		printf("test double, minishell: syntax error near unexpected token `%s`\n", "||");
-		return ;
-	}
-	if (ft_start_with(input, '|'))
-	{
-		printf("test single, minishell: syntax error near unexpected token `%c`\n", '|');
-		return;
-	}
+    while (*input == ' ' || *input == '\t' || *input == '\n')
+        input++;
+
+    if (ft_strncmp(input, "||", 2) == 0)
+    {
+        printf("minishell: syntax error near unexpected token `%s`\n", "||");
+        clear_tokens(shell);
+        return (1);
+    }
+    if (ft_start_with(input, '|'))
+    {
+        printf("minishell: syntax error near unexpected token `%c`\n", '|');
+        clear_tokens(shell);
+        return (1);
+    }
+    if (ft_strncmp(input, ">", 2) == 0 || ft_strncmp(input, ">>", 2) || ft_strncmp(input, "<", 2) || ft_strncmp(input, "<<", 2))
+    {
+        printf("minishell: syntax error near unexpected token `%s`\n", "newline");
+        clear_tokens(shell);
+        return (1);
+    }
+    return (0);
 }
 
 void tokenize_input(char *input, t_shell *shell)
@@ -146,7 +158,11 @@ void tokenize_input(char *input, t_shell *shell)
 	shell->in_single_quote = 0;
 	shell->in_double_quote = 0;
 	clear_tokens(shell);
-	empty_pipe_checker(input, shell);
+  	if (empty_pipe_checker(input, shell))
+    {
+        free(input);
+        return;
+    }
 	handle_unbalanced_quotes(&input);
 	parse_input_fragment(input, shell);
 	process_additional_input(shell, &input);
