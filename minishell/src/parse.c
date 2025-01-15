@@ -1,8 +1,4 @@
 #include "../includes/minishell.h"
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 //exe part
 void execute_external_command(char **tokens)
@@ -34,7 +30,9 @@ void execute_external_command(char **tokens)
 void parse(t_shell *shell)
 {
 	tokenize_input(shell->input, shell);
-	// print_tokens(shell->tokens);
+	print_tokens(shell->tokens);
+
+    ft_structlize(shell);
 
 	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)

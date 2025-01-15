@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 14:08:31 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:25:15 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define NONE_NUMERIC_EXIT_CODE 255
 # define WHITESPACE " \t\n"
 
-//structs
 typedef struct s_sig
 {
 	int sigint;
@@ -44,14 +43,23 @@ typedef enum e_token_type {
     TOKEN_REDIRECT
 } t_token_type;
 
-//this is doubly linked list struct //not used yet //pending
-typedef struct s_token
+typedef enum e_redirect_type {
+    INPUT_REDIRECT,
+    OUTPUT_REDIRECT,
+    APPEND_REDIRECT,
+    HERE_DOC
+} t_redirect_type;
+
+typedef struct s_cmd
 {
- char   *str;
- char   *type;
- struct s_token *prev;
- struct s_token *next;
-} t_token;
+    char            *name;
+    t_redirect_type *type;
+    char		    **infiles;
+	char		    **outfiles;
+    struct s_cmd    *next;
+    //pipe flag yes = 1 or no = 0
+    int             pipe;
+} t_cmd;
 
 typedef struct s_shell
 {
@@ -59,11 +67,13 @@ typedef struct s_shell
     char    *input;
 	int 	current_index;
 	int 	exit_code;
-	char    **tokens; //might need to change tpye to custom linked list??
-    int		last_token_type; //can chane to enum?
+	char    **tokens;
 	int		token_count;
 	int		in_single_quote;
     int		in_double_quote;
+
+    t_token_type    last_token_type;
+    t_cmd   *cmds;
 } t_shell;
 
 
@@ -108,6 +118,7 @@ void ft_free_all(t_shell *shell);
 void print_tokens(char **tokens);
 
 //lex/heredoc.c
+char *extract_delimiter(char *input, int *i);
 void handle_heredoc(t_shell *shell, char *delimiter);
 
 extern t_sig g_sig;

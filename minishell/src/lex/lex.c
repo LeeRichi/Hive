@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 14:31:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:08:00 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,14 @@ void parse_input_character(t_shell *shell, char **current_token, int *i, char *i
             *current_token = str_append(*current_token, env_value[j++]);
         free(env_value);
     }
-	else if (shell->tokens[*i] && strcmp(shell->tokens[*i], "<<") == 0)
-	{
-		printf("yo\n");
-
-		if (shell->tokens[*i + 1]) // Ensure a delimiter follows
-		{
-			printf("hi\n");
-			char *delimiter = shell->tokens[++*i];
-			handle_heredoc(shell, delimiter);
-		}
-		else
-    	{
-        	fprintf(stderr, "minishell: syntax error near unexpected token `newline`\n");
-        	return;
-    	}
-	}
     else if (strchr("|<>", input[*i]) && !(shell->in_single_quote) && !(shell->in_double_quote))
 	{
+        if (input[*i] == '<' && input[*i + 1] == '<')
+        {
+            handle_heredoc(shell, extract_delimiter(input, i));
+            //do i need a break here??
+            return ;
+        }
 		shell->current_index = *i;
 		handle_wrong_pipes(shell, current_token, &shell->token_count, input[*i]);
 		*i = shell->current_index;
@@ -92,6 +82,7 @@ static void append_additional_input(char **input, char *additional_input)
     *input = new_input;
 }
 
+//needs to add more
 void handle_unexpected_eof(t_shell *shell, char *input, char *additional_input)
 {
     if (shell->last_token_type == 2)
@@ -111,7 +102,7 @@ void process_additional_input(t_shell *shell, char **input)
     {
         printf("> ");
         additional_input = readline(NULL);
-        if (!additional_input || ft_start_with(additional_input, '|')) //here
+        if (!additional_input || ft_start_with(additional_input, '|'))
             handle_unexpected_eof(shell, *input, additional_input);
 		append_additional_input(input, additional_input);
         parse_input_fragment(additional_input, shell);

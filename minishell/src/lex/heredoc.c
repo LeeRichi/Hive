@@ -6,11 +6,31 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:54:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 14:10:46 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 17:01:28 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char *extract_delimiter(char *input, int *i)
+{
+    int start = *i + 2;  // Skip past the `<<`
+    while (input[start] && strchr(WHITESPACE, input[start]))  // Skip any leading spaces
+        start++;
+
+    int end = start;
+    while (input[end] && !strchr(WHITESPACE, input[end]))  // Find the end of the delimiter
+        end++;
+
+    // Allocate memory for the delimiter string
+    char *delimiter = ft_substr(input, start, end - start);
+    *i = end - 1;  // Move the index after the delimiter
+
+
+    printf("delimiter: %s\n", delimiter);
+
+    return delimiter;
+}
 
 void handle_heredoc(t_shell *shell, char *delimiter)
 {

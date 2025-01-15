@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:28:12 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 14:06:33 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:11:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int ft_arraylen(char **tokens)
 	if (!tokens)
         return (0);
     while (tokens[len] != NULL)
+    {
         len++;
+    }
 	return (len);
 }
 
