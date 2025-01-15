@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:28:12 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/14 19:28:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 10:39:11 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,27 @@ int ft_arraylen(char **tokens)
     while (tokens[len] != NULL)
         len++;
 	return (len);
+}
+
+int ft_start_with(char *str, char c)
+{
+    int i = 0;
+
+    while (str[i])
+    {
+        while (str[i] == ' ')
+			i++;
+        if (str[i] != c)
+            return (0);
+		else
+			return (1);
+		// Check for incomplete operators like '|'
+        if (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>')
+            return (1);
+        // Check for unclosed quotes
+        if (str[i] == '\'' || str[i] == '\"')
+            return (1);
+        i++;
+    }
+    return (0);
 }

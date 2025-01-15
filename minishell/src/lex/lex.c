@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 00:07:49 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 11:31:13 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void parse_input_character(t_shell *shell, char **current_token, int *i, char *i
     char *env_value;
     int j;
 
-    if (input[*i] == '\'' && !(shell->in_double_quote))
+	if (input[*i] == '\'' && !(shell->in_double_quote))
         shell->in_single_quote = !(shell->in_single_quote);
     else if (input[*i] == '"' && !(shell->in_single_quote))
         shell->in_double_quote = !(shell->in_double_quote);
@@ -42,7 +42,11 @@ void parse_input_character(t_shell *shell, char **current_token, int *i, char *i
         free(env_value);
     }
     else if (strchr("|<>", input[*i]) && !(shell->in_single_quote) && !(shell->in_double_quote))
-        handle_wrong_pipes(shell, current_token, &shell->token_count, input[*i]);
+	{
+		shell->current_index = *i;
+		handle_wrong_pipes(shell, current_token, &shell->token_count, input[*i]);
+		*i = shell->current_index;
+	}
     else if (strchr(WHITESPACE, input[*i]) && !(shell->in_single_quote) && !(shell->in_double_quote))
         finalize_token(shell, current_token, &shell->token_count);
     else
@@ -83,37 +87,9 @@ void handle_unexpected_eof(t_shell *shell, char *input, char *additional_input)
     exit(EXIT_FAILURE);
 }
 
-int ft_start_with(char *str, char c)
-{
-    int i = 0;
-
-    while (str[i])
-    {
-        // Skip leading whitespace
-        while (str[i] == ' ')
-			i++;
-
-        if (str[i] != c)
-            return (0);
-		else
-			return (1);
-		// Check for incomplete operators like '|'
-        if (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>')
-            return (1);
-
-        // Check for unclosed quotes
-        if (str[i] == '\'' || str[i] == '\"')
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-
 void process_additional_input(t_shell *shell, char **input)
 {
     char *additional_input;
-	// printf("%end type: d\n", shell->last_token_type);
 
 	while (shell->last_token_type == 2 || shell->last_token_type == 3)
     {
@@ -125,32 +101,6 @@ void process_additional_input(t_shell *shell, char **input)
         parse_input_fragment(additional_input, shell);
         free(additional_input);
     }
-}
-
-int empty_pipe_checker(char *input, t_shell *shell)
-{
-    while (*input == ' ' || *input == '\t' || *input == '\n')
-        input++;
-
-    if (ft_strncmp(input, "||", 2) == 0)
-    {
-        printf("minishell: syntax error near unexpected token `%s`\n", "||");
-        clear_tokens(shell);
-        return (1);
-    }
-    if (ft_start_with(input, '|'))
-    {
-        printf("minishell: syntax error near unexpected token `%c`\n", '|');
-        clear_tokens(shell);
-        return (1);
-    }
-    if (ft_strncmp(input, ">", 2) == 0 || ft_strncmp(input, ">>", 2) || ft_strncmp(input, "<", 2) || ft_strncmp(input, "<<", 2))
-    {
-        printf("minishell: syntax error near unexpected token `%s`\n", "newline");
-        clear_tokens(shell);
-        return (1);
-    }
-    return (0);
 }
 
 void tokenize_input(char *input, t_shell *shell)
