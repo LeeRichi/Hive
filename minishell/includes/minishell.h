@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 11:29:17 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:08:31 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_sig
   	int sigquit;
 }	t_sig;
 
+typedef enum e_token_type {
+    TOKEN_WORD,
+    TOKEN_PIPE,
+    TOKEN_REDIRECT
+} t_token_type;
+
 //this is doubly linked list struct //not used yet //pending
 typedef struct s_token
 {
@@ -54,11 +60,12 @@ typedef struct s_shell
 	int 	current_index;
 	int 	exit_code;
 	char    **tokens; //might need to change tpye to custom linked list??
-    int		last_token_type;
+    int		last_token_type; //can chane to enum?
 	int		token_count;
 	int		in_single_quote;
     int		in_double_quote;
 } t_shell;
+
 
 //global functions
 void parse(t_shell *shell);
@@ -90,6 +97,7 @@ char *str_append(char *str, char c);
 char *get_env_value(const char *env_name);
 int ft_arraylen(char **tokens);
 int ft_start_with(char *str, char c);
+int ft_end_with(char *str, char c);
 
 //utils
 //free.c
@@ -98,6 +106,9 @@ void clear_tokens(t_shell *shell);
 void ft_free_all(t_shell *shell);
 //print.c
 void print_tokens(char **tokens);
+
+//lex/heredoc.c
+void handle_heredoc(t_shell *shell, char *delimiter);
 
 extern t_sig g_sig;
 #endif

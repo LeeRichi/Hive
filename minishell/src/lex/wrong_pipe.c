@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:44:57 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 11:35:24 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 12:43:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int empty_pipe_checker(char *input, t_shell *shell)
         clear_tokens(shell);
         return (1);
     }
+	if (ft_end_with(input, '>') || ft_end_with(input, '<'))
+	{
+		printf("minishell: syntax error near unexpected token `%s`\n", "newline");
+		clear_tokens(shell);
+		return (1);
+	}
 	if(is_exact_operator(input))
 	{
         printf("minishell: syntax error near unexpected token `%s`\n", "newline");

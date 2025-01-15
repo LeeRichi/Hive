@@ -24,6 +24,7 @@ SRCS = ft_isalpha.c \
 		ft_realloc.c \
 		ft_strncmp.c \
 		ft_strtrim.c \
+		ft_strcmp.c \
 
 # BONUS = ft_lstmap_bonus.c ft_lstnew_bonus.c 			\
 # 		ft_lstlast_bonus.c ft_lstsize_bonus.c			\

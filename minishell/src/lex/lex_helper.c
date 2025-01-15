@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 19:28:12 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 10:39:11 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:06:33 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,45 @@ int ft_start_with(char *str, char c)
 
     while (str[i])
     {
-        while (str[i] == ' ')
-			i++;
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+        	i++;
         if (str[i] != c)
             return (0);
 		else
 			return (1);
 		// Check for incomplete operators like '|'
-        if (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>')
-            return (1);
-        // Check for unclosed quotes
-        if (str[i] == '\'' || str[i] == '\"')
-            return (1);
+        // if (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>')
+        //     return (1);
+        // // Check for unclosed quotes
+        // if (str[i] == '\'' || str[i] == '\"')
+        //     return (1);
         i++;
+    }
+    return (0);
+}
+
+int ft_end_with(char *str, char c)
+{
+    // int i = 0;
+	int len;
+
+	len = ft_strlen(str);
+	while (len > 0)
+	{
+		len--;
+		while (str[len] == ' ' || str[len] == '\t' || str[len] == '\n')
+			len--;
+        if (str[len] == c)
+			return (1);
+		else
+			return (0);
+		// //>> or << //maybe no need
+        // if ((c == '<' && str[len - 1] == '<' ) || (c == '>' && str[len - 1] == '>'))
+        //     return (1);
+        // // Check for unclosed quotes //not sure
+        // if (str[i] == '\'' || str[i] == '\"')
+        //     return (1);
+        len--;
     }
     return (0);
 }

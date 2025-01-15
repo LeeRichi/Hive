@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:23:08 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 11:31:13 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:31:02 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ void parse_input_character(t_shell *shell, char **current_token, int *i, char *i
             *current_token = str_append(*current_token, env_value[j++]);
         free(env_value);
     }
+	else if (shell->tokens[*i] && strcmp(shell->tokens[*i], "<<") == 0)
+	{
+		printf("yo\n");
+
+		if (shell->tokens[*i + 1]) // Ensure a delimiter follows
+		{
+			printf("hi\n");
+			char *delimiter = shell->tokens[++*i];
+			handle_heredoc(shell, delimiter);
+		}
+		else
+    	{
+        	fprintf(stderr, "minishell: syntax error near unexpected token `newline`\n");
+        	return;
+    	}
+	}
     else if (strchr("|<>", input[*i]) && !(shell->in_single_quote) && !(shell->in_double_quote))
 	{
 		shell->current_index = *i;

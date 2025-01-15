@@ -34,7 +34,7 @@ void execute_external_command(char **tokens)
 void parse(t_shell *shell)
 {
 	tokenize_input(shell->input, shell);
-	print_tokens(shell->tokens);
+	// print_tokens(shell->tokens);
 
 	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
