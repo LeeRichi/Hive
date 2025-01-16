@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/15 14:08:39 by chlee2           ###   ########.fr        #
+#    Updated: 2025/01/16 13:44:38 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = src/main.c \
 		src/utils/print.c \
 		src/lex/quotes_and_dollar.c \
 		src/lex/lex_helper.c \
-		src/lex/heredoc.c\
+		src/lex/heredoc.c \
+		src/structlize.c \
 
 OBJS = $(SRCS:.c=.o)
 

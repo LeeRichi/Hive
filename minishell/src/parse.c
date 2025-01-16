@@ -30,9 +30,12 @@ void execute_external_command(char **tokens)
 void parse(t_shell *shell)
 {
 	tokenize_input(shell->input, shell);
-	print_tokens(shell->tokens);
 
-    ft_structlize(shell);
+	// print_tokens(shell->tokens);
+	if (!shell->err_code)
+		ft_structlize(shell);
+
+	print_cmd_struct(shell->cmds);
 
 	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
@@ -51,8 +54,8 @@ void parse(t_shell *shell)
         //     handle_unset(shell->tokens);
         // else if (strcmp(shell->tokens[0], "export") == 0)
         //     handle_export(shell->tokens);
-        else
-            execute_external_command(shell->tokens);
+        // else
+        //     execute_external_command(shell->tokens);
     }
     //might delete depends how I free_all?
     // if (shell->tokens)

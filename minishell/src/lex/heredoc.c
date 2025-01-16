@@ -6,11 +6,13 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:54:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 17:01:28 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:18:31 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+//pending
 
 char *extract_delimiter(char *input, int *i)
 {
@@ -25,7 +27,6 @@ char *extract_delimiter(char *input, int *i)
     // Allocate memory for the delimiter string
     char *delimiter = ft_substr(input, start, end - start);
     *i = end - 1;  // Move the index after the delimiter
-
 
     printf("delimiter: %s\n", delimiter);
 

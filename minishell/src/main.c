@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:56:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/15 17:15:57 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:19:30 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 t_sig	g_sig;
 
-static void	shell_init(char **envp, t_shell *shell)
+static void shell_init(char **envp, t_shell *shell)
 {
-	shell->envp = envp;
-	shell->input = NULL;
-	shell->tokens = NULL;
-	shell->last_token_type = 0;
+    shell->envp = envp;
+    shell->input = NULL;
+    shell->tokens = NULL;
+    shell->token_count = 0;
+    shell->current_index = 0;
+    shell->exit_code = 0;
+    shell->in_single_quote = 0;
+    shell->in_double_quote = 0;
+    shell->err_code = 0;
+    shell->last_token_type = 0;
+    shell->cmds = NULL;
 }
 
 int	main(int ac, char **av, char **envp)
