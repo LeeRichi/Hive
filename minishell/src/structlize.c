@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:27:51 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/16 15:17:11 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/16 20:32:04 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void ft_nullize_struct(t_cmd *new_cmd)
     new_cmd->arg = NULL;
     new_cmd->infiles = NULL;
     new_cmd->outfiles = NULL;
-    new_cmd->type = INPUT_REDIRECT; //deault
+    new_cmd->type = NULL;
     new_cmd->pipe = 0;
     new_cmd->next = NULL;
 }
@@ -82,17 +82,39 @@ void handle_pipe(t_cmd **current_cmd, t_cmd **new_cmd, t_shell *shell)
     *current_cmd = *new_cmd;
 }
 
+
 void handle_redirection(t_cmd *current_cmd, char *operator, char *file)
 {
+    static int i = 0;
+    
+    if (current_cmd->type == NULL) {
+        current_cmd->type = malloc(sizeof(t_redirect_type) * 10);  // Initial size, increase later if needed
+        if (!current_cmd->type) {
+            perror("malloc failed for type");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Add redirection based on the operator
     if (strcmp(operator, "<") == 0)
+    {
         ft_add_redirection(&current_cmd->infiles, file);
+        current_cmd->type[i] = INPUT_REDIRECT;
+    }
     else if (strcmp(operator, ">") == 0 || strcmp(operator, ">>") == 0)
+    {
         ft_add_redirection(&current_cmd->outfiles, file);
+        if (strcmp(operator, ">") == 0)
+            current_cmd->type[i] = OUTPUT_REDIRECT;
+        else
+            current_cmd->type[i] = APPEND_REDIRECT;
+    }
     else if (strcmp(operator, "<<") == 0)
     {
         ft_add_redirection(&current_cmd->infiles, file);
-        current_cmd->type = HERE_DOC;
+        current_cmd->type[i] = HERE_DOC;
     }
+    i++;
 }
 
 void ft_structlize(t_shell *shell)
@@ -117,6 +139,8 @@ void ft_structlize(t_shell *shell)
         {
 			i++;
 			handle_redirection(current_cmd, shell->tokens[i - 1], shell->tokens[i]);
+            //for (int j = 0; j < ; j++)
+              //  printf("i: %d current cmd: %d\n", i, current_cmd->type[j]);
 		}
         else
         {
