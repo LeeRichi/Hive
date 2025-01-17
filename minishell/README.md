@@ -8,7 +8,6 @@
 
 ### 1. test cases
 
-
 TODOs:
 ARG="ls -l"
 $ARG
@@ -16,9 +15,9 @@ $ARG
 HANDLED PARSING:
 echo "hi"
 (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
-- [x] echo "hi"
-- [x] (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
-- [ ]
+- [✔] echo "hi"
+- [✔] (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
+- [ ] ..more(replace this)
 
 HANDLED EXECUTION:
 
