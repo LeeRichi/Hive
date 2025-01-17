@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:53:11 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/16 20:46:25 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/17 10:58:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_cmd
 	char		    **outfiles;
     struct s_cmd    *next;
     int             pipe;
+		int redirection_index;
 } t_cmd;
 
 typedef struct s_shell

@@ -14,7 +14,11 @@ ARG="ls -l"
 $ARG
 
 HANDLED PARSING:
-echo "hi" 
+echo "hi"
+(basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
+- [x] echo "hi"
+- [x] (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
+- [ ]
 
 HANDLED EXECUTION:
 

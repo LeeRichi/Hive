@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:27:51 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/16 20:32:04 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/17 11:04:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void ft_nullize_struct(t_cmd *new_cmd)
     new_cmd->outfiles = NULL;
     new_cmd->type = NULL;
     new_cmd->pipe = 0;
-    new_cmd->next = NULL;
+	new_cmd->redirection_index = 0;
+	new_cmd->next = NULL;
 }
 
 void ft_add_redirection(char ***array, char *file)
@@ -85,8 +86,9 @@ void handle_pipe(t_cmd **current_cmd, t_cmd **new_cmd, t_shell *shell)
 
 void handle_redirection(t_cmd *current_cmd, char *operator, char *file)
 {
-    static int i = 0;
-    
+    // static int i = 0;
+	int i = current_cmd->redirection_index;
+
     if (current_cmd->type == NULL) {
         current_cmd->type = malloc(sizeof(t_redirect_type) * 10);  // Initial size, increase later if needed
         if (!current_cmd->type) {
@@ -95,13 +97,15 @@ void handle_redirection(t_cmd *current_cmd, char *operator, char *file)
         }
     }
 
-    // Add redirection based on the operator
+	printf("op: %s\n", operator);
+
+	// Add redirection based on the operator
     if (strcmp(operator, "<") == 0)
     {
         ft_add_redirection(&current_cmd->infiles, file);
         current_cmd->type[i] = INPUT_REDIRECT;
-    }
-    else if (strcmp(operator, ">") == 0 || strcmp(operator, ">>") == 0)
+	}
+	else if (strcmp(operator, ">") == 0 || strcmp(operator, ">>") == 0)
     {
         ft_add_redirection(&current_cmd->outfiles, file);
         if (strcmp(operator, ">") == 0)
@@ -114,7 +118,8 @@ void handle_redirection(t_cmd *current_cmd, char *operator, char *file)
         ft_add_redirection(&current_cmd->infiles, file);
         current_cmd->type[i] = HERE_DOC;
     }
-    i++;
+	printf("i: %d, current_cmd->type[i]: %d\n", i, current_cmd->type[i]);
+	current_cmd->redirection_index = ++i;
 }
 
 void ft_structlize(t_shell *shell)
@@ -139,10 +144,8 @@ void ft_structlize(t_shell *shell)
         {
 			i++;
 			handle_redirection(current_cmd, shell->tokens[i - 1], shell->tokens[i]);
-            //for (int j = 0; j < ; j++)
-              //  printf("i: %d current cmd: %d\n", i, current_cmd->type[j]);
 		}
-        else
+		else
         {
             if (current_cmd->cmd_name == NULL)
                 current_cmd->cmd_name = strdup(shell->tokens[i]);
@@ -151,4 +154,5 @@ void ft_structlize(t_shell *shell)
         }
         i++;
     }
+	current_cmd->redirection_index = 0;
 }

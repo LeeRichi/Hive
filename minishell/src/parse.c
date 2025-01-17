@@ -35,7 +35,7 @@ void parse(t_shell *shell)
 	if (!shell->err_code)
 		ft_structlize(shell);
 
-	// print_cmd_struct(shell->cmds);
+	print_cmd_struct(shell->cmds);
 
 	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
