@@ -8,13 +8,14 @@
 
 ### 1. test cases
 
-
 TODOs:
 ARG="ls -l"
 $ARG
 
 HANDLED PARSING:
-echo "hi" 
+- [x] echo "hi"
+- [x] (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
+- [ ] ..more(replace this)
 
 HANDLED EXECUTION:
 

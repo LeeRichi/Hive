@@ -37,7 +37,6 @@ void parse(t_shell *shell)
 
 	// print_cmd_struct(shell->cmds);
 
-	// Check for built-in commands (example: "cd", "exit")
     if (shell->tokens && shell->tokens[0] != NULL)
     {
         if (strcmp(shell->tokens[0], "echo") == 0)

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:53:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/01/16 20:50:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/01/17 10:54:44 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void print_cmd_struct(t_cmd *cmd)
         {
             printf("Types: \n");
             for (int i = 0; i < file_counter; i++)
-                printf("%s \n", get_redirection_type_string(cmd->type[i]));
+			{
+				printf("i: %d\n", i);
+				printf("type int: %d, str: %s \n", cmd->type[i], get_redirection_type_string(cmd->type[i]));
+			}
             printf("\n");
         }
 
