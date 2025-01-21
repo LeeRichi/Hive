@@ -91,27 +91,27 @@ char *get_next_line(int fd)
 	return (line);
 }
 
-int main(void)
-{
-	// char *test = "test";
+// int main(void)
+// {
+// 	// char *test = "test";
 
-	// char *second = "second";
+// 	// char *second = "second";
 
-	// char *result;
+// 	// char *result;
 
-	// result = ft_strjoin(test, second);
+// 	// result = ft_strjoin(test, second);
 
-	// printf("result: %s\n", result);
+// 	// printf("result: %s\n", result);
 
-	int fd;
-	char *line;
+// 	int fd;
+// 	char *line;
 
-	fd = open("test.txt", O_RDONLY);
+// 	fd = open("test.txt", O_RDONLY);
 
-	while((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-}
+// 	while((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// }

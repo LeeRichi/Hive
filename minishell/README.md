@@ -14,7 +14,11 @@ $ARG
 
 HANDLED PARSING:
 - [x] echo "hi"
-- [x] (basic redir handle check) echo "output" > file.txt < file2.txt > file3.txt
+- [x] echo "output" > file.txt < file2.txt > file3.txt (basic redir handle checks, testing more every now and then)
+- [x] only | or || or > or >> or < or <<
+- [x] echo "hello" | echo "world" (one pipe or more)
+- [ ] multiple pipes with ridir
+
 - [ ] ..more(replace this)
 
 HANDLED EXECUTION:
