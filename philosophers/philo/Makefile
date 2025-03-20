@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/01/30 22:49:16 by chlee2           ###   ########.fr        #
+#    Updated: 2025/03/19 10:36:49 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS = src/main.c \
 				src/helpers.c \
+				src/monitor.c \
+				src/philo_loop.c \
 
 OBJS = $(SRCS:.c=.o)
 
