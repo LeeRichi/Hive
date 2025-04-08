@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/03/19 10:39:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/08 13:50:50 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ typedef struct s_data
 //helpers.h
 int ft_atoi(const char *str);
 void print_exit(char *str);
-size_t get_time(void);
+// size_t get_time(void);
 void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks);
 void destroy_all(t_data *data, pthread_mutex_t *forks);
 
 void *monitor_function(void *args);
 void *philo_loop(void *arg);
+
+size_t get_current_time(void);
 
 #endif

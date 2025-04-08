@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/03/20 12:04:17 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/08 14:05:37 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,26 @@ void print_exit(char *str)
 	exit(EXIT_FAILURE);
 }
 
-size_t get_time(void)
-{
-	struct timeval time;
+// size_t get_time(void)
+// {
+// 	struct timeval time;
 
-	if (gettimeofday(&time, NULL) == -1)
-	{
-		print_exit("Fails on gettimeofday.\n");
-		return (0);
-	}
+// 	if (gettimeofday(&time, NULL) == -1)
+// 	{
+// 		print_exit("Fails on gettimeofday.\n");
+// 		return (0);
+// 	}
 
-    // printf("Current time: %ld seconds, %d microseconds\n", time.tv_sec, time.tv_usec);
-    // printf("combine: %ld\n", time.tv_sec * 1000 + time.tv_usec / 1000);
+//     // printf("Current time: %ld seconds, %d microseconds\n", time.tv_sec, time.tv_usec);
+//     // printf("combine: %ld\n", time.tv_sec * 1000 + time.tv_usec / 1000);
 
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
+// 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+// }
 
 void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
 {
     int i;
+    pthread_t monitor_thread;
 
     data->philos = philos;
     data->dead_flag = 0;
@@ -90,21 +91,28 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
     i = 0;
     while (i < ft_atoi(av[1]))
     {
-        philos[i].id = i + 1; //or just i
+        philos[i].id = i; //or just i
         philos[i].num_philos = ft_atoi(av[1]);
         philos[i].time_to_die = ft_atoi(av[2]);
         philos[i].time_to_eat = ft_atoi(av[3]);
         philos[i].time_to_sleep = ft_atoi(av[4]);
         philos[i].num_times_to_eat = -1;
         if (av[5])
-        philos[i].num_times_to_eat = atoi(av[5]);
+            philos[i].num_times_to_eat = atoi(av[5]);
         philos[i].num_times_eaten = 0;
-        philos[i].is_eating = 0;
-        philos[i].starting_time = 0;
-        philos[i].time_of_last_meal = 0;
+        philos[i].is_eating = 0; //flag
+        philos[i].starting_time = get_current_time(); //record once
+        philos[i].time_of_last_meal = get_current_time(); //updateing each time
         philos[i].dead_flag = 0;
-        philos[i].r_fork = &forks[i];
-        philos[i].l_fork = &forks[(i + 1) % data->philos[0].num_philos];
+
+        //not sure what this is for? (also not being set from header yet)
+        // philos[i].meal_lock = &data->meal_lock;
+
+        philos[i].l_fork = &forks[i];
+        if (i == 0)
+			philos[i].r_fork = &forks[philos[i].num_philos - 1];
+		else
+			philos[i].r_fork = &forks[i - 1];
         i++;
     }
 
@@ -116,8 +124,6 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
         i++;
     }
 
-    pthread_t monitor_thread;
-
     // Create monitor thread
     if (pthread_create(&monitor_thread, NULL, monitor_function, (void *)data) != 0)
     {
@@ -128,7 +134,7 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
     i = 0;
     while (i < data->philos->num_philos)
     {
-        if (pthread_create(&philos[i].thread, NULL, philo_loop, (void *)&philos[i]) != 0)
+        if (pthread_create(&data->philos[i].thread, NULL, philo_loop, (void *)&philos[i]) != 0)
         {
             print_exit("pthread_create philo failed");
             destroy_all(data, forks);

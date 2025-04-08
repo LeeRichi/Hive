@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:24 by chlee2            #+#    #+#             */
-/*   Updated: 2025/03/20 12:04:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/08 14:05:29 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int arg_check(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		print_exit("Usage: ./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [number_of_times_each_philosopher_must_eat]");
-
 	if (atoi(av[1]) <= 0 || ft_atoi(av[1]) > MAX_NUM_PHILO || !ft_is_num(av[1]))
 	{
 		print_exit("Invalid number of philos.");
@@ -56,11 +55,9 @@ int arg_check(int ac, char **av)
 // ◦ time_to_die (in milliseconds):
 // If a philosopher didn’t start eating time_to_die milliseconds since the beginning of
 // their last meal or the beginning of the simulation, they die.
-
 // ◦ time_to_eat (in milliseconds):
 // The time it takes for a philosopher to eat.
 // During that time, they will need to hold two forks.
-
 // ◦ time_to_sleep (in milliseconds): The time a philosopher will spend sleeping
 int main(int ac, char **av)
 {
@@ -72,6 +69,5 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	data_init(&data, av, philos, forks);
 	free(data.philos);
-
 	return (EXIT_SUCCESS);
 }
