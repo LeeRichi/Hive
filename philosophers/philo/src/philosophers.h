@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/08 13:50:50 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/16 20:56:39 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct s_philo
 	size_t time_to_die;
 	size_t time_to_eat;
 	size_t time_to_sleep;
-	int num_times_to_eat;
+	size_t	num_times_to_eat;
 	//process
-	int num_times_eaten;
+	size_t num_times_eaten;
 	int is_eating; //flag
 	size_t starting_time;
 	size_t time_of_last_meal;

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:24 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/08 14:05:29 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:53:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ int main(int ac, char **av)
 	if (!arg_check(ac, av))
 		return (EXIT_FAILURE);
 	data_init(&data, av, philos, forks);
-	free(data.philos);
+	// free(data.philos);
 	return (EXIT_SUCCESS);
 }

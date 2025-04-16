@@ -6,39 +6,97 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/08 14:07:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/16 20:51:18 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+int is_alive(t_philo *philos)
+{
+    int i;
+	
+	i = 0;
+	while (i < philos[i].num_philos)
+	{
+		pthread_mutex_lock(philos[i].eat_lock);
+		if (get_current_time() - philos[i].time_of_last_meal >= philos[i].time_to_die)
+		{
+			pthread_mutex_lock(philos[i].dead_lock);
+			printf("Philosopher %d has died\n", i);
+			philos->dead_flag = 1;
+			philos[i].dead_flag = 1; //single philo
+			pthread_mutex_unlock(philos[i].dead_lock);
+			pthread_mutex_unlock(philos[i].eat_lock);
+			return (0);
+		}
+		pthread_mutex_unlock(philos[i].eat_lock);
+		i++;
+	}
+	return (1);
+}
+
+int	is_all_eaten(t_philo *philos)
+{
+	int	i;
+	int	done;
+
+	done = 0;
+	if ((int)philos[0].num_times_to_eat == -1)
+		return (0);
+	i = 0;
+	while (i < philos[i].num_philos)
+	{
+		pthread_mutex_lock(philos[i].eat_lock);
+		if (philos[i].num_times_eaten >= philos[i].num_times_to_eat)
+			done++;
+		pthread_mutex_unlock(philos[i].eat_lock);
+		i++;
+	}
+	if (done == philos[0].num_philos)
+	{
+		printf("done is now %d\n", done);
+		pthread_mutex_lock(philos[0].dead_lock);
+		
+		philos->dead_flag = 1;
+		philos[0].dead_flag = 1;
+		pthread_mutex_unlock(philos[0].dead_lock);
+		return (1);
+	}
+	return (0);
+}
+
 void *monitor_function(void *arg)
 {
-    t_data *data;
+    t_philo *philos;
 
-    data = (t_data *)arg;
-    int i;
-    while (!data->dead_flag)
+    philos = (t_philo *)arg;
+    while (1)
     {
-        i = 0;
-        while (i < data->philos[0].num_philos)
-        {
-            printf("wait what?: %d\n", data->philos[0].num_philos);
+		// //temp
+		// pthread_mutex_lock(philos->dead_lock);
+        // if (philos->dead_lock)
+        // {
+        //     pthread_mutex_unlock(philos->dead_lock);
+        //     break;
+        // }
+        // pthread_mutex_unlock(philos->dead_lock);
+		
+		// if (!is_alive(philos) || is_all_eaten(philos))
+		
+		if (!is_alive(philos))
+		{
+			printf("someone died!!! or everyone has eaten!!!");
+			break ;
+		}
 
-            printf("i: %d\n", i);
-			printf("Monitor: time now: %zu\n", get_current_time());
-			printf("philo[%d]'s time of last meal: %zu\n", i, data->philos[i].time_of_last_meal);
-			printf("data->philos[%i].time_to_die: %zu\n", i, data->philos[i].time_to_die);
+		// printf("monitor funcccccccccccccccc\n");
 
-            if (get_current_time() - data->philos[i].time_of_last_meal >= data->philos[i].time_to_die * 1000 * 1000)
-            {
-                data->philos[i].dead_flag = 1;
-                data->dead_flag = 1;
-                printf("Philosopher %d has died\n", i);
-                break;
-            }
-            i++;
-        }
+		if (is_all_eaten(philos))
+		{
+			printf("everyone has eaten!!!\n");
+			break ;
+		}
     }
-    return NULL;
+    return (arg);
 }
