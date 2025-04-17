@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/17 19:54:21 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:08:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
     i = 0;
     while (i < ft_atoi(av[1]))
     {
-        philos[i].id = i; //or just i
+        philos[i].id = i + 1; //or just i // no it should be from 1
         philos[i].num_philos = ft_atoi(av[1]);
         philos[i].time_to_die = ft_atoi(av[2]);
         philos[i].time_to_eat = ft_atoi(av[3]);

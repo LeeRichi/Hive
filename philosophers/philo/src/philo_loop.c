@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/17 19:44:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:08:59 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void *philo_loop(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
 
-    if ((philo->id + 1) % 2 == 0)
+    if ((philo->id) % 2 == 0)
         ft_usleep(1);
     
     while (!dead_loop(philo))

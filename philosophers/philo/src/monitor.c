@@ -6,13 +6,13 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/17 19:43:56 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:23:07 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int is_alive(t_philo *philos)
+int did_not_starve(t_philo *philos)
 {
     int i;
 	
@@ -23,9 +23,8 @@ int is_alive(t_philo *philos)
 		if (get_current_time() - philos[i].time_of_last_meal >= philos[i].time_to_die)
 		{
 			pthread_mutex_lock(philos[i].dead_lock);
-			printf("Philosopher %d has died\n", i);
-			philos->dead_flag = 1;
-			philos[i].dead_flag = 1; //single philo
+			printf("Philosopher %d has died\n", philos->id);
+			*philos->dead_flag_pointer = 1;
 			pthread_mutex_unlock(philos[i].dead_lock);
 			pthread_mutex_unlock(philos[i].eat_lock);
 			return (0);
@@ -36,7 +35,7 @@ int is_alive(t_philo *philos)
 	return (1);
 }
 
-int	is_all_eaten(t_philo *philos)
+int	everyone_eats_enough_time(t_philo *philos)
 {
 	int	i;
 	int	done;
@@ -53,19 +52,10 @@ int	is_all_eaten(t_philo *philos)
 		pthread_mutex_unlock(philos[i].eat_lock);
 		i++;
 	}
-	if (done == philos[0].num_philos)
+	if (done == i)
 	{
-		printf("done is now %d\n", done);
-		// pthread_mutex_lock(philos[0].dead_lock);
 		pthread_mutex_lock(philos->dead_lock);
-
-		
-		philos->dead_flag = 1;
-
-		//new
 		*philos->dead_flag_pointer = 1;
-		// philos[0].dead_flag = 1;
-		// pthread_mutex_unlock(philos[0].dead_lock);
 		pthread_mutex_unlock(philos->dead_lock);
 		return (1);
 	}
@@ -80,19 +70,11 @@ void *monitor_function(void *arg)
     while (1)
     {
 		
-		if (!is_alive(philos) || is_all_eaten(philos))
+		if (!did_not_starve(philos) || everyone_eats_enough_time(philos))
 		{
-			printf("someone died!!!\n");
+			printf("someone died or everyone has eaten enough!!!\n"); //this might not be needed at the end.
 			break ;
 		}
-		
-		// if (!is_alive(philos))
-
-		// if (is_all_eaten(philos))
-		// {
-		// 	printf("everyone has eaten!!! Program ends..\n");
-		// 	break ;
-		// }
     }
     return (arg);
 }
