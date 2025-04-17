@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/16 20:51:18 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 19:43:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ int	is_all_eaten(t_philo *philos)
 	if (done == philos[0].num_philos)
 	{
 		printf("done is now %d\n", done);
-		pthread_mutex_lock(philos[0].dead_lock);
+		// pthread_mutex_lock(philos[0].dead_lock);
+		pthread_mutex_lock(philos->dead_lock);
+
 		
 		philos->dead_flag = 1;
-		philos[0].dead_flag = 1;
-		pthread_mutex_unlock(philos[0].dead_lock);
+
+		//new
+		*philos->dead_flag_pointer = 1;
+		// philos[0].dead_flag = 1;
+		// pthread_mutex_unlock(philos[0].dead_lock);
+		pthread_mutex_unlock(philos->dead_lock);
 		return (1);
 	}
 	return (0);
@@ -73,30 +79,20 @@ void *monitor_function(void *arg)
     philos = (t_philo *)arg;
     while (1)
     {
-		// //temp
-		// pthread_mutex_lock(philos->dead_lock);
-        // if (philos->dead_lock)
-        // {
-        //     pthread_mutex_unlock(philos->dead_lock);
-        //     break;
-        // }
-        // pthread_mutex_unlock(philos->dead_lock);
 		
-		// if (!is_alive(philos) || is_all_eaten(philos))
-		
-		if (!is_alive(philos))
+		if (!is_alive(philos) || is_all_eaten(philos))
 		{
-			printf("someone died!!! or everyone has eaten!!!");
+			printf("someone died!!!\n");
 			break ;
 		}
+		
+		// if (!is_alive(philos))
 
-		// printf("monitor funcccccccccccccccc\n");
-
-		if (is_all_eaten(philos))
-		{
-			printf("everyone has eaten!!!\n");
-			break ;
-		}
+		// if (is_all_eaten(philos))
+		// {
+		// 	printf("everyone has eaten!!! Program ends..\n");
+		// 	break ;
+		// }
     }
     return (arg);
 }

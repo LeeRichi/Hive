@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/16 20:54:52 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 19:44:22 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,16 @@ void eat(t_philo *philo)
 
 void dream(t_philo *philo)
 {
-    // Philosopher goes to sleep
     print_message("is sleeping", philo, philo->id);
-    usleep(philo->time_to_sleep * 1000);  // Convert time_to_sleep from ms to microseconds
+    usleep(philo->time_to_sleep * 1000);
 }
 
 int	dead_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
-	// printf("fuckkkkkk: %d \n", philo->dead_flag);
-	if (philo->dead_flag == 1)
+	if (*philo->dead_flag_pointer == 1)
 		return (pthread_mutex_unlock(philo->dead_lock), 1);
 	pthread_mutex_unlock(philo->dead_lock);
-	// return (pthread_mutex_unlock(philo->dead_lock), 0);
 	return (0);
 }
 
@@ -96,8 +93,8 @@ void *philo_loop(void *arg)
 
     if ((philo->id + 1) % 2 == 0)
         ft_usleep(1);
-
-    while (1)
+    
+    while (!dead_loop(philo))
     {
         if (dead_loop(philo))
             break;
@@ -109,7 +106,6 @@ void *philo_loop(void *arg)
             break;
         think(philo);
     }
-	printf("fuckkkkkk: %d\n", dead_loop(philo));
     return NULL;
 }
 

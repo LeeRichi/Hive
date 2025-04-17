@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/16 20:59:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 19:54:21 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,12 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
         philos[i].starting_time = get_current_time(); //record once
         philos[i].time_of_last_meal = get_current_time(); //updateing each time
         philos[i].dead_flag = 0;
+        //new
+        philos[i].dead_flag_pointer = &data->dead_flag;
 
         philos[i].write_lock = &data->write_lock;
 		philos[i].dead_lock = &data->dead_lock;
 		philos[i].eat_lock = &data->eat_lock;
-
-        //not sure what this is for? (also not being set from header yet)
-        // philos[i].meal_lock = &data->meal_lock;
 
         philos[i].l_fork = &forks[i] + 1;
         if (i == 0)
@@ -120,7 +119,6 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
         i++;
     }
 
-    // Initialize forks mutexes
     i = 0;
     while (i < data->philos[0].num_philos)
     {
@@ -128,7 +126,6 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
         i++;
     }
 
-    // Create monitor thread
     if (pthread_create(&monitor_thread, NULL, monitor_function, data->philos) != 0)
     {
         print_exit("pthread_create monitor failed");
@@ -138,7 +135,6 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
     i = 0;
     while (i < data->philos->num_philos)
     {
-        printf("i: %d\n", i);
         if (pthread_create(&data->philos[i].thread, NULL, philo_loop, &data->philos[i]) != 0)
         {
             print_exit("pthread_create philo failed");
@@ -147,7 +143,6 @@ void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
         i++;
     }
 
-    // Join all threads (important for synchronization)
     if (pthread_join(monitor_thread, NULL) != 0)
     {
         print_exit("pthread_join monitor failed");

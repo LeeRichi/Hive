@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/16 20:56:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:03:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_philo
 	size_t starting_time;
 	size_t time_of_last_meal;
 	int dead_flag;
+	int	*dead_flag_pointer;
+
 	// pointers to central values
 	pthread_mutex_t *write_lock;
 	pthread_mutex_t *dead_lock;
@@ -61,13 +63,10 @@ typedef struct s_data
 //helpers.h
 int ft_atoi(const char *str);
 void print_exit(char *str);
-// size_t get_time(void);
 void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks);
 void destroy_all(t_data *data, pthread_mutex_t *forks);
-
 void *monitor_function(void *args);
 void *philo_loop(void *arg);
-
 size_t get_current_time(void);
 
 #endif
