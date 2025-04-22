@@ -6,46 +6,49 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/17 20:08:59 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:55:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_usleep(size_t time)
-{
-    size_t start;
+// int ft_usleep(size_t time)
+// {
+//     size_t start;
 
-    start = get_current_time();
-    while (get_current_time() - start < time)
-        usleep(100);
-    return (0);
-}
+//     start = get_current_time();
+//     while (get_current_time() - start < time)
+//         usleep(100);
+//     return (0);
+// }
 
-size_t get_current_time(void)
-{
-    struct timeval time;
+// size_t get_current_time(void)
+// {
+//     struct timeval time;
 
-    if (gettimeofday(&time, NULL) == -1)
-    {
-        perror("gettimeofday");
-        return (0);
-    }
+//     if (gettimeofday(&time, NULL) == -1)
+//     {
+//         perror("gettimeofday");
+//         return (0);
+//     }
 
-    return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
+//     return (time.tv_sec * 1000 + time.tv_usec / 1000);
+// }
 
-void print_message(char *str, t_philo *philo, int id)
-{
-    pthread_mutex_lock(philo->write_lock);
-    printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
-    pthread_mutex_unlock(philo->write_lock);
-}
+// void print_message(char *str, t_philo *philo, int id)
+// {
+//     pthread_mutex_lock(philo->write_lock);
+//     printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
+//     pthread_mutex_unlock(philo->write_lock);
+// }
 
 void think(t_philo *philo)
 {
-    print_message("is fucking thinking", philo, philo->id);
-    usleep(1000); //needs to change
+    if (get_current_time() - philo->time_of_last_meal > philo->time_to_eat / 2)
+        usleep(500);
+    else
+        usleep(1000);
+    print_message("is thinking", philo, philo->id);
 }
 
 void eat(t_philo *philo)

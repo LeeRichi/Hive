@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/17 20:03:24 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 14:59:34 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,21 @@ typedef struct s_data
 {
 	t_philo *philos;
 	int dead_flag;
-	//central locks
 	pthread_mutex_t write_lock;
 	pthread_mutex_t dead_lock;
 	pthread_mutex_t eat_lock;
 } t_data;
 
 //helpers.h
-int ft_atoi(const char *str);
-void print_exit(char *str);
-void data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks);
-void destroy_all(t_data *data, pthread_mutex_t *forks);
-void *monitor_function(void *args);
-void *philo_loop(void *arg);
-size_t get_current_time(void);
+int		ft_atoi(const char *str);
+void	print_exit(char *str);
+void	data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks);
+void	destroy_all(t_data *data, pthread_mutex_t *forks);
+void	*monitor_function(void *args);
+void	*philo_loop(void *arg);
+size_t	get_current_time(void);
+int		ft_usleep(size_t time);
+void	print_message(char *str, t_philo *philo, int id);
+int		is_num(char *str);
 
 #endif
