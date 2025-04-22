@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 18:05:11 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:18:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	did_not_starve(t_philo *p)
 		if (get_current_time() - p[i].time_of_last_meal >= p[i].time_to_die)
 		{
 			pthread_mutex_lock(p[i].dead_lock);
-			printf("Philosopher %d has died\n", p[i].id);
 			*p->dead_flag_pointer = 1;
+			print_message("died", p, p[i].id);
 			pthread_mutex_unlock(p[i].dead_lock);
 			pthread_mutex_unlock(p[i].eat_lock);
 			return (0);

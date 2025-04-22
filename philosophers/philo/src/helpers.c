@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 18:00:36 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:13:33 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_thread_join(pthread_t monitor_thread, t_data *data,
 	destroy_all(data, forks);
 }
 
-void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
+void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos) //fix
 {
 	int			i;
 	pthread_t	monitor_thread;

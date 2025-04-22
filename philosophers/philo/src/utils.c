@@ -6,13 +6,13 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:24:42 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:13:15 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_usleep(size_t time)
+int	ft_usleep(size_t time) //fixed
 {
 	size_t	start;
 
