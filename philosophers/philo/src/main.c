@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:24 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:36:33 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:00:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int	arg_check(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		print_exit("Usage: ./philo n n n n (n)");
-	if (atoi(av[1]) <= 0 || ft_atoi(av[1]) > MAX_NUM_PHILO || !ft_is_num(av[1]))
+	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > MAX_NUM_PHILO || !ft_is_num(av[1]))
 	{
 		print_exit("Invalid number of philos.");
 		printf("Invalid number of philos.");
 		exit(EXIT_FAILURE);
 	}
-	if (atoi(av[2]) <= 0 || !ft_is_num(av[2]))
+	if (ft_atoi(av[2]) <= 0 || !ft_is_num(av[2]))
 		print_exit("Invalid time_to_die.");
-	if (atoi(av[3]) <= 0 || !ft_is_num(av[3]))
+	if (ft_atoi(av[3]) <= 0 || !ft_is_num(av[3]))
 		print_exit("Invalid time_to_eat.");
-	if (atoi(av[4]) <= 0 || !ft_is_num(av[4]))
+	if (ft_atoi(av[4]) <= 0 || !ft_is_num(av[4]))
 		print_exit("Invalid time_to_sleep.");
-	if (av[5] != NULL && (atoi(av[5]) <= 0 || !ft_is_num(av[5])))
+	if (av[5] != NULL && (ft_atoi(av[5]) <= 0 || !ft_is_num(av[5])))
 		print_exit("Invalid times each philosopher must eat.");
 	return (1);
 }

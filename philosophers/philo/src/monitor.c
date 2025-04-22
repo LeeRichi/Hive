@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:33:01 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:05:11 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ int	everyone_eats_enough_time(t_philo *philos)
 {
 	int	i;
 	int	done;
+	int	num;
 
+	num = philos[0].num_philos;
 	done = 0;
 	if ((int)philos[0].num_times_to_eat == -1)
 		return (0);
 	i = 0;
-	while (i < philos[i].num_philos)
+	while (i < num)
 	{
 		pthread_mutex_lock(philos[i].eat_lock);
 		if (philos[i].num_times_eaten >= philos[i].num_times_to_eat)

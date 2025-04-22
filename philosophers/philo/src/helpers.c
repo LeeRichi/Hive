@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:23:20 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 18:00:36 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	philo_init(t_philo *philos, char **av, t_data *data,
 		philos[i].time_to_sleep = ft_atoi(av[4]);
 		philos[i].num_times_to_eat = -1;
 		if (av[5])
-			philos[i].num_times_to_eat = atoi(av[5]);
+			philos[i].num_times_to_eat = ft_atoi(av[5]);
 		philos[i].num_times_eaten = 0;
 		philos[i].is_eating = 0;
 		philos[i].starting_time = get_current_time();
