@@ -6,32 +6,32 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 14:24:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:33:01 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int did_not_starve(t_philo *philos)
+int	did_not_starve(t_philo *p)
 {
-    int i;
-	int num;
+	int	i;
+	int	num;
 
-	num = philos[0].num_philos;
+	num = p[0].num_philos;
 	i = 0;
 	while (i < num)
 	{
-		pthread_mutex_lock(philos[i].eat_lock);
-		if (get_current_time() - philos[i].time_of_last_meal >= philos[i].time_to_die)
+		pthread_mutex_lock(p[i].eat_lock);
+		if (get_current_time() - p[i].time_of_last_meal >= p[i].time_to_die)
 		{
-			pthread_mutex_lock(philos[i].dead_lock);
-			printf("Philosopher %d has died\n", philos[i].id);
-			*philos->dead_flag_pointer = 1;
-			pthread_mutex_unlock(philos[i].dead_lock);
-			pthread_mutex_unlock(philos[i].eat_lock);
+			pthread_mutex_lock(p[i].dead_lock);
+			printf("Philosopher %d has died\n", p[i].id);
+			*p->dead_flag_pointer = 1;
+			pthread_mutex_unlock(p[i].dead_lock);
+			pthread_mutex_unlock(p[i].eat_lock);
 			return (0);
 		}
-		pthread_mutex_unlock(philos[i].eat_lock);
+		pthread_mutex_unlock(p[i].eat_lock);
 		i++;
 	}
 	return (1);
@@ -64,19 +64,17 @@ int	everyone_eats_enough_time(t_philo *philos)
 	return (0);
 }
 
-void *monitor_function(void *arg)
+void	*monitor_function(void *arg)
 {
-    t_philo *philos;
+	t_philo	*philos;
 
-    philos = (t_philo *)arg;
-    while (1)
-    {
-		
+	philos = (t_philo *)arg;
+	while (1)
+	{
 		if (!did_not_starve(philos) || everyone_eats_enough_time(philos))
 		{
-			printf("someone died or everyone has eaten enough!!!\n"); //this might not be needed at the end.
 			break ;
 		}
-    }
-    return (arg);
+	}
+	return (arg);
 }
