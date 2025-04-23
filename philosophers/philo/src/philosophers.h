@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 14:39:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 15:26:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	destroy_all(t_data *data, pthread_mutex_t *forks);
 void	*monitor_function(void *args);
 void	*philo_loop(void *arg);
 size_t	get_current_time(void);
-int		ft_usleep(size_t time);
+int		ft_usleep(size_t time, t_philo *philos);
 void	print_message(char *str, t_philo *philo, int id);
 int		is_num(char *str);
 void	exit_destroy_norm(char *str, t_data *data, pthread_mutex_t *forks);

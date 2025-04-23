@@ -6,19 +6,23 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 14:40:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 15:27:44 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_usleep(size_t time) //fixed
+int	ft_usleep(size_t time, t_philo *philo)
 {
 	size_t	start;
 
 	start = get_current_time();
 	while (get_current_time() - start < time)
+	{
+		if (*philo->dead_flag_pointer)
+			return (0);
 		usleep(100);
+	}
 	return (0);
 }
 
@@ -42,8 +46,6 @@ void	print_message(char *str, t_philo *philo, int id)
 	{
 		if (ft_strcmp(str, "died") == 0)
 			printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
-		pthread_mutex_unlock(philo->write_lock);
-		return ;
 	}
 	else
 		printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
