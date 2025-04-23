@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 15:27:44 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:40:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ int	ft_usleep(size_t time, t_philo *philo)
 	start = get_current_time();
 	while (get_current_time() - start < time)
 	{
+		pthread_mutex_lock(philo->dead_lock);
 		if (*philo->dead_flag_pointer)
+		{
+			pthread_mutex_unlock(philo->dead_lock);
 			return (0);
+		}
+		pthread_mutex_unlock(philo->dead_lock);
 		usleep(100);
 	}
 	return (0);

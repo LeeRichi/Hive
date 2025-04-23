@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 15:41:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:40:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 void	think(t_philo *philo)
 {
 	if (get_current_time() - philo->time_of_last_meal > philo->time_to_eat / 2)
-		usleep(500);
+	{
+		ft_usleep(500, philo);
+		// sleep(500);
+	}
 	else
-		usleep(1000);
+	{
+		ft_usleep(1000, philo);
+		// sleep(1000);
+	}
 	print_message("is thinking", philo, philo->id);
 }
 
@@ -40,8 +46,6 @@ void	eat(t_philo *philo)
 	philo->num_times_eaten++;
 	pthread_mutex_unlock(philo->eat_lock);
 	ft_usleep(philo->time_to_eat, philo);
-	// sleep(philo->time_to_eat);
-
 	philo->is_eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
