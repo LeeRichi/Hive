@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:00:51 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:23:51 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:38:55 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (result * flag);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

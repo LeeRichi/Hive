@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 18:13:15 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:40:08 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,16 @@ size_t	get_current_time(void)
 void	print_message(char *str, t_philo *philo, int id)
 {
 	pthread_mutex_lock(philo->write_lock);
-	printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
+	
+	if (*philo->dead_flag_pointer)
+	{
+		if (ft_strcmp(str, "died") == 0)
+			printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
+		pthread_mutex_unlock(philo->write_lock);
+		return ;
+	}
+	else
+		printf("%zu %d %s\n", get_current_time() - philo->starting_time, id, str);
 	pthread_mutex_unlock(philo->write_lock);
 }
 

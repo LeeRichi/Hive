@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/22 15:38:23 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:20:57 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	eat(t_philo *philo)
 	if (philo->num_philos == 1)
 	{
 		ft_usleep(philo->time_to_die);
+		// sleep(philo->time_to_die);
 		pthread_mutex_unlock(philo->l_fork);
 		return ;
 	}
@@ -40,6 +41,8 @@ void	eat(t_philo *philo)
 	philo->num_times_eaten++;
 	pthread_mutex_unlock(philo->eat_lock);
 	ft_usleep(philo->time_to_eat);
+	// sleep(philo->time_to_eat);
+
 	philo->is_eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
