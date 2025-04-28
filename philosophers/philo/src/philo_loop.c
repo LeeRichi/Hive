@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 16:44:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 17:41:32 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	*philo_loop(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(philo->write_lock);
+	pthread_mutex_unlock(philo->write_lock);
 	if ((philo->id) % 2 == 0)
 		ft_usleep(2, philo);
 	else if (philo->num_philos >= 150)

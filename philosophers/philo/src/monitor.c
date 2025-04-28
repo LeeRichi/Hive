@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 16:35:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 17:38:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	*monitor_function(void *arg)
 	t_philo	*philos;
 
 	philos = (t_philo *)arg;
+	pthread_mutex_lock(philos->write_lock);
+	pthread_mutex_unlock(philos->write_lock);
 	while (1)
 	{
 		if (!did_not_starve(philos) || everyone_eats_enough_time(philos))

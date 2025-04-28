@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 15:26:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 17:41:39 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ int		is_num(char *str);
 void	exit_destroy_norm(char *str, t_data *data, pthread_mutex_t *forks);
 
 int		ft_strcmp(const char *s1, const char *s2);
-
 
 #endif

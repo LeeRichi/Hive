@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 16:17:05 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/04/23 17:38:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_thread_join(pthread_t monitor_thread, t_data *data,
 	destroy_all(data, forks);
 }
 
-void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos) //fix
+void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	int			i;
 	pthread_t	monitor_thread;
@@ -46,6 +46,7 @@ void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos) //fix
 		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
+	pthread_mutex_lock(philos->write_lock);
 	if (pthread_create(&monitor_thread, NULL, monitor_function,
 			data->philos) != 0)
 		exit_destroy_norm("pthread_create monitor failed", data, forks);
@@ -57,6 +58,7 @@ void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos) //fix
 			exit_destroy_norm("pthread_create philo failed", data, forks);
 		i++;
 	}
+	pthread_mutex_unlock(philos->write_lock);
 	ft_thread_join(monitor_thread, data, forks, philos);
 }
 
