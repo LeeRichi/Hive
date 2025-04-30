@@ -1,0 +1,4 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+chlee2   3933500  0.0  0.0      0     0 ?        Z    12:27   0:00 [zypak-sandbox] <defunct>
+chlee2   3995658  0.0  0.0      0     0 ?        Z    15:57   0:00 [zypak-sandbox] <defunct>
+chlee2   4016177  0.0  0.0      0     0 pts/0    Z+   16:44   0:00 [sleep] <defunct>
