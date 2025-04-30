@@ -1,3 +1,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/leerichi/minishell.git
+[submodule "cube3d"]
+	path = cube3d
+	url = https://github.com/leerichi/42_cube3d.git
