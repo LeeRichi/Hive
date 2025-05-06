@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/28 13:17:25 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:19:21 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	*philo_loop(void *arg)
 	else if (philo->num_philos >= 100 && philo->num_philos < 190)
 		ft_usleep(6, philo);
 	else if (philo->num_philos >= 190)
-		ft_usleep(10, philo);
+		ft_usleep(11, philo);
 	while (!dead_loop(philo))
 	{
 		if (dead_loop(philo))
