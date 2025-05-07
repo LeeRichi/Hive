@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:24 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 17:43:26 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:24:40 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,32 @@ static int	ft_num(char *str)
 int	arg_check(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
-		print_exit("Usage: ./philo n n n n (n)");
+		return (print_exit("Usage: ./philo n n n n (n)"));
 	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > MAX_NUM_PHILO || !ft_num(av[1]))
 	{
-		print_exit("Invalid number of philos.");
+		return (print_exit("Invalid number of philos."));
 		printf("Invalid number of philos.");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (ft_atoi(av[2]) <= 0 || !ft_num(av[2]))
-		print_exit("Invalid time_to_die.");
+		return (print_exit("Invalid time_to_die."));
 	if (ft_atoi(av[3]) <= 0 || !ft_num(av[3]))
-		print_exit("Invalid time_to_eat.");
+		return (print_exit("Invalid time_to_eat."));
 	if (ft_atoi(av[4]) <= 0 || !ft_num(av[4]))
-		print_exit("Invalid time_to_sleep.");
+		return (print_exit("Invalid time_to_sleep."));
 	if (av[5] != NULL && (ft_atoi(av[5]) <= 0 || !ft_num(av[5])))
-		print_exit("Invalid times each philosopher must eat.");
+		return (print_exit("Invalid times each philosopher must eat."));
 	return (1);
 }
 
 // ◦ time_to_die (in milliseconds):
-// If a philosopher didn’t start eating 
+// If a philosopher didn’t start eating
 // time_to_die milliseconds since the beginning of
 // their last meal or the beginning of the simulation, they die.
 // ◦ time_to_eat (in milliseconds):
 // The time it takes for a philosopher to eat.
 // During that time, they will need to hold two forks.
-// ◦ time_to_sleep (in milliseconds): 
+// ◦ time_to_sleep (in milliseconds):
 // The time a philosopher will spend sleeping
 int	main(int ac, char **av)
 {
@@ -69,6 +69,7 @@ int	main(int ac, char **av)
 
 	if (!arg_check(ac, av))
 		return (EXIT_FAILURE);
-	data_init(&data, av, philos, forks);
+	if (!data_init(&data, av, philos, forks))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

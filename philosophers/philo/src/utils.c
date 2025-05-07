@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 17:41:18 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:21:25 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ int	is_num(char *str)
 	return (1);
 }
 
-void	print_exit(char *str)
+int	print_exit(char *str)
 {
 	printf("%s", str);
-	exit(EXIT_FAILURE);
+	return (0);
+	// exit(EXIT_FAILURE);
 }

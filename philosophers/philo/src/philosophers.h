@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 17:41:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:25:12 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_philo
 	int				*dead_flag_pointer;
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*eat_lock;
+	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }	t_philo;
@@ -52,12 +52,12 @@ typedef struct s_data
 	int				dead_flag;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	eat_lock;
+	// pthread_mutex_t	eat_lock;
 }	t_data;
 
 int		ft_atoi(const char *str);
-void	print_exit(char *str);
-void	data_init(t_data *data, char **av, t_philo *philos,
+int		print_exit(char *str);
+int		data_init(t_data *data, char **av, t_philo *philos,
 			pthread_mutex_t *forks);
 void	destroy_all(t_data *data, pthread_mutex_t *forks);
 void	*monitor_function(void *args);
@@ -66,7 +66,7 @@ size_t	get_current_time(void);
 int		ft_usleep(size_t time, t_philo *philos);
 void	print_message(char *str, t_philo *philo, int id);
 int		is_num(char *str);
-void	exit_destroy_norm(char *str, t_data *data, pthread_mutex_t *forks);
+int		exit_destroy_norm(char *str, t_data *data, pthread_mutex_t *forks);
 
 int		ft_strcmp(const char *s1, const char *s2);
 

@@ -6,36 +6,37 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/04/23 17:38:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:26:44 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_thread_join(pthread_t monitor_thread, t_data *data,
+int	ft_thread_join(pthread_t monitor_thread, t_data *data,
 	pthread_mutex_t *forks, t_philo *philos)
 {
 	int	i;
 
 	if (pthread_join(monitor_thread, NULL) != 0)
 	{
-		print_exit("pthread_join monitor failed");
 		destroy_all(data, forks);
+		return (print_exit("pthread_join monitor failed"));
 	}
 	i = 0;
 	while (i < data->philos->num_philos)
 	{
 		if (pthread_join(philos[i].thread, NULL) != 0)
 		{
-			print_exit("pthread_join philo failed");
+			return (print_exit("pthread_join philo failed"));
 			destroy_all(data, forks);
 		}
 		i++;
 	}
 	destroy_all(data, forks);
+	return (1);
 }
 
-void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
+int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	int			i;
 	pthread_t	monitor_thread;
@@ -59,7 +60,7 @@ void	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 		i++;
 	}
 	pthread_mutex_unlock(philos->write_lock);
-	ft_thread_join(monitor_thread, data, forks, philos);
+	return (ft_thread_join(monitor_thread, data, forks, philos));
 }
 
 void	philo_init(t_philo *philos, char **av, t_data *data,
@@ -85,23 +86,23 @@ void	philo_init(t_philo *philos, char **av, t_data *data,
 		philos[i].dead_flag_pointer = &data->dead_flag;
 		philos[i].write_lock = &data->write_lock;
 		philos[i].dead_lock = &data->dead_lock;
-		philos[i].eat_lock = &data->eat_lock;
+		pthread_mutex_init(&philos[i].eat_lock, NULL);
 		philos[i].l_fork = &forks[i];
 		philos[i].r_fork = &forks[(i + 1) % philos[i].num_philos];
 		i++;
 	}
 }
 
-void	data_init(t_data *data, char **av, t_philo *philos,
+int	data_init(t_data *data, char **av, t_philo *philos,
 	pthread_mutex_t *forks)
 {
 	data->philos = philos;
 	data->dead_flag = 0;
 	pthread_mutex_init(&data->write_lock, NULL);
 	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->eat_lock, NULL);
+	// pthread_mutex_init(&data->eat_lock, NULL);
 	philo_init(philos, av, data, forks);
-	ft_thread_init(data, forks, philos);
+	return (ft_thread_init(data, forks, philos));
 }
 
 void	destroy_all(t_data *data, pthread_mutex_t *forks)
@@ -112,9 +113,9 @@ void	destroy_all(t_data *data, pthread_mutex_t *forks)
 	while (i < data->philos[0].num_philos)
 	{
 		pthread_mutex_destroy(&forks[i]);
+		pthread_mutex_destroy(&data->philos[i].eat_lock);
 		i++;
 	}
 	pthread_mutex_destroy(&data->write_lock);
 	pthread_mutex_destroy(&data->dead_lock);
-	pthread_mutex_destroy(&data->eat_lock);
 }
