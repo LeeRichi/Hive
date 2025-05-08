@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/07 16:21:25 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/08 15:59:41 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	get_current_time(void)
 {
 	struct timeval	time;
 
-	if (gettimeofday(&time, NULL) == -1)
+	if (gettimeofday(&time, NULL) == -1) //do i need to protect it?
 	{
 		perror("gettimeofday");
 		return (0);
