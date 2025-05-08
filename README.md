@@ -24,7 +24,7 @@
 
 ## 💡 About
 
-- This folder contains all the projects I have been working on since 2024/4/15.
+- This folder contains all Hive projects I have been working on since 2024/4/15.
 
 
 ## 📋 Appendix
@@ -34,4 +34,4 @@
 - [get_next_line](https://github.com/LeeRichi/Hive/tree/master/get_next_line/README.md) – A function to read lines from file descriptors, character by character.
 - [push_swap](https://github.com/LeeRichi/Hive/tree/master/push_swap/README.md) – A project to implement and optimize sorting algorithms with limited instructions.
 - [so_long](https://github.com/LeeRichi/Hive/tree/master/so_long) – A 2D game built with MLX, showcasing pathfinding and game mechanics.
-- [pipix](https://github.com/LeeRichi/Hive/tree/master/pipex) – (🚧 Work in Progress) A simplified shell-like program to replicate pipe functionality.
+- [pipex](https://github.com/LeeRichi/Hive/tree/master/pipex) – (🚧 Work in Progress) A simplified shell-like program to replicate pipe functionality.
