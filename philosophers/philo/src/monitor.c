@@ -6,25 +6,29 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 10:15:57 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 13:44:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void	did_not_starve_help(t_philo *p, int i)
+{
+	pthread_mutex_unlock(p[i].dead_lock);
+	pthread_mutex_unlock(&p[i].eat_lock);
+}
+
 int	did_not_starve(t_philo *p)
 {
 	int		i;
-	int		num;
 	size_t	current_time;
-	
-	num = p[0].num_philos;
+
 	i = 0;
-	while (i < num)
+	while (i < p[0].num_philos)
 	{
 		pthread_mutex_lock(&p[i].eat_lock);
 		current_time = get_current_time();
-		if (current_time == (size_t)-1)
+		if (current_time == (size_t)(-1))
 		{
 			pthread_mutex_unlock(&p[i].eat_lock);
 			return (0);
@@ -34,8 +38,7 @@ int	did_not_starve(t_philo *p)
 			pthread_mutex_lock(p[i].dead_lock);
 			*p->dead_flag_pointer = 1;
 			print_message("died", p, p[i].id);
-			pthread_mutex_unlock(p[i].dead_lock);
-			pthread_mutex_unlock(&p[i].eat_lock);
+			did_not_starve_help(p, i);
 			return (0);
 		}
 		pthread_mutex_unlock(&p[i].eat_lock);

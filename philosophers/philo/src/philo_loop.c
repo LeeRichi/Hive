@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 10:25:54 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 13:43:35 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	think(t_philo *philo)
 {
-	size_t current_time;
+	size_t	current_time;
 
 	current_time = get_current_time();
 	if (current_time == (size_t)-1)
 	{
-        printf("Error: get_current_time failed in think()\n");
+		printf("Error: get_current_time failed in think()\n");
+		*philo->dead_flag_pointer = 1;
 		return ;
 	}
 	if (current_time - philo->time_of_last_meal > philo->time_to_eat / 2)
@@ -45,14 +46,7 @@ void	eat(t_philo *philo)
 	philo->is_eating = 1;
 	print_message("is eating", philo, philo->id);
 	philo->time_of_last_meal = get_current_time();
-	if (philo->time_of_last_meal == (size_t)-1)
-	{
-		printf("Error: get_current_time failed in eat()\n");
-		pthread_mutex_unlock(&philo->eat_lock);
-        pthread_mutex_unlock(philo->r_fork);
-        pthread_mutex_unlock(philo->l_fork);
-		return ;
-	}
+	eat_help(philo);
 	philo->num_times_eaten++;
 	pthread_mutex_unlock(&philo->eat_lock);
 	ft_usleep(philo->time_to_eat, philo);

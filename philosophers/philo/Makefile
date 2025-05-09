@@ -6,7 +6,7 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 14:27:00 by chlee2            #+#    #+#              #
-#    Updated: 2025/05/07 15:48:30 by chlee2           ###   ########.fr        #
+#    Updated: 2025/05/09 13:42:04 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = src/main.c \
 				src/utils.c \
 				src/ft_atoi.c \
 				src/exit_destroy_norm.c \
+				src/eat_help.c \
 
 OBJS = $(SRCS:.c=.o)
 

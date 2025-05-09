@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 10:40:05 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:36:56 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ size_t	get_current_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 	{
 		printf("Error: gettimeofday() failed\n");
-		return (size_t)-1;
+		return ((size_t)(-1));
 	}
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
@@ -53,7 +53,7 @@ void	print_message(char *str, t_philo *philo, int id)
 	size_t	current_time;
 
 	current_time = get_current_time();
-	if(current_time == (size_t)-1)
+	if (current_time == (size_t)-1)
 	{
 		printf("Error: get_current_time failed in print_message()\n");
 		return ;
