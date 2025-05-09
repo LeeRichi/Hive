@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/07 16:07:55 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 10:15:57 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 int	did_not_starve(t_philo *p)
 {
-	int	i;
-	int	num;
-
+	int		i;
+	int		num;
+	size_t	current_time;
+	
 	num = p[0].num_philos;
 	i = 0;
 	while (i < num)
 	{
 		pthread_mutex_lock(&p[i].eat_lock);
-		if (get_current_time() - p[i].time_of_last_meal >= p[i].time_to_die)
+		current_time = get_current_time();
+		if (current_time == (size_t)-1)
+		{
+			pthread_mutex_unlock(&p[i].eat_lock);
+			return (0);
+		}
+		if (current_time - p[i].time_of_last_meal >= p[i].time_to_die)
 		{
 			pthread_mutex_lock(p[i].dead_lock);
 			*p->dead_flag_pointer = 1;

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/07 16:25:12 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 11:04:28 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct s_data
 	int				dead_flag;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
+
+	int				num_forks_initialized;
+	int				num_philos_initialized;
 	// pthread_mutex_t	eat_lock;
 }	t_data;
 
