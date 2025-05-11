@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 16:27:33 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:32:50 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <pthread.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 

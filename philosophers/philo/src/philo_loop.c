@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 13:43:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/11 19:13:54 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	eat(t_philo *philo)
 void	dream(t_philo *philo)
 {
 	print_message("is sleeping", philo, philo->id);
-	usleep(philo->time_to_sleep * 1000);
+	ft_usleep(philo->time_to_sleep, philo);
 }
 
 int	dead_loop(t_philo *philo)
@@ -77,8 +77,8 @@ void	*philo_loop(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(philo->write_lock);
-	pthread_mutex_unlock(philo->write_lock);
+	// pthread_mutex_lock(philo->write_lock);
+	// pthread_mutex_unlock(philo->write_lock);
 	if ((philo->id) % 2 == 0)
 		ft_usleep(2, philo);
 	else if (philo->num_philos >= 100 && philo->num_philos < 190)
@@ -87,6 +87,7 @@ void	*philo_loop(void *arg)
 		ft_usleep(11, philo);
 	while (!dead_loop(philo))
 	{
+		think(philo);
 		if (dead_loop(philo))
 			break ;
 		eat(philo);
@@ -95,7 +96,6 @@ void	*philo_loop(void *arg)
 		dream(philo);
 		if (dead_loop(philo))
 			break ;
-		think(philo);
 	}
 	return (NULL);
 }
