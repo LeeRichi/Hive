@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/12 14:34:52 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:59:57 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 		philos[i].starting_time = time;
 		i++;
 	}
-	// pthread_mutex_lock(philos->write_lock);
 	i = 0;
 	while (i < data->philos->num_philos)
 	{
@@ -69,7 +68,6 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 			exit_destroy_norm("pthread_create philo failed", data, forks);
 		i++;
 	}
-	// pthread_mutex_unlock(philos->write_lock);
 	return (ft_thread_join(monitor_thread, data, forks, philos));
 }
 
