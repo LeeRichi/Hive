@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:24 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 12:26:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:20:23 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ int	arg_check(int ac, char **av)
 	if (ac != 5 && ac != 6)
 		return (print_exit("Usage: ./philo n n n n (n)"));
 	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > MAX_NUM_PHILO || !ft_num(av[1]))
-	{
 		return (print_exit("Invalid number of philos."));
-		printf("Invalid number of philos.");
-		return (0);
-	}
 	if (ft_atoi(av[2]) <= 0 || !ft_num(av[2]))
 		return (print_exit("Invalid time_to_die."));
 	if (ft_atoi(av[3]) <= 0 || !ft_num(av[3]))

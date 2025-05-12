@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/11 19:13:54 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:27:37 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	think(t_philo *philo)
 {
-	size_t	current_time;
+	// size_t	current_time;
 
-	current_time = get_current_time();
-	if (current_time == (size_t)-1)
-	{
-		printf("Error: get_current_time failed in think()\n");
-		*philo->dead_flag_pointer = 1;
-		return ;
-	}
-	if (current_time - philo->time_of_last_meal > philo->time_to_eat / 2)
-		usleep(500);
-	else
-		usleep(1000);
+	// current_time = get_current_time();
+	// if (current_time == (size_t)-1)
+	// {
+	// 	printf("Error: get_current_time failed in think()\n");
+	// 	*philo->dead_flag_pointer = 1;
+	// 	return ;
+	// }
+	// if (current_time - philo->time_of_last_meal > philo->time_to_eat / 2)
+	// 	usleep(500);
+	// else
+	// 	usleep(1000);
 	print_message("is thinking", philo, philo->id);
 }
 
@@ -77,8 +77,17 @@ void	*philo_loop(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+
+	while (get_current_time() < philo->starting_time)
+		usleep(50);
+
+	// printf("test: %zu, test2: %zu\n", philo->starting_time, get_current_time());
+
 	// pthread_mutex_lock(philo->write_lock);
 	// pthread_mutex_unlock(philo->write_lock);
+
+	think(philo);
+
 	if ((philo->id) % 2 == 0)
 		ft_usleep(2, philo);
 	else if (philo->num_philos >= 100 && philo->num_philos < 190)
@@ -87,7 +96,7 @@ void	*philo_loop(void *arg)
 		ft_usleep(11, philo);
 	while (!dead_loop(philo))
 	{
-		think(philo);
+		// think(philo);
 		if (dead_loop(philo))
 			break ;
 		eat(philo);
@@ -96,6 +105,7 @@ void	*philo_loop(void *arg)
 		dream(philo);
 		if (dead_loop(philo))
 			break ;
+		think(philo);
 	}
 	return (NULL);
 }

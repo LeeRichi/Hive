@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/11 19:09:13 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:21:09 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_usleep(size_t time, t_philo *philo)
 		pthread_mutex_unlock(philo->dead_lock);
 		usleep(100);
 	}
-	return (0);
+	return (1);
 }
 
 size_t	get_current_time(void)
@@ -78,7 +78,7 @@ int	is_num(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] > '9' && str[i] < '0')
+		if (str[i] > '9' || str[i] < '0')
 			return (0);
 		i++;
 	}

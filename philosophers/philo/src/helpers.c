@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/11 19:13:52 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:34:52 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,21 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 	while (i < data->philos[0].num_philos)
 	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
-			return (ft_forks_init_fail(data, forks, i));
+		return (ft_forks_init_fail(data, forks, i));
 		i++;
 		data->num_forks_initialized++;
 	}
-	// pthread_mutex_lock(philos->write_lock);
 	if (pthread_create(&monitor_thread, NULL, monitor_function,
-			data->philos) != 0)
+		data->philos) != 0)
 		exit_destroy_norm("pthread_create monitor failed", data, forks);
+	time = get_current_time() + 200;
+	i = 0;
+	while (i < data->philos->num_philos)
+	{
+		philos[i].starting_time = time;
+		i++;
+	}
+	// pthread_mutex_lock(philos->write_lock);
 	i = 0;
 	while (i < data->philos->num_philos)
 	{
@@ -62,9 +69,6 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 			exit_destroy_norm("pthread_create philo failed", data, forks);
 		i++;
 	}
-	time = get_current_time();
-	while (--i >= 0)
-		philos[i].starting_time = time;
 	// pthread_mutex_unlock(philos->write_lock);
 	return (ft_thread_join(monitor_thread, data, forks, philos));
 }
@@ -78,9 +82,6 @@ int	philo_init(t_philo *philos, char **av, t_data *data,
 	while (i < ft_atoi(av[1]))
 	{
 		philo_init_help(philos, av, i);
-		// philos[i].starting_time = get_current_time();
-		// if (philos[i].starting_time == (size_t)(-1))
-		// 	return (0);
 		philos[i].time_of_last_meal = get_current_time();
 		if (philos[i].time_of_last_meal == (size_t)(-1))
 			return (0);
