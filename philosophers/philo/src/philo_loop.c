@@ -6,15 +6,17 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/12 15:00:58 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/13 19:20:53 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	think(t_philo *philo)
+void think(t_philo *philo)
 {
-	print_message("is thinking", philo, philo->id);
+    if (philo->is_eating)
+        return;
+    print_message("is thinking", philo, philo->id);
 }
 
 void	eat(t_philo *philo)
@@ -64,15 +66,27 @@ void	*philo_loop(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(philo->write_lock);
+	pthread_mutex_unlock(philo->write_lock);
+	
 	while (get_current_time() < philo->starting_time)
-		usleep(50);
-	think(philo);
-	if ((philo->id) % 2 == 0)
-		ft_usleep(2, philo);
-	else if (philo->num_philos >= 100 && philo->num_philos < 190)
-		ft_usleep(6, philo);
-	else if (philo->num_philos >= 190)
-		ft_usleep(11, philo);
+	{
+		// printf("fuckkkkk\n");
+		usleep(200);
+	}
+
+	// if ((philo->id) % 2 == 0)
+	// 	ft_usleep(2, philo);
+	// else if (philo->num_philos >= 100 && philo->num_philos < 190)
+	// 	ft_usleep(6, philo);
+	// else if (philo->num_philos >= 190)
+	// 	ft_usleep(11, philo);
+
+	if (philo->id % 2 != 0 && philo->num_philos != 1)
+	{
+		think(philo);
+		ft_usleep(philo->num_philos / 2, philo);
+	}
 	while (!dead_loop(philo))
 	{
 		if (dead_loop(philo))
@@ -84,6 +98,7 @@ void	*philo_loop(void *arg)
 		if (dead_loop(philo))
 			break ;
 		think(philo);
+		// think(philo);
 	}
 	return (NULL);
 }
