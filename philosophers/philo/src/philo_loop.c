@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/13 19:20:53 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 10:59:14 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,9 @@ void	*philo_loop(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->write_lock);
 	pthread_mutex_unlock(philo->write_lock);
-	
+
 	while (get_current_time() < philo->starting_time)
 	{
-		// printf("fuckkkkk\n");
 		usleep(200);
 	}
 

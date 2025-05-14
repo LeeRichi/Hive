@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:41:51 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/09 16:28:39 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 10:45:03 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	eat_help(t_philo *philo)
 {
-	if (philo->time_of_last_meal == (size_t)-1)
+	if (philo->time_of_last_meal == -1)
 	{
 		printf("Error: get_current_time failed in eat()\n");
 		*philo->dead_flag_pointer = 1;

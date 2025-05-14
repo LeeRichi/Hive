@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:56 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/13 15:57:34 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 10:58:29 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	did_not_starve_help(t_philo *p, int i)
 int	did_not_starve(t_philo *p)
 {
 	int		i;
-	size_t	current_time;
+	long	current_time;
 
 	i = 0;
 	while (i < p[0].num_philos)
 	{
 		pthread_mutex_lock(&p[i].eat_lock);
 		current_time = get_current_time();
-		if (current_time == (size_t)(-1))
+		if (current_time == -1)
 		{
 			pthread_mutex_unlock(&p[i].eat_lock);
 			return (0);

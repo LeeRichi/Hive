@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/13 19:43:35 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 11:02:38 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	int			i;
 	pthread_t	monitor_thread;
-	size_t		time;
+	long		time;
 
 	i = 0;
 	while (i < data->philos[0].num_philos)
@@ -62,7 +62,7 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 		philos[i].starting_time = time;
 		i++;
 	}
-	
+
 	i = 0;
 	while (i < data->philos->num_philos)
 	{
@@ -85,7 +85,7 @@ int	philo_init(t_philo *philos, char **av, t_data *data,
 	{
 		philo_init_help(philos, av, i);
 		philos[i].time_of_last_meal = get_current_time();
-		if (philos[i].time_of_last_meal == (size_t)(-1))
+		if (philos[i].time_of_last_meal == -1)
 			return (0);
 		philo_init_help_2(philos, data, i);
 		if (pthread_mutex_init(&philos[i].eat_lock, NULL) != 0)
@@ -109,9 +109,9 @@ int	data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
 	data->dead_flag = 0;
 	data->num_forks_initialized = 0;
 	data->num_philos_initialized = 0;
-	
+
 	data->start_flag = 0;
-	
+
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
 	{
 		printf("Error: pthread_mutex_init failed for write_lock\n");

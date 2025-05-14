@@ -6,18 +6,18 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:06 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/13 19:44:22 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 10:59:59 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_usleep(size_t time, t_philo *philo)
+int	ft_usleep(long time, t_philo *philo)
 {
-	size_t	start;
+	long	start;
 
 	start = get_current_time();
-	if (start == (size_t)-1)
+	if (start == -1)
 	{
 		printf("Error: get_current_time failed in ft_usleep()\n");
 		return (0);
@@ -36,25 +36,25 @@ int	ft_usleep(size_t time, t_philo *philo)
 	return (1);
 }
 
-size_t	get_current_time(void)
+long	get_current_time(void)
 {
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
 		printf("Error: gettimeofday() failed\n");
-		return ((size_t)(-1));
+		return (-1);
 	}
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 void	print_message(char *str, t_philo *philo, int id)
 {
-	size_t	current_time;
+	long	current_time;
 
 	pthread_mutex_lock(philo->write_lock);
-	current_time = get_current_time();	
-	if (current_time == (size_t)-1)
+	current_time = get_current_time();
+	if (current_time == -1)
 	{
 		printf("Error: get_current_time failed in print_message()\n");
 		return ;
