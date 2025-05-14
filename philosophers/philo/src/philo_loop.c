@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/14 13:58:51 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 15:16:17 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	think(t_philo *philo)
 	if (philo->is_eating)
 		return ;
 	print_message("is thinking", philo, philo->id);
+	usleep(1000);
 }
 
 void	eat(t_philo *philo)
@@ -69,22 +70,11 @@ void	*philo_loop(void *arg)
 	while (get_current_time() < philo->starting_time)
 		usleep(200);
 	manual_dealy(philo);
-	if (philo->id % 2 != 0 && philo->num_philos != 1)
-	{
-		think(philo);
-		ft_usleep(philo->num_philos / 2, philo);
-	}
 	while (!dead_loop(philo))
 	{
-		if (dead_loop(philo))
-			break ;
-		eat(philo);
-		if (dead_loop(philo))
-			break ;
-		dream(philo);
-		if (dead_loop(philo))
-			break ;
 		think(philo);
+		eat(philo);
+		dream(philo);
 	}
 	return (NULL);
 }
