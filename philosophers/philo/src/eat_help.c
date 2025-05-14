@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:41:51 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/14 10:45:03 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 13:58:05 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ int	ft_forks_init_fail(t_data *data, pthread_mutex_t *forks, int i)
 	printf("Error: pthread_mutex_init failed for forks[%d]\n", i);
 	destroy_all(data, forks);
 	return (0);
+}
+
+//manual delay implimentation explain
+//1. consistent performance
+//2. To avoid deadlocks without using extra complex synchronization
+//3, Philosophers should try not starving due to mutex contention
+void	manual_dealy(t_philo *philo)
+{
+	while (get_current_time() < philo->starting_time)
+		usleep(200);
+	if ((philo->id) % 2 == 0)
+		ft_usleep(2, philo);
+	else if (philo->num_philos >= 100 && philo->num_philos < 190)
+		ft_usleep(6, philo);
+	else if (philo->num_philos >= 190)
+		ft_usleep(11, philo);
 }

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:47:55 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/14 11:02:38 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 14:04:58 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,19 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	int			i;
 	pthread_t	monitor_thread;
-	long		time;
 
 	i = 0;
 	while (i < data->philos[0].num_philos)
 	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
-		return (ft_forks_init_fail(data, forks, i));
+			return (ft_forks_init_fail(data, forks, i));
 		i++;
 		data->num_forks_initialized++;
 	}
 	if (pthread_create(&monitor_thread, NULL, monitor_function,
-		data->philos) != 0)
+			data->philos) != 0)
 		exit_destroy_norm("pthread_create monitor failed", data, forks);
-
-	pthread_mutex_lock(philos->write_lock);
-	time = get_current_time();
-	i = 0;
-	while (i < data->philos->num_philos)
-	{
-		philos[i].starting_time = time;
-		i++;
-	}
-
+	inject_time_each(data, philos);
 	i = 0;
 	while (i < data->philos->num_philos)
 	{
@@ -71,7 +61,6 @@ int	ft_thread_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 			exit_destroy_norm("pthread_create philo failed", data, forks);
 		i++;
 	}
-	pthread_mutex_unlock(philos->write_lock);
 	return (ft_thread_join(monitor_thread, data, forks, philos));
 }
 
@@ -96,7 +85,6 @@ int	philo_init(t_philo *philos, char **av, t_data *data,
 		}
 		philos[i].l_fork = &forks[i];
 		philos[i].r_fork = &forks[(i + 1) % philos[i].num_philos];
-		philos[i].data = data;
 		i++;
 		data->num_philos_initialized++;
 	}
@@ -109,9 +97,6 @@ int	data_init(t_data *data, char **av, t_philo *philos, pthread_mutex_t *forks)
 	data->dead_flag = 0;
 	data->num_forks_initialized = 0;
 	data->num_philos_initialized = 0;
-
-	data->start_flag = 0;
-
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
 	{
 		printf("Error: pthread_mutex_init failed for write_lock\n");

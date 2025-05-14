@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:30:21 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/14 11:02:07 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 14:04:24 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define EXIT_FAILURE 1
 
 # define MAX_NUM_PHILO 200
-
-typedef struct s_data t_data;
 
 typedef struct s_philo
 {
@@ -45,10 +43,6 @@ typedef struct s_philo
 	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-
-
-	// int				*start_flag;
-	t_data			*data; //point back
 }	t_philo;
 
 typedef struct s_data
@@ -59,9 +53,6 @@ typedef struct s_data
 	pthread_mutex_t	dead_lock;
 	int				num_forks_initialized;
 	int				num_philos_initialized;
-
-	// pthread_mutex_t start_lock;
-	int				start_flag;
 }	t_data;
 
 int		ft_atoi(const char *str);
@@ -81,5 +72,7 @@ void	eat_help(t_philo *philo);
 void	philo_init_help(t_philo *philos, char **av, int i);
 void	philo_init_help_2(t_philo *philos, t_data *data, int i);
 int		ft_forks_init_fail(t_data *data, pthread_mutex_t *forks, int i);
+void	manual_dealy(t_philo *philo);
+void	inject_time_each(t_data *data, t_philo *philos);
 
 #endif

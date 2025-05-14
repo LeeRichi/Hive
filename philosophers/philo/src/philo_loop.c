@@ -6,17 +6,17 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:59:52 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/14 10:59:14 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/14 13:58:51 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void think(t_philo *philo)
+void	think(t_philo *philo)
 {
-    if (philo->is_eating)
-        return;
-    print_message("is thinking", philo, philo->id);
+	if (philo->is_eating)
+		return ;
+	print_message("is thinking", philo, philo->id);
 }
 
 void	eat(t_philo *philo)
@@ -66,21 +66,9 @@ void	*philo_loop(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(philo->write_lock);
-	pthread_mutex_unlock(philo->write_lock);
-
 	while (get_current_time() < philo->starting_time)
-	{
 		usleep(200);
-	}
-
-	// if ((philo->id) % 2 == 0)
-	// 	ft_usleep(2, philo);
-	// else if (philo->num_philos >= 100 && philo->num_philos < 190)
-	// 	ft_usleep(6, philo);
-	// else if (philo->num_philos >= 190)
-	// 	ft_usleep(11, philo);
-
+	manual_dealy(philo);
 	if (philo->id % 2 != 0 && philo->num_philos != 1)
 	{
 		think(philo);
@@ -97,7 +85,6 @@ void	*philo_loop(void *arg)
 		if (dead_loop(philo))
 			break ;
 		think(philo);
-		// think(philo);
 	}
 	return (NULL);
 }
