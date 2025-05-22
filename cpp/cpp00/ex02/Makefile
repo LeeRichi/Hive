@@ -6,27 +6,30 @@
 #    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 15:58:16 by chlee2            #+#    #+#              #
-#    Updated: 2025/05/19 16:11:24 by chlee2           ###   ########.fr        #
+#    Updated: 2025/05/22 12:57:22 by chlee2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = dreamjob
 
-CC = c++
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+HEADER_FILES = Account.hpp
+SRC_FILES = tests.cpp Account.cpp
+OBJ_FILES = $(SRC_FILES:.cpp=.o)
 
-SRCS = megaphone.cpp \
+CPP = c++
+CPP_FLAGS = -Wall -Wextra -Werror -std=c++98
+DEPENDENCIES = $(HEADER_FILES) Makefile
 
-OBJS = $(SRCS:.cpp=.o)
+all: $(NAME)
 
-all:$(NAME)
+%.o: %.cpp $(DEPENDENCIES)
+	$(CPP) $(CPP_FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJ_FILES)
+	$(CPP) $(CPP_FLAGS) $(OBJ_FILES) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	rm -f $(OBJ_FILES)
 
 fclean: clean
 	rm -f $(NAME)
@@ -34,5 +37,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-

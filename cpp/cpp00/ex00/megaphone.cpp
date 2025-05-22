@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:02:45 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/21 18:21:41 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/22 20:40:36 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void megaphone(std::string s)
 		{
 			c = std::toupper(c);
 		}
-		std::cout << s;
+        // std::cout << s << std::endl;
+        std::cout << s;
 	}
 }
 
@@ -34,6 +35,7 @@ int main(int ac, char **av)
 		{
 			megaphone(av[i]);
 		}
+        std::cout << std::endl;
 	}
 	return (0);
 }
