@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 15:58:16 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/23 12:28:54 by chlee2           ###   ########.fr       */
+/*   Created: 2025/05/23 14:46:02 by chlee2            #+#    #+#             */
+/*   Updated: 2025/05/23 14:46:25 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "Zombie.hpp"
 
-#include "Contact.hpp"
-
-class PhoneBook
-{
-    private:
-        static const int MAX_CONTACTS = 8;
-        Contact contacts[MAX_CONTACTS];
-        int count;
-        int nextIndex;
-    public:
-        PhoneBook();
-        ~PhoneBook();
-        void addContact();
-        void searchContact() const;
-        int getCount() const;
-};
-
-#endif
+//heap
+Zombie* newZombie(std::string name) {
+    return new Zombie(name);
+}
