@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:58:16 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/22 13:22:02 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:15:48 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Account.hpp"
 #include <iostream>
 
+// Initialize static members
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -121,6 +122,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 	return true;
 }
 
+//this is never used but still in header
 int	Account::checkAmount( void ) const
 {
 	return _amount;
@@ -138,10 +140,11 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-	std::time_t now = std::time(nullptr);
+	std::time_t now = std::time(NULL);
 	std::tm*     ptm = std::localtime(&now);
 
 	char buffer[20];
+	//size_t strftime(char* buffer, size_t maxSize, const char* format, const std::tm* timeStruct);
 	std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S]", ptm);
 	std::cout << buffer << " ";
 }

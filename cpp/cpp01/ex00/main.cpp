@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-#include <new>
 
 int	main(void)
 {
+	//stack
 	randomChump("Jay Stack Guy");
+	//heap
 	Zombie *zmb = newZombie("Jared Heap Boi");
 	if (!zmb)
 		return 1;

@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:58:16 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/23 18:10:08 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/23 19:08:33 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int PhoneBook::getCount() const
     return count;
 }
 
-bool isValidPhoneNumber(const std::string& phoneNumber)
+//in const std::string& phoneNumber), '&' passes a reference to the original string without copying it
+static bool isValidPhoneNumber(const std::string& phoneNumber)
 {
     for (size_t i = 0; i < phoneNumber.length(); ++i) {
         if (!std::isdigit(phoneNumber[i]) && phoneNumber[i] != '+' && phoneNumber[i] != '-' && phoneNumber[i] != ' ') {
@@ -42,10 +43,25 @@ void PhoneBook::addContact()
 
     std::cout << "Enter first name: ";
     if (!std::getline(std::cin, firstName)) return;
+    if (firstName.empty())
+    {
+        std::cout << "FirstName cannot be empty!" << std::endl;
+        return;
+    }
     std::cout << "Enter last name: ";
     if (!std::getline(std::cin, lastName)) return;
+    if (lastName.empty())
+    {
+        std::cout << "LastName cannot be empty!" << std::endl;
+        return;
+    }
     std::cout << "Enter nickname: ";
     if (!std::getline(std::cin, nickName)) return;
+    if (nickName.empty())
+    {
+        std::cout << "NickName cannot be empty!" << std::endl;
+        return;
+    }
     std::cout << "Enter phone number: ";
     if (!std::getline(std::cin, phoneNumber)) return;
     if (!isValidPhoneNumber(phoneNumber))
@@ -53,8 +69,18 @@ void PhoneBook::addContact()
         std::cout << "Invalid phone number format." << std::endl;
         return;
     }
+    if (phoneNumber.empty())
+    {
+        std::cout << "PhoneNumber cannot be empty!" << std::endl;
+        return;
+    }
     std::cout << "Enter darkest secret: ";
     if (!std::getline(std::cin, darkestSecret)) return;
+    if (darkestSecret.empty())
+    {
+        std::cout << "DarkestSecret cannot be empty!" << std::endl;
+        return;
+    }
 
     contacts[nextIndex] = Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
 
@@ -63,6 +89,7 @@ void PhoneBook::addContact()
         count++;
 }
 
+//setw = set width
 static void printField(const std::string& str)
 {
     if (str.length() > 10)
@@ -73,6 +100,7 @@ static void printField(const std::string& str)
 
 static void printContactSummary(const Contact& contact, int index)
 {
+    //If index is shorter than 10 characters (like a small number), it will be padded with spaces on the left by default to fill the width.
     std::cout << std::setw(10) << index << "|";
     printField(contact.getFirstName());
     std::cout << "|";

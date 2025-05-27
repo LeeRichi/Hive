@@ -1,8 +1,9 @@
-NAME = Brain
+
+NAME = Exercise04
 
 CC = c++
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -std=c++17
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp
 
