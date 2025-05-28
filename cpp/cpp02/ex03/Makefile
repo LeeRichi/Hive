@@ -1,11 +1,11 @@
 
-NAME = FragTrap
+NAME = BSP
 
 CC = c++
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRCS = main.cpp Fixed.cpp operators.cpp printLog.cpp bsp.cpp Point.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
