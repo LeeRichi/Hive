@@ -6,7 +6,7 @@
 /*   By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:02:45 by chlee2            #+#    #+#             */
-/*   Updated: 2025/05/23 18:28:48 by chlee2           ###   ########.fr       */
+/*   Updated: 2025/05/27 19:18:05 by chlee2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void megaphone(std::string s)
 int main(int ac, char **av)
 {
 	if (ac == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
 	{
 		for(int i = 1; i < ac; i++)
