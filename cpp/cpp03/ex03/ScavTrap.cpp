@@ -4,12 +4,18 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
     std::cout << "ScavTrap default constructor called for " << _name << std::endl;
+    _hitPoints = 100;
+    _energyPoints = 50;
+    _attackDamage = 20;
 }
 
 // Param constructor
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name, 100, 50, 20)
 {
-    std::cout << "ScavTrap constructed by ClapTrap constructor " << std::endl;
+    std::cout << "ScavTrap param constructor called for " << _name << std::endl;
+    _hitPoints = 100;
+    _energyPoints = 50;
+    _attackDamage = 20;
 }
 
 // Copy constructor

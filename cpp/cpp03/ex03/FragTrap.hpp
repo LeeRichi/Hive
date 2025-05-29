@@ -2,7 +2,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
     public:
         // Orthodox Canonical
@@ -13,4 +13,8 @@ class FragTrap : public ClapTrap
         ~FragTrap();
 
         void	highFivesGuys(void);
+
+        static const unsigned int defaultHitPoints = 100;
+        static const unsigned int defaultEnergyPoints = 100;
+        static const unsigned int defaultAttackDamage = 30;
 };

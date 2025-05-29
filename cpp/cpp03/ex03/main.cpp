@@ -1,25 +1,30 @@
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-int main()
-{
-    std::cout << "\n=== Creating FragTrap ===" << std::endl;
-    // FragTrap ft1("FT-One");
-    FragTrap ft1;
+int main() {
+    std::cout << "\n=== Default DiamondTrap ===\n";
+    DiamondTrap defaultDt;
 
-    ft1.attack("TargetX");
-    ft1.highFivesGuys();
-    ft1.takeDamage(30);
-    ft1.beRepaired(20);
+    std::cout << "\n=== Params DiamondTrap ===\n";
+    DiamondTrap dt("R2D2");
 
-    std::cout << "\n=== Copying FragTrap ===" << std::endl;
-    FragTrap ft2 = ft1;
-    ft2.highFivesGuys();
+    std::cout << "\n===  Copy Constructor DiamondTrap===\n";
+    DiamondTrap copyDt(dt);
 
-    std::cout << "\n=== Assigning FragTrap ===" << std::endl;
-    FragTrap ft3;
-    ft3 = ft1;
-    ft3.attack("TargetY");
+    std::cout << "\n=== Copy Assignment DiamondTrap ===\n";
+    DiamondTrap assignedDt;
+    assignedDt = dt;
 
-    std::cout << "\n=== End of main ===" << std::endl;
-    return 0;
+    std::cout << "\n=== To Attack ===\n";
+    dt.attack("a target");
+
+    std::cout << "\n=== Who Am I===\n";
+    dt.whoAmI();
+    copyDt.whoAmI();
+    assignedDt.whoAmI();
+    defaultDt.whoAmI();
+
+    std::cout << "\n=== End of Program ===\n\n";
 }
+
+
