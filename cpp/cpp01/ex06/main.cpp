@@ -1,21 +1,16 @@
 #include "Harl.hpp"
 #include <iostream>
 
-int main(void)
+int main(int ac, char **av)
 {
+	if (ac != 2)
+	{
+		std::cerr << "Usage: <progame.name> <level>" << std::endl;
+		return (1);
+	}
+
 	Harl rich;
+	rich.complain(av[1]);
 
-	std::cout << ":::valid session:::" << std::endl;
-	std::cout << std::endl << "--- dubug ---" << std::endl;
-	rich.complain("DEBUG");
-	std::cout << std::endl << "--- info ---" << std::endl;
-	rich.complain("INFO");
-	std::cout << std::endl << "--- warning ---" << std::endl;
-	rich.complain("WARNING");
-	std::cout << std::endl << "--- error ---" << std::endl;
-	rich.complain("ERROR");
-
-	std::cout << std::endl << ":::invalid session:::" << std::endl;
-	rich.complain("something else");
 	return 0;
 }

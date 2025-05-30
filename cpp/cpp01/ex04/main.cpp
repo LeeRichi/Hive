@@ -6,7 +6,7 @@
 int main(int ac, char **av)
 {
 	if (ac != 4)
-        std::cout << "Only accept 3 arguments. No more no less." << std::endl;
+        std::cout << "Usage: ./Exercise04 <filename> <word_to_find> <word_to_replace>" << std::endl;
     else
     {
         std::string fileName = av[1];

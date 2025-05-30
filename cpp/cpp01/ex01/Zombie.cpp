@@ -2,7 +2,7 @@
 
 Zombie::Zombie()
 {
-    std::cout << _name << "is being created." << std::endl;
+    std::cout << "Zombie constructor called." << std::endl;
 }
 
 Zombie::~Zombie()
