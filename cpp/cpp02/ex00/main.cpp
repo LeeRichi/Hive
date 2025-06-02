@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main( void ) {
-    Fixed a;
+    Fixed a ;
     Fixed b( a ); // copy constructor
     Fixed c;
     c = b; // copy assigment operator
