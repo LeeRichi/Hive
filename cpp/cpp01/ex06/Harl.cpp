@@ -29,16 +29,12 @@ void Harl::complain(std::string level) {
 	switch (i) {
 		case 0:
 			(this->*methods[0])();
-			break;
 		case 1:
 			(this->*methods[1])();
-			break;
 		case 2:
 			(this->*methods[2])();
-			break;
 		case 3:
 			(this->*methods[3])();
-			break;
 		default:
 			std::cout << "UNKNOWN: Invalid complaint level." << std::endl;
 	}
