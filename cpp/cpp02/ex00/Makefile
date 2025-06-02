@@ -1,42 +1,14 @@
-# NAME = ex00
-
-# CC = c++
-# RM = rm -f
-# CFLAGS = -Wall -Wextra -Werror -std=c++98
-# DEPFLAGS = -MMD -MP
-
-# SRCS = main.cpp Fixed.cpp
-
-# OBJS = $(SRCS:.cpp=.o)
-
-# DEPS = $(OBJS:.o=.d)
-
-# all:$(NAME)
-
-# $(NAME): $(OBJS)
-# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
-# %.o: %.cpp
-# 	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
-
-# -include $(DEPS)
-
-# clean:
-# 	$(RM) $(OBJS) $(DEPS)
-
-# fclean: clean
-# 	rm -f $(NAME)
-
-# re: fclean all
-
-# .PHONY: all clean fclean re
-
-
 NAME = ex00
 
 CC = c++
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+# compiler generates dependency files:
+# -MMD
+# Generate dependencies for #include files, excluding system headers (like <iostream>), and write them to a .d file.
+
+# -MP
+# Add phony targets for each header file listed in the .d file.
 DEPFLAGS = -MMD -MP
 
 OBJDIR = obj
