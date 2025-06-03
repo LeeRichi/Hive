@@ -24,7 +24,7 @@ int main() {
     assignedDt.whoAmI();
     defaultDt.whoAmI();
 
-    std::cout << "\n=== End of Program ===\n\n";
+    std::cout << "\n=== End of Program, cleaning up ===\n\n";
 }
 
 

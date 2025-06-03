@@ -7,9 +7,9 @@ class ClapTrap
 {
 	private:
         std::string _name;
-        unsigned int _hitPoints = 10;
-        unsigned int _energyPoints = 10;
-        unsigned int _attackDamage = 0;
+        unsigned int _hitPoints;
+        unsigned int _energyPoints;
+        unsigned int _attackDamage;
 
     public:
         // Orthodox Canonical
@@ -23,6 +23,4 @@ class ClapTrap
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
-
-        // std::string getName() const;
 };

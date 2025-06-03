@@ -23,7 +23,6 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), ScavTrap(o
 	this->_name = other._name;
 	std::cout << "DiamondTrap copy constructor called for " << this->_name << std::endl;
     // std::cout << "values are: " << this->_hitPoints << " " << this->_energyPoints << " " << this->_attackDamage << std::endl;
-
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {

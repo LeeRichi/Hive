@@ -1,50 +1,41 @@
-
 NAME = DiamondTrap
 
 CC = c++
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -std=c++17
+CFLAGS = -Wall -Wextra -Werror -std=c++11
+
+DEPFLAGS = -MMD -MP
+
+OBJDIR = obj
+DEPDIR = dep
 
 SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
+DEPS = $(SRCS:%.cpp=$(DEPDIR)/%.d)
 
-OBJS = $(SRCS:.cpp=.o)
+all: $(NAME)
 
-DEPS = $(OBJS:.o=.d)
-
-all:$(NAME)
-
-# notes
-# $@ target
-# $@ = target name → expands to $(NAME) (i.e., DiamondTrap)
-
-# $< first prerequisite
-# $< = first dependency → the .cpp file
-
-# $^ all prerequisites (all .o files)
-# $^ = all dependencies → expands to $(OBJS) (i.e., all the .o files)
-
-# -c flag tells the compiler to compile source files into object files without linking.
-
-# This rule compiles .cpp source files into .o object files.
-# eg: c++ -Wall -Wextra -Werror -std=c++17 -c main.cpp -o main.o
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# This rule links object files into the final executable.
-# eg. c++ -Wall -Wextra -Werror -std=c++17 -c main.cpp -o main.o
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+$(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(OBJDIR) $(DEPDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(DEPFLAGS) -MF $(DEPDIR)/$*.d
 
 -include $(DEPS)
 
 clean:
-	$(RM) $(OBJS) $(DEPS)
+	$(RM) -r $(OBJDIR) $(DEPDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+
+
+
 
 
