@@ -32,7 +32,7 @@ ClapTrap::~ClapTrap() {
 
 // Member functions
 void ClapTrap::attack(const std::string& target) {
-    if (_energyPoints <= 0 || _hitPoints <= 0) {
+    if (_energyPoints == 0 || _hitPoints == 0) {
         std::cout << "ClapTrap " << _name << " can't attack. No energy or hit points left!" << std::endl;
         return;
     }
@@ -42,7 +42,6 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-    _hitPoints -= amount;
     if (amount >= _hitPoints)
         _hitPoints = 0;
     else
@@ -52,7 +51,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-    if (_energyPoints <= 0 || _hitPoints <= 0) {
+    if (_energyPoints == 0 || _hitPoints == 0) {
         std::cout << "ClapTrap " << _name << " can't repair. No energy or hit points left!" << std::endl;
         return;
     }
@@ -62,15 +61,15 @@ void ClapTrap::beRepaired(unsigned int amount) {
               << " points! Current HP: " << _hitPoints << std::endl;
 }
 
-//setters
-unsigned int ClapTrap::getHitPoints() const {
-	return _hitPoints;
-}
+// //setters
+// unsigned int ClapTrap::getHitPoints() const {
+// 	return _hitPoints;
+// }
 
-unsigned int ClapTrap::getEnergyPoints() const {
-	return _energyPoints;
-}
+// unsigned int ClapTrap::getEnergyPoints() const {
+// 	return _energyPoints;
+// }
 
-unsigned int ClapTrap::getAttackDamage() const {
-	return _attackDamage;
-}
+// unsigned int ClapTrap::getAttackDamage() const {
+// 	return _attackDamage;
+// }

@@ -8,7 +8,7 @@ ScavTrap   FragTrap    // these two classes are virtual
    DiamondTrap
 */
 
-#include "ClapTrap.hpp"
+// #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #pragma once

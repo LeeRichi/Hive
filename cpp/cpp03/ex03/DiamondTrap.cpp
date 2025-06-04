@@ -1,9 +1,9 @@
 #include "DiamondTrap.hpp"
 
 // Default constructor
-DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap() {
     std::cout << "DiamondTrap default constructor called for " << this->_name << std::endl;
-    _hitPoints = FragTrap::defaultHitPoints;
+    _hitPoints = FragTrap::_hitPoints;
     _energyPoints = ScavTrap::defaultEnergyPoints;
     _attackDamage = FragTrap::defaultAttackDamage;
     std::cout << "values are: " << this->_hitPoints << " " << this->_energyPoints << " " << this->_attackDamage << std::endl;

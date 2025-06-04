@@ -4,6 +4,10 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
     std::cout << "ScavTrap default constructor called for " << _name << std::endl;
+    _name = ClapTrap::_name;
+    _hitPoints = ClapTrap::_hitPoints;
+    _energyPoints = 50;
+    _attackDamage = 20;
 }
 
 // Param constructor
@@ -38,7 +42,7 @@ ScavTrap::~ScavTrap()
 // Override attack
 void ScavTrap::attack(const std::string& target)
 {
-    if (_energyPoints <= 0 || _hitPoints <= 0)
+    if (_energyPoints == 0 || _hitPoints == 0)
     {
         std::cout << "ScavTrap " << _name << " can't attack. No energy or hit points left!" << std::endl;
         return;

@@ -14,7 +14,7 @@ class ClapTrap
     public:
         // Orthodox Canonical
         ClapTrap();
-        ClapTrap(const std::string& name, unsigned int hitPoints = 10, unsigned int energyPoints = 10, unsigned int attackDamage = 0); // New
+        ClapTrap(const std::string& name, unsigned int hitPoints = 100, unsigned int energyPoints = 10, unsigned int attackDamage = 0); // New
         ClapTrap(const ClapTrap& other); // Copy constructor
         ClapTrap& operator=(const ClapTrap& other); // Copy assignment operator
         virtual ~ClapTrap();

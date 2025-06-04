@@ -25,9 +25,9 @@ class ClapTrap
         void beRepaired(unsigned int amount);
 
         //getters
-        unsigned int getHitPoints() const;
-        unsigned int getEnergyPoints() const;
-        unsigned int getAttackDamage() const;
+        // unsigned int getHitPoints() const;
+        // unsigned int getEnergyPoints() const;
+        // unsigned int getAttackDamage() const;
 
         // std::string getName() const;
 };

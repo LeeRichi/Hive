@@ -3,8 +3,9 @@
 // Default constructor
 ScavTrap::ScavTrap() : ClapTrap()
 {
+    std::cout << "ScavTrap default constructor called for " << _name << std::endl;
     _name = ClapTrap::_name;
-    _hitPoints = 100;
+    _hitPoints = ClapTrap::_hitPoints;
     _energyPoints = 50;
     _attackDamage = 20;
 }
@@ -12,7 +13,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 // Param constructor
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name, 100, 50, 20)
 {
-    std::cout << "ScavTrap constructed by ClapTrap param constructor " << std::endl;
+    std::cout << "ScavTrap Param constructor called for " << std::endl;
 }
 
 // Copy constructor
@@ -24,7 +25,7 @@ ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 // Copy assignment operator
 ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 {
-    std::cout << "ScavTrap copy assignment operator called" << std::endl;
+    std::cout << "ScavTrap copy assignment operator called for " << _name << std::endl;
     if (this != &other)
     {
         ClapTrap::operator=(other);

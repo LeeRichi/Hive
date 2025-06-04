@@ -12,9 +12,8 @@ class ClapTrap
         unsigned int _attackDamage;
 
     public:
-        // Orthodox Canonical
         ClapTrap();
-        ClapTrap(const std::string& name); // Param constructor
+        ClapTrap(const std::string& name);
         ClapTrap(const ClapTrap& other); // Copy constructor
         ClapTrap& operator=(const ClapTrap& other); // Copy assignment operator
         ~ClapTrap();
