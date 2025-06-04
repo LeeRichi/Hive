@@ -61,15 +61,3 @@ void ClapTrap::beRepaired(unsigned int amount) {
               << " points! Current HP: " << _hitPoints << std::endl;
 }
 
-// //setters
-// unsigned int ClapTrap::getHitPoints() const {
-// 	return _hitPoints;
-// }
-
-// unsigned int ClapTrap::getEnergyPoints() const {
-// 	return _energyPoints;
-// }
-
-// unsigned int ClapTrap::getAttackDamage() const {
-// 	return _attackDamage;
-// }

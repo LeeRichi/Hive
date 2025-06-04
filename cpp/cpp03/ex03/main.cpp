@@ -4,8 +4,6 @@
 int main() {
     std::cout << "\n=== Default DiamondTrap ===\n";
     DiamondTrap defaultDt;
-
-
     defaultDt.takeDamage(2);
 
     std::cout << "\n=== Params DiamondTrap ===\n";

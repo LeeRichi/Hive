@@ -8,7 +8,6 @@ ScavTrap   FragTrap    // these two classes are virtual
    DiamondTrap
 */
 
-// #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #pragma once
@@ -16,7 +15,7 @@ ScavTrap   FragTrap    // these two classes are virtual
 class DiamondTrap: public ScavTrap, public FragTrap
 {
     private:
-        std::string _name = "Default";
+        std::string _name;
 
     public:
         // Orthodox Canonical
