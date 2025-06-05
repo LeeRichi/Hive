@@ -7,7 +7,7 @@ int main() {
     c = b;
 
     a.attack("Target");
-    b.takeDamage(5);
+    b.takeDamage(-5);
     c.beRepaired(3333333);
 
     return 0;
