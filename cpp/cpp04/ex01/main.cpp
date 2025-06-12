@@ -16,7 +16,7 @@ int main() {
             animals[i] = new Cat();
     }
 
-    std::cout << "\n--- Making Sounds ---" << std::endl;
+    std::cout << "\n--- All animals now making Sounds ---" << std::endl;
     for (int i = 0; i < arraySize; ++i)
         animals[i]->makeSound();
 
@@ -30,7 +30,7 @@ int main() {
     originalDog.getBrain()->setIdea(0, "I am for sure a original Dog.");
 
     Dog copiedDog = originalDog; // copy constructor
-    copiedDog.getBrain()->setIdea(0, "I guess I am the copy one.");
+    copiedDog.getBrain()->setIdea(0, "I guess I am the copy one?");
 
     std::cout << "Original Dog idea: " << originalDog.getBrain()->getIdea(0) << std::endl;
     std::cout << "Copied Dog idea:   " << copiedDog.getBrain()->getIdea(0) << std::endl;
@@ -44,6 +44,11 @@ int main() {
 
     std::cout << "Original Cat idea: " << originalCat.getBrain()->getIdea(0) << std::endl;
     std::cout << "Copied Cat idea:   " << copiedCat.getBrain()->getIdea(0) << std::endl;
+
+
+
+    std::cout << "\n === Now bunch of destructors: ===" << std::endl;
+
 
     return 0;
 }

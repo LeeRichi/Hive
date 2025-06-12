@@ -18,14 +18,14 @@ int main() {
     assignedDt = dt;
     assignedDt.takeDamage(2000);
 
-    // std::cout << "\n=== To Attack ===\n";
-    // dt.attack("a target");
+    std::cout << "\n=== To Attack ===\n";
+    dt.attack("a target");
 
-    // std::cout << "\n=== Who Am I===\n";
-    // dt.whoAmI();
-    // copyDt.whoAmI();
-    // assignedDt.whoAmI();
-    // defaultDt.whoAmI();
+    std::cout << "\n=== Who Am I===\n";
+    dt.whoAmI();
+    copyDt.whoAmI();
+    assignedDt.whoAmI();
+    defaultDt.whoAmI();
 
     std::cout << "\n=== End of Program, cleaning up ===\n\n";
 }

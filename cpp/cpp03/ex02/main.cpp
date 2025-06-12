@@ -9,6 +9,8 @@ int main()
     ft1.highFivesGuys();
     ft1.takeDamage(1);
     ft1.beRepaired(20);
+    ft1.highFivesGuys();
+
 
     std::cout << "\n=== Copying FragTrap ===" << std::endl;
     FragTrap ft2 = ft1;

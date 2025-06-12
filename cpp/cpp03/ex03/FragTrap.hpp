@@ -13,7 +13,7 @@ class FragTrap : virtual public ClapTrap
         ~FragTrap();
 
         void	highFivesGuys(void);
-
+    protected:
         static const unsigned int defaultHitPoints = 100;
         static const unsigned int defaultEnergyPoints = 100;
         static const unsigned int defaultAttackDamage = 30;

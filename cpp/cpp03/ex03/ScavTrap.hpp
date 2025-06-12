@@ -17,7 +17,7 @@ class ScavTrap : virtual public ClapTrap
         // Member functions
         void attack(const std::string& target) override;
         void guardGate();
-
+    protected:
         static const unsigned int defaultHitPoints = 100;
         static const unsigned int defaultEnergyPoints = 50;
         static const unsigned int defaultAttackDamage = 20;

@@ -18,6 +18,10 @@
 //     cat1->makeSound();
 //     notSureWhatThisIs->makeSound();
 // 	return 0;
+
+// delete notSureWhatThisIs;
+// delete dog1;
+// delete cat1;
 // }
 
 //<=== from suject ===>
@@ -32,20 +36,29 @@
 // j->makeSound();
 // meta->makeSound();
 // ...
+// delete meta;
+// delete j;
+// delete i;
 // return 0;
 // }
 
 //<=== from suject but with Wrong animal or cat ===>
 int main()
 {
-    const WrongAnimal* wrongMeta = new WrongAnimal();
+    const WrongAnimal* wrongMeta = new WrongCat();
     const Animal* j = new Dog();
     const WrongAnimal* i = new WrongCat();
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
     i->makeSound(); //will output the cat sound! //not anymore
     j->makeSound();
+
     wrongMeta->makeSound();
+    
     // ...
+    delete wrongMeta;
+    delete j;
+    delete i;
+
     return 0;
 }

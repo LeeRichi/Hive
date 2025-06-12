@@ -1,7 +1,7 @@
 #include "Brain.hpp"
 
 Brain::Brain() {
-    std::cout << "Brain constructed" << std::endl;
+    std::cout << "Brain default constructed" << std::endl;
 }
 
 Brain::Brain(const Brain& other) {

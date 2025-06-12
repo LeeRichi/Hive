@@ -1,7 +1,7 @@
 #include "Brain.hpp"
 
 Brain::Brain() {
-    std::cout << "Brain constructed" << std::endl;
+    std::cout << "Brain default constructed" << std::endl;
 }
 
 Brain::Brain(const Brain& other) {
@@ -10,7 +10,7 @@ Brain::Brain(const Brain& other) {
 }
 
 Brain& Brain::operator=(const Brain& other) {
-    std::cout << "Brain copy assigned" << std::endl;
+    std::cout << "Brain copy assigned constructed" << std::endl;
     for (int i = 0; i < 100; ++i)
         ideas[i] = other.ideas[i];
     return *this;

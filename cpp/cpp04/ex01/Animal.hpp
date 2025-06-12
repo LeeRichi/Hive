@@ -13,6 +13,6 @@ class Animal {
         virtual void makeSound() const;
         std::string getType() const;
         void setType(const std::string &type);
-    private:
+    protected:
         std::string _type;
 };
