@@ -17,21 +17,25 @@ bool ScalarConverter::isValidInput(const std::string &input) {
         return true;
     }
     try {
-        std::stod(input);
-        return true;
+			std::stod(input);
+			return true;
+		} catch (const std::out_of_range &) {
+			return true;
     } catch (const std::invalid_argument &) {
-        return false;
-    } catch (const std::out_of_range &) {
-        return false;
-    }
+			return false;
+		}
+}
+
+bool ScalarConverter::isSpecialValue(const std::string &input) {
+	return input == "nan" || input == "inf" || input == "-inf";
 }
 
 void ScalarConverter::handleInvalidInput(const std::string &input) {
 	std::cerr << "Invalid input: " << input << std::endl;
 }
 
-bool ScalarConverter::isSpecialValue(const std::string &input) {
-	return input == "nan" || input == "inf" || input == "-inf";
+void handleOutOfRange(const std::string &input) {
+	std::cerr << "Input out of range: " << input << std::endl;
 }
 
 //hard code pseudo-literals
@@ -81,7 +85,6 @@ void ScalarConverter::convertToFloat(double value) {
 	} else if (value < std::numeric_limits<float>::lowest() || value > std::numeric_limits<float>::max()) {
 		std::cout << "float: impossible" << std::endl;
 	} else {
-        //valid coinversion
 		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(value) << "f" << std::endl;
 	}
 }
@@ -102,18 +105,20 @@ void ScalarConverter::convert(const std::string &input) {
 		handleInvalidInput(input);
 		return;
 	}
-
 	if (isSpecialValue(input)) {
 		handleSpecialValues(input);
 		return;
 	}
+
 	double value;
 	try {
 		value = std::stod(input);
-	} catch (const std::invalid_argument &) {
-		handleInvalidInput(input);
+	}
+	catch (const std::out_of_range &) {
+		handleOutOfRange(input);
 		return;
-	} catch (const std::out_of_range &) {
+	}
+	catch (const std::invalid_argument &) {
 		handleInvalidInput(input);
 		return;
 	}
