@@ -1,51 +1,41 @@
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include "Bureaucrat.hpp"
 
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
-
-//delete what ever is created btw.
-
-// int main()
-// {
-// 	const Animal* notSureWhatThisIs = new Animal();
-// 	const Animal* dog1 = new Dog();
-// 	const Animal* cat1 = new Cat();
-// 	std::cout << dog1->getType() << " " << std::endl;
-// 	std::cout << cat1->getType() << " " << std::endl;
-//     dog1->makeSound();
-//     cat1->makeSound();
-//     notSureWhatThisIs->makeSound();
-// 	return 0;
-// }
-
-//<=== from suject ===>
-// int main()
-// {
-// const Animal* meta = new Animal();
-// const Animal* j = new Dog();
-// const Animal* i = new Cat();
-// std::cout << j->getType() << " " << std::endl;
-// std::cout << i->getType() << " " << std::endl;
-// i->makeSound(); //will output the cat sound!
-// j->makeSound();
-// meta->makeSound();
-// ...
-// return 0;
-// }
-
-//<=== from suject but with Wrong animal or cat ===>
 int main()
 {
-    const WrongAnimal* wrongMeta = new WrongAnimal();
-    const Animal* j = new Dog();
-    const WrongAnimal* i = new WrongCat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound(); //will output the cat sound! //not anymore
-    j->makeSound();
-    wrongMeta->makeSound();
-    // ...
+    std::cout << "hello cpp05" << std::endl;
+    try {
+        Bureaucrat a1("Alice", 0);  // this should throw exception
+    } catch (const std::exception &e) {
+        std::cerr << "Failed to create Bureaucrat: " << e.what() << std::endl;
+    }
+
+    // Bureaucrat a1("Alice", 0); //ummmmmmmm //dont do this
+
+    try
+    {
+        Bureaucrat b1("Alice", 1);
+        Bureaucrat b2("Bob", 150);
+        Bureaucrat b3("Charlie", 1);
+        Bureaucrat b4; // Default constructor
+        Bureaucrat b5(b1);
+        Bureaucrat b6 = b2;
+        Bureaucrat b7;
+        b7 = b3;
+
+        std::cout << b1 << std::endl;
+        std::cout << b2 << std::endl;
+        std::cout << b3 << std::endl;
+        std::cout << b4 << std::endl;
+        std::cout << b5 << std::endl;
+        std::cout << b6 << std::endl;
+        std::cout << b7 << std::endl;
+        b2.decrementGrade();
+        std::cout << "After incrementing grade of " << b2.getName() << ": " << b2 << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Failed to create Bureaucrat: " << e.what() << std::endl;
+    }
+
     return 0;
 }
