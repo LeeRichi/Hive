@@ -16,7 +16,7 @@ class Array {
 		Array() : _array(nullptr), _size(0) {}
 		Array(unsigned int n) : _size(n) {
 			if (n > 0) {
-				_array = new T[n];
+				_array = new T[n](); //add () for initialization
 			} else {
 				_array = nullptr;
 			}

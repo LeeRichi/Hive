@@ -17,6 +17,10 @@ int main() {
     std::cout << "Copy: " << b[0] << "\n";
     std::cout << "Assigned: " << c[0] << "\n";
 
+    for (unsigned int i = 0; i < a.size(); ++i) {
+        std::cout << "a[" << i << "] = " << a[i] << "\n";
+    }
+
     try {
         std::cout << a[999] << "\n"; // Should throw
     } catch (std::exception& e) {
