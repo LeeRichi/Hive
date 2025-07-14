@@ -32,11 +32,16 @@ class Form
 				virtual const char* what() const throw();
 		};
 
+		// class AlreadySignedException : public std::exception
+		// {
+		// 	public:
+		// 		virtual const char* what() const throw();
+		// };
+
 		const std::string getName() const;
 		bool getIsSigned() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
-
 		void beSigned(const Bureaucrat &bureaucrat);
 };
 

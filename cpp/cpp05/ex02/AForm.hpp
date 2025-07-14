@@ -18,7 +18,7 @@ class AForm
 		AForm();
 		AForm(const std::string &name, int gradeToSign, int gradeToExecute);
 		AForm(const AForm &other);
-		AForm &operator=(const AForm &othe3r);
+		AForm &operator=(const AForm &other);
 		virtual ~AForm();
 
 		class GradeTooHighException : public std::exception

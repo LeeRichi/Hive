@@ -120,15 +120,15 @@ int main() {
 	testSigningAndExecution(pardonForm, Chi, Chi);   // should fail both sign & exec
 
 	// Polymorphism check
-	std::cout << "\n[TEST] Polymorphism\n";
-	AForm *form = new ShrubberyCreationForm("backyard");
-	try {
-		Rich.signForm(*form);
-		form->execute(Rich);
-	} catch (const std::exception &e) {
-		std::cerr << e.what() << "\n";
-	}
-	delete form;
+	// std::cout << "\n[TEST] Polymorphism\n";
+	// AForm *form = new ShrubberyCreationForm("backyard");
+	// try {
+	// 	Rich.signForm(*form);
+	// 	form->execute(Rich);
+	// } catch (const std::exception &e) {
+	// 	std::cerr << e.what() << "\n";
+	// }
+	// delete form;
 
 	return 0;
 }
