@@ -1,10 +1,5 @@
 #include "ScalarConverter.hpp"
-
-#include <iostream>
-#include <limits>
-#include <sstream>
 #include <stdexcept>
-#include <string>
 
 bool ScalarConverter::isValidInput(const std::string &input) {
     if (input.empty()) {
@@ -99,6 +94,16 @@ void ScalarConverter::convertToDouble(double value) {
 	}
 }
 
+//     [input string]
+//          ↓
+//    ┌──────────────┐
+//    │ std::stod()  │  → parse safely
+//    └──────────────┘
+//          ↓
+//       [double]    → from here:
+//          ↓               ↓                ↓                 ↓
+//   convertToChar()  convertToInt()  convertToFloat()  convertToDouble()
+
 //the main function
 void ScalarConverter::convert(const std::string &input) {
 	if (!isValidInput(input)) {
@@ -110,6 +115,7 @@ void ScalarConverter::convert(const std::string &input) {
 		return;
 	}
 
+	//double can cover all possible valid inputs
 	double value;
 	try {
 		value = std::stod(input);
