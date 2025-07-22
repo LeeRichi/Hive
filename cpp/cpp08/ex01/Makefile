@@ -1,4 +1,4 @@
-NAME = easyfind
+NAME = span
 
 CC = c++
 RM = rm -f
