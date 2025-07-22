@@ -1,5 +1,4 @@
 #include "Span.hpp"
-#include <climits>
 
 Span::Span() : max_size(0) {}
 

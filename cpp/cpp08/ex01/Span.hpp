@@ -1,5 +1,8 @@
 #pragma once
 #include <vector>
+#include <climits>
+#include <stdexcept>    // for std::overflow_error, std::runtime_error, std::logic_error
+#include <algorithm>    // for std::sort, std::min_element, std::max_element
 
 class Span {
 	private:
