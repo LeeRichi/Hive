@@ -1,38 +1,40 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: chlee2 <chlee2@student.hive.fi>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/19 15:58:16 by chlee2            #+#    #+#              #
-#    Updated: 2025/05/19 16:11:24 by chlee2           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = megaphone
+NAME = btc
 
 CC = c++
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRCS = megaphone.cpp \
+DEPFLAGS = -MMD -MP
 
-OBJS = $(SRCS:.cpp=.o)
+OBJDIR = obj
+DEPDIR = dep
 
-all:$(NAME)
+SRCS = main.cpp BitcoinExchange.cpp
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
+DEPS = $(SRCS:%.cpp=$(DEPDIR)/%.d)
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
+$(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(OBJDIR) $(DEPDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(DEPFLAGS) -MF $(DEPDIR)/$*.d
+
+-include $(DEPS)
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) -r $(OBJDIR) $(DEPDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+
+
 
 
