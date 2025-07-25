@@ -1,30 +1,17 @@
 #pragma once
 
+#include <map>
+#include <string>
+
 class BitcoinExchange {
 	private:
-		std::map<int> numbers;
-		
+		std::map<std::string, float> numbers;
 
 	public:
 		BitcoinExchange();
 		BitcoinExchange(unsigned int n);
-		BitcoinExchange(const Span &og);
+		BitcoinExchange(const BitcoinExchange &og);
 		BitcoinExchange &operator=(const BitcoinExchange &og);
 
-
-
-        void readStore(int file);
-
-		// void addNumber(int n);
-		// int shortestSpan() const;
-		// int longestSpan() const;
-
-		// template<typename InputIterator>
-		// void addNumbers(InputIterator begin, InputIterator end)
-		// {
-		// 	if (std::distance(begin, end) + numbers.size() > max_size)
-		// 		throw std::overflow_error("Error: Adding this range would exceed the span's capacity.");
-
-		// 	numbers.insert(numbers.end(), begin, end);
-		// }
+		void readStore(const std::string& filename);  // changed from int to string
 };
