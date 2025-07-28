@@ -1,2 +1,4 @@
 temp
 2tester
+*.vscode
+*.DS_Store
