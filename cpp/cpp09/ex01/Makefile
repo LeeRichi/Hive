@@ -1,4 +1,4 @@
-NAME = span
+NAME = RPN
 
 CC = c++
 RM = rm -f
@@ -9,7 +9,7 @@ DEPFLAGS = -MMD -MP
 OBJDIR = obj
 DEPDIR = dep
 
-SRCS = main.cpp Span.cpp
+SRCS = main.cpp RPN.cpp
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(SRCS:%.cpp=$(DEPDIR)/%.d)
 
