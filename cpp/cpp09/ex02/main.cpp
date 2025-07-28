@@ -1,98 +1,91 @@
-#include "MutantStack.hpp"
+#include "PmergeMe.hpp"
 #include <iostream>
 #include <exception>
+#include <chrono>
+#include <climits>
+#include <string>
+#include <iomanip>  // <-- needed for std::fixed and std::setprecision
 
-void push_many_randoms(MutantStack<int>& mstack, int rounds)
+void printTime(const std::string &containerName,
+    std::chrono::high_resolution_clock::time_point start,
+    std::chrono::high_resolution_clock::time_point end,
+    size_t len)
 {
-    for (int i = 0; i < rounds; i++)
+    auto duration = std::chrono::duration_cast<std::chrono::duration<double, std::micro>>(end - start).count();
+
+    std::cout << std::fixed << std::setprecision(5);  // <-- ensure 5 digits after decimal
+    std::cout << "Time to process a range of    " << len << " elements with " << containerName
+    << " : " << duration << " us" << std::endl;
+}
+
+void printSequence(const std::vector<int>& vec, const std::string& prefix)
+{
+    std::cout << prefix;
+    for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); ++it)
     {
-        if (i == 3)
-        {
-            mstack.push(000);
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+void printSequence(const std::deque<int>& deq, const std::string& prefix)
+{
+    std::cout << prefix;
+    for (std::deque<int>::const_iterator it = deq.begin(); it != deq.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+int parse_and_validate(const std::string& str)
+{
+    try {
+        size_t pos;
+        int result = std::stoi(str, &pos);
+
+        // Check if there's junk after the number
+        if (pos != str.length()) {
+            throw std::invalid_argument("Extra characters after number");
         }
-        mstack.push(rand() / 10000);
+
+        if (result <= 0)
+        {
+            std::cerr << "Error" << std::endl;
+            exit(1);
+        }
+        return result;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error parsing '" << str << "': " << e.what() << std::endl;
+        exit(1);
     }
 }
 
-int main()
-{
-MutantStack<int> mstack;
-// mstack.push(5);
-// mstack.push(17);
-// std::cout << mstack.top() << std::endl;
-// mstack.pop();
-// std::cout << mstack.size() << std::endl;
-// mstack.push(3);
-// mstack.push(5);
-// mstack.push(737);
-// //[...]
-// mstack.push(1);
+int main(int argc, char **argv) {
+    PmergeMe cont;
+    for (int i = 1; i < argc; i++)
+    {
+        int val = parse_and_validate(argv[i]);
+        cont.addNumber(val);
+    }
 
-push_many_randoms(mstack, 10);
-MutantStack<int>::iterator it = mstack.begin();
-MutantStack<int>::iterator ite = mstack.end();
-++it;
---it;
-while (it != ite)
-{
-std::cout << *it << std::endl;
-++it;
+    printSequence(cont.getVector(), "Before: ");
+
+    auto start = std::chrono::high_resolution_clock::now();
+    cont.mergeInsertSortVector(cont.getVector(), 0, cont.getVector().size() - 1);
+    auto end = std::chrono::high_resolution_clock::now();
+    //subject print
+    printSequence(cont.getVector(), "After: ");
+    // printSequence(cont.getVector(), "After(vector): ");
+    printTime("std::vector", start, end, cont.getVector().size());
+
+    start = std::chrono::high_resolution_clock::now();
+    cont.mergeInsertSortDeque(cont.getDeque(), 0, cont.getDeque().size() - 1);
+    end = std::chrono::high_resolution_clock::now();
+    // printSequence(cont.getDeque(), "After(deque): ");
+
+    printTime("std::deque", start, end, cont.getDeque().size());
+
+    return 0;
 }
-std::stack<int> s(mstack);
-return 0;
-}
-
-// #include "MutantStack.hpp"
-// #include <iostream>
-
-// int main()
-// {
-//     MutantStack<int> mstack;
-
-//     if (mstack.empty()) {
-//         std::cout << "Stack is empty, cannot access top value.\n";
-//     } else {
-//         try {
-//             int topValue = mstack.top();
-//             std::cout << "Top value: " << topValue << std::endl;
-//         }
-//         catch (const std::out_of_range& e) {
-//             std::cout << "Caught exception: " << e.what() << std::endl;
-//         }
-//     }
-
-//     for (int i = 1; i <= 5; ++i)
-//         mstack.push(i * 10); // 10, 20, 30, 40, 50
-
-//     std::cout << "\n== Regular iterator ==\n";
-//     for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it)
-//         std::cout << *it << ' ';
-
-//     std::cout << "\n== Const iterator ==\n";
-//     const MutantStack<int>& const_mstack = mstack;
-//     for (MutantStack<int>::const_iterator cit = const_mstack.begin(); cit != const_mstack.end(); ++cit)
-//         std::cout << *cit << ' ';
-
-//     std::cout << "\n== Reverse iterator ==\n";
-//     for (MutantStack<int>::reverse_iterator rit = mstack.rbegin(); rit != mstack.rend(); ++rit)
-//         std::cout << *rit << ' ';
-
-//     std::cout << "\n== Const reverse iterator ==\n";
-//     for (MutantStack<int>::const_reverse_iterator crit = const_mstack.rbegin(); crit != const_mstack.rend(); ++crit)
-//         std::cout << *crit << ' ';
-
-//     //try to mutate the const iter
-//     // for (MutantStack<int>::iterator it = const_mstack.begin(); it != const_mstack.end(); ++it)
-//     //     *it += 1; // Mutate the const contents //should not work
-
-//     std::cout << "\n\n== Mutation via iterator (adds 1) ==\n";
-//     for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it)
-//         *it += 1; // Mutate the contents
-
-//     for (MutantStack<int>::const_iterator cit = const_mstack.begin(); cit != const_mstack.end(); ++cit)
-//         std::cout << *cit << ' '; // Should reflect updated values
-
-//     std::cout << '\n';
-
-//     return 0;
-// }

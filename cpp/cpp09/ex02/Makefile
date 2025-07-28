@@ -1,4 +1,4 @@
-NAME = MutantStack
+NAME = PmergeMe
 
 CC = c++
 RM = rm -f
@@ -9,7 +9,7 @@ DEPFLAGS = -MMD -MP
 OBJDIR = obj
 DEPDIR = dep
 
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(SRCS:%.cpp=$(DEPDIR)/%.d)
 
