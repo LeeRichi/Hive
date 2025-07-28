@@ -13,5 +13,6 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange &og);
 		BitcoinExchange &operator=(const BitcoinExchange &og);
 
-		void readStore(const std::string& filename);  // changed from int to string
-};
+		void readStore(const std::string& filename); //read data.csv
+		void multiplyPrint(const std::string &filename); //read input.txt(av[1]) and calculate
+	};

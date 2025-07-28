@@ -32,11 +32,11 @@
 //     //parsing starts
 //     std::map<std::string, float> data;
 //     std::string line;
-    
+
 //     // Skip header line
 //     std::getline(file, line);
-    
-    
+
+
 //     //trmming logic
 //     // iss >> date >> sep >> value;
 //     while (std::getline(file, line)) {
@@ -91,13 +91,17 @@
 #include "BitcoinExchange.hpp"
 
 int main(int ac, char **av) {
-	if (ac != 2) {
+	(void)av;
+	if (ac != 2)
+	{
 		std::cerr << "Error: could not open file." << std::endl;
 		return 1;
 	}
 
 	BitcoinExchange btc;
-	btc.readStore(av[1]);
+	btc.readStore("./data.csv");
+
+	btc.multiplyPrint(av[1]);
 
 	return 0;
 }
