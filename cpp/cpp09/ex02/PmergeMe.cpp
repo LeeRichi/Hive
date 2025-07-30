@@ -6,7 +6,7 @@ PmergeMe::PmergeMe(const PmergeMe &other) {
 	*this = other;
 }
 
-PmergeMe &PmergeMe::operator=(const PmergeMe &og)
+PmergeMe &PmergeMe::operator=(const PmergeMe& og)
 {
 	if (this != &og)
 	{
@@ -18,107 +18,109 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &og)
 
 PmergeMe::~PmergeMe() {}
 
-
 void PmergeMe::addNumber(int val)
 {
 	vec.push_back(val);
 	deq.push_back(val);
 }
 
-void insertionSort(std::vector<int> &vec, int left, int right) {
-	for (int i = left + 1; i <= right; ++i)
-	{
-		int key = vec[i];
-		int j = i - 1;
 
-		while (j >= left && vec[j] > key) {
-			vec[j + 1] = vec[j];
-			--j;
-		}
-		vec[j + 1] = key;
-	}
-}
+// old
 
-void mergeSort(std::vector<int>& vec, int left, int mid, int right)
-{
-	std::vector<int> left_vec(vec.begin() + left, vec.begin() + mid + 1);
-	std::vector<int> right_vec(vec.begin() + mid + 1, vec.begin() + right + 1);
+// void insertionSort(std::vector<int> &vec, int left, int right) {
+// 	for (int i = left + 1; i <= right; ++i)
+// 	{
+// 		int key = vec[i];
+// 		int j = i - 1;
 
-	size_t i = 0, j = 0;
-	int k = left;
+// 		while (j >= left && vec[j] > key) {
+// 			vec[j + 1] = vec[j];
+// 			--j;
+// 		}
+// 		vec[j + 1] = key;
+// 	}
+// }
 
-	while (i < left_vec.size() && j < right_vec.size())
-	{
-		if (left_vec[i] <= right_vec[j])
-			vec[k++] = left_vec[i++];
-		else
-			vec[k++] = right_vec[j++];
-	}
+// void mergeSort(std::vector<int>& vec, int left, int mid, int right)
+// {
+// 	std::vector<int> left_vec(vec.begin() + left, vec.begin() + mid + 1);
+// 	std::vector<int> right_vec(vec.begin() + mid + 1, vec.begin() + right + 1);
 
-	while (i < left_vec.size()) vec[k++] = left_vec[i++];
-	while (j < right_vec.size()) vec[k++] = right_vec[j++];
-}
+// 	size_t i = 0, j = 0;
+// 	int k = left;
 
-void PmergeMe::mergeInsertSortVector(std::vector<int>& vec, int left, int right)
-{
-	if (right - left <= INSERTION_SORT_THRESHOLD)
-	{
-		insertionSort(vec, left, right);
-		return;
-	}
+// 	while (i < left_vec.size() && j < right_vec.size())
+// 	{
+// 		if (left_vec[i] <= right_vec[j])
+// 			vec[k++] = left_vec[i++];
+// 		else
+// 			vec[k++] = right_vec[j++];
+// 	}
 
-	int mid = left + (right - left) / 2;
-	mergeInsertSortVector(vec, left, mid);
-	mergeInsertSortVector(vec, mid + 1, right);
-	mergeSort(vec, left, mid, right);
-}
+// 	while (i < left_vec.size()) vec[k++] = left_vec[i++];
+// 	while (j < right_vec.size()) vec[k++] = right_vec[j++];
+// }
 
-void insertionSort(std::deque<int>& deq, int left, int right) {
-	for (int i = left + 1; i <= right; ++i) {
-		int key = deq[i];
-		int j = i - 1;
+// void PmergeMe::mergeInsertSortVector(std::vector<int>& vec, int left, int right)
+// {
+// 	if (right - left <= INSERTION_SORT_THRESHOLD)
+// 	{
+// 		insertionSort(vec, left, right);
+// 		return;
+// 	}
 
-		while (j >= left && deq[j] > key) {
-			deq[j + 1] = deq[j];
-			--j;
-		}
-		deq[j + 1] = key;
-	}
-}
+// 	int mid = left + (right - left) / 2;
+// 	mergeInsertSortVector(vec, left, mid);
+// 	mergeInsertSortVector(vec, mid + 1, right);
+// 	mergeSort(vec, left, mid, right);
+// }
 
-void mergeSort(std::deque<int>& deq, int left, int mid, int right) {
-	std::deque<int> left_deq, right_deq;
+// void insertionSort(std::deque<int>& deq, int left, int right) {
+// 	for (int i = left + 1; i <= right; ++i) {
+// 		int key = deq[i];
+// 		int j = i - 1;
 
-	for (int i = left; i <= mid; ++i)
-		left_deq.push_back(deq[i]);
-	for (int i = mid + 1; i <= right; ++i)
-		right_deq.push_back(deq[i]);
+// 		while (j >= left && deq[j] > key) {
+// 			deq[j + 1] = deq[j];
+// 			--j;
+// 		}
+// 		deq[j + 1] = key;
+// 	}
+// }
 
-	size_t i = 0, j = 0;
-	int k = left;
+// void mergeSort(std::deque<int>& deq, int left, int mid, int right) {
+// 	std::deque<int> left_deq, right_deq;
 
-	while (i < left_deq.size() && j < right_deq.size()) {
-		if (left_deq[i] <= right_deq[j])
-			deq[k++] = left_deq[i++];
-		else
-			deq[k++] = right_deq[j++];
-	}
+// 	for (int i = left; i <= mid; ++i)
+// 		left_deq.push_back(deq[i]);
+// 	for (int i = mid + 1; i <= right; ++i)
+// 		right_deq.push_back(deq[i]);
 
-	while (i < left_deq.size()) deq[k++] = left_deq[i++];
-	while (j < right_deq.size()) deq[k++] = right_deq[j++];
-}
+// 	size_t i = 0, j = 0;
+// 	int k = left;
 
-void PmergeMe::mergeInsertSortDeque(std::deque<int>& deq, int left, int right) {
-	if (right - left <= INSERTION_SORT_THRESHOLD) {
-		insertionSort(deq, left, right);
-		return;
-	}
+// 	while (i < left_deq.size() && j < right_deq.size()) {
+// 		if (left_deq[i] <= right_deq[j])
+// 			deq[k++] = left_deq[i++];
+// 		else
+// 			deq[k++] = right_deq[j++];
+// 	}
 
-	int mid = left + (right - left) / 2;
-	mergeInsertSortDeque(deq, left, mid);
-	mergeInsertSortDeque(deq, mid + 1, right);
-	mergeSort(deq, left, mid, right);
-}
+// 	while (i < left_deq.size()) deq[k++] = left_deq[i++];
+// 	while (j < right_deq.size()) deq[k++] = right_deq[j++];
+// }
+
+// void PmergeMe::mergeInsertSortDeque(std::deque<int>& deq, int left, int right) {
+// 	if (right - left <= INSERTION_SORT_THRESHOLD) {
+// 		insertionSort(deq, left, right);
+// 		return;
+// 	}
+
+// 	int mid = left + (right - left) / 2;
+// 	mergeInsertSortDeque(deq, left, mid);
+// 	mergeInsertSortDeque(deq, mid + 1, right);
+// 	mergeSort(deq, left, mid, right);
+// }
 
 
 std::vector<int>& PmergeMe::getVector() {

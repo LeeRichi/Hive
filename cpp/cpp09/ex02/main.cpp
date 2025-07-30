@@ -70,18 +70,21 @@ int main(int argc, char **argv) {
         cont.addNumber(val);
     }
 
+    //subject print
     printSequence(cont.getVector(), "Before: ");
 
+    //using vector
     auto start = std::chrono::high_resolution_clock::now();
-    cont.mergeInsertSortVector(cont.getVector(), 0, cont.getVector().size() - 1);
+    cont.FordJohnson(cont.getVector(), 0, cont.getVector().size() - 1);
     auto end = std::chrono::high_resolution_clock::now();
     //subject print
     printSequence(cont.getVector(), "After: ");
     // printSequence(cont.getVector(), "After(vector): ");
     printTime("std::vector", start, end, cont.getVector().size());
 
+    //using deque
     start = std::chrono::high_resolution_clock::now();
-    cont.mergeInsertSortDeque(cont.getDeque(), 0, cont.getDeque().size() - 1);
+    cont.FordJohnson(cont.getDeque(), 0, cont.getDeque().size() - 1);
     end = std::chrono::high_resolution_clock::now();
     // printSequence(cont.getDeque(), "After(deque): ");
 
