@@ -4,7 +4,7 @@
 #include <chrono>
 #include <climits>
 #include <string>
-#include <iomanip>  // <-- needed for std::fixed and std::setprecision
+#include <iomanip>
 
 void printTime(const std::string &containerName,
     std::chrono::high_resolution_clock::time_point start,
@@ -48,10 +48,9 @@ int parse_and_validate(const std::string& str)
         if (pos != str.length()) {
             throw std::invalid_argument("Extra characters after number");
         }
-
-        if (result <= -1) //change later
+        if (result <= 0)
         {
-            std::cerr << "Error" << std::endl;
+            std::cerr << "Error" << std::endl; //subject asked
             exit(1);
         }
         return result;
@@ -64,33 +63,34 @@ int parse_and_validate(const std::string& str)
 
 int main(int argc, char **argv) {
     PmergeMe cont;
+
     for (int i = 1; i < argc; i++)
     {
+        //parsing validition
         int val = parse_and_validate(argv[i]);
         cont.addNumber(val);
     }
 
-    cont.setSize(1); //init
+    cont.setSize(1); // to init
 
     //subject print
     printSequence(cont.getVector(), "Before: ");
 
-    //using vector
+    // ------------using vector------------
     auto start = std::chrono::high_resolution_clock::now();
-    cont.FordJohnson(cont.getVector(), 0, cont.getVector().size() - 1);
+    cont.FordJohnson(cont.getVector());
     auto end = std::chrono::high_resolution_clock::now();
     //subject print
     printSequence(cont.getVector(), "After: ");
     // printSequence(cont.getVector(), "After(vector): ");
     printTime("std::vector", start, end, cont.getVector().size());
 
-    // //using deque
-    // start = std::chrono::high_resolution_clock::now();
-    // cont.FordJohnson(cont.getDeque(), 0, cont.getDeque().size() - 1);
-    // end = std::chrono::high_resolution_clock::now();
-    // // printSequence(cont.getDeque(), "After(deque): ");
-
-    // printTime("std::deque", start, end, cont.getDeque().size());
+    // ------------using deque------------
+    start = std::chrono::high_resolution_clock::now();
+    cont.FordJohnson(cont.getDeque());
+    end = std::chrono::high_resolution_clock::now();
+    // printSequence(cont.getDeque(), "After(deque): ");
+    printTime("std::deque", start, end, cont.getDeque().size());
 
     return 0;
 }

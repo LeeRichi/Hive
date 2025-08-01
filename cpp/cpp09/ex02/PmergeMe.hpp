@@ -21,7 +21,7 @@ public:
     void addNumber(int val);
 
     template <typename Container>
-    void FordJohnson(Container &container, int left, int right);
+    void FordJohnson(Container &container);
 
     // Accessors for output
     std::vector<int> &getVector();
