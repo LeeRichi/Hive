@@ -56,14 +56,25 @@ void RPN::evaluate(const std::string &expression)
 			value_stack.pop();
 			value_stack.push(result);
 		}
-		else if (token.length() == 1 && std::isdigit(token[0]))
-		{
-			value_stack.push(token[0] - '0');
-		}
 		else
 		{
-			std::cerr << "Error" << std::endl;
-			return;
+			try {
+				size_t idx;
+				int number = std::stoi(token, &idx);
+				if (idx != token.length()) {
+					std::cerr << "Error" << std::endl;
+					return;
+				}
+				value_stack.push(number);
+			}
+			catch (const std::invalid_argument &e) {
+				std::cerr << "Error" << std::endl;
+				return;
+			}
+			catch (const std::out_of_range &e) {
+				std::cerr << "Error" << std::endl;
+				return;
+			}
 		}
 	}
 	if (value_stack.size() == 1)
