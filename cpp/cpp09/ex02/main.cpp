@@ -49,7 +49,7 @@ int parse_and_validate(const std::string& str)
             throw std::invalid_argument("Extra characters after number");
         }
 
-        if (result <= 0)
+        if (result <= -1) //change later
         {
             std::cerr << "Error" << std::endl;
             exit(1);
@@ -70,6 +70,8 @@ int main(int argc, char **argv) {
         cont.addNumber(val);
     }
 
+    cont.setSize(1); //init
+
     //subject print
     printSequence(cont.getVector(), "Before: ");
 
@@ -82,13 +84,13 @@ int main(int argc, char **argv) {
     // printSequence(cont.getVector(), "After(vector): ");
     printTime("std::vector", start, end, cont.getVector().size());
 
-    //using deque
-    start = std::chrono::high_resolution_clock::now();
-    cont.FordJohnson(cont.getDeque(), 0, cont.getDeque().size() - 1);
-    end = std::chrono::high_resolution_clock::now();
-    // printSequence(cont.getDeque(), "After(deque): ");
+    // //using deque
+    // start = std::chrono::high_resolution_clock::now();
+    // cont.FordJohnson(cont.getDeque(), 0, cont.getDeque().size() - 1);
+    // end = std::chrono::high_resolution_clock::now();
+    // // printSequence(cont.getDeque(), "After(deque): ");
 
-    printTime("std::deque", start, end, cont.getDeque().size());
+    // printTime("std::deque", start, end, cont.getDeque().size());
 
     return 0;
 }

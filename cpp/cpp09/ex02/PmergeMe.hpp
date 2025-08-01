@@ -9,21 +9,25 @@ class PmergeMe {
     std::vector<int> vec;
     std::deque<int> deq;
 
-    public:
-        PmergeMe();
-        PmergeMe(const PmergeMe& other);
-        PmergeMe& operator=(const PmergeMe& other);
-        ~PmergeMe();
+    size_t unit_size;
 
-        // Add elements
-        void addNumber(int val);
+public:
+    PmergeMe();
+    PmergeMe(const PmergeMe &other);
+    PmergeMe &operator=(const PmergeMe &other);
+    ~PmergeMe();
 
-        template <typename Container>
-        void FordJohnson(Container& container, int left, int right);
+    // Add elements
+    void addNumber(int val);
 
-        // Accessors for output
-        std::vector<int>& getVector();
-        std::deque<int>& getDeque();
+    template <typename Container>
+    void FordJohnson(Container &container, int left, int right);
+
+    // Accessors for output
+    std::vector<int> &getVector();
+    void setSize(size_t size);
+    std::deque<int> &getDeque();
+
 };
 
 #include "PmergeMe.tpp"
