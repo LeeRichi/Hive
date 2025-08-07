@@ -1,6 +1,17 @@
 #include <algorithm>
 #include "PmergeMe.hpp"
 
+
+// <h1>Trick of using Jacobsthal</h1>
+// You insert b5, then b4
+// You search in the bounded region before a5
+// Because b5 < a5, you know:
+// b5 belongs somewhere before a5
+// So you never need to look beyond a5
+// Search space is 2^(k+1)-1
+// Then for b4, the search region shrinks slightly (to a4), but the number of items grows by 1 (because you just inserted b5). So the total comparisons stay optimal.
+
+
 //to generate Jacobsthal sequence
 template <typename Container>
 static std::vector<int> Jacobsthal(int n) {
@@ -112,10 +123,8 @@ void PmergeMe::FordJohnson(Container& container) {
     size_t units = container.size() / unit_size;
     Container main, pend;
 
-    main.insert(main.end(), container.begin(), container.begin() + unit_size);
-    main.insert(main.end(),
-            container.begin() + unit_size,
-            container.begin() + 2 * unit_size);
+    main.insert(main.end(), container.begin(), container.begin() + unit_size); //b1
+    main.insert(main.end(), container.begin() + unit_size, container.begin() + 2 * unit_size); //a1
 
     for (size_t i = 2; i < units; ++i) {
         size_t index = i * unit_size;
@@ -131,3 +140,20 @@ void PmergeMe::FordJohnson(Container& container) {
     //second step
     insert(main, pend, leftover, unit_size, container);
 }
+
+//recursive visualization
+// unit_size = 1
+// → call FordJohnson (unit_size = 2)
+
+//     → call FordJohnson (unit_size = 4)
+
+//         → call FordJohnson (unit_size = 8)
+
+//             → call FordJohnson (unit_size = 16)
+
+//                 → hits base case → return
+
+//             ← continue at unit_size = 8 → insert(...)
+//         ← continue at unit_size = 4 → insert(...)
+//     ← continue at unit_size = 2 → insert(...)
+// ← continue at unit_size = 1 → insert(...)

@@ -14,7 +14,7 @@ void printTime(const std::string &containerName,
     auto duration = std::chrono::duration_cast<std::chrono::duration<double, std::micro>>(end - start).count();
 
     std::cout << std::fixed << std::setprecision(5);  // <-- ensure 5 digits after decimal
-    std::cout << "Time to process a range of    " << len << " elements with " << containerName
+    std::cout << "Time to process a range of " << len << " elements with " << containerName
     << " : " << duration << " us" << std::endl;
 }
 
@@ -40,25 +40,17 @@ void printSequence(const std::deque<int>& deq, const std::string& prefix)
 
 int parse_and_validate(const std::string& str)
 {
-    try {
-        size_t pos;
-        int result = std::stoi(str, &pos);
+    size_t pos;
+    int result = std::stoi(str, &pos);
 
-        // Check if there's junk after the number
-        if (pos != str.length()) {
-            throw std::invalid_argument("Extra characters after number");
-        }
-        if (result <= 0)
-        {
-            std::cerr << "Error" << std::endl; //subject asked
-            exit(1);
-        }
-        return result;
+    // Check if there's junk after the number
+    if (pos != str.length()) {
+        throw std::invalid_argument("Extra characters after number.");
     }
-    catch (const std::exception& e) {
-        std::cerr << "Error parsing '" << str << "': " << e.what() << std::endl;
-        exit(1);
+    if (result <= 0) {
+        throw std::out_of_range("Value must be positive.");
     }
+    return result;
 }
 
 int main(int argc, char **argv) {
@@ -67,8 +59,13 @@ int main(int argc, char **argv) {
     for (int i = 1; i < argc; i++)
     {
         //parsing validition
-        int val = parse_and_validate(argv[i]);
-        cont.addNumber(val);
+        try {
+            int val = parse_and_validate(argv[i]);
+            cont.addNumber(val);
+        } catch (const std::exception& e) {
+            std::cerr << "Error" << std::endl;
+            return 1;
+        }
     }
 
     cont.setSize(1); // to init

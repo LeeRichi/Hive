@@ -51,7 +51,7 @@ static bool isValidDate(const std::string& date) {
 }
 
 static bool isPositiveValue(float value) {
-	return value > 0;
+	return value >= 0; //for me 0 is not positive, but subject requires us to handle it.
 }
 
 static bool isToolargeValue(float value) {

@@ -20,6 +20,11 @@ RPN &RPN::operator=(const RPN &og)
 
 RPN::~RPN() {}
 
+static int valueIsInRange(int value) //yes, it is becasue of the subject being unclear
+{
+	return (value < 10);
+}
+
 void RPN::evaluate(const std::string &expression)
 {
 	std::istringstream iss(expression);
@@ -61,7 +66,7 @@ void RPN::evaluate(const std::string &expression)
 			try {
 				size_t idx;
 				int number = std::stoi(token, &idx);
-				if (idx != token.length()) {
+				if (idx != token.length() || !valueIsInRange(number)) {
 					std::cerr << "Error" << std::endl;
 					return;
 				}
